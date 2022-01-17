@@ -560,7 +560,7 @@ namespace Bulkan
 	{
 		public VkStructureType sType = .VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
 		public void* pNext;
-		public uint32 flags;
+		public VkShaderModuleCreateFlags flags;
 		public uint codeSize;
 		public uint32* pCode;
 	}
@@ -843,16 +843,6 @@ namespace Bulkan
 		public VkPipelineCacheCreateFlags flags;
 		public uint initialDataSize;
 		public void* pInitialData;
-	}
-
-	[CRepr]
-	public struct VkPipelineCacheHeaderVersionOne
-	{
-		public uint32 headerSize;
-		public VkPipelineCacheHeaderVersion headerVersion;
-		public uint32 vendorID;
-		public uint32 deviceID;
-		public uint8[(int)VulkanNative.VK_UUID_SIZE] pipelineCacheUUID;
 	}
 
 	[CRepr]
@@ -2664,31 +2654,6 @@ namespace Bulkan
 	}
 
 	[CRepr]
-	public struct VkPhysicalDevicePresentIdFeaturesKHR
-	{
-		public VkStructureType sType = .VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_ID_FEATURES_KHR;
-		public void* pNext;
-		public VkBool32 presentId;
-	}
-
-	[CRepr]
-	public struct VkPresentIdKHR
-	{
-		public VkStructureType sType = .VK_STRUCTURE_TYPE_PRESENT_ID_KHR;
-		public void* pNext;
-		public uint32 swapchainCount;
-		public uint64* pPresentIds;
-	}
-
-	[CRepr]
-	public struct VkPhysicalDevicePresentWaitFeaturesKHR
-	{
-		public VkStructureType sType = .VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_WAIT_FEATURES_KHR;
-		public void* pNext;
-		public VkBool32 presentWait;
-	}
-
-	[CRepr]
 	public struct VkHdrMetadataEXT
 	{
 		public VkStructureType sType = .VK_STRUCTURE_TYPE_HDR_METADATA_EXT;
@@ -4080,25 +4045,6 @@ namespace Bulkan
 	}
 
 	[CRepr]
-	public struct VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT
-	{
-		public VkStructureType sType = .VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_2_FEATURES_EXT;
-		public void* pNext;
-		public VkBool32 shaderBufferFloat16Atomics;
-		public VkBool32 shaderBufferFloat16AtomicAdd;
-		public VkBool32 shaderBufferFloat16AtomicMinMax;
-		public VkBool32 shaderBufferFloat32AtomicMinMax;
-		public VkBool32 shaderBufferFloat64AtomicMinMax;
-		public VkBool32 shaderSharedFloat16Atomics;
-		public VkBool32 shaderSharedFloat16AtomicAdd;
-		public VkBool32 shaderSharedFloat16AtomicMinMax;
-		public VkBool32 shaderSharedFloat32AtomicMinMax;
-		public VkBool32 shaderSharedFloat64AtomicMinMax;
-		public VkBool32 shaderImageFloat32AtomicMinMax;
-		public VkBool32 sparseImageFloat32AtomicMinMax;
-	}
-
-	[CRepr]
 	public struct VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT
 	{
 		public VkStructureType sType = .VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT;
@@ -4304,14 +4250,6 @@ namespace Bulkan
 		public VkExtent2D shadingRateTexelSize;
 		public uint32 shadingRatePaletteSize;
 		public uint32 shadingRateMaxCoarseSamples;
-	}
-
-	[CRepr]
-	public struct VkPhysicalDeviceInvocationMaskFeaturesHUAWEI
-	{
-		public VkStructureType sType = .VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INVOCATION_MASK_FEATURES_HUAWEI;
-		public void* pNext;
-		public VkBool32 invocationMask;
 	}
 
 	[CRepr]
@@ -5265,15 +5203,6 @@ namespace Bulkan
 	}
 
 	[CRepr]
-	public struct VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT
-	{
-		public VkStructureType sType = .VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIMITIVE_TOPOLOGY_LIST_RESTART_FEATURES_EXT;
-		public void* pNext;
-		public VkBool32 primitiveTopologyListRestart;
-		public VkBool32 primitiveTopologyPatchListRestart;
-	}
-
-	[CRepr]
 	public struct VkAttachmentDescriptionStencilLayout
 	{
 		public VkStructureType sType = .VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_STENCIL_LAYOUT;
@@ -5399,7 +5328,7 @@ namespace Bulkan
 	[CRepr]
 	public struct VkSubpassShadingPipelineCreateInfoHUAWEI
 	{
-		public VkStructureType sType = .VK_STRUCTURE_TYPE_SUBPASS_SHADING_PIPELINE_CREATE_INFO_HUAWEI;
+		public VkStructureType sType;
 		public void* pNext;
 		public VkRenderPass renderPass;
 		public uint32 subpass;
@@ -6291,14 +6220,6 @@ namespace Bulkan
 	}
 
 	[CRepr]
-	public struct VkPhysicalDeviceExternalMemoryRDMAFeaturesNV
-	{
-		public VkStructureType sType = .VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_RDMA_FEATURES_NV;
-		public void* pNext;
-		public VkBool32 externalMemoryRDMA;
-	}
-
-	[CRepr]
 	public struct VkVertexInputBindingDescription2EXT
 	{
 		public VkStructureType sType = .VK_STRUCTURE_TYPE_VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT;
@@ -6504,7 +6425,7 @@ namespace Bulkan
 	{
 		public VkStructureType sType = .VK_STRUCTURE_TYPE_VIDEO_CAPABILITIES_KHR;
 		public void* pNext;
-		public VkVideoCapabilityFlagsKHR capabilityFlags;
+		public VkVideoCapabilitiesFlagsKHR capabilityFlags;
 		public uint64 minBitstreamBufferOffsetAlignment;
 		public uint64 minBitstreamBufferSizeAlignment;
 		public VkExtent2D videoPictureExtentGranularity;
@@ -6577,7 +6498,7 @@ namespace Bulkan
 		public VkStructureType sType = .VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_PROFILE_EXT;
 		public void* pNext;
 		public void* stdProfileIdc;
-		public VkVideoDecodeH264PictureLayoutFlagsEXT pictureLayout;
+		public VkVideoDecodeH264FieldLayoutFlagsEXT fieldLayout;
 	}
 
 	[CRepr]
@@ -6808,7 +6729,7 @@ namespace Bulkan
 	{
 		public VkStructureType sType = .VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_CAPABILITIES_EXT;
 		public void* pNext;
-		public VkVideoEncodeH264CapabilityFlagsEXT flags;
+		public VkVideoEncodeH264CapabilitiesFlagsEXT flags;
 		public VkVideoEncodeH264InputModeFlagsEXT inputModeFlags;
 		public VkVideoEncodeH264OutputModeFlagsEXT outputModeFlags;
 		public VkExtent2D minPictureSizeInMbs;
@@ -7000,51 +6921,6 @@ namespace Bulkan
 	}
 
 	[CRepr]
-	public struct VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR
-	{
-		public VkStructureType sType = .VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES_KHR;
-		public void* pNext;
-		public VkBool32 shaderIntegerDotProduct;
-	}
-
-	[CRepr]
-	public struct VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR
-	{
-		public VkStructureType sType = .VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES_KHR;
-		public void* pNext;
-		public VkBool32 integerDotProduct8BitUnsignedAccelerated;
-		public VkBool32 integerDotProduct8BitSignedAccelerated;
-		public VkBool32 integerDotProduct8BitMixedSignednessAccelerated;
-		public VkBool32 integerDotProduct4x8BitPackedUnsignedAccelerated;
-		public VkBool32 integerDotProduct4x8BitPackedSignedAccelerated;
-		public VkBool32 integerDotProduct4x8BitPackedMixedSignednessAccelerated;
-		public VkBool32 integerDotProduct16BitUnsignedAccelerated;
-		public VkBool32 integerDotProduct16BitSignedAccelerated;
-		public VkBool32 integerDotProduct16BitMixedSignednessAccelerated;
-		public VkBool32 integerDotProduct32BitUnsignedAccelerated;
-		public VkBool32 integerDotProduct32BitSignedAccelerated;
-		public VkBool32 integerDotProduct32BitMixedSignednessAccelerated;
-		public VkBool32 integerDotProduct64BitUnsignedAccelerated;
-		public VkBool32 integerDotProduct64BitSignedAccelerated;
-		public VkBool32 integerDotProduct64BitMixedSignednessAccelerated;
-		public VkBool32 integerDotProductAccumulatingSaturating8BitUnsignedAccelerated;
-		public VkBool32 integerDotProductAccumulatingSaturating8BitSignedAccelerated;
-		public VkBool32 integerDotProductAccumulatingSaturating8BitMixedSignednessAccelerated;
-		public VkBool32 integerDotProductAccumulatingSaturating4x8BitPackedUnsignedAccelerated;
-		public VkBool32 integerDotProductAccumulatingSaturating4x8BitPackedSignedAccelerated;
-		public VkBool32 integerDotProductAccumulatingSaturating4x8BitPackedMixedSignednessAccelerated;
-		public VkBool32 integerDotProductAccumulatingSaturating16BitUnsignedAccelerated;
-		public VkBool32 integerDotProductAccumulatingSaturating16BitSignedAccelerated;
-		public VkBool32 integerDotProductAccumulatingSaturating16BitMixedSignednessAccelerated;
-		public VkBool32 integerDotProductAccumulatingSaturating32BitUnsignedAccelerated;
-		public VkBool32 integerDotProductAccumulatingSaturating32BitSignedAccelerated;
-		public VkBool32 integerDotProductAccumulatingSaturating32BitMixedSignednessAccelerated;
-		public VkBool32 integerDotProductAccumulatingSaturating64BitUnsignedAccelerated;
-		public VkBool32 integerDotProductAccumulatingSaturating64BitSignedAccelerated;
-		public VkBool32 integerDotProductAccumulatingSaturating64BitMixedSignednessAccelerated;
-	}
-
-	[CRepr]
 	public struct VkPhysicalDeviceDrmPropertiesEXT
 	{
 		public VkStructureType sType = .VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRM_PROPERTIES_EXT;
@@ -7134,15 +7010,6 @@ namespace Bulkan
 		public VkAccelerationStructureMotionInstanceTypeNV type;
 		public uint32 flags;
 		public VkAccelerationStructureMotionInstanceDataNV data;
-	}
-
-	[CRepr]
-	public struct VkMemoryGetRemoteAddressInfoNV
-	{
-		public VkStructureType sType = .VK_STRUCTURE_TYPE_MEMORY_GET_REMOTE_ADDRESS_INFO_NV;
-		public void* pNext;
-		public VkDeviceMemory memory;
-		public VkExternalMemoryHandleTypeFlags handleType;
 	}
 
 }

@@ -5,6 +5,7 @@ namespace Bulkan
 		public const uint32 VK_MAX_PHYSICAL_DEVICE_NAME_SIZE = 256;
 		public const uint32 VK_UUID_SIZE = 16;
 		public const uint32 VK_LUID_SIZE = 8;
+		public const uint32 VK_LUID_SIZE_KHR = VK_LUID_SIZE;
 		public const uint32 VK_MAX_EXTENSION_NAME_SIZE = 256;
 		public const uint32 VK_MAX_DESCRIPTION_SIZE = 256;
 		public const uint32 VK_MAX_MEMORY_TYPES = 32;
@@ -18,12 +19,17 @@ namespace Bulkan
 		public const uint32 VK_FALSE = 0;
 		public const uint32 VK_QUEUE_FAMILY_IGNORED = (~0U);
 		public const uint32 VK_QUEUE_FAMILY_EXTERNAL = (~1U);
+		public const uint32 VK_QUEUE_FAMILY_EXTERNAL_KHR = VK_QUEUE_FAMILY_EXTERNAL;
 		public const uint32 VK_QUEUE_FAMILY_FOREIGN_EXT = (~2U);
 		public const uint32 VK_SUBPASS_EXTERNAL = (~0U);
 		public const uint32 VK_MAX_DEVICE_GROUP_SIZE = 32;
+		public const uint32 VK_MAX_DEVICE_GROUP_SIZE_KHR = VK_MAX_DEVICE_GROUP_SIZE;
 		public const uint32 VK_MAX_DRIVER_NAME_SIZE = 256;
+		public const uint32 VK_MAX_DRIVER_NAME_SIZE_KHR = VK_MAX_DRIVER_NAME_SIZE;
 		public const uint32 VK_MAX_DRIVER_INFO_SIZE = 256;
+		public const uint32 VK_MAX_DRIVER_INFO_SIZE_KHR = VK_MAX_DRIVER_INFO_SIZE;
 		public const uint32 VK_SHADER_UNUSED_KHR = (~0U);
+		public const uint32 VK_SHADER_UNUSED_NV = VK_SHADER_UNUSED_KHR;
 		public const uint32 VK_MAX_GLOBAL_PRIORITY_SIZE_EXT = 16;
 		public const uint32 VK_KHR_SURFACE_SPEC_VERSION = 25;
 		public const char8* VK_KHR_SURFACE_EXTENSION_NAME = "VK_KHR_surface";
@@ -61,7 +67,7 @@ namespace Bulkan
 		public const char8* VK_AMD_SHADER_EXPLICIT_VERTEX_PARAMETER_EXTENSION_NAME = "VK_AMD_shader_explicit_vertex_parameter";
 		public const uint32 VK_EXT_DEBUG_MARKER_SPEC_VERSION = 4;
 		public const char8* VK_EXT_DEBUG_MARKER_EXTENSION_NAME = "VK_EXT_debug_marker";
-		public const uint32 VK_KHR_VIDEO_QUEUE_SPEC_VERSION = 2;
+		public const uint32 VK_KHR_VIDEO_QUEUE_SPEC_VERSION = 1;
 		public const char8* VK_KHR_VIDEO_QUEUE_EXTENSION_NAME = "VK_KHR_video_queue";
 		public const uint32 VK_KHR_VIDEO_DECODE_QUEUE_SPEC_VERSION = 1;
 		public const char8* VK_KHR_VIDEO_DECODE_QUEUE_EXTENSION_NAME = "VK_KHR_video_decode_queue";
@@ -83,9 +89,9 @@ namespace Bulkan
 		public const char8* VK_AMD_GPU_SHADER_HALF_FLOAT_EXTENSION_NAME = "VK_AMD_gpu_shader_half_float";
 		public const uint32 VK_AMD_SHADER_BALLOT_SPEC_VERSION = 1;
 		public const char8* VK_AMD_SHADER_BALLOT_EXTENSION_NAME = "VK_AMD_shader_ballot";
-		public const uint32 VK_EXT_VIDEO_ENCODE_H264_SPEC_VERSION = 2;
+		public const uint32 VK_EXT_VIDEO_ENCODE_H264_SPEC_VERSION = 1;
 		public const char8* VK_EXT_VIDEO_ENCODE_H264_EXTENSION_NAME = "VK_EXT_video_encode_h264";
-		public const uint32 VK_EXT_VIDEO_DECODE_H264_SPEC_VERSION = 3;
+		public const uint32 VK_EXT_VIDEO_DECODE_H264_SPEC_VERSION = 1;
 		public const char8* VK_EXT_VIDEO_DECODE_H264_EXTENSION_NAME = "VK_EXT_video_decode_h264";
 		public const uint32 VK_AMD_TEXTURE_GATHER_BIAS_LOD_SPEC_VERSION = 1;
 		public const char8* VK_AMD_TEXTURE_GATHER_BIAS_LOD_EXTENSION_NAME = "VK_AMD_texture_gather_bias_lod";
@@ -257,7 +263,7 @@ namespace Bulkan
 		public const char8* VK_EXT_BLEND_OPERATION_ADVANCED_EXTENSION_NAME = "VK_EXT_blend_operation_advanced";
 		public const uint32 VK_NV_FRAGMENT_COVERAGE_TO_COLOR_SPEC_VERSION = 1;
 		public const char8* VK_NV_FRAGMENT_COVERAGE_TO_COLOR_EXTENSION_NAME = "VK_NV_fragment_coverage_to_color";
-		public const uint32 VK_KHR_ACCELERATION_STRUCTURE_SPEC_VERSION = 12;
+		public const uint32 VK_KHR_ACCELERATION_STRUCTURE_SPEC_VERSION = 11;
 		public const char8* VK_KHR_ACCELERATION_STRUCTURE_EXTENSION_NAME = "VK_KHR_acceleration_structure";
 		public const uint32 VK_KHR_RAY_TRACING_PIPELINE_SPEC_VERSION = 1;
 		public const char8* VK_KHR_RAY_TRACING_PIPELINE_EXTENSION_NAME = "VK_KHR_ray_tracing_pipeline";
@@ -407,8 +413,6 @@ namespace Bulkan
 		public const char8* VK_EXT_SEPARATE_STENCIL_USAGE_EXTENSION_NAME = "VK_EXT_separate_stencil_usage";
 		public const uint32 VK_EXT_VALIDATION_FEATURES_SPEC_VERSION = 5;
 		public const char8* VK_EXT_VALIDATION_FEATURES_EXTENSION_NAME = "VK_EXT_validation_features";
-		public const uint32 VK_KHR_PRESENT_WAIT_SPEC_VERSION = 1;
-		public const char8* VK_KHR_PRESENT_WAIT_EXTENSION_NAME = "VK_KHR_present_wait";
 		public const uint32 VK_NV_COOPERATIVE_MATRIX_SPEC_VERSION = 1;
 		public const char8* VK_NV_COOPERATIVE_MATRIX_EXTENSION_NAME = "VK_NV_cooperative_matrix";
 		public const uint32 VK_NV_COVERAGE_REDUCTION_MODE_SPEC_VERSION = 1;
@@ -441,16 +445,12 @@ namespace Bulkan
 		public const char8* VK_KHR_DEFERRED_HOST_OPERATIONS_EXTENSION_NAME = "VK_KHR_deferred_host_operations";
 		public const uint32 VK_KHR_PIPELINE_EXECUTABLE_PROPERTIES_SPEC_VERSION = 1;
 		public const char8* VK_KHR_PIPELINE_EXECUTABLE_PROPERTIES_EXTENSION_NAME = "VK_KHR_pipeline_executable_properties";
-		public const uint32 VK_EXT_SHADER_ATOMIC_FLOAT_2_SPEC_VERSION = 1;
-		public const char8* VK_EXT_SHADER_ATOMIC_FLOAT_2_EXTENSION_NAME = "VK_EXT_shader_atomic_float2";
 		public const uint32 VK_EXT_SHADER_DEMOTE_TO_HELPER_INVOCATION_SPEC_VERSION = 1;
 		public const char8* VK_EXT_SHADER_DEMOTE_TO_HELPER_INVOCATION_EXTENSION_NAME = "VK_EXT_shader_demote_to_helper_invocation";
 		public const uint32 VK_NV_DEVICE_GENERATED_COMMANDS_SPEC_VERSION = 3;
 		public const char8* VK_NV_DEVICE_GENERATED_COMMANDS_EXTENSION_NAME = "VK_NV_device_generated_commands";
 		public const uint32 VK_NV_INHERITED_VIEWPORT_SCISSOR_SPEC_VERSION = 1;
 		public const char8* VK_NV_INHERITED_VIEWPORT_SCISSOR_EXTENSION_NAME = "VK_NV_inherited_viewport_scissor";
-		public const uint32 VK_KHR_SHADER_INTEGER_DOT_PRODUCT_SPEC_VERSION = 1;
-		public const char8* VK_KHR_SHADER_INTEGER_DOT_PRODUCT_EXTENSION_NAME = "VK_KHR_shader_integer_dot_product";
 		public const uint32 VK_EXT_TEXEL_BUFFER_ALIGNMENT_SPEC_VERSION = 1;
 		public const char8* VK_EXT_TEXEL_BUFFER_ALIGNMENT_EXTENSION_NAME = "VK_EXT_texel_buffer_alignment";
 		public const uint32 VK_QCOM_RENDER_PASS_TRANSFORM_SPEC_VERSION = 2;
@@ -469,8 +469,6 @@ namespace Bulkan
 		public const char8* VK_KHR_PIPELINE_LIBRARY_EXTENSION_NAME = "VK_KHR_pipeline_library";
 		public const uint32 VK_KHR_SHADER_NON_SEMANTIC_INFO_SPEC_VERSION = 1;
 		public const char8* VK_KHR_SHADER_NON_SEMANTIC_INFO_EXTENSION_NAME = "VK_KHR_shader_non_semantic_info";
-		public const uint32 VK_KHR_PRESENT_ID_SPEC_VERSION = 1;
-		public const char8* VK_KHR_PRESENT_ID_EXTENSION_NAME = "VK_KHR_present_id";
 		public const uint32 VK_EXT_PRIVATE_DATA_SPEC_VERSION = 1;
 		public const char8* VK_EXT_PRIVATE_DATA_EXTENSION_NAME = "VK_EXT_private_data";
 		public const uint32 VK_EXT_PIPELINE_CREATION_CACHE_CONTROL_SPEC_VERSION = 3;
@@ -515,18 +513,12 @@ namespace Bulkan
 		public const char8* VK_EXT_VERTEX_INPUT_DYNAMIC_STATE_EXTENSION_NAME = "VK_EXT_vertex_input_dynamic_state";
 		public const uint32 VK_EXT_PHYSICAL_DEVICE_DRM_SPEC_VERSION = 1;
 		public const char8* VK_EXT_PHYSICAL_DEVICE_DRM_EXTENSION_NAME = "VK_EXT_physical_device_drm";
-		public const uint32 VK_EXT_PRIMITIVE_TOPOLOGY_LIST_RESTART_SPEC_VERSION = 1;
-		public const char8* VK_EXT_PRIMITIVE_TOPOLOGY_LIST_RESTART_EXTENSION_NAME = "VK_EXT_primitive_topology_list_restart";
 		public const uint32 VK_FUCHSIA_EXTERNAL_MEMORY_SPEC_VERSION = 1;
 		public const char8* VK_FUCHSIA_EXTERNAL_MEMORY_EXTENSION_NAME = "VK_FUCHSIA_external_memory";
 		public const uint32 VK_FUCHSIA_EXTERNAL_SEMAPHORE_SPEC_VERSION = 1;
 		public const char8* VK_FUCHSIA_EXTERNAL_SEMAPHORE_EXTENSION_NAME = "VK_FUCHSIA_external_semaphore";
-		public const uint32 VK_HUAWEI_SUBPASS_SHADING_SPEC_VERSION = 2;
+		public const uint32 VK_HUAWEI_SUBPASS_SHADING_SPEC_VERSION = 0;
 		public const char8* VK_HUAWEI_SUBPASS_SHADING_EXTENSION_NAME = "VK_HUAWEI_subpass_shading";
-		public const uint32 VK_HUAWEI_INVOCATION_MASK_SPEC_VERSION = 1;
-		public const char8* VK_HUAWEI_INVOCATION_MASK_EXTENSION_NAME = "VK_HUAWEI_invocation_mask";
-		public const uint32 VK_NV_EXTERNAL_MEMORY_RDMA_SPEC_VERSION = 1;
-		public const char8* VK_NV_EXTERNAL_MEMORY_RDMA_EXTENSION_NAME = "VK_NV_external_memory_rdma";
 		public const uint32 VK_EXT_EXTENDED_DYNAMIC_STATE_2_SPEC_VERSION = 1;
 		public const char8* VK_EXT_EXTENDED_DYNAMIC_STATE_2_EXTENSION_NAME = "VK_EXT_extended_dynamic_state2";
 		public const uint32 VK_QNX_SCREEN_SURFACE_SPEC_VERSION = 1;
@@ -537,7 +529,5 @@ namespace Bulkan
 		public const char8* VK_EXT_GLOBAL_PRIORITY_QUERY_EXTENSION_NAME = "VK_EXT_global_priority_query";
 		public const uint32 VK_EXT_MULTI_DRAW_SPEC_VERSION = 1;
 		public const char8* VK_EXT_MULTI_DRAW_EXTENSION_NAME = "VK_EXT_multi_draw";
-		public const uint32 VK_EXT_LOAD_STORE_OP_NONE_SPEC_VERSION = 1;
-		public const char8* VK_EXT_LOAD_STORE_OP_NONE_EXTENSION_NAME = "VK_EXT_load_store_op_none";
 	}
 }
