@@ -10,7 +10,13 @@ namespace VulkanTriangle
 		char8*[?] extensions = .
 		(
 		    "VK_KHR_surface",
+#if BF_PLATFORM_WINDOWS 
 		    "VK_KHR_win32_surface",
+#endif
+
+#if BF_PLATFORM_LINUX 
+			"VK_KHR_xlib_surface",
+#endif
 		    "VK_EXT_debug_utils",
 		);
 

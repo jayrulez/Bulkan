@@ -11,6 +11,7 @@ namespace VulkanTriangle
 
 		private SDL.Window* window;
 		private void* NativeWindow;
+		private void* Display; // X11
 
 		private void InitWindow()
 		{
@@ -41,6 +42,11 @@ namespace VulkanTriangle
 			switch (subsystem) {
 			case SDL.SDL_SYSWM_TYPE.SDL_SYSWM_WINDOWS:
 				NativeWindow = (void*)(int)info.info.win.window;
+				break;
+
+			case SDL.SDL_SYSWM_TYPE.SDL_SYSWM_X11:
+				NativeWindow = info.info.x11.window;
+				Display = info.info.x11.display;
 				break;
 
 			case SDL.SDL_SYSWM_TYPE.SDL_SYSWM_UNKNOWN:
