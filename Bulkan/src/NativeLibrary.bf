@@ -64,9 +64,8 @@ namespace Bulkan
 				field = *(T*)(void*)(int*)&funcPtr;
 			} else
 			{
-				//Console.WriteLine("Error loading function");
 				field = default;
-				//Console.WriteLine($"Error loading function {name}");
+				Console.WriteLine(scope $"Error loading function {name}");
 			}
 		}
 
@@ -130,7 +129,7 @@ namespace Bulkan
 				    if (!String.IsNullOrWhiteSpace(baseDir))
 				    {
 						String localPath = scope String();
-				        //string localPath = Path.Combine(baseDir, libraryName);
+				       	Path.InternalCombine(localPath, baseDir, libraryName);
 				        handle = Libdl.dlopen(localPath, Libdl.RTLD_NOW);
 				    }
 				}

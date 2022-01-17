@@ -7,6 +7,10 @@ namespace VulkanTriangle
 
 		private void CreateImageViews()
 		{
+			/*if(swapChainImageViews != null){
+				delete swapChainImageViews;
+			}*/
+
 			swapChainImageViews = new VkImageView[swapChainImages.Count];
 
 			for (int i = 0; i < swapChainImages.Count; i++)

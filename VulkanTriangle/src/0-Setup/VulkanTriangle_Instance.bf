@@ -25,9 +25,9 @@ namespace VulkanTriangle
 		    VkApplicationInfo appInfo = .()
 		    {
 		        sType = VkStructureType.VK_STRUCTURE_TYPE_APPLICATION_INFO,
-		        pApplicationName = "Vulkan Triangle".CStr(),
+		        pApplicationName = "Vulkan Triangle",
 		        applicationVersion = Helpers.Version(1, 0, 0),
-		        pEngineName = "No Engine".CStr(),
+		        pEngineName = "No Engine",
 		        engineVersion = Helpers.Version(1, 0, 0),
 		        apiVersion = Helpers.Version(1, 2, 0),
 		    };
