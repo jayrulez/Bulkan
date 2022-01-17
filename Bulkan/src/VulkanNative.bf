@@ -37,7 +37,15 @@ namespace Bulkan
 
 		private static String GetVulkanName()
 		{
+#if BF_PLATFORM_WINDOWS 
 			return "vulkan-1.dll";
+#elif BF_PLATFORM_LINUX  
+			return "libvulkan.so.1";
+#elif BF_PLATFORM_MACOS  
+			return "libvulkan.dylib";
+#else
+			Runtime.FatalError("Unsupported platform.");
+#endif
 		}
 	}
 }
