@@ -1,0 +1,5 @@
+FileVersion = 1
+Projects = {Bulkan = {Path = "Bulkan"}, VulkanTriangle = {Path = "VulkanTriangle"}, SDL2 = "*"}
+
+[Workspace]
+StartupProject = "VulkanTriangle"
