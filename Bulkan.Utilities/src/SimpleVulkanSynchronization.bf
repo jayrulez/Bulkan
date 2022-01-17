@@ -213,10 +213,12 @@ event functions.
 May consider other allocation strategies in future.
 */
 
+#if DEBUG
 #define THSVS_ERROR_CHECK_ACCESS_TYPE_IN_RANGE
 #define THSVS_ERROR_CHECK_COULD_USE_GLOBAL_BARRIER
 #define THSVS_ERROR_CHECK_MIXED_IMAGE_LAYOUT
 #define THSVS_ERROR_CHECK_POTENTIAL_HAZARD
+#endif
 
 namespace Bulkan.Utilities
 {
