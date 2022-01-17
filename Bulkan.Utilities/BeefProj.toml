@@ -1,0 +1,7 @@
+FileVersion = 1
+Dependencies = {corlib = "*", Bulkan = "*"}
+
+[Project]
+Name = "Bulkan.Utilities"
+TargetType = "BeefLib"
+StartupObject = "Bulkan.Utilities.Program"

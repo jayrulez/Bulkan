@@ -18,7 +18,7 @@ namespace Bulkan
 		[Import("libdl")]
 		public static extern char8* dlerror();
 
-		public const int RTLD_NOW = 0x002;
+		public const int32 RTLD_NOW = 0x002;
 	}
 
 	abstract class NativeLibrary : IDisposable

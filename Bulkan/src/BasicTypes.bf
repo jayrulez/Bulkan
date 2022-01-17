@@ -1,8 +1,9 @@
+using System;
 namespace Bulkan
 {
-	typealias VkDeviceSize = uint64;
-	typealias VkDeviceAddress = uint64;
-	typealias VkSampleMask = uint32;
-	typealias VkFlags = uint32;
-	typealias VkBufferViewCreateFlags = VkFlags;
+	[CRepr] struct VkDeviceSize : uint64 { }
+	[CRepr] struct VkDeviceAddress : uint64 { }
+	[CRepr] struct VkSampleMask : uint32 { }
+	[CRepr] struct VkFlags : uint32 { }
+	[CRepr] struct VkBufferViewCreateFlags : VkFlags { }
 }
