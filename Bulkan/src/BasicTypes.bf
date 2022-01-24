@@ -17,6 +17,11 @@ namespace Bulkan
 	    {
 	        return (.)(uint64)self;
 	    }
+
+		public static Self operator implicit<T>(T value)
+		{
+			return value;
+		}
 	}
 
 	[CRepr] struct VkSampleMask : uint32
@@ -26,6 +31,11 @@ namespace Bulkan
 	    {
 	        return (.)(uint32)self;
 	    }
+
+		public static Self operator implicit<T>(T value)
+		{
+			return value;
+		}
 	}
 
 	[CRepr] struct VkFlags : uint32
