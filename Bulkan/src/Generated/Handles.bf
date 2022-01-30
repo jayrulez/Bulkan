@@ -479,6 +479,20 @@ namespace Bulkan
 	}
 
 	[CRepr]
+	public struct VkBufferCollectionFUCHSIA : IEquatable<VkBufferCollectionFUCHSIA>
+	{
+		public readonly uint64 Handle;
+		public this(uint64 existingHandle) { Handle = existingHandle; }
+		public static VkBufferCollectionFUCHSIA Null => VkBufferCollectionFUCHSIA(0);
+		public static implicit operator VkBufferCollectionFUCHSIA(uint64 handle) => VkBufferCollectionFUCHSIA(handle);
+		public static bool operator ==(VkBufferCollectionFUCHSIA left, VkBufferCollectionFUCHSIA right) => left.Handle == right.Handle;
+		public static bool operator !=(VkBufferCollectionFUCHSIA left, VkBufferCollectionFUCHSIA right) => left.Handle != right.Handle;
+		public static bool operator ==(VkBufferCollectionFUCHSIA left, uint64 right) => left.Handle == right;
+		public static bool operator !=(VkBufferCollectionFUCHSIA left, uint64 right) => left.Handle != right;
+		public bool Equals(VkBufferCollectionFUCHSIA h) => Handle == h.Handle;
+	}
+
+	[CRepr]
 	public struct VkDeferredOperationKHR : IEquatable<VkDeferredOperationKHR>
 	{
 		public readonly uint64 Handle;
@@ -490,6 +504,20 @@ namespace Bulkan
 		public static bool operator ==(VkDeferredOperationKHR left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkDeferredOperationKHR left, uint64 right) => left.Handle != right;
 		public bool Equals(VkDeferredOperationKHR h) => Handle == h.Handle;
+	}
+
+	[CRepr]
+	public struct VkPrivateDataSlot : IEquatable<VkPrivateDataSlot>
+	{
+		public readonly uint64 Handle;
+		public this(uint64 existingHandle) { Handle = existingHandle; }
+		public static VkPrivateDataSlot Null => VkPrivateDataSlot(0);
+		public static implicit operator VkPrivateDataSlot(uint64 handle) => VkPrivateDataSlot(handle);
+		public static bool operator ==(VkPrivateDataSlot left, VkPrivateDataSlot right) => left.Handle == right.Handle;
+		public static bool operator !=(VkPrivateDataSlot left, VkPrivateDataSlot right) => left.Handle != right.Handle;
+		public static bool operator ==(VkPrivateDataSlot left, uint64 right) => left.Handle == right;
+		public static bool operator !=(VkPrivateDataSlot left, uint64 right) => left.Handle != right;
+		public bool Equals(VkPrivateDataSlot h) => Handle == h.Handle;
 	}
 
 	[CRepr]
