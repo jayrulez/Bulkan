@@ -429,7 +429,7 @@ when an application re-uses a presented image after vkAcquireNextImageKHR.
 
 	public static
 	{
-		private static mixin THSVS_TEMP_ALLOC(int size){
+		private static mixin THSVS_TEMP_ALLOC(uint size){
 			void* data = scope:: uint8[size]*;
 			data
 		}
