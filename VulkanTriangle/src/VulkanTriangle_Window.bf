@@ -40,7 +40,7 @@ namespace VulkanTriangle
 			SDL.GetWindowWMInfo(window, ref info);
 			SDL.SDL_SYSWM_TYPE subsystem = info.subsystem;
 			switch (subsystem) {
-#if VF_PLATFORM_WINDOWS
+#if BF_PLATFORM_WINDOWS
 			case SDL.SDL_SYSWM_TYPE.SDL_SYSWM_WINDOWS:
 				NativeWindow = (void*)(int)info.info.win.window;
 				break;
