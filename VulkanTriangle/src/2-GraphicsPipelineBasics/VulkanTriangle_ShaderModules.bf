@@ -22,10 +22,10 @@ namespace VulkanTriangle
 		private void CreateGraphicsPipeline()
 		{
 			List<uint8> vertShaderCode = scope .();
-			File.ReadAll("Shaders/vert.spv", vertShaderCode);
+			if (File.ReadAll("Shaders/vert.spv", vertShaderCode) case .Err) Console.WriteLine("ERROR: Failed to read vertex shader");
 
 			List<uint8> fragShaderCode = scope .();
-			File.ReadAll("Shaders/frag.spv", fragShaderCode);
+			if (File.ReadAll("Shaders/frag.spv", fragShaderCode) case .Err) Console.WriteLine("ERROR: Failed to read fragment shader");
 
 			VkShaderModule vertShaderModule = default;
 			this.CreateShaderModule(vertShaderCode, ref vertShaderModule);

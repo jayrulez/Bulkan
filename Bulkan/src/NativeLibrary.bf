@@ -6,16 +6,16 @@ namespace Bulkan
 
 	internal class Libdl
 	{
-		[Import("libdl")]
+		[CLink]
 		public static extern int dlopen(char8* fileName, int flags);
 
-		[Import("libdl")]
+		[CLink]
 		public static extern int dlsym(int handle, char8* name);
 
-		[Import("libdl")]
+		[CLink]
 		public static extern int dlclose(int handle);
 
-		[Import("libdl")]
+		[CLink]
 		public static extern char8* dlerror();
 
 		public const int32 RTLD_NOW = 0x002;
@@ -88,6 +88,7 @@ namespace Bulkan
 
 		}
 
+#if BF_PLATFORM_WINDOWS
 		private class WindowsNativeLibrary : NativeLibrary
 		{
 			public this(String libraryName) : base(libraryName)
@@ -109,6 +110,7 @@ namespace Bulkan
 				handle = System.Windows.GetProcAddress((System.Windows.HModule)NativeHandle, functionName.Ptr);
 			}
 		}
+#endif
 
 		private class UnixNativeLibrary : NativeLibrary
 		{
