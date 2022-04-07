@@ -2734,6 +2734,18 @@ namespace Bulkan
 		public static void vkSetDeviceMemoryPriorityEXT(VkDevice device, VkDeviceMemory memory, float priority)
 			=> vkSetDeviceMemoryPriorityEXT_ptr(device, memory, priority);
 
+		typealias vkGetDescriptorSetLayoutHostMappingInfoVALVEFunction = function void(VkDevice device, VkDescriptorSetBindingReferenceVALVE* pBindingReference, VkDescriptorSetLayoutHostMappingInfoVALVE* pHostMapping);
+		private static vkGetDescriptorSetLayoutHostMappingInfoVALVEFunction vkGetDescriptorSetLayoutHostMappingInfoVALVE_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkGetDescriptorSetLayoutHostMappingInfoVALVE(VkDevice device, VkDescriptorSetBindingReferenceVALVE* pBindingReference, VkDescriptorSetLayoutHostMappingInfoVALVE* pHostMapping)
+			=> vkGetDescriptorSetLayoutHostMappingInfoVALVE_ptr(device, pBindingReference, pHostMapping);
+
+		typealias vkGetDescriptorSetHostMappingVALVEFunction = function void(VkDevice device, VkDescriptorSet descriptorSet, void** ppData);
+		private static vkGetDescriptorSetHostMappingVALVEFunction vkGetDescriptorSetHostMappingVALVE_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkGetDescriptorSetHostMappingVALVE(VkDevice device, VkDescriptorSet descriptorSet, void** ppData)
+			=> vkGetDescriptorSetHostMappingVALVE_ptr(device, descriptorSet, ppData);
+
 		public static void LoadFuncionPointers(VkInstance instance = default)
 		{
 			if (instance != default)
@@ -3196,6 +3208,8 @@ namespace Bulkan
 			NativeLib.LoadFunction("vkCmdDrawMultiEXT",  out vkCmdDrawMultiEXT_ptr);
 			NativeLib.LoadFunction("vkCmdDrawMultiIndexedEXT",  out vkCmdDrawMultiIndexedEXT_ptr);
 			NativeLib.LoadFunction("vkSetDeviceMemoryPriorityEXT",  out vkSetDeviceMemoryPriorityEXT_ptr);
+			NativeLib.LoadFunction("vkGetDescriptorSetLayoutHostMappingInfoVALVE",  out vkGetDescriptorSetLayoutHostMappingInfoVALVE_ptr);
+			NativeLib.LoadFunction("vkGetDescriptorSetHostMappingVALVE",  out vkGetDescriptorSetHostMappingVALVE_ptr);
 		}
 	}
 }

@@ -164,7 +164,7 @@ namespace Bulkan
 	{
 		public VkStructureType sType = .VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
 		public void* pNext;
-		public uint32 flags;
+		public VkInstanceCreateFlags flags;
 		public VkApplicationInfo* pApplicationInfo;
 		public uint32 enabledLayerCount;
 		public char8** ppEnabledLayerNames;
@@ -868,7 +868,7 @@ namespace Bulkan
 	{
 		public VkStructureType sType = .VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
 		public void* pNext;
-		public uint32 flags;
+		public VkPipelineLayoutCreateFlags flags;
 		public uint32 setLayoutCount;
 		public VkDescriptorSetLayout* pSetLayouts;
 		public uint32 pushConstantRangeCount;
@@ -1721,7 +1721,7 @@ namespace Bulkan
 	{
 		public VkStructureType sType = .VK_STRUCTURE_TYPE_PRIVATE_DATA_SLOT_CREATE_INFO;
 		public void* pNext;
-		public VkPrivateDataSlotCreateFlags flags;
+		public uint32 flags;
 	}
 
 	[CRepr]
@@ -6629,6 +6629,16 @@ namespace Bulkan
 	}
 
 	[CRepr]
+	public struct VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT
+	{
+		public VkStructureType sType = .VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIMITIVES_GENERATED_QUERY_FEATURES_EXT;
+		public void* pNext;
+		public VkBool32 primitivesGeneratedQuery;
+		public VkBool32 primitivesGeneratedQueryWithRasterizerDiscard;
+		public VkBool32 primitivesGeneratedQueryWithNonZeroStreams;
+	}
+
+	[CRepr]
 	public struct VkVideoQueueFamilyProperties2KHR
 	{
 		public VkStructureType sType = .VK_STRUCTURE_TYPE_VIDEO_QUEUE_FAMILY_PROPERTIES_2_KHR;
@@ -6694,6 +6704,7 @@ namespace Bulkan
 		public VkExtent2D maxExtent;
 		public uint32 maxReferencePicturesSlotsCount;
 		public uint32 maxReferencePicturesActiveCount;
+		public VkExtensionProperties stdHeaderVersion;
 	}
 
 	[CRepr]
@@ -6737,6 +6748,14 @@ namespace Bulkan
 	}
 
 	[CRepr]
+	public struct VkVideoDecodeCapabilitiesKHR
+	{
+		public VkStructureType sType = .VK_STRUCTURE_TYPE_VIDEO_DECODE_CAPABILITIES_KHR;
+		public void* pNext;
+		public VkVideoDecodeCapabilityFlagsKHR flags;
+	}
+
+	[CRepr]
 	public struct VkVideoDecodeInfoKHR
 	{
 		public VkStructureType sType = .VK_STRUCTURE_TYPE_VIDEO_DECODE_INFO_KHR;
@@ -6769,16 +6788,6 @@ namespace Bulkan
 		public void* pNext;
 		public uint32 maxLevel;
 		public VkOffset2D fieldOffsetGranularity;
-		public VkExtensionProperties stdExtensionVersion;
-	}
-
-	[CRepr]
-	public struct VkVideoDecodeH264SessionCreateInfoEXT
-	{
-		public VkStructureType sType = .VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_SESSION_CREATE_INFO_EXT;
-		public void* pNext;
-		public uint32 flags;
-		public VkExtensionProperties* pStdExtensionVersion;
 	}
 
 	[CRepr]
@@ -6842,16 +6851,6 @@ namespace Bulkan
 		public VkStructureType sType = .VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_CAPABILITIES_EXT;
 		public void* pNext;
 		public uint32 maxLevel;
-		public VkExtensionProperties stdExtensionVersion;
-	}
-
-	[CRepr]
-	public struct VkVideoDecodeH265SessionCreateInfoEXT
-	{
-		public VkStructureType sType = .VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_CREATE_INFO_EXT;
-		public void* pNext;
-		public uint32 flags;
-		public VkExtensionProperties* pStdExtensionVersion;
 	}
 
 	[CRepr]
@@ -6859,6 +6858,8 @@ namespace Bulkan
 	{
 		public VkStructureType sType = .VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_PARAMETERS_ADD_INFO_EXT;
 		public void* pNext;
+		public uint32 vpsStdCount;
+		public void* pVpsStd;
 		public uint32 spsStdCount;
 		public void* pSpsStd;
 		public uint32 ppsStdCount;
@@ -6870,6 +6871,7 @@ namespace Bulkan
 	{
 		public VkStructureType sType = .VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_PARAMETERS_CREATE_INFO_EXT;
 		public void* pNext;
+		public uint32 maxVpsStdCount;
 		public uint32 maxSpsStdCount;
 		public uint32 maxPpsStdCount;
 		public VkVideoDecodeH265SessionParametersAddInfoEXT* pParametersAddInfo;
@@ -6906,6 +6908,7 @@ namespace Bulkan
 		public VkFormat referencePicturesFormat;
 		public uint32 maxReferencePicturesSlotsCount;
 		public uint32 maxReferencePicturesActiveCount;
+		public VkExtensionProperties* pStdHeaderVersion;
 	}
 
 	[CRepr]
@@ -6997,6 +7000,18 @@ namespace Bulkan
 	}
 
 	[CRepr]
+	public struct VkVideoEncodeCapabilitiesKHR
+	{
+		public VkStructureType sType = .VK_STRUCTURE_TYPE_VIDEO_ENCODE_CAPABILITIES_KHR;
+		public void* pNext;
+		public VkVideoEncodeCapabilityFlagsKHR flags;
+		public VkVideoEncodeRateControlModeFlagsKHR rateControlModes;
+		public uint8 rateControlLayerCount;
+		public uint8 qualityLevelCount;
+		public VkExtent2D inputImageDataFillAlignment;
+	}
+
+	[CRepr]
 	public struct VkVideoEncodeH264CapabilitiesEXT
 	{
 		public VkStructureType sType = .VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_CAPABILITIES_EXT;
@@ -7004,24 +7019,14 @@ namespace Bulkan
 		public VkVideoEncodeH264CapabilityFlagsEXT flags;
 		public VkVideoEncodeH264InputModeFlagsEXT inputModeFlags;
 		public VkVideoEncodeH264OutputModeFlagsEXT outputModeFlags;
-		public VkExtent2D minPictureSizeInMbs;
-		public VkExtent2D maxPictureSizeInMbs;
-		public VkExtent2D inputImageDataAlignment;
-		public uint8 maxNumL0ReferenceForP;
-		public uint8 maxNumL0ReferenceForB;
-		public uint8 maxNumL1Reference;
-		public uint8 qualityLevelCount;
-		public VkExtensionProperties stdExtensionVersion;
-	}
-
-	[CRepr]
-	public struct VkVideoEncodeH264SessionCreateInfoEXT
-	{
-		public VkStructureType sType = .VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_CREATE_INFO_EXT;
-		public void* pNext;
-		public VkVideoEncodeH264CreateFlagsEXT flags;
-		public VkExtent2D maxPictureSizeInMbs;
-		public VkExtensionProperties* pStdExtensionVersion;
+		public uint8 maxPPictureL0ReferenceCount;
+		public uint8 maxBPictureL0ReferenceCount;
+		public uint8 maxL1ReferenceCount;
+		public VkBool32 motionVectorsOverPicBoundariesFlag;
+		public uint32 maxBytesPerPicDenom;
+		public uint32 maxBitsPerMbDenom;
+		public uint32 log2MaxMvLengthHorizontal;
+		public uint32 log2MaxMvLengthVertical;
 	}
 
 	[CRepr]
@@ -7051,7 +7056,7 @@ namespace Bulkan
 		public VkStructureType sType = .VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_DPB_SLOT_INFO_EXT;
 		public void* pNext;
 		public int8 slotIndex;
-		public void* pStdPictureInfo;
+		public void* pStdReferenceInfo;
 	}
 
 	[CRepr]
@@ -7059,13 +7064,22 @@ namespace Bulkan
 	{
 		public VkStructureType sType = .VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_VCL_FRAME_INFO_EXT;
 		public void* pNext;
-		public uint8 refDefaultFinalList0EntryCount;
-		public VkVideoEncodeH264DpbSlotInfoEXT* pRefDefaultFinalList0Entries;
-		public uint8 refDefaultFinalList1EntryCount;
-		public VkVideoEncodeH264DpbSlotInfoEXT* pRefDefaultFinalList1Entries;
+		public VkVideoEncodeH264ReferenceListsEXT* pReferenceFinalLists;
 		public uint32 naluSliceEntryCount;
 		public VkVideoEncodeH264NaluSliceEXT* pNaluSliceEntries;
-		public VkVideoEncodeH264DpbSlotInfoEXT* pCurrentPictureInfo;
+		public void* pCurrentPictureInfo;
+	}
+
+	[CRepr]
+	public struct VkVideoEncodeH264ReferenceListsEXT
+	{
+		public VkStructureType sType = .VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_REFERENCE_LISTS_EXT;
+		public void* pNext;
+		public uint8 referenceList0EntryCount;
+		public VkVideoEncodeH264DpbSlotInfoEXT* pReferenceList0Entries;
+		public uint8 referenceList1EntryCount;
+		public VkVideoEncodeH264DpbSlotInfoEXT* pReferenceList1Entries;
+		public void* pMemMgmtCtrlOperations;
 	}
 
 	[CRepr]
@@ -7092,12 +7106,9 @@ namespace Bulkan
 	{
 		public VkStructureType sType = .VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_NALU_SLICE_EXT;
 		public void* pNext;
-		public void* pSliceHeaderStd;
 		public uint32 mbCount;
-		public uint8 refFinalList0EntryCount;
-		public VkVideoEncodeH264DpbSlotInfoEXT* pRefFinalList0Entries;
-		public uint8 refFinalList1EntryCount;
-		public VkVideoEncodeH264DpbSlotInfoEXT* pRefFinalList1Entries;
+		public VkVideoEncodeH264ReferenceListsEXT* pReferenceFinalLists;
+		public void* pSliceHeaderStd;
 	}
 
 	[CRepr]
@@ -7149,26 +7160,26 @@ namespace Bulkan
 	{
 		public VkStructureType sType = .VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_CAPABILITIES_EXT;
 		public void* pNext;
-		public uint32 flags;
+		public VkVideoEncodeH265CapabilityFlagsEXT flags;
 		public VkVideoEncodeH265InputModeFlagsEXT inputModeFlags;
 		public VkVideoEncodeH265OutputModeFlagsEXT outputModeFlags;
 		public VkVideoEncodeH265CtbSizeFlagsEXT ctbSizes;
-		public VkExtent2D inputImageDataAlignment;
-		public uint8 maxNumL0ReferenceForP;
-		public uint8 maxNumL0ReferenceForB;
-		public uint8 maxNumL1Reference;
-		public uint8 maxNumSubLayers;
-		public uint8 qualityLevelCount;
-		public VkExtensionProperties stdExtensionVersion;
-	}
-
-	[CRepr]
-	public struct VkVideoEncodeH265SessionCreateInfoEXT
-	{
-		public VkStructureType sType = .VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_CREATE_INFO_EXT;
-		public void* pNext;
-		public uint32 flags;
-		public VkExtensionProperties* pStdExtensionVersion;
+		public VkVideoEncodeH265TransformBlockSizeFlagsEXT transformBlockSizes;
+		public uint8 maxPPictureL0ReferenceCount;
+		public uint8 maxBPictureL0ReferenceCount;
+		public uint8 maxL1ReferenceCount;
+		public uint8 maxSubLayersCount;
+		public uint8 minLog2MinLumaCodingBlockSizeMinus3;
+		public uint8 maxLog2MinLumaCodingBlockSizeMinus3;
+		public uint8 minLog2MinLumaTransformBlockSizeMinus2;
+		public uint8 maxLog2MinLumaTransformBlockSizeMinus2;
+		public uint8 minMaxTransformHierarchyDepthInter;
+		public uint8 maxMaxTransformHierarchyDepthInter;
+		public uint8 minMaxTransformHierarchyDepthIntra;
+		public uint8 maxMaxTransformHierarchyDepthIntra;
+		public uint8 maxDiffCuQpDeltaDepth;
+		public uint8 minMaxNumMergeCand;
+		public uint8 maxMaxNumMergeCand;
 	}
 
 	[CRepr]
@@ -7201,8 +7212,8 @@ namespace Bulkan
 		public VkStructureType sType = .VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_VCL_FRAME_INFO_EXT;
 		public void* pNext;
 		public VkVideoEncodeH265ReferenceListsEXT* pReferenceFinalLists;
-		public uint32 naluSliceEntryCount;
-		public VkVideoEncodeH265NaluSliceEXT* pNaluSliceEntries;
+		public uint32 naluSliceSegmentEntryCount;
+		public VkVideoEncodeH265NaluSliceSegmentEXT* pNaluSliceSegmentEntries;
 		public void* pCurrentPictureInfo;
 	}
 
@@ -7220,13 +7231,13 @@ namespace Bulkan
 	}
 
 	[CRepr]
-	public struct VkVideoEncodeH265NaluSliceEXT
+	public struct VkVideoEncodeH265NaluSliceSegmentEXT
 	{
-		public VkStructureType sType = .VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_NALU_SLICE_EXT;
+		public VkStructureType sType = .VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_NALU_SLICE_SEGMENT_EXT;
 		public void* pNext;
 		public uint32 ctbCount;
 		public VkVideoEncodeH265ReferenceListsEXT* pReferenceFinalLists;
-		public void* pSliceHeaderStd;
+		public void* pSliceSegmentHeaderStd;
 	}
 
 	[CRepr]
@@ -7828,6 +7839,57 @@ namespace Bulkan
 		public VkStructureType sType = .VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINEAR_COLOR_ATTACHMENT_FEATURES_NV;
 		public void* pNext;
 		public VkBool32 linearColorAttachment;
+	}
+
+	[CRepr]
+	public struct VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT
+	{
+		public VkStructureType sType = .VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GRAPHICS_PIPELINE_LIBRARY_FEATURES_EXT;
+		public void* pNext;
+		public VkBool32 graphicsPipelineLibrary;
+	}
+
+	[CRepr]
+	public struct VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT
+	{
+		public VkStructureType sType = .VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GRAPHICS_PIPELINE_LIBRARY_PROPERTIES_EXT;
+		public void* pNext;
+		public VkBool32 graphicsPipelineLibraryFastLinking;
+		public VkBool32 graphicsPipelineLibraryIndependentInterpolationDecoration;
+	}
+
+	[CRepr]
+	public struct VkGraphicsPipelineLibraryCreateInfoEXT
+	{
+		public VkStructureType sType = .VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_LIBRARY_CREATE_INFO_EXT;
+		public void* pNext;
+		public VkGraphicsPipelineLibraryFlagsEXT flags;
+	}
+
+	[CRepr]
+	public struct VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE
+	{
+		public VkStructureType sType = .VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_SET_HOST_MAPPING_FEATURES_VALVE;
+		public void* pNext;
+		public VkBool32 descriptorSetHostMapping;
+	}
+
+	[CRepr]
+	public struct VkDescriptorSetBindingReferenceVALVE
+	{
+		public VkStructureType sType = .VK_STRUCTURE_TYPE_DESCRIPTOR_SET_BINDING_REFERENCE_VALVE;
+		public void* pNext;
+		public VkDescriptorSetLayout descriptorSetLayout;
+		public uint32 binding;
+	}
+
+	[CRepr]
+	public struct VkDescriptorSetLayoutHostMappingInfoVALVE
+	{
+		public VkStructureType sType = .VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_HOST_MAPPING_INFO_VALVE;
+		public void* pNext;
+		public uint descriptorOffset;
+		public uint32 descriptorSize;
 	}
 
 }
