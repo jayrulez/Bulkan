@@ -20,7 +20,7 @@ namespace Bulkan
 
 		public static Self operator implicit<T>(T value)
 		{
-			return value;
+			return (.)value;
 		}
 	}
 
@@ -34,7 +34,7 @@ namespace Bulkan
 
 		public static Self operator implicit<T>(T value)
 		{
-			return value;
+			return (.)value;
 		}
 	}
 

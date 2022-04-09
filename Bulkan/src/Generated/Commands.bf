@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using internal Bulkan;
 namespace Bulkan
 {
@@ -2746,470 +2747,3238 @@ namespace Bulkan
 		public static void vkGetDescriptorSetHostMappingVALVE(VkDevice device, VkDescriptorSet descriptorSet, void** ppData)
 			=> vkGetDescriptorSetHostMappingVALVE_ptr(device, descriptorSet, ppData);
 
-		public static void LoadFuncionPointers(VkInstance instance = default)
+		public static void SetInstance(VkInstance instance)
+		{
+			NativeLib.mInstance = instance;
+		}
+
+		public static void LoadFunction(in StringView name)
+		{
+			switch (name) {
+			case "vkCreateInstance":
+				NativeLib.LoadFunction("vkCreateInstance", out vkCreateInstance_ptr);
+				break;
+
+			case "vkDestroyInstance":
+				NativeLib.LoadFunction("vkDestroyInstance", out vkDestroyInstance_ptr);
+				break;
+
+			case "vkEnumeratePhysicalDevices":
+				NativeLib.LoadFunction("vkEnumeratePhysicalDevices", out vkEnumeratePhysicalDevices_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceFeatures":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceFeatures", out vkGetPhysicalDeviceFeatures_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceFormatProperties":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceFormatProperties", out vkGetPhysicalDeviceFormatProperties_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceImageFormatProperties":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceImageFormatProperties", out vkGetPhysicalDeviceImageFormatProperties_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceProperties":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceProperties", out vkGetPhysicalDeviceProperties_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceQueueFamilyProperties":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceQueueFamilyProperties", out vkGetPhysicalDeviceQueueFamilyProperties_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceMemoryProperties":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceMemoryProperties", out vkGetPhysicalDeviceMemoryProperties_ptr);
+				break;
+
+			case "vkGetInstanceProcAddr":
+				NativeLib.LoadFunction("vkGetInstanceProcAddr", out vkGetInstanceProcAddr_ptr);
+				break;
+
+			case "vkGetDeviceProcAddr":
+				NativeLib.LoadFunction("vkGetDeviceProcAddr", out vkGetDeviceProcAddr_ptr);
+				break;
+
+			case "vkCreateDevice":
+				NativeLib.LoadFunction("vkCreateDevice", out vkCreateDevice_ptr);
+				break;
+
+			case "vkDestroyDevice":
+				NativeLib.LoadFunction("vkDestroyDevice", out vkDestroyDevice_ptr);
+				break;
+
+			case "vkEnumerateInstanceExtensionProperties":
+				NativeLib.LoadFunction("vkEnumerateInstanceExtensionProperties", out vkEnumerateInstanceExtensionProperties_ptr);
+				break;
+
+			case "vkEnumerateDeviceExtensionProperties":
+				NativeLib.LoadFunction("vkEnumerateDeviceExtensionProperties", out vkEnumerateDeviceExtensionProperties_ptr);
+				break;
+
+			case "vkEnumerateInstanceLayerProperties":
+				NativeLib.LoadFunction("vkEnumerateInstanceLayerProperties", out vkEnumerateInstanceLayerProperties_ptr);
+				break;
+
+			case "vkEnumerateDeviceLayerProperties":
+				NativeLib.LoadFunction("vkEnumerateDeviceLayerProperties", out vkEnumerateDeviceLayerProperties_ptr);
+				break;
+
+			case "vkGetDeviceQueue":
+				NativeLib.LoadFunction("vkGetDeviceQueue", out vkGetDeviceQueue_ptr);
+				break;
+
+			case "vkQueueSubmit":
+				NativeLib.LoadFunction("vkQueueSubmit", out vkQueueSubmit_ptr);
+				break;
+
+			case "vkQueueWaitIdle":
+				NativeLib.LoadFunction("vkQueueWaitIdle", out vkQueueWaitIdle_ptr);
+				break;
+
+			case "vkDeviceWaitIdle":
+				NativeLib.LoadFunction("vkDeviceWaitIdle", out vkDeviceWaitIdle_ptr);
+				break;
+
+			case "vkAllocateMemory":
+				NativeLib.LoadFunction("vkAllocateMemory", out vkAllocateMemory_ptr);
+				break;
+
+			case "vkFreeMemory":
+				NativeLib.LoadFunction("vkFreeMemory", out vkFreeMemory_ptr);
+				break;
+
+			case "vkMapMemory":
+				NativeLib.LoadFunction("vkMapMemory", out vkMapMemory_ptr);
+				break;
+
+			case "vkUnmapMemory":
+				NativeLib.LoadFunction("vkUnmapMemory", out vkUnmapMemory_ptr);
+				break;
+
+			case "vkFlushMappedMemoryRanges":
+				NativeLib.LoadFunction("vkFlushMappedMemoryRanges", out vkFlushMappedMemoryRanges_ptr);
+				break;
+
+			case "vkInvalidateMappedMemoryRanges":
+				NativeLib.LoadFunction("vkInvalidateMappedMemoryRanges", out vkInvalidateMappedMemoryRanges_ptr);
+				break;
+
+			case "vkGetDeviceMemoryCommitment":
+				NativeLib.LoadFunction("vkGetDeviceMemoryCommitment", out vkGetDeviceMemoryCommitment_ptr);
+				break;
+
+			case "vkBindBufferMemory":
+				NativeLib.LoadFunction("vkBindBufferMemory", out vkBindBufferMemory_ptr);
+				break;
+
+			case "vkBindImageMemory":
+				NativeLib.LoadFunction("vkBindImageMemory", out vkBindImageMemory_ptr);
+				break;
+
+			case "vkGetBufferMemoryRequirements":
+				NativeLib.LoadFunction("vkGetBufferMemoryRequirements", out vkGetBufferMemoryRequirements_ptr);
+				break;
+
+			case "vkGetImageMemoryRequirements":
+				NativeLib.LoadFunction("vkGetImageMemoryRequirements", out vkGetImageMemoryRequirements_ptr);
+				break;
+
+			case "vkGetImageSparseMemoryRequirements":
+				NativeLib.LoadFunction("vkGetImageSparseMemoryRequirements", out vkGetImageSparseMemoryRequirements_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceSparseImageFormatProperties":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceSparseImageFormatProperties", out vkGetPhysicalDeviceSparseImageFormatProperties_ptr);
+				break;
+
+			case "vkQueueBindSparse":
+				NativeLib.LoadFunction("vkQueueBindSparse", out vkQueueBindSparse_ptr);
+				break;
+
+			case "vkCreateFence":
+				NativeLib.LoadFunction("vkCreateFence", out vkCreateFence_ptr);
+				break;
+
+			case "vkDestroyFence":
+				NativeLib.LoadFunction("vkDestroyFence", out vkDestroyFence_ptr);
+				break;
+
+			case "vkResetFences":
+				NativeLib.LoadFunction("vkResetFences", out vkResetFences_ptr);
+				break;
+
+			case "vkGetFenceStatus":
+				NativeLib.LoadFunction("vkGetFenceStatus", out vkGetFenceStatus_ptr);
+				break;
+
+			case "vkWaitForFences":
+				NativeLib.LoadFunction("vkWaitForFences", out vkWaitForFences_ptr);
+				break;
+
+			case "vkCreateSemaphore":
+				NativeLib.LoadFunction("vkCreateSemaphore", out vkCreateSemaphore_ptr);
+				break;
+
+			case "vkDestroySemaphore":
+				NativeLib.LoadFunction("vkDestroySemaphore", out vkDestroySemaphore_ptr);
+				break;
+
+			case "vkCreateEvent":
+				NativeLib.LoadFunction("vkCreateEvent", out vkCreateEvent_ptr);
+				break;
+
+			case "vkDestroyEvent":
+				NativeLib.LoadFunction("vkDestroyEvent", out vkDestroyEvent_ptr);
+				break;
+
+			case "vkGetEventStatus":
+				NativeLib.LoadFunction("vkGetEventStatus", out vkGetEventStatus_ptr);
+				break;
+
+			case "vkSetEvent":
+				NativeLib.LoadFunction("vkSetEvent", out vkSetEvent_ptr);
+				break;
+
+			case "vkResetEvent":
+				NativeLib.LoadFunction("vkResetEvent", out vkResetEvent_ptr);
+				break;
+
+			case "vkCreateQueryPool":
+				NativeLib.LoadFunction("vkCreateQueryPool", out vkCreateQueryPool_ptr);
+				break;
+
+			case "vkDestroyQueryPool":
+				NativeLib.LoadFunction("vkDestroyQueryPool", out vkDestroyQueryPool_ptr);
+				break;
+
+			case "vkGetQueryPoolResults":
+				NativeLib.LoadFunction("vkGetQueryPoolResults", out vkGetQueryPoolResults_ptr);
+				break;
+
+			case "vkCreateBuffer":
+				NativeLib.LoadFunction("vkCreateBuffer", out vkCreateBuffer_ptr);
+				break;
+
+			case "vkDestroyBuffer":
+				NativeLib.LoadFunction("vkDestroyBuffer", out vkDestroyBuffer_ptr);
+				break;
+
+			case "vkCreateBufferView":
+				NativeLib.LoadFunction("vkCreateBufferView", out vkCreateBufferView_ptr);
+				break;
+
+			case "vkDestroyBufferView":
+				NativeLib.LoadFunction("vkDestroyBufferView", out vkDestroyBufferView_ptr);
+				break;
+
+			case "vkCreateImage":
+				NativeLib.LoadFunction("vkCreateImage", out vkCreateImage_ptr);
+				break;
+
+			case "vkDestroyImage":
+				NativeLib.LoadFunction("vkDestroyImage", out vkDestroyImage_ptr);
+				break;
+
+			case "vkGetImageSubresourceLayout":
+				NativeLib.LoadFunction("vkGetImageSubresourceLayout", out vkGetImageSubresourceLayout_ptr);
+				break;
+
+			case "vkCreateImageView":
+				NativeLib.LoadFunction("vkCreateImageView", out vkCreateImageView_ptr);
+				break;
+
+			case "vkDestroyImageView":
+				NativeLib.LoadFunction("vkDestroyImageView", out vkDestroyImageView_ptr);
+				break;
+
+			case "vkCreateShaderModule":
+				NativeLib.LoadFunction("vkCreateShaderModule", out vkCreateShaderModule_ptr);
+				break;
+
+			case "vkDestroyShaderModule":
+				NativeLib.LoadFunction("vkDestroyShaderModule", out vkDestroyShaderModule_ptr);
+				break;
+
+			case "vkCreatePipelineCache":
+				NativeLib.LoadFunction("vkCreatePipelineCache", out vkCreatePipelineCache_ptr);
+				break;
+
+			case "vkDestroyPipelineCache":
+				NativeLib.LoadFunction("vkDestroyPipelineCache", out vkDestroyPipelineCache_ptr);
+				break;
+
+			case "vkGetPipelineCacheData":
+				NativeLib.LoadFunction("vkGetPipelineCacheData", out vkGetPipelineCacheData_ptr);
+				break;
+
+			case "vkMergePipelineCaches":
+				NativeLib.LoadFunction("vkMergePipelineCaches", out vkMergePipelineCaches_ptr);
+				break;
+
+			case "vkCreateGraphicsPipelines":
+				NativeLib.LoadFunction("vkCreateGraphicsPipelines", out vkCreateGraphicsPipelines_ptr);
+				break;
+
+			case "vkCreateComputePipelines":
+				NativeLib.LoadFunction("vkCreateComputePipelines", out vkCreateComputePipelines_ptr);
+				break;
+
+			case "vkDestroyPipeline":
+				NativeLib.LoadFunction("vkDestroyPipeline", out vkDestroyPipeline_ptr);
+				break;
+
+			case "vkCreatePipelineLayout":
+				NativeLib.LoadFunction("vkCreatePipelineLayout", out vkCreatePipelineLayout_ptr);
+				break;
+
+			case "vkDestroyPipelineLayout":
+				NativeLib.LoadFunction("vkDestroyPipelineLayout", out vkDestroyPipelineLayout_ptr);
+				break;
+
+			case "vkCreateSampler":
+				NativeLib.LoadFunction("vkCreateSampler", out vkCreateSampler_ptr);
+				break;
+
+			case "vkDestroySampler":
+				NativeLib.LoadFunction("vkDestroySampler", out vkDestroySampler_ptr);
+				break;
+
+			case "vkCreateDescriptorSetLayout":
+				NativeLib.LoadFunction("vkCreateDescriptorSetLayout", out vkCreateDescriptorSetLayout_ptr);
+				break;
+
+			case "vkDestroyDescriptorSetLayout":
+				NativeLib.LoadFunction("vkDestroyDescriptorSetLayout", out vkDestroyDescriptorSetLayout_ptr);
+				break;
+
+			case "vkCreateDescriptorPool":
+				NativeLib.LoadFunction("vkCreateDescriptorPool", out vkCreateDescriptorPool_ptr);
+				break;
+
+			case "vkDestroyDescriptorPool":
+				NativeLib.LoadFunction("vkDestroyDescriptorPool", out vkDestroyDescriptorPool_ptr);
+				break;
+
+			case "vkResetDescriptorPool":
+				NativeLib.LoadFunction("vkResetDescriptorPool", out vkResetDescriptorPool_ptr);
+				break;
+
+			case "vkAllocateDescriptorSets":
+				NativeLib.LoadFunction("vkAllocateDescriptorSets", out vkAllocateDescriptorSets_ptr);
+				break;
+
+			case "vkFreeDescriptorSets":
+				NativeLib.LoadFunction("vkFreeDescriptorSets", out vkFreeDescriptorSets_ptr);
+				break;
+
+			case "vkUpdateDescriptorSets":
+				NativeLib.LoadFunction("vkUpdateDescriptorSets", out vkUpdateDescriptorSets_ptr);
+				break;
+
+			case "vkCreateFramebuffer":
+				NativeLib.LoadFunction("vkCreateFramebuffer", out vkCreateFramebuffer_ptr);
+				break;
+
+			case "vkDestroyFramebuffer":
+				NativeLib.LoadFunction("vkDestroyFramebuffer", out vkDestroyFramebuffer_ptr);
+				break;
+
+			case "vkCreateRenderPass":
+				NativeLib.LoadFunction("vkCreateRenderPass", out vkCreateRenderPass_ptr);
+				break;
+
+			case "vkDestroyRenderPass":
+				NativeLib.LoadFunction("vkDestroyRenderPass", out vkDestroyRenderPass_ptr);
+				break;
+
+			case "vkGetRenderAreaGranularity":
+				NativeLib.LoadFunction("vkGetRenderAreaGranularity", out vkGetRenderAreaGranularity_ptr);
+				break;
+
+			case "vkCreateCommandPool":
+				NativeLib.LoadFunction("vkCreateCommandPool", out vkCreateCommandPool_ptr);
+				break;
+
+			case "vkDestroyCommandPool":
+				NativeLib.LoadFunction("vkDestroyCommandPool", out vkDestroyCommandPool_ptr);
+				break;
+
+			case "vkResetCommandPool":
+				NativeLib.LoadFunction("vkResetCommandPool", out vkResetCommandPool_ptr);
+				break;
+
+			case "vkAllocateCommandBuffers":
+				NativeLib.LoadFunction("vkAllocateCommandBuffers", out vkAllocateCommandBuffers_ptr);
+				break;
+
+			case "vkFreeCommandBuffers":
+				NativeLib.LoadFunction("vkFreeCommandBuffers", out vkFreeCommandBuffers_ptr);
+				break;
+
+			case "vkBeginCommandBuffer":
+				NativeLib.LoadFunction("vkBeginCommandBuffer", out vkBeginCommandBuffer_ptr);
+				break;
+
+			case "vkEndCommandBuffer":
+				NativeLib.LoadFunction("vkEndCommandBuffer", out vkEndCommandBuffer_ptr);
+				break;
+
+			case "vkResetCommandBuffer":
+				NativeLib.LoadFunction("vkResetCommandBuffer", out vkResetCommandBuffer_ptr);
+				break;
+
+			case "vkCmdBindPipeline":
+				NativeLib.LoadFunction("vkCmdBindPipeline", out vkCmdBindPipeline_ptr);
+				break;
+
+			case "vkCmdSetViewport":
+				NativeLib.LoadFunction("vkCmdSetViewport", out vkCmdSetViewport_ptr);
+				break;
+
+			case "vkCmdSetScissor":
+				NativeLib.LoadFunction("vkCmdSetScissor", out vkCmdSetScissor_ptr);
+				break;
+
+			case "vkCmdSetLineWidth":
+				NativeLib.LoadFunction("vkCmdSetLineWidth", out vkCmdSetLineWidth_ptr);
+				break;
+
+			case "vkCmdSetDepthBias":
+				NativeLib.LoadFunction("vkCmdSetDepthBias", out vkCmdSetDepthBias_ptr);
+				break;
+
+			case "vkCmdSetBlendConstants":
+				NativeLib.LoadFunction("vkCmdSetBlendConstants", out vkCmdSetBlendConstants_ptr);
+				break;
+
+			case "vkCmdSetDepthBounds":
+				NativeLib.LoadFunction("vkCmdSetDepthBounds", out vkCmdSetDepthBounds_ptr);
+				break;
+
+			case "vkCmdSetStencilCompareMask":
+				NativeLib.LoadFunction("vkCmdSetStencilCompareMask", out vkCmdSetStencilCompareMask_ptr);
+				break;
+
+			case "vkCmdSetStencilWriteMask":
+				NativeLib.LoadFunction("vkCmdSetStencilWriteMask", out vkCmdSetStencilWriteMask_ptr);
+				break;
+
+			case "vkCmdSetStencilReference":
+				NativeLib.LoadFunction("vkCmdSetStencilReference", out vkCmdSetStencilReference_ptr);
+				break;
+
+			case "vkCmdBindDescriptorSets":
+				NativeLib.LoadFunction("vkCmdBindDescriptorSets", out vkCmdBindDescriptorSets_ptr);
+				break;
+
+			case "vkCmdBindIndexBuffer":
+				NativeLib.LoadFunction("vkCmdBindIndexBuffer", out vkCmdBindIndexBuffer_ptr);
+				break;
+
+			case "vkCmdBindVertexBuffers":
+				NativeLib.LoadFunction("vkCmdBindVertexBuffers", out vkCmdBindVertexBuffers_ptr);
+				break;
+
+			case "vkCmdDraw":
+				NativeLib.LoadFunction("vkCmdDraw", out vkCmdDraw_ptr);
+				break;
+
+			case "vkCmdDrawIndexed":
+				NativeLib.LoadFunction("vkCmdDrawIndexed", out vkCmdDrawIndexed_ptr);
+				break;
+
+			case "vkCmdDrawIndirect":
+				NativeLib.LoadFunction("vkCmdDrawIndirect", out vkCmdDrawIndirect_ptr);
+				break;
+
+			case "vkCmdDrawIndexedIndirect":
+				NativeLib.LoadFunction("vkCmdDrawIndexedIndirect", out vkCmdDrawIndexedIndirect_ptr);
+				break;
+
+			case "vkCmdDispatch":
+				NativeLib.LoadFunction("vkCmdDispatch", out vkCmdDispatch_ptr);
+				break;
+
+			case "vkCmdDispatchIndirect":
+				NativeLib.LoadFunction("vkCmdDispatchIndirect", out vkCmdDispatchIndirect_ptr);
+				break;
+
+			case "vkCmdCopyBuffer":
+				NativeLib.LoadFunction("vkCmdCopyBuffer", out vkCmdCopyBuffer_ptr);
+				break;
+
+			case "vkCmdCopyImage":
+				NativeLib.LoadFunction("vkCmdCopyImage", out vkCmdCopyImage_ptr);
+				break;
+
+			case "vkCmdBlitImage":
+				NativeLib.LoadFunction("vkCmdBlitImage", out vkCmdBlitImage_ptr);
+				break;
+
+			case "vkCmdCopyBufferToImage":
+				NativeLib.LoadFunction("vkCmdCopyBufferToImage", out vkCmdCopyBufferToImage_ptr);
+				break;
+
+			case "vkCmdCopyImageToBuffer":
+				NativeLib.LoadFunction("vkCmdCopyImageToBuffer", out vkCmdCopyImageToBuffer_ptr);
+				break;
+
+			case "vkCmdUpdateBuffer":
+				NativeLib.LoadFunction("vkCmdUpdateBuffer", out vkCmdUpdateBuffer_ptr);
+				break;
+
+			case "vkCmdFillBuffer":
+				NativeLib.LoadFunction("vkCmdFillBuffer", out vkCmdFillBuffer_ptr);
+				break;
+
+			case "vkCmdClearColorImage":
+				NativeLib.LoadFunction("vkCmdClearColorImage", out vkCmdClearColorImage_ptr);
+				break;
+
+			case "vkCmdClearDepthStencilImage":
+				NativeLib.LoadFunction("vkCmdClearDepthStencilImage", out vkCmdClearDepthStencilImage_ptr);
+				break;
+
+			case "vkCmdClearAttachments":
+				NativeLib.LoadFunction("vkCmdClearAttachments", out vkCmdClearAttachments_ptr);
+				break;
+
+			case "vkCmdResolveImage":
+				NativeLib.LoadFunction("vkCmdResolveImage", out vkCmdResolveImage_ptr);
+				break;
+
+			case "vkCmdSetEvent":
+				NativeLib.LoadFunction("vkCmdSetEvent", out vkCmdSetEvent_ptr);
+				break;
+
+			case "vkCmdResetEvent":
+				NativeLib.LoadFunction("vkCmdResetEvent", out vkCmdResetEvent_ptr);
+				break;
+
+			case "vkCmdWaitEvents":
+				NativeLib.LoadFunction("vkCmdWaitEvents", out vkCmdWaitEvents_ptr);
+				break;
+
+			case "vkCmdPipelineBarrier":
+				NativeLib.LoadFunction("vkCmdPipelineBarrier", out vkCmdPipelineBarrier_ptr);
+				break;
+
+			case "vkCmdBeginQuery":
+				NativeLib.LoadFunction("vkCmdBeginQuery", out vkCmdBeginQuery_ptr);
+				break;
+
+			case "vkCmdEndQuery":
+				NativeLib.LoadFunction("vkCmdEndQuery", out vkCmdEndQuery_ptr);
+				break;
+
+			case "vkCmdResetQueryPool":
+				NativeLib.LoadFunction("vkCmdResetQueryPool", out vkCmdResetQueryPool_ptr);
+				break;
+
+			case "vkCmdWriteTimestamp":
+				NativeLib.LoadFunction("vkCmdWriteTimestamp", out vkCmdWriteTimestamp_ptr);
+				break;
+
+			case "vkCmdCopyQueryPoolResults":
+				NativeLib.LoadFunction("vkCmdCopyQueryPoolResults", out vkCmdCopyQueryPoolResults_ptr);
+				break;
+
+			case "vkCmdPushConstants":
+				NativeLib.LoadFunction("vkCmdPushConstants", out vkCmdPushConstants_ptr);
+				break;
+
+			case "vkCmdBeginRenderPass":
+				NativeLib.LoadFunction("vkCmdBeginRenderPass", out vkCmdBeginRenderPass_ptr);
+				break;
+
+			case "vkCmdNextSubpass":
+				NativeLib.LoadFunction("vkCmdNextSubpass", out vkCmdNextSubpass_ptr);
+				break;
+
+			case "vkCmdEndRenderPass":
+				NativeLib.LoadFunction("vkCmdEndRenderPass", out vkCmdEndRenderPass_ptr);
+				break;
+
+			case "vkCmdExecuteCommands":
+				NativeLib.LoadFunction("vkCmdExecuteCommands", out vkCmdExecuteCommands_ptr);
+				break;
+
+			case "vkEnumerateInstanceVersion":
+				NativeLib.LoadFunction("vkEnumerateInstanceVersion", out vkEnumerateInstanceVersion_ptr);
+				break;
+
+			case "vkBindBufferMemory2":
+				NativeLib.LoadFunction("vkBindBufferMemory2", out vkBindBufferMemory2_ptr);
+				break;
+
+			case "vkBindImageMemory2":
+				NativeLib.LoadFunction("vkBindImageMemory2", out vkBindImageMemory2_ptr);
+				break;
+
+			case "vkGetDeviceGroupPeerMemoryFeatures":
+				NativeLib.LoadFunction("vkGetDeviceGroupPeerMemoryFeatures", out vkGetDeviceGroupPeerMemoryFeatures_ptr);
+				break;
+
+			case "vkCmdSetDeviceMask":
+				NativeLib.LoadFunction("vkCmdSetDeviceMask", out vkCmdSetDeviceMask_ptr);
+				break;
+
+			case "vkCmdDispatchBase":
+				NativeLib.LoadFunction("vkCmdDispatchBase", out vkCmdDispatchBase_ptr);
+				break;
+
+			case "vkEnumeratePhysicalDeviceGroups":
+				NativeLib.LoadFunction("vkEnumeratePhysicalDeviceGroups", out vkEnumeratePhysicalDeviceGroups_ptr);
+				break;
+
+			case "vkGetImageMemoryRequirements2":
+				NativeLib.LoadFunction("vkGetImageMemoryRequirements2", out vkGetImageMemoryRequirements2_ptr);
+				break;
+
+			case "vkGetBufferMemoryRequirements2":
+				NativeLib.LoadFunction("vkGetBufferMemoryRequirements2", out vkGetBufferMemoryRequirements2_ptr);
+				break;
+
+			case "vkGetImageSparseMemoryRequirements2":
+				NativeLib.LoadFunction("vkGetImageSparseMemoryRequirements2", out vkGetImageSparseMemoryRequirements2_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceFeatures2":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceFeatures2", out vkGetPhysicalDeviceFeatures2_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceProperties2":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceProperties2", out vkGetPhysicalDeviceProperties2_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceFormatProperties2":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceFormatProperties2", out vkGetPhysicalDeviceFormatProperties2_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceImageFormatProperties2":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceImageFormatProperties2", out vkGetPhysicalDeviceImageFormatProperties2_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceQueueFamilyProperties2":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceQueueFamilyProperties2", out vkGetPhysicalDeviceQueueFamilyProperties2_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceMemoryProperties2":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceMemoryProperties2", out vkGetPhysicalDeviceMemoryProperties2_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceSparseImageFormatProperties2":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceSparseImageFormatProperties2", out vkGetPhysicalDeviceSparseImageFormatProperties2_ptr);
+				break;
+
+			case "vkTrimCommandPool":
+				NativeLib.LoadFunction("vkTrimCommandPool", out vkTrimCommandPool_ptr);
+				break;
+
+			case "vkGetDeviceQueue2":
+				NativeLib.LoadFunction("vkGetDeviceQueue2", out vkGetDeviceQueue2_ptr);
+				break;
+
+			case "vkCreateSamplerYcbcrConversion":
+				NativeLib.LoadFunction("vkCreateSamplerYcbcrConversion", out vkCreateSamplerYcbcrConversion_ptr);
+				break;
+
+			case "vkDestroySamplerYcbcrConversion":
+				NativeLib.LoadFunction("vkDestroySamplerYcbcrConversion", out vkDestroySamplerYcbcrConversion_ptr);
+				break;
+
+			case "vkCreateDescriptorUpdateTemplate":
+				NativeLib.LoadFunction("vkCreateDescriptorUpdateTemplate", out vkCreateDescriptorUpdateTemplate_ptr);
+				break;
+
+			case "vkDestroyDescriptorUpdateTemplate":
+				NativeLib.LoadFunction("vkDestroyDescriptorUpdateTemplate", out vkDestroyDescriptorUpdateTemplate_ptr);
+				break;
+
+			case "vkUpdateDescriptorSetWithTemplate":
+				NativeLib.LoadFunction("vkUpdateDescriptorSetWithTemplate", out vkUpdateDescriptorSetWithTemplate_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceExternalBufferProperties":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceExternalBufferProperties", out vkGetPhysicalDeviceExternalBufferProperties_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceExternalFenceProperties":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceExternalFenceProperties", out vkGetPhysicalDeviceExternalFenceProperties_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceExternalSemaphoreProperties":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceExternalSemaphoreProperties", out vkGetPhysicalDeviceExternalSemaphoreProperties_ptr);
+				break;
+
+			case "vkGetDescriptorSetLayoutSupport":
+				NativeLib.LoadFunction("vkGetDescriptorSetLayoutSupport", out vkGetDescriptorSetLayoutSupport_ptr);
+				break;
+
+			case "vkCmdDrawIndirectCount":
+				NativeLib.LoadFunction("vkCmdDrawIndirectCount", out vkCmdDrawIndirectCount_ptr);
+				break;
+
+			case "vkCmdDrawIndexedIndirectCount":
+				NativeLib.LoadFunction("vkCmdDrawIndexedIndirectCount", out vkCmdDrawIndexedIndirectCount_ptr);
+				break;
+
+			case "vkCreateRenderPass2":
+				NativeLib.LoadFunction("vkCreateRenderPass2", out vkCreateRenderPass2_ptr);
+				break;
+
+			case "vkCmdBeginRenderPass2":
+				NativeLib.LoadFunction("vkCmdBeginRenderPass2", out vkCmdBeginRenderPass2_ptr);
+				break;
+
+			case "vkCmdNextSubpass2":
+				NativeLib.LoadFunction("vkCmdNextSubpass2", out vkCmdNextSubpass2_ptr);
+				break;
+
+			case "vkCmdEndRenderPass2":
+				NativeLib.LoadFunction("vkCmdEndRenderPass2", out vkCmdEndRenderPass2_ptr);
+				break;
+
+			case "vkResetQueryPool":
+				NativeLib.LoadFunction("vkResetQueryPool", out vkResetQueryPool_ptr);
+				break;
+
+			case "vkGetSemaphoreCounterValue":
+				NativeLib.LoadFunction("vkGetSemaphoreCounterValue", out vkGetSemaphoreCounterValue_ptr);
+				break;
+
+			case "vkWaitSemaphores":
+				NativeLib.LoadFunction("vkWaitSemaphores", out vkWaitSemaphores_ptr);
+				break;
+
+			case "vkSignalSemaphore":
+				NativeLib.LoadFunction("vkSignalSemaphore", out vkSignalSemaphore_ptr);
+				break;
+
+			case "vkGetBufferDeviceAddress":
+				NativeLib.LoadFunction("vkGetBufferDeviceAddress", out vkGetBufferDeviceAddress_ptr);
+				break;
+
+			case "vkGetBufferOpaqueCaptureAddress":
+				NativeLib.LoadFunction("vkGetBufferOpaqueCaptureAddress", out vkGetBufferOpaqueCaptureAddress_ptr);
+				break;
+
+			case "vkGetDeviceMemoryOpaqueCaptureAddress":
+				NativeLib.LoadFunction("vkGetDeviceMemoryOpaqueCaptureAddress", out vkGetDeviceMemoryOpaqueCaptureAddress_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceToolProperties":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceToolProperties", out vkGetPhysicalDeviceToolProperties_ptr);
+				break;
+
+			case "vkCreatePrivateDataSlot":
+				NativeLib.LoadFunction("vkCreatePrivateDataSlot", out vkCreatePrivateDataSlot_ptr);
+				break;
+
+			case "vkDestroyPrivateDataSlot":
+				NativeLib.LoadFunction("vkDestroyPrivateDataSlot", out vkDestroyPrivateDataSlot_ptr);
+				break;
+
+			case "vkSetPrivateData":
+				NativeLib.LoadFunction("vkSetPrivateData", out vkSetPrivateData_ptr);
+				break;
+
+			case "vkGetPrivateData":
+				NativeLib.LoadFunction("vkGetPrivateData", out vkGetPrivateData_ptr);
+				break;
+
+			case "vkCmdSetEvent2":
+				NativeLib.LoadFunction("vkCmdSetEvent2", out vkCmdSetEvent2_ptr);
+				break;
+
+			case "vkCmdResetEvent2":
+				NativeLib.LoadFunction("vkCmdResetEvent2", out vkCmdResetEvent2_ptr);
+				break;
+
+			case "vkCmdWaitEvents2":
+				NativeLib.LoadFunction("vkCmdWaitEvents2", out vkCmdWaitEvents2_ptr);
+				break;
+
+			case "vkCmdPipelineBarrier2":
+				NativeLib.LoadFunction("vkCmdPipelineBarrier2", out vkCmdPipelineBarrier2_ptr);
+				break;
+
+			case "vkCmdWriteTimestamp2":
+				NativeLib.LoadFunction("vkCmdWriteTimestamp2", out vkCmdWriteTimestamp2_ptr);
+				break;
+
+			case "vkQueueSubmit2":
+				NativeLib.LoadFunction("vkQueueSubmit2", out vkQueueSubmit2_ptr);
+				break;
+
+			case "vkCmdCopyBuffer2":
+				NativeLib.LoadFunction("vkCmdCopyBuffer2", out vkCmdCopyBuffer2_ptr);
+				break;
+
+			case "vkCmdCopyImage2":
+				NativeLib.LoadFunction("vkCmdCopyImage2", out vkCmdCopyImage2_ptr);
+				break;
+
+			case "vkCmdCopyBufferToImage2":
+				NativeLib.LoadFunction("vkCmdCopyBufferToImage2", out vkCmdCopyBufferToImage2_ptr);
+				break;
+
+			case "vkCmdCopyImageToBuffer2":
+				NativeLib.LoadFunction("vkCmdCopyImageToBuffer2", out vkCmdCopyImageToBuffer2_ptr);
+				break;
+
+			case "vkCmdBlitImage2":
+				NativeLib.LoadFunction("vkCmdBlitImage2", out vkCmdBlitImage2_ptr);
+				break;
+
+			case "vkCmdResolveImage2":
+				NativeLib.LoadFunction("vkCmdResolveImage2", out vkCmdResolveImage2_ptr);
+				break;
+
+			case "vkCmdBeginRendering":
+				NativeLib.LoadFunction("vkCmdBeginRendering", out vkCmdBeginRendering_ptr);
+				break;
+
+			case "vkCmdEndRendering":
+				NativeLib.LoadFunction("vkCmdEndRendering", out vkCmdEndRendering_ptr);
+				break;
+
+			case "vkCmdSetCullMode":
+				NativeLib.LoadFunction("vkCmdSetCullMode", out vkCmdSetCullMode_ptr);
+				break;
+
+			case "vkCmdSetFrontFace":
+				NativeLib.LoadFunction("vkCmdSetFrontFace", out vkCmdSetFrontFace_ptr);
+				break;
+
+			case "vkCmdSetPrimitiveTopology":
+				NativeLib.LoadFunction("vkCmdSetPrimitiveTopology", out vkCmdSetPrimitiveTopology_ptr);
+				break;
+
+			case "vkCmdSetViewportWithCount":
+				NativeLib.LoadFunction("vkCmdSetViewportWithCount", out vkCmdSetViewportWithCount_ptr);
+				break;
+
+			case "vkCmdSetScissorWithCount":
+				NativeLib.LoadFunction("vkCmdSetScissorWithCount", out vkCmdSetScissorWithCount_ptr);
+				break;
+
+			case "vkCmdBindVertexBuffers2":
+				NativeLib.LoadFunction("vkCmdBindVertexBuffers2", out vkCmdBindVertexBuffers2_ptr);
+				break;
+
+			case "vkCmdSetDepthTestEnable":
+				NativeLib.LoadFunction("vkCmdSetDepthTestEnable", out vkCmdSetDepthTestEnable_ptr);
+				break;
+
+			case "vkCmdSetDepthWriteEnable":
+				NativeLib.LoadFunction("vkCmdSetDepthWriteEnable", out vkCmdSetDepthWriteEnable_ptr);
+				break;
+
+			case "vkCmdSetDepthCompareOp":
+				NativeLib.LoadFunction("vkCmdSetDepthCompareOp", out vkCmdSetDepthCompareOp_ptr);
+				break;
+
+			case "vkCmdSetDepthBoundsTestEnable":
+				NativeLib.LoadFunction("vkCmdSetDepthBoundsTestEnable", out vkCmdSetDepthBoundsTestEnable_ptr);
+				break;
+
+			case "vkCmdSetStencilTestEnable":
+				NativeLib.LoadFunction("vkCmdSetStencilTestEnable", out vkCmdSetStencilTestEnable_ptr);
+				break;
+
+			case "vkCmdSetStencilOp":
+				NativeLib.LoadFunction("vkCmdSetStencilOp", out vkCmdSetStencilOp_ptr);
+				break;
+
+			case "vkCmdSetRasterizerDiscardEnable":
+				NativeLib.LoadFunction("vkCmdSetRasterizerDiscardEnable", out vkCmdSetRasterizerDiscardEnable_ptr);
+				break;
+
+			case "vkCmdSetDepthBiasEnable":
+				NativeLib.LoadFunction("vkCmdSetDepthBiasEnable", out vkCmdSetDepthBiasEnable_ptr);
+				break;
+
+			case "vkCmdSetPrimitiveRestartEnable":
+				NativeLib.LoadFunction("vkCmdSetPrimitiveRestartEnable", out vkCmdSetPrimitiveRestartEnable_ptr);
+				break;
+
+			case "vkGetDeviceBufferMemoryRequirements":
+				NativeLib.LoadFunction("vkGetDeviceBufferMemoryRequirements", out vkGetDeviceBufferMemoryRequirements_ptr);
+				break;
+
+			case "vkGetDeviceImageMemoryRequirements":
+				NativeLib.LoadFunction("vkGetDeviceImageMemoryRequirements", out vkGetDeviceImageMemoryRequirements_ptr);
+				break;
+
+			case "vkGetDeviceImageSparseMemoryRequirements":
+				NativeLib.LoadFunction("vkGetDeviceImageSparseMemoryRequirements", out vkGetDeviceImageSparseMemoryRequirements_ptr);
+				break;
+
+			case "vkDestroySurfaceKHR":
+				NativeLib.LoadFunction("vkDestroySurfaceKHR", out vkDestroySurfaceKHR_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceSurfaceSupportKHR":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceSurfaceSupportKHR", out vkGetPhysicalDeviceSurfaceSupportKHR_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceSurfaceCapabilitiesKHR":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceSurfaceCapabilitiesKHR", out vkGetPhysicalDeviceSurfaceCapabilitiesKHR_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceSurfaceFormatsKHR":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceSurfaceFormatsKHR", out vkGetPhysicalDeviceSurfaceFormatsKHR_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceSurfacePresentModesKHR":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceSurfacePresentModesKHR", out vkGetPhysicalDeviceSurfacePresentModesKHR_ptr);
+				break;
+
+			case "vkCreateSwapchainKHR":
+				NativeLib.LoadFunction("vkCreateSwapchainKHR", out vkCreateSwapchainKHR_ptr);
+				break;
+
+			case "vkDestroySwapchainKHR":
+				NativeLib.LoadFunction("vkDestroySwapchainKHR", out vkDestroySwapchainKHR_ptr);
+				break;
+
+			case "vkGetSwapchainImagesKHR":
+				NativeLib.LoadFunction("vkGetSwapchainImagesKHR", out vkGetSwapchainImagesKHR_ptr);
+				break;
+
+			case "vkAcquireNextImageKHR":
+				NativeLib.LoadFunction("vkAcquireNextImageKHR", out vkAcquireNextImageKHR_ptr);
+				break;
+
+			case "vkQueuePresentKHR":
+				NativeLib.LoadFunction("vkQueuePresentKHR", out vkQueuePresentKHR_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceDisplayPropertiesKHR":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceDisplayPropertiesKHR", out vkGetPhysicalDeviceDisplayPropertiesKHR_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceDisplayPlanePropertiesKHR":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceDisplayPlanePropertiesKHR", out vkGetPhysicalDeviceDisplayPlanePropertiesKHR_ptr);
+				break;
+
+			case "vkGetDisplayPlaneSupportedDisplaysKHR":
+				NativeLib.LoadFunction("vkGetDisplayPlaneSupportedDisplaysKHR", out vkGetDisplayPlaneSupportedDisplaysKHR_ptr);
+				break;
+
+			case "vkGetDisplayModePropertiesKHR":
+				NativeLib.LoadFunction("vkGetDisplayModePropertiesKHR", out vkGetDisplayModePropertiesKHR_ptr);
+				break;
+
+			case "vkCreateDisplayModeKHR":
+				NativeLib.LoadFunction("vkCreateDisplayModeKHR", out vkCreateDisplayModeKHR_ptr);
+				break;
+
+			case "vkGetDisplayPlaneCapabilitiesKHR":
+				NativeLib.LoadFunction("vkGetDisplayPlaneCapabilitiesKHR", out vkGetDisplayPlaneCapabilitiesKHR_ptr);
+				break;
+
+			case "vkCreateDisplayPlaneSurfaceKHR":
+				NativeLib.LoadFunction("vkCreateDisplayPlaneSurfaceKHR", out vkCreateDisplayPlaneSurfaceKHR_ptr);
+				break;
+
+			case "vkCreateSharedSwapchainsKHR":
+				NativeLib.LoadFunction("vkCreateSharedSwapchainsKHR", out vkCreateSharedSwapchainsKHR_ptr);
+				break;
+
+			case "vkCreateXlibSurfaceKHR":
+				NativeLib.LoadFunction("vkCreateXlibSurfaceKHR", out vkCreateXlibSurfaceKHR_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceXlibPresentationSupportKHR":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceXlibPresentationSupportKHR", out vkGetPhysicalDeviceXlibPresentationSupportKHR_ptr);
+				break;
+
+			case "vkCreateXcbSurfaceKHR":
+				NativeLib.LoadFunction("vkCreateXcbSurfaceKHR", out vkCreateXcbSurfaceKHR_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceXcbPresentationSupportKHR":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceXcbPresentationSupportKHR", out vkGetPhysicalDeviceXcbPresentationSupportKHR_ptr);
+				break;
+
+			case "vkCreateWaylandSurfaceKHR":
+				NativeLib.LoadFunction("vkCreateWaylandSurfaceKHR", out vkCreateWaylandSurfaceKHR_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceWaylandPresentationSupportKHR":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceWaylandPresentationSupportKHR", out vkGetPhysicalDeviceWaylandPresentationSupportKHR_ptr);
+				break;
+
+			case "vkCreateAndroidSurfaceKHR":
+				NativeLib.LoadFunction("vkCreateAndroidSurfaceKHR", out vkCreateAndroidSurfaceKHR_ptr);
+				break;
+
+			case "vkCreateWin32SurfaceKHR":
+				NativeLib.LoadFunction("vkCreateWin32SurfaceKHR", out vkCreateWin32SurfaceKHR_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceWin32PresentationSupportKHR":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceWin32PresentationSupportKHR", out vkGetPhysicalDeviceWin32PresentationSupportKHR_ptr);
+				break;
+
+			case "vkCreateDebugReportCallbackEXT":
+				NativeLib.LoadFunction("vkCreateDebugReportCallbackEXT", out vkCreateDebugReportCallbackEXT_ptr);
+				break;
+
+			case "vkDestroyDebugReportCallbackEXT":
+				NativeLib.LoadFunction("vkDestroyDebugReportCallbackEXT", out vkDestroyDebugReportCallbackEXT_ptr);
+				break;
+
+			case "vkDebugReportMessageEXT":
+				NativeLib.LoadFunction("vkDebugReportMessageEXT", out vkDebugReportMessageEXT_ptr);
+				break;
+
+			case "vkDebugMarkerSetObjectTagEXT":
+				NativeLib.LoadFunction("vkDebugMarkerSetObjectTagEXT", out vkDebugMarkerSetObjectTagEXT_ptr);
+				break;
+
+			case "vkDebugMarkerSetObjectNameEXT":
+				NativeLib.LoadFunction("vkDebugMarkerSetObjectNameEXT", out vkDebugMarkerSetObjectNameEXT_ptr);
+				break;
+
+			case "vkCmdDebugMarkerBeginEXT":
+				NativeLib.LoadFunction("vkCmdDebugMarkerBeginEXT", out vkCmdDebugMarkerBeginEXT_ptr);
+				break;
+
+			case "vkCmdDebugMarkerEndEXT":
+				NativeLib.LoadFunction("vkCmdDebugMarkerEndEXT", out vkCmdDebugMarkerEndEXT_ptr);
+				break;
+
+			case "vkCmdDebugMarkerInsertEXT":
+				NativeLib.LoadFunction("vkCmdDebugMarkerInsertEXT", out vkCmdDebugMarkerInsertEXT_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceVideoCapabilitiesKHR":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceVideoCapabilitiesKHR", out vkGetPhysicalDeviceVideoCapabilitiesKHR_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceVideoFormatPropertiesKHR":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceVideoFormatPropertiesKHR", out vkGetPhysicalDeviceVideoFormatPropertiesKHR_ptr);
+				break;
+
+			case "vkCreateVideoSessionKHR":
+				NativeLib.LoadFunction("vkCreateVideoSessionKHR", out vkCreateVideoSessionKHR_ptr);
+				break;
+
+			case "vkDestroyVideoSessionKHR":
+				NativeLib.LoadFunction("vkDestroyVideoSessionKHR", out vkDestroyVideoSessionKHR_ptr);
+				break;
+
+			case "vkGetVideoSessionMemoryRequirementsKHR":
+				NativeLib.LoadFunction("vkGetVideoSessionMemoryRequirementsKHR", out vkGetVideoSessionMemoryRequirementsKHR_ptr);
+				break;
+
+			case "vkBindVideoSessionMemoryKHR":
+				NativeLib.LoadFunction("vkBindVideoSessionMemoryKHR", out vkBindVideoSessionMemoryKHR_ptr);
+				break;
+
+			case "vkCreateVideoSessionParametersKHR":
+				NativeLib.LoadFunction("vkCreateVideoSessionParametersKHR", out vkCreateVideoSessionParametersKHR_ptr);
+				break;
+
+			case "vkUpdateVideoSessionParametersKHR":
+				NativeLib.LoadFunction("vkUpdateVideoSessionParametersKHR", out vkUpdateVideoSessionParametersKHR_ptr);
+				break;
+
+			case "vkDestroyVideoSessionParametersKHR":
+				NativeLib.LoadFunction("vkDestroyVideoSessionParametersKHR", out vkDestroyVideoSessionParametersKHR_ptr);
+				break;
+
+			case "vkCmdBeginVideoCodingKHR":
+				NativeLib.LoadFunction("vkCmdBeginVideoCodingKHR", out vkCmdBeginVideoCodingKHR_ptr);
+				break;
+
+			case "vkCmdEndVideoCodingKHR":
+				NativeLib.LoadFunction("vkCmdEndVideoCodingKHR", out vkCmdEndVideoCodingKHR_ptr);
+				break;
+
+			case "vkCmdControlVideoCodingKHR":
+				NativeLib.LoadFunction("vkCmdControlVideoCodingKHR", out vkCmdControlVideoCodingKHR_ptr);
+				break;
+
+			case "vkCmdDecodeVideoKHR":
+				NativeLib.LoadFunction("vkCmdDecodeVideoKHR", out vkCmdDecodeVideoKHR_ptr);
+				break;
+
+			case "vkCmdBindTransformFeedbackBuffersEXT":
+				NativeLib.LoadFunction("vkCmdBindTransformFeedbackBuffersEXT", out vkCmdBindTransformFeedbackBuffersEXT_ptr);
+				break;
+
+			case "vkCmdBeginTransformFeedbackEXT":
+				NativeLib.LoadFunction("vkCmdBeginTransformFeedbackEXT", out vkCmdBeginTransformFeedbackEXT_ptr);
+				break;
+
+			case "vkCmdEndTransformFeedbackEXT":
+				NativeLib.LoadFunction("vkCmdEndTransformFeedbackEXT", out vkCmdEndTransformFeedbackEXT_ptr);
+				break;
+
+			case "vkCmdBeginQueryIndexedEXT":
+				NativeLib.LoadFunction("vkCmdBeginQueryIndexedEXT", out vkCmdBeginQueryIndexedEXT_ptr);
+				break;
+
+			case "vkCmdEndQueryIndexedEXT":
+				NativeLib.LoadFunction("vkCmdEndQueryIndexedEXT", out vkCmdEndQueryIndexedEXT_ptr);
+				break;
+
+			case "vkCmdDrawIndirectByteCountEXT":
+				NativeLib.LoadFunction("vkCmdDrawIndirectByteCountEXT", out vkCmdDrawIndirectByteCountEXT_ptr);
+				break;
+
+			case "vkCreateCuModuleNVX":
+				NativeLib.LoadFunction("vkCreateCuModuleNVX", out vkCreateCuModuleNVX_ptr);
+				break;
+
+			case "vkCreateCuFunctionNVX":
+				NativeLib.LoadFunction("vkCreateCuFunctionNVX", out vkCreateCuFunctionNVX_ptr);
+				break;
+
+			case "vkDestroyCuModuleNVX":
+				NativeLib.LoadFunction("vkDestroyCuModuleNVX", out vkDestroyCuModuleNVX_ptr);
+				break;
+
+			case "vkDestroyCuFunctionNVX":
+				NativeLib.LoadFunction("vkDestroyCuFunctionNVX", out vkDestroyCuFunctionNVX_ptr);
+				break;
+
+			case "vkCmdCuLaunchKernelNVX":
+				NativeLib.LoadFunction("vkCmdCuLaunchKernelNVX", out vkCmdCuLaunchKernelNVX_ptr);
+				break;
+
+			case "vkGetImageViewHandleNVX":
+				NativeLib.LoadFunction("vkGetImageViewHandleNVX", out vkGetImageViewHandleNVX_ptr);
+				break;
+
+			case "vkGetImageViewAddressNVX":
+				NativeLib.LoadFunction("vkGetImageViewAddressNVX", out vkGetImageViewAddressNVX_ptr);
+				break;
+
+			case "vkGetShaderInfoAMD":
+				NativeLib.LoadFunction("vkGetShaderInfoAMD", out vkGetShaderInfoAMD_ptr);
+				break;
+
+			case "vkCreateStreamDescriptorSurfaceGGP":
+				NativeLib.LoadFunction("vkCreateStreamDescriptorSurfaceGGP", out vkCreateStreamDescriptorSurfaceGGP_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceExternalImageFormatPropertiesNV":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceExternalImageFormatPropertiesNV", out vkGetPhysicalDeviceExternalImageFormatPropertiesNV_ptr);
+				break;
+
+			case "vkGetMemoryWin32HandleNV":
+				NativeLib.LoadFunction("vkGetMemoryWin32HandleNV", out vkGetMemoryWin32HandleNV_ptr);
+				break;
+
+			case "vkCreateViSurfaceNN":
+				NativeLib.LoadFunction("vkCreateViSurfaceNN", out vkCreateViSurfaceNN_ptr);
+				break;
+
+			case "vkGetMemoryWin32HandleKHR":
+				NativeLib.LoadFunction("vkGetMemoryWin32HandleKHR", out vkGetMemoryWin32HandleKHR_ptr);
+				break;
+
+			case "vkGetMemoryWin32HandlePropertiesKHR":
+				NativeLib.LoadFunction("vkGetMemoryWin32HandlePropertiesKHR", out vkGetMemoryWin32HandlePropertiesKHR_ptr);
+				break;
+
+			case "vkGetMemoryFdKHR":
+				NativeLib.LoadFunction("vkGetMemoryFdKHR", out vkGetMemoryFdKHR_ptr);
+				break;
+
+			case "vkGetMemoryFdPropertiesKHR":
+				NativeLib.LoadFunction("vkGetMemoryFdPropertiesKHR", out vkGetMemoryFdPropertiesKHR_ptr);
+				break;
+
+			case "vkImportSemaphoreWin32HandleKHR":
+				NativeLib.LoadFunction("vkImportSemaphoreWin32HandleKHR", out vkImportSemaphoreWin32HandleKHR_ptr);
+				break;
+
+			case "vkGetSemaphoreWin32HandleKHR":
+				NativeLib.LoadFunction("vkGetSemaphoreWin32HandleKHR", out vkGetSemaphoreWin32HandleKHR_ptr);
+				break;
+
+			case "vkImportSemaphoreFdKHR":
+				NativeLib.LoadFunction("vkImportSemaphoreFdKHR", out vkImportSemaphoreFdKHR_ptr);
+				break;
+
+			case "vkGetSemaphoreFdKHR":
+				NativeLib.LoadFunction("vkGetSemaphoreFdKHR", out vkGetSemaphoreFdKHR_ptr);
+				break;
+
+			case "vkCmdPushDescriptorSetKHR":
+				NativeLib.LoadFunction("vkCmdPushDescriptorSetKHR", out vkCmdPushDescriptorSetKHR_ptr);
+				break;
+
+			case "vkCmdBeginConditionalRenderingEXT":
+				NativeLib.LoadFunction("vkCmdBeginConditionalRenderingEXT", out vkCmdBeginConditionalRenderingEXT_ptr);
+				break;
+
+			case "vkCmdEndConditionalRenderingEXT":
+				NativeLib.LoadFunction("vkCmdEndConditionalRenderingEXT", out vkCmdEndConditionalRenderingEXT_ptr);
+				break;
+
+			case "vkCmdSetViewportWScalingNV":
+				NativeLib.LoadFunction("vkCmdSetViewportWScalingNV", out vkCmdSetViewportWScalingNV_ptr);
+				break;
+
+			case "vkReleaseDisplayEXT":
+				NativeLib.LoadFunction("vkReleaseDisplayEXT", out vkReleaseDisplayEXT_ptr);
+				break;
+
+			case "vkAcquireXlibDisplayEXT":
+				NativeLib.LoadFunction("vkAcquireXlibDisplayEXT", out vkAcquireXlibDisplayEXT_ptr);
+				break;
+
+			case "vkGetRandROutputDisplayEXT":
+				NativeLib.LoadFunction("vkGetRandROutputDisplayEXT", out vkGetRandROutputDisplayEXT_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceSurfaceCapabilities2EXT":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceSurfaceCapabilities2EXT", out vkGetPhysicalDeviceSurfaceCapabilities2EXT_ptr);
+				break;
+
+			case "vkDisplayPowerControlEXT":
+				NativeLib.LoadFunction("vkDisplayPowerControlEXT", out vkDisplayPowerControlEXT_ptr);
+				break;
+
+			case "vkRegisterDeviceEventEXT":
+				NativeLib.LoadFunction("vkRegisterDeviceEventEXT", out vkRegisterDeviceEventEXT_ptr);
+				break;
+
+			case "vkRegisterDisplayEventEXT":
+				NativeLib.LoadFunction("vkRegisterDisplayEventEXT", out vkRegisterDisplayEventEXT_ptr);
+				break;
+
+			case "vkGetSwapchainCounterEXT":
+				NativeLib.LoadFunction("vkGetSwapchainCounterEXT", out vkGetSwapchainCounterEXT_ptr);
+				break;
+
+			case "vkGetRefreshCycleDurationGOOGLE":
+				NativeLib.LoadFunction("vkGetRefreshCycleDurationGOOGLE", out vkGetRefreshCycleDurationGOOGLE_ptr);
+				break;
+
+			case "vkGetPastPresentationTimingGOOGLE":
+				NativeLib.LoadFunction("vkGetPastPresentationTimingGOOGLE", out vkGetPastPresentationTimingGOOGLE_ptr);
+				break;
+
+			case "vkCmdSetDiscardRectangleEXT":
+				NativeLib.LoadFunction("vkCmdSetDiscardRectangleEXT", out vkCmdSetDiscardRectangleEXT_ptr);
+				break;
+
+			case "vkSetHdrMetadataEXT":
+				NativeLib.LoadFunction("vkSetHdrMetadataEXT", out vkSetHdrMetadataEXT_ptr);
+				break;
+
+			case "vkGetSwapchainStatusKHR":
+				NativeLib.LoadFunction("vkGetSwapchainStatusKHR", out vkGetSwapchainStatusKHR_ptr);
+				break;
+
+			case "vkImportFenceWin32HandleKHR":
+				NativeLib.LoadFunction("vkImportFenceWin32HandleKHR", out vkImportFenceWin32HandleKHR_ptr);
+				break;
+
+			case "vkGetFenceWin32HandleKHR":
+				NativeLib.LoadFunction("vkGetFenceWin32HandleKHR", out vkGetFenceWin32HandleKHR_ptr);
+				break;
+
+			case "vkImportFenceFdKHR":
+				NativeLib.LoadFunction("vkImportFenceFdKHR", out vkImportFenceFdKHR_ptr);
+				break;
+
+			case "vkGetFenceFdKHR":
+				NativeLib.LoadFunction("vkGetFenceFdKHR", out vkGetFenceFdKHR_ptr);
+				break;
+
+			case "vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR":
+				NativeLib.LoadFunction("vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR", out vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR", out vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR_ptr);
+				break;
+
+			case "vkAcquireProfilingLockKHR":
+				NativeLib.LoadFunction("vkAcquireProfilingLockKHR", out vkAcquireProfilingLockKHR_ptr);
+				break;
+
+			case "vkReleaseProfilingLockKHR":
+				NativeLib.LoadFunction("vkReleaseProfilingLockKHR", out vkReleaseProfilingLockKHR_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceSurfaceCapabilities2KHR":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceSurfaceCapabilities2KHR", out vkGetPhysicalDeviceSurfaceCapabilities2KHR_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceSurfaceFormats2KHR":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceSurfaceFormats2KHR", out vkGetPhysicalDeviceSurfaceFormats2KHR_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceDisplayProperties2KHR":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceDisplayProperties2KHR", out vkGetPhysicalDeviceDisplayProperties2KHR_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceDisplayPlaneProperties2KHR":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceDisplayPlaneProperties2KHR", out vkGetPhysicalDeviceDisplayPlaneProperties2KHR_ptr);
+				break;
+
+			case "vkGetDisplayModeProperties2KHR":
+				NativeLib.LoadFunction("vkGetDisplayModeProperties2KHR", out vkGetDisplayModeProperties2KHR_ptr);
+				break;
+
+			case "vkGetDisplayPlaneCapabilities2KHR":
+				NativeLib.LoadFunction("vkGetDisplayPlaneCapabilities2KHR", out vkGetDisplayPlaneCapabilities2KHR_ptr);
+				break;
+
+			case "vkCreateIOSSurfaceMVK":
+				NativeLib.LoadFunction("vkCreateIOSSurfaceMVK", out vkCreateIOSSurfaceMVK_ptr);
+				break;
+
+			case "vkCreateMacOSSurfaceMVK":
+				NativeLib.LoadFunction("vkCreateMacOSSurfaceMVK", out vkCreateMacOSSurfaceMVK_ptr);
+				break;
+
+			case "vkSetDebugUtilsObjectNameEXT":
+				NativeLib.LoadFunction("vkSetDebugUtilsObjectNameEXT", out vkSetDebugUtilsObjectNameEXT_ptr);
+				break;
+
+			case "vkSetDebugUtilsObjectTagEXT":
+				NativeLib.LoadFunction("vkSetDebugUtilsObjectTagEXT", out vkSetDebugUtilsObjectTagEXT_ptr);
+				break;
+
+			case "vkQueueBeginDebugUtilsLabelEXT":
+				NativeLib.LoadFunction("vkQueueBeginDebugUtilsLabelEXT", out vkQueueBeginDebugUtilsLabelEXT_ptr);
+				break;
+
+			case "vkQueueEndDebugUtilsLabelEXT":
+				NativeLib.LoadFunction("vkQueueEndDebugUtilsLabelEXT", out vkQueueEndDebugUtilsLabelEXT_ptr);
+				break;
+
+			case "vkQueueInsertDebugUtilsLabelEXT":
+				NativeLib.LoadFunction("vkQueueInsertDebugUtilsLabelEXT", out vkQueueInsertDebugUtilsLabelEXT_ptr);
+				break;
+
+			case "vkCmdBeginDebugUtilsLabelEXT":
+				NativeLib.LoadFunction("vkCmdBeginDebugUtilsLabelEXT", out vkCmdBeginDebugUtilsLabelEXT_ptr);
+				break;
+
+			case "vkCmdEndDebugUtilsLabelEXT":
+				NativeLib.LoadFunction("vkCmdEndDebugUtilsLabelEXT", out vkCmdEndDebugUtilsLabelEXT_ptr);
+				break;
+
+			case "vkCmdInsertDebugUtilsLabelEXT":
+				NativeLib.LoadFunction("vkCmdInsertDebugUtilsLabelEXT", out vkCmdInsertDebugUtilsLabelEXT_ptr);
+				break;
+
+			case "vkCreateDebugUtilsMessengerEXT":
+				NativeLib.LoadFunction("vkCreateDebugUtilsMessengerEXT", out vkCreateDebugUtilsMessengerEXT_ptr);
+				break;
+
+			case "vkDestroyDebugUtilsMessengerEXT":
+				NativeLib.LoadFunction("vkDestroyDebugUtilsMessengerEXT", out vkDestroyDebugUtilsMessengerEXT_ptr);
+				break;
+
+			case "vkSubmitDebugUtilsMessageEXT":
+				NativeLib.LoadFunction("vkSubmitDebugUtilsMessageEXT", out vkSubmitDebugUtilsMessageEXT_ptr);
+				break;
+
+			case "vkGetAndroidHardwareBufferPropertiesANDROID":
+				NativeLib.LoadFunction("vkGetAndroidHardwareBufferPropertiesANDROID", out vkGetAndroidHardwareBufferPropertiesANDROID_ptr);
+				break;
+
+			case "vkGetMemoryAndroidHardwareBufferANDROID":
+				NativeLib.LoadFunction("vkGetMemoryAndroidHardwareBufferANDROID", out vkGetMemoryAndroidHardwareBufferANDROID_ptr);
+				break;
+
+			case "vkCmdSetSampleLocationsEXT":
+				NativeLib.LoadFunction("vkCmdSetSampleLocationsEXT", out vkCmdSetSampleLocationsEXT_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceMultisamplePropertiesEXT":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceMultisamplePropertiesEXT", out vkGetPhysicalDeviceMultisamplePropertiesEXT_ptr);
+				break;
+
+			case "vkCreateAccelerationStructureKHR":
+				NativeLib.LoadFunction("vkCreateAccelerationStructureKHR", out vkCreateAccelerationStructureKHR_ptr);
+				break;
+
+			case "vkDestroyAccelerationStructureKHR":
+				NativeLib.LoadFunction("vkDestroyAccelerationStructureKHR", out vkDestroyAccelerationStructureKHR_ptr);
+				break;
+
+			case "vkCmdBuildAccelerationStructuresKHR":
+				NativeLib.LoadFunction("vkCmdBuildAccelerationStructuresKHR", out vkCmdBuildAccelerationStructuresKHR_ptr);
+				break;
+
+			case "vkCmdBuildAccelerationStructuresIndirectKHR":
+				NativeLib.LoadFunction("vkCmdBuildAccelerationStructuresIndirectKHR", out vkCmdBuildAccelerationStructuresIndirectKHR_ptr);
+				break;
+
+			case "vkBuildAccelerationStructuresKHR":
+				NativeLib.LoadFunction("vkBuildAccelerationStructuresKHR", out vkBuildAccelerationStructuresKHR_ptr);
+				break;
+
+			case "vkCopyAccelerationStructureKHR":
+				NativeLib.LoadFunction("vkCopyAccelerationStructureKHR", out vkCopyAccelerationStructureKHR_ptr);
+				break;
+
+			case "vkCopyAccelerationStructureToMemoryKHR":
+				NativeLib.LoadFunction("vkCopyAccelerationStructureToMemoryKHR", out vkCopyAccelerationStructureToMemoryKHR_ptr);
+				break;
+
+			case "vkCopyMemoryToAccelerationStructureKHR":
+				NativeLib.LoadFunction("vkCopyMemoryToAccelerationStructureKHR", out vkCopyMemoryToAccelerationStructureKHR_ptr);
+				break;
+
+			case "vkWriteAccelerationStructuresPropertiesKHR":
+				NativeLib.LoadFunction("vkWriteAccelerationStructuresPropertiesKHR", out vkWriteAccelerationStructuresPropertiesKHR_ptr);
+				break;
+
+			case "vkCmdCopyAccelerationStructureKHR":
+				NativeLib.LoadFunction("vkCmdCopyAccelerationStructureKHR", out vkCmdCopyAccelerationStructureKHR_ptr);
+				break;
+
+			case "vkCmdCopyAccelerationStructureToMemoryKHR":
+				NativeLib.LoadFunction("vkCmdCopyAccelerationStructureToMemoryKHR", out vkCmdCopyAccelerationStructureToMemoryKHR_ptr);
+				break;
+
+			case "vkCmdCopyMemoryToAccelerationStructureKHR":
+				NativeLib.LoadFunction("vkCmdCopyMemoryToAccelerationStructureKHR", out vkCmdCopyMemoryToAccelerationStructureKHR_ptr);
+				break;
+
+			case "vkGetAccelerationStructureDeviceAddressKHR":
+				NativeLib.LoadFunction("vkGetAccelerationStructureDeviceAddressKHR", out vkGetAccelerationStructureDeviceAddressKHR_ptr);
+				break;
+
+			case "vkCmdWriteAccelerationStructuresPropertiesKHR":
+				NativeLib.LoadFunction("vkCmdWriteAccelerationStructuresPropertiesKHR", out vkCmdWriteAccelerationStructuresPropertiesKHR_ptr);
+				break;
+
+			case "vkGetDeviceAccelerationStructureCompatibilityKHR":
+				NativeLib.LoadFunction("vkGetDeviceAccelerationStructureCompatibilityKHR", out vkGetDeviceAccelerationStructureCompatibilityKHR_ptr);
+				break;
+
+			case "vkGetAccelerationStructureBuildSizesKHR":
+				NativeLib.LoadFunction("vkGetAccelerationStructureBuildSizesKHR", out vkGetAccelerationStructureBuildSizesKHR_ptr);
+				break;
+
+			case "vkCmdTraceRaysKHR":
+				NativeLib.LoadFunction("vkCmdTraceRaysKHR", out vkCmdTraceRaysKHR_ptr);
+				break;
+
+			case "vkCreateRayTracingPipelinesKHR":
+				NativeLib.LoadFunction("vkCreateRayTracingPipelinesKHR", out vkCreateRayTracingPipelinesKHR_ptr);
+				break;
+
+			case "vkGetRayTracingShaderGroupHandlesKHR":
+				NativeLib.LoadFunction("vkGetRayTracingShaderGroupHandlesKHR", out vkGetRayTracingShaderGroupHandlesKHR_ptr);
+				break;
+
+			case "vkGetRayTracingCaptureReplayShaderGroupHandlesKHR":
+				NativeLib.LoadFunction("vkGetRayTracingCaptureReplayShaderGroupHandlesKHR", out vkGetRayTracingCaptureReplayShaderGroupHandlesKHR_ptr);
+				break;
+
+			case "vkCmdTraceRaysIndirectKHR":
+				NativeLib.LoadFunction("vkCmdTraceRaysIndirectKHR", out vkCmdTraceRaysIndirectKHR_ptr);
+				break;
+
+			case "vkGetRayTracingShaderGroupStackSizeKHR":
+				NativeLib.LoadFunction("vkGetRayTracingShaderGroupStackSizeKHR", out vkGetRayTracingShaderGroupStackSizeKHR_ptr);
+				break;
+
+			case "vkCmdSetRayTracingPipelineStackSizeKHR":
+				NativeLib.LoadFunction("vkCmdSetRayTracingPipelineStackSizeKHR", out vkCmdSetRayTracingPipelineStackSizeKHR_ptr);
+				break;
+
+			case "vkGetImageDrmFormatModifierPropertiesEXT":
+				NativeLib.LoadFunction("vkGetImageDrmFormatModifierPropertiesEXT", out vkGetImageDrmFormatModifierPropertiesEXT_ptr);
+				break;
+
+			case "vkCreateValidationCacheEXT":
+				NativeLib.LoadFunction("vkCreateValidationCacheEXT", out vkCreateValidationCacheEXT_ptr);
+				break;
+
+			case "vkDestroyValidationCacheEXT":
+				NativeLib.LoadFunction("vkDestroyValidationCacheEXT", out vkDestroyValidationCacheEXT_ptr);
+				break;
+
+			case "vkMergeValidationCachesEXT":
+				NativeLib.LoadFunction("vkMergeValidationCachesEXT", out vkMergeValidationCachesEXT_ptr);
+				break;
+
+			case "vkGetValidationCacheDataEXT":
+				NativeLib.LoadFunction("vkGetValidationCacheDataEXT", out vkGetValidationCacheDataEXT_ptr);
+				break;
+
+			case "vkCmdBindShadingRateImageNV":
+				NativeLib.LoadFunction("vkCmdBindShadingRateImageNV", out vkCmdBindShadingRateImageNV_ptr);
+				break;
+
+			case "vkCmdSetViewportShadingRatePaletteNV":
+				NativeLib.LoadFunction("vkCmdSetViewportShadingRatePaletteNV", out vkCmdSetViewportShadingRatePaletteNV_ptr);
+				break;
+
+			case "vkCmdSetCoarseSampleOrderNV":
+				NativeLib.LoadFunction("vkCmdSetCoarseSampleOrderNV", out vkCmdSetCoarseSampleOrderNV_ptr);
+				break;
+
+			case "vkCreateAccelerationStructureNV":
+				NativeLib.LoadFunction("vkCreateAccelerationStructureNV", out vkCreateAccelerationStructureNV_ptr);
+				break;
+
+			case "vkDestroyAccelerationStructureNV":
+				NativeLib.LoadFunction("vkDestroyAccelerationStructureNV", out vkDestroyAccelerationStructureNV_ptr);
+				break;
+
+			case "vkGetAccelerationStructureMemoryRequirementsNV":
+				NativeLib.LoadFunction("vkGetAccelerationStructureMemoryRequirementsNV", out vkGetAccelerationStructureMemoryRequirementsNV_ptr);
+				break;
+
+			case "vkBindAccelerationStructureMemoryNV":
+				NativeLib.LoadFunction("vkBindAccelerationStructureMemoryNV", out vkBindAccelerationStructureMemoryNV_ptr);
+				break;
+
+			case "vkCmdBuildAccelerationStructureNV":
+				NativeLib.LoadFunction("vkCmdBuildAccelerationStructureNV", out vkCmdBuildAccelerationStructureNV_ptr);
+				break;
+
+			case "vkCmdCopyAccelerationStructureNV":
+				NativeLib.LoadFunction("vkCmdCopyAccelerationStructureNV", out vkCmdCopyAccelerationStructureNV_ptr);
+				break;
+
+			case "vkCmdTraceRaysNV":
+				NativeLib.LoadFunction("vkCmdTraceRaysNV", out vkCmdTraceRaysNV_ptr);
+				break;
+
+			case "vkCreateRayTracingPipelinesNV":
+				NativeLib.LoadFunction("vkCreateRayTracingPipelinesNV", out vkCreateRayTracingPipelinesNV_ptr);
+				break;
+
+			case "vkGetAccelerationStructureHandleNV":
+				NativeLib.LoadFunction("vkGetAccelerationStructureHandleNV", out vkGetAccelerationStructureHandleNV_ptr);
+				break;
+
+			case "vkCmdWriteAccelerationStructuresPropertiesNV":
+				NativeLib.LoadFunction("vkCmdWriteAccelerationStructuresPropertiesNV", out vkCmdWriteAccelerationStructuresPropertiesNV_ptr);
+				break;
+
+			case "vkCompileDeferredNV":
+				NativeLib.LoadFunction("vkCompileDeferredNV", out vkCompileDeferredNV_ptr);
+				break;
+
+			case "vkGetMemoryHostPointerPropertiesEXT":
+				NativeLib.LoadFunction("vkGetMemoryHostPointerPropertiesEXT", out vkGetMemoryHostPointerPropertiesEXT_ptr);
+				break;
+
+			case "vkCmdWriteBufferMarkerAMD":
+				NativeLib.LoadFunction("vkCmdWriteBufferMarkerAMD", out vkCmdWriteBufferMarkerAMD_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceCalibrateableTimeDomainsEXT":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceCalibrateableTimeDomainsEXT", out vkGetPhysicalDeviceCalibrateableTimeDomainsEXT_ptr);
+				break;
+
+			case "vkGetCalibratedTimestampsEXT":
+				NativeLib.LoadFunction("vkGetCalibratedTimestampsEXT", out vkGetCalibratedTimestampsEXT_ptr);
+				break;
+
+			case "vkCmdDrawMeshTasksNV":
+				NativeLib.LoadFunction("vkCmdDrawMeshTasksNV", out vkCmdDrawMeshTasksNV_ptr);
+				break;
+
+			case "vkCmdDrawMeshTasksIndirectNV":
+				NativeLib.LoadFunction("vkCmdDrawMeshTasksIndirectNV", out vkCmdDrawMeshTasksIndirectNV_ptr);
+				break;
+
+			case "vkCmdDrawMeshTasksIndirectCountNV":
+				NativeLib.LoadFunction("vkCmdDrawMeshTasksIndirectCountNV", out vkCmdDrawMeshTasksIndirectCountNV_ptr);
+				break;
+
+			case "vkCmdSetExclusiveScissorNV":
+				NativeLib.LoadFunction("vkCmdSetExclusiveScissorNV", out vkCmdSetExclusiveScissorNV_ptr);
+				break;
+
+			case "vkCmdSetCheckpointNV":
+				NativeLib.LoadFunction("vkCmdSetCheckpointNV", out vkCmdSetCheckpointNV_ptr);
+				break;
+
+			case "vkGetQueueCheckpointDataNV":
+				NativeLib.LoadFunction("vkGetQueueCheckpointDataNV", out vkGetQueueCheckpointDataNV_ptr);
+				break;
+
+			case "vkInitializePerformanceApiINTEL":
+				NativeLib.LoadFunction("vkInitializePerformanceApiINTEL", out vkInitializePerformanceApiINTEL_ptr);
+				break;
+
+			case "vkUninitializePerformanceApiINTEL":
+				NativeLib.LoadFunction("vkUninitializePerformanceApiINTEL", out vkUninitializePerformanceApiINTEL_ptr);
+				break;
+
+			case "vkCmdSetPerformanceMarkerINTEL":
+				NativeLib.LoadFunction("vkCmdSetPerformanceMarkerINTEL", out vkCmdSetPerformanceMarkerINTEL_ptr);
+				break;
+
+			case "vkCmdSetPerformanceStreamMarkerINTEL":
+				NativeLib.LoadFunction("vkCmdSetPerformanceStreamMarkerINTEL", out vkCmdSetPerformanceStreamMarkerINTEL_ptr);
+				break;
+
+			case "vkCmdSetPerformanceOverrideINTEL":
+				NativeLib.LoadFunction("vkCmdSetPerformanceOverrideINTEL", out vkCmdSetPerformanceOverrideINTEL_ptr);
+				break;
+
+			case "vkAcquirePerformanceConfigurationINTEL":
+				NativeLib.LoadFunction("vkAcquirePerformanceConfigurationINTEL", out vkAcquirePerformanceConfigurationINTEL_ptr);
+				break;
+
+			case "vkReleasePerformanceConfigurationINTEL":
+				NativeLib.LoadFunction("vkReleasePerformanceConfigurationINTEL", out vkReleasePerformanceConfigurationINTEL_ptr);
+				break;
+
+			case "vkQueueSetPerformanceConfigurationINTEL":
+				NativeLib.LoadFunction("vkQueueSetPerformanceConfigurationINTEL", out vkQueueSetPerformanceConfigurationINTEL_ptr);
+				break;
+
+			case "vkGetPerformanceParameterINTEL":
+				NativeLib.LoadFunction("vkGetPerformanceParameterINTEL", out vkGetPerformanceParameterINTEL_ptr);
+				break;
+
+			case "vkSetLocalDimmingAMD":
+				NativeLib.LoadFunction("vkSetLocalDimmingAMD", out vkSetLocalDimmingAMD_ptr);
+				break;
+
+			case "vkCreateImagePipeSurfaceFUCHSIA":
+				NativeLib.LoadFunction("vkCreateImagePipeSurfaceFUCHSIA", out vkCreateImagePipeSurfaceFUCHSIA_ptr);
+				break;
+
+			case "vkCreateMetalSurfaceEXT":
+				NativeLib.LoadFunction("vkCreateMetalSurfaceEXT", out vkCreateMetalSurfaceEXT_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceFragmentShadingRatesKHR":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceFragmentShadingRatesKHR", out vkGetPhysicalDeviceFragmentShadingRatesKHR_ptr);
+				break;
+
+			case "vkCmdSetFragmentShadingRateKHR":
+				NativeLib.LoadFunction("vkCmdSetFragmentShadingRateKHR", out vkCmdSetFragmentShadingRateKHR_ptr);
+				break;
+
+			case "vkWaitForPresentKHR":
+				NativeLib.LoadFunction("vkWaitForPresentKHR", out vkWaitForPresentKHR_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceCooperativeMatrixPropertiesNV":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceCooperativeMatrixPropertiesNV", out vkGetPhysicalDeviceCooperativeMatrixPropertiesNV_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV", out vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceSurfacePresentModes2EXT":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceSurfacePresentModes2EXT", out vkGetPhysicalDeviceSurfacePresentModes2EXT_ptr);
+				break;
+
+			case "vkAcquireFullScreenExclusiveModeEXT":
+				NativeLib.LoadFunction("vkAcquireFullScreenExclusiveModeEXT", out vkAcquireFullScreenExclusiveModeEXT_ptr);
+				break;
+
+			case "vkReleaseFullScreenExclusiveModeEXT":
+				NativeLib.LoadFunction("vkReleaseFullScreenExclusiveModeEXT", out vkReleaseFullScreenExclusiveModeEXT_ptr);
+				break;
+
+			case "vkCreateHeadlessSurfaceEXT":
+				NativeLib.LoadFunction("vkCreateHeadlessSurfaceEXT", out vkCreateHeadlessSurfaceEXT_ptr);
+				break;
+
+			case "vkCmdSetLineStippleEXT":
+				NativeLib.LoadFunction("vkCmdSetLineStippleEXT", out vkCmdSetLineStippleEXT_ptr);
+				break;
+
+			case "vkCreateDeferredOperationKHR":
+				NativeLib.LoadFunction("vkCreateDeferredOperationKHR", out vkCreateDeferredOperationKHR_ptr);
+				break;
+
+			case "vkDestroyDeferredOperationKHR":
+				NativeLib.LoadFunction("vkDestroyDeferredOperationKHR", out vkDestroyDeferredOperationKHR_ptr);
+				break;
+
+			case "vkGetDeferredOperationMaxConcurrencyKHR":
+				NativeLib.LoadFunction("vkGetDeferredOperationMaxConcurrencyKHR", out vkGetDeferredOperationMaxConcurrencyKHR_ptr);
+				break;
+
+			case "vkGetDeferredOperationResultKHR":
+				NativeLib.LoadFunction("vkGetDeferredOperationResultKHR", out vkGetDeferredOperationResultKHR_ptr);
+				break;
+
+			case "vkDeferredOperationJoinKHR":
+				NativeLib.LoadFunction("vkDeferredOperationJoinKHR", out vkDeferredOperationJoinKHR_ptr);
+				break;
+
+			case "vkGetPipelineExecutablePropertiesKHR":
+				NativeLib.LoadFunction("vkGetPipelineExecutablePropertiesKHR", out vkGetPipelineExecutablePropertiesKHR_ptr);
+				break;
+
+			case "vkGetPipelineExecutableStatisticsKHR":
+				NativeLib.LoadFunction("vkGetPipelineExecutableStatisticsKHR", out vkGetPipelineExecutableStatisticsKHR_ptr);
+				break;
+
+			case "vkGetPipelineExecutableInternalRepresentationsKHR":
+				NativeLib.LoadFunction("vkGetPipelineExecutableInternalRepresentationsKHR", out vkGetPipelineExecutableInternalRepresentationsKHR_ptr);
+				break;
+
+			case "vkGetGeneratedCommandsMemoryRequirementsNV":
+				NativeLib.LoadFunction("vkGetGeneratedCommandsMemoryRequirementsNV", out vkGetGeneratedCommandsMemoryRequirementsNV_ptr);
+				break;
+
+			case "vkCmdPreprocessGeneratedCommandsNV":
+				NativeLib.LoadFunction("vkCmdPreprocessGeneratedCommandsNV", out vkCmdPreprocessGeneratedCommandsNV_ptr);
+				break;
+
+			case "vkCmdExecuteGeneratedCommandsNV":
+				NativeLib.LoadFunction("vkCmdExecuteGeneratedCommandsNV", out vkCmdExecuteGeneratedCommandsNV_ptr);
+				break;
+
+			case "vkCmdBindPipelineShaderGroupNV":
+				NativeLib.LoadFunction("vkCmdBindPipelineShaderGroupNV", out vkCmdBindPipelineShaderGroupNV_ptr);
+				break;
+
+			case "vkCreateIndirectCommandsLayoutNV":
+				NativeLib.LoadFunction("vkCreateIndirectCommandsLayoutNV", out vkCreateIndirectCommandsLayoutNV_ptr);
+				break;
+
+			case "vkDestroyIndirectCommandsLayoutNV":
+				NativeLib.LoadFunction("vkDestroyIndirectCommandsLayoutNV", out vkDestroyIndirectCommandsLayoutNV_ptr);
+				break;
+
+			case "vkAcquireDrmDisplayEXT":
+				NativeLib.LoadFunction("vkAcquireDrmDisplayEXT", out vkAcquireDrmDisplayEXT_ptr);
+				break;
+
+			case "vkGetDrmDisplayEXT":
+				NativeLib.LoadFunction("vkGetDrmDisplayEXT", out vkGetDrmDisplayEXT_ptr);
+				break;
+
+			case "vkCmdEncodeVideoKHR":
+				NativeLib.LoadFunction("vkCmdEncodeVideoKHR", out vkCmdEncodeVideoKHR_ptr);
+				break;
+
+			case "vkCmdSetFragmentShadingRateEnumNV":
+				NativeLib.LoadFunction("vkCmdSetFragmentShadingRateEnumNV", out vkCmdSetFragmentShadingRateEnumNV_ptr);
+				break;
+
+			case "vkAcquireWinrtDisplayNV":
+				NativeLib.LoadFunction("vkAcquireWinrtDisplayNV", out vkAcquireWinrtDisplayNV_ptr);
+				break;
+
+			case "vkGetWinrtDisplayNV":
+				NativeLib.LoadFunction("vkGetWinrtDisplayNV", out vkGetWinrtDisplayNV_ptr);
+				break;
+
+			case "vkCreateDirectFBSurfaceEXT":
+				NativeLib.LoadFunction("vkCreateDirectFBSurfaceEXT", out vkCreateDirectFBSurfaceEXT_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceDirectFBPresentationSupportEXT":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceDirectFBPresentationSupportEXT", out vkGetPhysicalDeviceDirectFBPresentationSupportEXT_ptr);
+				break;
+
+			case "vkCmdSetVertexInputEXT":
+				NativeLib.LoadFunction("vkCmdSetVertexInputEXT", out vkCmdSetVertexInputEXT_ptr);
+				break;
+
+			case "vkGetMemoryZirconHandleFUCHSIA":
+				NativeLib.LoadFunction("vkGetMemoryZirconHandleFUCHSIA", out vkGetMemoryZirconHandleFUCHSIA_ptr);
+				break;
+
+			case "vkGetMemoryZirconHandlePropertiesFUCHSIA":
+				NativeLib.LoadFunction("vkGetMemoryZirconHandlePropertiesFUCHSIA", out vkGetMemoryZirconHandlePropertiesFUCHSIA_ptr);
+				break;
+
+			case "vkImportSemaphoreZirconHandleFUCHSIA":
+				NativeLib.LoadFunction("vkImportSemaphoreZirconHandleFUCHSIA", out vkImportSemaphoreZirconHandleFUCHSIA_ptr);
+				break;
+
+			case "vkGetSemaphoreZirconHandleFUCHSIA":
+				NativeLib.LoadFunction("vkGetSemaphoreZirconHandleFUCHSIA", out vkGetSemaphoreZirconHandleFUCHSIA_ptr);
+				break;
+
+			case "vkCreateBufferCollectionFUCHSIA":
+				NativeLib.LoadFunction("vkCreateBufferCollectionFUCHSIA", out vkCreateBufferCollectionFUCHSIA_ptr);
+				break;
+
+			case "vkSetBufferCollectionImageConstraintsFUCHSIA":
+				NativeLib.LoadFunction("vkSetBufferCollectionImageConstraintsFUCHSIA", out vkSetBufferCollectionImageConstraintsFUCHSIA_ptr);
+				break;
+
+			case "vkSetBufferCollectionBufferConstraintsFUCHSIA":
+				NativeLib.LoadFunction("vkSetBufferCollectionBufferConstraintsFUCHSIA", out vkSetBufferCollectionBufferConstraintsFUCHSIA_ptr);
+				break;
+
+			case "vkDestroyBufferCollectionFUCHSIA":
+				NativeLib.LoadFunction("vkDestroyBufferCollectionFUCHSIA", out vkDestroyBufferCollectionFUCHSIA_ptr);
+				break;
+
+			case "vkGetBufferCollectionPropertiesFUCHSIA":
+				NativeLib.LoadFunction("vkGetBufferCollectionPropertiesFUCHSIA", out vkGetBufferCollectionPropertiesFUCHSIA_ptr);
+				break;
+
+			case "vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI":
+				NativeLib.LoadFunction("vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI", out vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI_ptr);
+				break;
+
+			case "vkCmdSubpassShadingHUAWEI":
+				NativeLib.LoadFunction("vkCmdSubpassShadingHUAWEI", out vkCmdSubpassShadingHUAWEI_ptr);
+				break;
+
+			case "vkCmdBindInvocationMaskHUAWEI":
+				NativeLib.LoadFunction("vkCmdBindInvocationMaskHUAWEI", out vkCmdBindInvocationMaskHUAWEI_ptr);
+				break;
+
+			case "vkGetMemoryRemoteAddressNV":
+				NativeLib.LoadFunction("vkGetMemoryRemoteAddressNV", out vkGetMemoryRemoteAddressNV_ptr);
+				break;
+
+			case "vkCmdSetPatchControlPointsEXT":
+				NativeLib.LoadFunction("vkCmdSetPatchControlPointsEXT", out vkCmdSetPatchControlPointsEXT_ptr);
+				break;
+
+			case "vkCmdSetLogicOpEXT":
+				NativeLib.LoadFunction("vkCmdSetLogicOpEXT", out vkCmdSetLogicOpEXT_ptr);
+				break;
+
+			case "vkCreateScreenSurfaceQNX":
+				NativeLib.LoadFunction("vkCreateScreenSurfaceQNX", out vkCreateScreenSurfaceQNX_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceScreenPresentationSupportQNX":
+				NativeLib.LoadFunction("vkGetPhysicalDeviceScreenPresentationSupportQNX", out vkGetPhysicalDeviceScreenPresentationSupportQNX_ptr);
+				break;
+
+			case "vkCmdSetColorWriteEnableEXT":
+				NativeLib.LoadFunction("vkCmdSetColorWriteEnableEXT", out vkCmdSetColorWriteEnableEXT_ptr);
+				break;
+
+			case "vkCmdDrawMultiEXT":
+				NativeLib.LoadFunction("vkCmdDrawMultiEXT", out vkCmdDrawMultiEXT_ptr);
+				break;
+
+			case "vkCmdDrawMultiIndexedEXT":
+				NativeLib.LoadFunction("vkCmdDrawMultiIndexedEXT", out vkCmdDrawMultiIndexedEXT_ptr);
+				break;
+
+			case "vkSetDeviceMemoryPriorityEXT":
+				NativeLib.LoadFunction("vkSetDeviceMemoryPriorityEXT", out vkSetDeviceMemoryPriorityEXT_ptr);
+				break;
+
+			case "vkGetDescriptorSetLayoutHostMappingInfoVALVE":
+				NativeLib.LoadFunction("vkGetDescriptorSetLayoutHostMappingInfoVALVE", out vkGetDescriptorSetLayoutHostMappingInfoVALVE_ptr);
+				break;
+
+			case "vkGetDescriptorSetHostMappingVALVE":
+				NativeLib.LoadFunction("vkGetDescriptorSetHostMappingVALVE", out vkGetDescriptorSetHostMappingVALVE_ptr);
+				break;
+
+			default:
+				Runtime.FatalError(scope $"Unknown function name '{name}'.");
+			}
+		}
+
+		public static void LoadFunctions(in Span<StringView> functions)
+		{
+			for (var func in functions)
+			{
+				LoadFunction(func);
+			}
+		}
+
+		public static void LoadAllFuncions(VkInstance instance = default, List<StringView> excludeFunctions = null)
 		{
 			if (instance != default)
 			{
 				NativeLib.mInstance = instance;
 			}
 
-			NativeLib.LoadFunction("vkCreateInstance",  out vkCreateInstance_ptr);
-			NativeLib.LoadFunction("vkDestroyInstance",  out vkDestroyInstance_ptr);
-			NativeLib.LoadFunction("vkEnumeratePhysicalDevices",  out vkEnumeratePhysicalDevices_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceFeatures",  out vkGetPhysicalDeviceFeatures_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceFormatProperties",  out vkGetPhysicalDeviceFormatProperties_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceImageFormatProperties",  out vkGetPhysicalDeviceImageFormatProperties_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceProperties",  out vkGetPhysicalDeviceProperties_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceQueueFamilyProperties",  out vkGetPhysicalDeviceQueueFamilyProperties_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceMemoryProperties",  out vkGetPhysicalDeviceMemoryProperties_ptr);
-			NativeLib.LoadFunction("vkGetInstanceProcAddr",  out vkGetInstanceProcAddr_ptr);
-			NativeLib.LoadFunction("vkGetDeviceProcAddr",  out vkGetDeviceProcAddr_ptr);
-			NativeLib.LoadFunction("vkCreateDevice",  out vkCreateDevice_ptr);
-			NativeLib.LoadFunction("vkDestroyDevice",  out vkDestroyDevice_ptr);
-			NativeLib.LoadFunction("vkEnumerateInstanceExtensionProperties",  out vkEnumerateInstanceExtensionProperties_ptr);
-			NativeLib.LoadFunction("vkEnumerateDeviceExtensionProperties",  out vkEnumerateDeviceExtensionProperties_ptr);
-			NativeLib.LoadFunction("vkEnumerateInstanceLayerProperties",  out vkEnumerateInstanceLayerProperties_ptr);
-			NativeLib.LoadFunction("vkEnumerateDeviceLayerProperties",  out vkEnumerateDeviceLayerProperties_ptr);
-			NativeLib.LoadFunction("vkGetDeviceQueue",  out vkGetDeviceQueue_ptr);
-			NativeLib.LoadFunction("vkQueueSubmit",  out vkQueueSubmit_ptr);
-			NativeLib.LoadFunction("vkQueueWaitIdle",  out vkQueueWaitIdle_ptr);
-			NativeLib.LoadFunction("vkDeviceWaitIdle",  out vkDeviceWaitIdle_ptr);
-			NativeLib.LoadFunction("vkAllocateMemory",  out vkAllocateMemory_ptr);
-			NativeLib.LoadFunction("vkFreeMemory",  out vkFreeMemory_ptr);
-			NativeLib.LoadFunction("vkMapMemory",  out vkMapMemory_ptr);
-			NativeLib.LoadFunction("vkUnmapMemory",  out vkUnmapMemory_ptr);
-			NativeLib.LoadFunction("vkFlushMappedMemoryRanges",  out vkFlushMappedMemoryRanges_ptr);
-			NativeLib.LoadFunction("vkInvalidateMappedMemoryRanges",  out vkInvalidateMappedMemoryRanges_ptr);
-			NativeLib.LoadFunction("vkGetDeviceMemoryCommitment",  out vkGetDeviceMemoryCommitment_ptr);
-			NativeLib.LoadFunction("vkBindBufferMemory",  out vkBindBufferMemory_ptr);
-			NativeLib.LoadFunction("vkBindImageMemory",  out vkBindImageMemory_ptr);
-			NativeLib.LoadFunction("vkGetBufferMemoryRequirements",  out vkGetBufferMemoryRequirements_ptr);
-			NativeLib.LoadFunction("vkGetImageMemoryRequirements",  out vkGetImageMemoryRequirements_ptr);
-			NativeLib.LoadFunction("vkGetImageSparseMemoryRequirements",  out vkGetImageSparseMemoryRequirements_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceSparseImageFormatProperties",  out vkGetPhysicalDeviceSparseImageFormatProperties_ptr);
-			NativeLib.LoadFunction("vkQueueBindSparse",  out vkQueueBindSparse_ptr);
-			NativeLib.LoadFunction("vkCreateFence",  out vkCreateFence_ptr);
-			NativeLib.LoadFunction("vkDestroyFence",  out vkDestroyFence_ptr);
-			NativeLib.LoadFunction("vkResetFences",  out vkResetFences_ptr);
-			NativeLib.LoadFunction("vkGetFenceStatus",  out vkGetFenceStatus_ptr);
-			NativeLib.LoadFunction("vkWaitForFences",  out vkWaitForFences_ptr);
-			NativeLib.LoadFunction("vkCreateSemaphore",  out vkCreateSemaphore_ptr);
-			NativeLib.LoadFunction("vkDestroySemaphore",  out vkDestroySemaphore_ptr);
-			NativeLib.LoadFunction("vkCreateEvent",  out vkCreateEvent_ptr);
-			NativeLib.LoadFunction("vkDestroyEvent",  out vkDestroyEvent_ptr);
-			NativeLib.LoadFunction("vkGetEventStatus",  out vkGetEventStatus_ptr);
-			NativeLib.LoadFunction("vkSetEvent",  out vkSetEvent_ptr);
-			NativeLib.LoadFunction("vkResetEvent",  out vkResetEvent_ptr);
-			NativeLib.LoadFunction("vkCreateQueryPool",  out vkCreateQueryPool_ptr);
-			NativeLib.LoadFunction("vkDestroyQueryPool",  out vkDestroyQueryPool_ptr);
-			NativeLib.LoadFunction("vkGetQueryPoolResults",  out vkGetQueryPoolResults_ptr);
-			NativeLib.LoadFunction("vkCreateBuffer",  out vkCreateBuffer_ptr);
-			NativeLib.LoadFunction("vkDestroyBuffer",  out vkDestroyBuffer_ptr);
-			NativeLib.LoadFunction("vkCreateBufferView",  out vkCreateBufferView_ptr);
-			NativeLib.LoadFunction("vkDestroyBufferView",  out vkDestroyBufferView_ptr);
-			NativeLib.LoadFunction("vkCreateImage",  out vkCreateImage_ptr);
-			NativeLib.LoadFunction("vkDestroyImage",  out vkDestroyImage_ptr);
-			NativeLib.LoadFunction("vkGetImageSubresourceLayout",  out vkGetImageSubresourceLayout_ptr);
-			NativeLib.LoadFunction("vkCreateImageView",  out vkCreateImageView_ptr);
-			NativeLib.LoadFunction("vkDestroyImageView",  out vkDestroyImageView_ptr);
-			NativeLib.LoadFunction("vkCreateShaderModule",  out vkCreateShaderModule_ptr);
-			NativeLib.LoadFunction("vkDestroyShaderModule",  out vkDestroyShaderModule_ptr);
-			NativeLib.LoadFunction("vkCreatePipelineCache",  out vkCreatePipelineCache_ptr);
-			NativeLib.LoadFunction("vkDestroyPipelineCache",  out vkDestroyPipelineCache_ptr);
-			NativeLib.LoadFunction("vkGetPipelineCacheData",  out vkGetPipelineCacheData_ptr);
-			NativeLib.LoadFunction("vkMergePipelineCaches",  out vkMergePipelineCaches_ptr);
-			NativeLib.LoadFunction("vkCreateGraphicsPipelines",  out vkCreateGraphicsPipelines_ptr);
-			NativeLib.LoadFunction("vkCreateComputePipelines",  out vkCreateComputePipelines_ptr);
-			NativeLib.LoadFunction("vkDestroyPipeline",  out vkDestroyPipeline_ptr);
-			NativeLib.LoadFunction("vkCreatePipelineLayout",  out vkCreatePipelineLayout_ptr);
-			NativeLib.LoadFunction("vkDestroyPipelineLayout",  out vkDestroyPipelineLayout_ptr);
-			NativeLib.LoadFunction("vkCreateSampler",  out vkCreateSampler_ptr);
-			NativeLib.LoadFunction("vkDestroySampler",  out vkDestroySampler_ptr);
-			NativeLib.LoadFunction("vkCreateDescriptorSetLayout",  out vkCreateDescriptorSetLayout_ptr);
-			NativeLib.LoadFunction("vkDestroyDescriptorSetLayout",  out vkDestroyDescriptorSetLayout_ptr);
-			NativeLib.LoadFunction("vkCreateDescriptorPool",  out vkCreateDescriptorPool_ptr);
-			NativeLib.LoadFunction("vkDestroyDescriptorPool",  out vkDestroyDescriptorPool_ptr);
-			NativeLib.LoadFunction("vkResetDescriptorPool",  out vkResetDescriptorPool_ptr);
-			NativeLib.LoadFunction("vkAllocateDescriptorSets",  out vkAllocateDescriptorSets_ptr);
-			NativeLib.LoadFunction("vkFreeDescriptorSets",  out vkFreeDescriptorSets_ptr);
-			NativeLib.LoadFunction("vkUpdateDescriptorSets",  out vkUpdateDescriptorSets_ptr);
-			NativeLib.LoadFunction("vkCreateFramebuffer",  out vkCreateFramebuffer_ptr);
-			NativeLib.LoadFunction("vkDestroyFramebuffer",  out vkDestroyFramebuffer_ptr);
-			NativeLib.LoadFunction("vkCreateRenderPass",  out vkCreateRenderPass_ptr);
-			NativeLib.LoadFunction("vkDestroyRenderPass",  out vkDestroyRenderPass_ptr);
-			NativeLib.LoadFunction("vkGetRenderAreaGranularity",  out vkGetRenderAreaGranularity_ptr);
-			NativeLib.LoadFunction("vkCreateCommandPool",  out vkCreateCommandPool_ptr);
-			NativeLib.LoadFunction("vkDestroyCommandPool",  out vkDestroyCommandPool_ptr);
-			NativeLib.LoadFunction("vkResetCommandPool",  out vkResetCommandPool_ptr);
-			NativeLib.LoadFunction("vkAllocateCommandBuffers",  out vkAllocateCommandBuffers_ptr);
-			NativeLib.LoadFunction("vkFreeCommandBuffers",  out vkFreeCommandBuffers_ptr);
-			NativeLib.LoadFunction("vkBeginCommandBuffer",  out vkBeginCommandBuffer_ptr);
-			NativeLib.LoadFunction("vkEndCommandBuffer",  out vkEndCommandBuffer_ptr);
-			NativeLib.LoadFunction("vkResetCommandBuffer",  out vkResetCommandBuffer_ptr);
-			NativeLib.LoadFunction("vkCmdBindPipeline",  out vkCmdBindPipeline_ptr);
-			NativeLib.LoadFunction("vkCmdSetViewport",  out vkCmdSetViewport_ptr);
-			NativeLib.LoadFunction("vkCmdSetScissor",  out vkCmdSetScissor_ptr);
-			NativeLib.LoadFunction("vkCmdSetLineWidth",  out vkCmdSetLineWidth_ptr);
-			NativeLib.LoadFunction("vkCmdSetDepthBias",  out vkCmdSetDepthBias_ptr);
-			NativeLib.LoadFunction("vkCmdSetBlendConstants",  out vkCmdSetBlendConstants_ptr);
-			NativeLib.LoadFunction("vkCmdSetDepthBounds",  out vkCmdSetDepthBounds_ptr);
-			NativeLib.LoadFunction("vkCmdSetStencilCompareMask",  out vkCmdSetStencilCompareMask_ptr);
-			NativeLib.LoadFunction("vkCmdSetStencilWriteMask",  out vkCmdSetStencilWriteMask_ptr);
-			NativeLib.LoadFunction("vkCmdSetStencilReference",  out vkCmdSetStencilReference_ptr);
-			NativeLib.LoadFunction("vkCmdBindDescriptorSets",  out vkCmdBindDescriptorSets_ptr);
-			NativeLib.LoadFunction("vkCmdBindIndexBuffer",  out vkCmdBindIndexBuffer_ptr);
-			NativeLib.LoadFunction("vkCmdBindVertexBuffers",  out vkCmdBindVertexBuffers_ptr);
-			NativeLib.LoadFunction("vkCmdDraw",  out vkCmdDraw_ptr);
-			NativeLib.LoadFunction("vkCmdDrawIndexed",  out vkCmdDrawIndexed_ptr);
-			NativeLib.LoadFunction("vkCmdDrawIndirect",  out vkCmdDrawIndirect_ptr);
-			NativeLib.LoadFunction("vkCmdDrawIndexedIndirect",  out vkCmdDrawIndexedIndirect_ptr);
-			NativeLib.LoadFunction("vkCmdDispatch",  out vkCmdDispatch_ptr);
-			NativeLib.LoadFunction("vkCmdDispatchIndirect",  out vkCmdDispatchIndirect_ptr);
-			NativeLib.LoadFunction("vkCmdCopyBuffer",  out vkCmdCopyBuffer_ptr);
-			NativeLib.LoadFunction("vkCmdCopyImage",  out vkCmdCopyImage_ptr);
-			NativeLib.LoadFunction("vkCmdBlitImage",  out vkCmdBlitImage_ptr);
-			NativeLib.LoadFunction("vkCmdCopyBufferToImage",  out vkCmdCopyBufferToImage_ptr);
-			NativeLib.LoadFunction("vkCmdCopyImageToBuffer",  out vkCmdCopyImageToBuffer_ptr);
-			NativeLib.LoadFunction("vkCmdUpdateBuffer",  out vkCmdUpdateBuffer_ptr);
-			NativeLib.LoadFunction("vkCmdFillBuffer",  out vkCmdFillBuffer_ptr);
-			NativeLib.LoadFunction("vkCmdClearColorImage",  out vkCmdClearColorImage_ptr);
-			NativeLib.LoadFunction("vkCmdClearDepthStencilImage",  out vkCmdClearDepthStencilImage_ptr);
-			NativeLib.LoadFunction("vkCmdClearAttachments",  out vkCmdClearAttachments_ptr);
-			NativeLib.LoadFunction("vkCmdResolveImage",  out vkCmdResolveImage_ptr);
-			NativeLib.LoadFunction("vkCmdSetEvent",  out vkCmdSetEvent_ptr);
-			NativeLib.LoadFunction("vkCmdResetEvent",  out vkCmdResetEvent_ptr);
-			NativeLib.LoadFunction("vkCmdWaitEvents",  out vkCmdWaitEvents_ptr);
-			NativeLib.LoadFunction("vkCmdPipelineBarrier",  out vkCmdPipelineBarrier_ptr);
-			NativeLib.LoadFunction("vkCmdBeginQuery",  out vkCmdBeginQuery_ptr);
-			NativeLib.LoadFunction("vkCmdEndQuery",  out vkCmdEndQuery_ptr);
-			NativeLib.LoadFunction("vkCmdResetQueryPool",  out vkCmdResetQueryPool_ptr);
-			NativeLib.LoadFunction("vkCmdWriteTimestamp",  out vkCmdWriteTimestamp_ptr);
-			NativeLib.LoadFunction("vkCmdCopyQueryPoolResults",  out vkCmdCopyQueryPoolResults_ptr);
-			NativeLib.LoadFunction("vkCmdPushConstants",  out vkCmdPushConstants_ptr);
-			NativeLib.LoadFunction("vkCmdBeginRenderPass",  out vkCmdBeginRenderPass_ptr);
-			NativeLib.LoadFunction("vkCmdNextSubpass",  out vkCmdNextSubpass_ptr);
-			NativeLib.LoadFunction("vkCmdEndRenderPass",  out vkCmdEndRenderPass_ptr);
-			NativeLib.LoadFunction("vkCmdExecuteCommands",  out vkCmdExecuteCommands_ptr);
-			NativeLib.LoadFunction("vkEnumerateInstanceVersion",  out vkEnumerateInstanceVersion_ptr);
-			NativeLib.LoadFunction("vkBindBufferMemory2",  out vkBindBufferMemory2_ptr);
-			NativeLib.LoadFunction("vkBindImageMemory2",  out vkBindImageMemory2_ptr);
-			NativeLib.LoadFunction("vkGetDeviceGroupPeerMemoryFeatures",  out vkGetDeviceGroupPeerMemoryFeatures_ptr);
-			NativeLib.LoadFunction("vkCmdSetDeviceMask",  out vkCmdSetDeviceMask_ptr);
-			NativeLib.LoadFunction("vkCmdDispatchBase",  out vkCmdDispatchBase_ptr);
-			NativeLib.LoadFunction("vkEnumeratePhysicalDeviceGroups",  out vkEnumeratePhysicalDeviceGroups_ptr);
-			NativeLib.LoadFunction("vkGetImageMemoryRequirements2",  out vkGetImageMemoryRequirements2_ptr);
-			NativeLib.LoadFunction("vkGetBufferMemoryRequirements2",  out vkGetBufferMemoryRequirements2_ptr);
-			NativeLib.LoadFunction("vkGetImageSparseMemoryRequirements2",  out vkGetImageSparseMemoryRequirements2_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceFeatures2",  out vkGetPhysicalDeviceFeatures2_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceProperties2",  out vkGetPhysicalDeviceProperties2_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceFormatProperties2",  out vkGetPhysicalDeviceFormatProperties2_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceImageFormatProperties2",  out vkGetPhysicalDeviceImageFormatProperties2_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceQueueFamilyProperties2",  out vkGetPhysicalDeviceQueueFamilyProperties2_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceMemoryProperties2",  out vkGetPhysicalDeviceMemoryProperties2_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceSparseImageFormatProperties2",  out vkGetPhysicalDeviceSparseImageFormatProperties2_ptr);
-			NativeLib.LoadFunction("vkTrimCommandPool",  out vkTrimCommandPool_ptr);
-			NativeLib.LoadFunction("vkGetDeviceQueue2",  out vkGetDeviceQueue2_ptr);
-			NativeLib.LoadFunction("vkCreateSamplerYcbcrConversion",  out vkCreateSamplerYcbcrConversion_ptr);
-			NativeLib.LoadFunction("vkDestroySamplerYcbcrConversion",  out vkDestroySamplerYcbcrConversion_ptr);
-			NativeLib.LoadFunction("vkCreateDescriptorUpdateTemplate",  out vkCreateDescriptorUpdateTemplate_ptr);
-			NativeLib.LoadFunction("vkDestroyDescriptorUpdateTemplate",  out vkDestroyDescriptorUpdateTemplate_ptr);
-			NativeLib.LoadFunction("vkUpdateDescriptorSetWithTemplate",  out vkUpdateDescriptorSetWithTemplate_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceExternalBufferProperties",  out vkGetPhysicalDeviceExternalBufferProperties_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceExternalFenceProperties",  out vkGetPhysicalDeviceExternalFenceProperties_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceExternalSemaphoreProperties",  out vkGetPhysicalDeviceExternalSemaphoreProperties_ptr);
-			NativeLib.LoadFunction("vkGetDescriptorSetLayoutSupport",  out vkGetDescriptorSetLayoutSupport_ptr);
-			NativeLib.LoadFunction("vkCmdDrawIndirectCount",  out vkCmdDrawIndirectCount_ptr);
-			NativeLib.LoadFunction("vkCmdDrawIndexedIndirectCount",  out vkCmdDrawIndexedIndirectCount_ptr);
-			NativeLib.LoadFunction("vkCreateRenderPass2",  out vkCreateRenderPass2_ptr);
-			NativeLib.LoadFunction("vkCmdBeginRenderPass2",  out vkCmdBeginRenderPass2_ptr);
-			NativeLib.LoadFunction("vkCmdNextSubpass2",  out vkCmdNextSubpass2_ptr);
-			NativeLib.LoadFunction("vkCmdEndRenderPass2",  out vkCmdEndRenderPass2_ptr);
-			NativeLib.LoadFunction("vkResetQueryPool",  out vkResetQueryPool_ptr);
-			NativeLib.LoadFunction("vkGetSemaphoreCounterValue",  out vkGetSemaphoreCounterValue_ptr);
-			NativeLib.LoadFunction("vkWaitSemaphores",  out vkWaitSemaphores_ptr);
-			NativeLib.LoadFunction("vkSignalSemaphore",  out vkSignalSemaphore_ptr);
-			NativeLib.LoadFunction("vkGetBufferDeviceAddress",  out vkGetBufferDeviceAddress_ptr);
-			NativeLib.LoadFunction("vkGetBufferOpaqueCaptureAddress",  out vkGetBufferOpaqueCaptureAddress_ptr);
-			NativeLib.LoadFunction("vkGetDeviceMemoryOpaqueCaptureAddress",  out vkGetDeviceMemoryOpaqueCaptureAddress_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceToolProperties",  out vkGetPhysicalDeviceToolProperties_ptr);
-			NativeLib.LoadFunction("vkCreatePrivateDataSlot",  out vkCreatePrivateDataSlot_ptr);
-			NativeLib.LoadFunction("vkDestroyPrivateDataSlot",  out vkDestroyPrivateDataSlot_ptr);
-			NativeLib.LoadFunction("vkSetPrivateData",  out vkSetPrivateData_ptr);
-			NativeLib.LoadFunction("vkGetPrivateData",  out vkGetPrivateData_ptr);
-			NativeLib.LoadFunction("vkCmdSetEvent2",  out vkCmdSetEvent2_ptr);
-			NativeLib.LoadFunction("vkCmdResetEvent2",  out vkCmdResetEvent2_ptr);
-			NativeLib.LoadFunction("vkCmdWaitEvents2",  out vkCmdWaitEvents2_ptr);
-			NativeLib.LoadFunction("vkCmdPipelineBarrier2",  out vkCmdPipelineBarrier2_ptr);
-			NativeLib.LoadFunction("vkCmdWriteTimestamp2",  out vkCmdWriteTimestamp2_ptr);
-			NativeLib.LoadFunction("vkQueueSubmit2",  out vkQueueSubmit2_ptr);
-			NativeLib.LoadFunction("vkCmdCopyBuffer2",  out vkCmdCopyBuffer2_ptr);
-			NativeLib.LoadFunction("vkCmdCopyImage2",  out vkCmdCopyImage2_ptr);
-			NativeLib.LoadFunction("vkCmdCopyBufferToImage2",  out vkCmdCopyBufferToImage2_ptr);
-			NativeLib.LoadFunction("vkCmdCopyImageToBuffer2",  out vkCmdCopyImageToBuffer2_ptr);
-			NativeLib.LoadFunction("vkCmdBlitImage2",  out vkCmdBlitImage2_ptr);
-			NativeLib.LoadFunction("vkCmdResolveImage2",  out vkCmdResolveImage2_ptr);
-			NativeLib.LoadFunction("vkCmdBeginRendering",  out vkCmdBeginRendering_ptr);
-			NativeLib.LoadFunction("vkCmdEndRendering",  out vkCmdEndRendering_ptr);
-			NativeLib.LoadFunction("vkCmdSetCullMode",  out vkCmdSetCullMode_ptr);
-			NativeLib.LoadFunction("vkCmdSetFrontFace",  out vkCmdSetFrontFace_ptr);
-			NativeLib.LoadFunction("vkCmdSetPrimitiveTopology",  out vkCmdSetPrimitiveTopology_ptr);
-			NativeLib.LoadFunction("vkCmdSetViewportWithCount",  out vkCmdSetViewportWithCount_ptr);
-			NativeLib.LoadFunction("vkCmdSetScissorWithCount",  out vkCmdSetScissorWithCount_ptr);
-			NativeLib.LoadFunction("vkCmdBindVertexBuffers2",  out vkCmdBindVertexBuffers2_ptr);
-			NativeLib.LoadFunction("vkCmdSetDepthTestEnable",  out vkCmdSetDepthTestEnable_ptr);
-			NativeLib.LoadFunction("vkCmdSetDepthWriteEnable",  out vkCmdSetDepthWriteEnable_ptr);
-			NativeLib.LoadFunction("vkCmdSetDepthCompareOp",  out vkCmdSetDepthCompareOp_ptr);
-			NativeLib.LoadFunction("vkCmdSetDepthBoundsTestEnable",  out vkCmdSetDepthBoundsTestEnable_ptr);
-			NativeLib.LoadFunction("vkCmdSetStencilTestEnable",  out vkCmdSetStencilTestEnable_ptr);
-			NativeLib.LoadFunction("vkCmdSetStencilOp",  out vkCmdSetStencilOp_ptr);
-			NativeLib.LoadFunction("vkCmdSetRasterizerDiscardEnable",  out vkCmdSetRasterizerDiscardEnable_ptr);
-			NativeLib.LoadFunction("vkCmdSetDepthBiasEnable",  out vkCmdSetDepthBiasEnable_ptr);
-			NativeLib.LoadFunction("vkCmdSetPrimitiveRestartEnable",  out vkCmdSetPrimitiveRestartEnable_ptr);
-			NativeLib.LoadFunction("vkGetDeviceBufferMemoryRequirements",  out vkGetDeviceBufferMemoryRequirements_ptr);
-			NativeLib.LoadFunction("vkGetDeviceImageMemoryRequirements",  out vkGetDeviceImageMemoryRequirements_ptr);
-			NativeLib.LoadFunction("vkGetDeviceImageSparseMemoryRequirements",  out vkGetDeviceImageSparseMemoryRequirements_ptr);
-			NativeLib.LoadFunction("vkDestroySurfaceKHR",  out vkDestroySurfaceKHR_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceSurfaceSupportKHR",  out vkGetPhysicalDeviceSurfaceSupportKHR_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceSurfaceCapabilitiesKHR",  out vkGetPhysicalDeviceSurfaceCapabilitiesKHR_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceSurfaceFormatsKHR",  out vkGetPhysicalDeviceSurfaceFormatsKHR_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceSurfacePresentModesKHR",  out vkGetPhysicalDeviceSurfacePresentModesKHR_ptr);
-			NativeLib.LoadFunction("vkCreateSwapchainKHR",  out vkCreateSwapchainKHR_ptr);
-			NativeLib.LoadFunction("vkDestroySwapchainKHR",  out vkDestroySwapchainKHR_ptr);
-			NativeLib.LoadFunction("vkGetSwapchainImagesKHR",  out vkGetSwapchainImagesKHR_ptr);
-			NativeLib.LoadFunction("vkAcquireNextImageKHR",  out vkAcquireNextImageKHR_ptr);
-			NativeLib.LoadFunction("vkQueuePresentKHR",  out vkQueuePresentKHR_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceDisplayPropertiesKHR",  out vkGetPhysicalDeviceDisplayPropertiesKHR_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceDisplayPlanePropertiesKHR",  out vkGetPhysicalDeviceDisplayPlanePropertiesKHR_ptr);
-			NativeLib.LoadFunction("vkGetDisplayPlaneSupportedDisplaysKHR",  out vkGetDisplayPlaneSupportedDisplaysKHR_ptr);
-			NativeLib.LoadFunction("vkGetDisplayModePropertiesKHR",  out vkGetDisplayModePropertiesKHR_ptr);
-			NativeLib.LoadFunction("vkCreateDisplayModeKHR",  out vkCreateDisplayModeKHR_ptr);
-			NativeLib.LoadFunction("vkGetDisplayPlaneCapabilitiesKHR",  out vkGetDisplayPlaneCapabilitiesKHR_ptr);
-			NativeLib.LoadFunction("vkCreateDisplayPlaneSurfaceKHR",  out vkCreateDisplayPlaneSurfaceKHR_ptr);
-			NativeLib.LoadFunction("vkCreateSharedSwapchainsKHR",  out vkCreateSharedSwapchainsKHR_ptr);
-			NativeLib.LoadFunction("vkCreateXlibSurfaceKHR",  out vkCreateXlibSurfaceKHR_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceXlibPresentationSupportKHR",  out vkGetPhysicalDeviceXlibPresentationSupportKHR_ptr);
-			NativeLib.LoadFunction("vkCreateXcbSurfaceKHR",  out vkCreateXcbSurfaceKHR_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceXcbPresentationSupportKHR",  out vkGetPhysicalDeviceXcbPresentationSupportKHR_ptr);
-			NativeLib.LoadFunction("vkCreateWaylandSurfaceKHR",  out vkCreateWaylandSurfaceKHR_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceWaylandPresentationSupportKHR",  out vkGetPhysicalDeviceWaylandPresentationSupportKHR_ptr);
-			NativeLib.LoadFunction("vkCreateAndroidSurfaceKHR",  out vkCreateAndroidSurfaceKHR_ptr);
-			NativeLib.LoadFunction("vkCreateWin32SurfaceKHR",  out vkCreateWin32SurfaceKHR_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceWin32PresentationSupportKHR",  out vkGetPhysicalDeviceWin32PresentationSupportKHR_ptr);
-			NativeLib.LoadFunction("vkCreateDebugReportCallbackEXT",  out vkCreateDebugReportCallbackEXT_ptr);
-			NativeLib.LoadFunction("vkDestroyDebugReportCallbackEXT",  out vkDestroyDebugReportCallbackEXT_ptr);
-			NativeLib.LoadFunction("vkDebugReportMessageEXT",  out vkDebugReportMessageEXT_ptr);
-			NativeLib.LoadFunction("vkDebugMarkerSetObjectTagEXT",  out vkDebugMarkerSetObjectTagEXT_ptr);
-			NativeLib.LoadFunction("vkDebugMarkerSetObjectNameEXT",  out vkDebugMarkerSetObjectNameEXT_ptr);
-			NativeLib.LoadFunction("vkCmdDebugMarkerBeginEXT",  out vkCmdDebugMarkerBeginEXT_ptr);
-			NativeLib.LoadFunction("vkCmdDebugMarkerEndEXT",  out vkCmdDebugMarkerEndEXT_ptr);
-			NativeLib.LoadFunction("vkCmdDebugMarkerInsertEXT",  out vkCmdDebugMarkerInsertEXT_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceVideoCapabilitiesKHR",  out vkGetPhysicalDeviceVideoCapabilitiesKHR_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceVideoFormatPropertiesKHR",  out vkGetPhysicalDeviceVideoFormatPropertiesKHR_ptr);
-			NativeLib.LoadFunction("vkCreateVideoSessionKHR",  out vkCreateVideoSessionKHR_ptr);
-			NativeLib.LoadFunction("vkDestroyVideoSessionKHR",  out vkDestroyVideoSessionKHR_ptr);
-			NativeLib.LoadFunction("vkGetVideoSessionMemoryRequirementsKHR",  out vkGetVideoSessionMemoryRequirementsKHR_ptr);
-			NativeLib.LoadFunction("vkBindVideoSessionMemoryKHR",  out vkBindVideoSessionMemoryKHR_ptr);
-			NativeLib.LoadFunction("vkCreateVideoSessionParametersKHR",  out vkCreateVideoSessionParametersKHR_ptr);
-			NativeLib.LoadFunction("vkUpdateVideoSessionParametersKHR",  out vkUpdateVideoSessionParametersKHR_ptr);
-			NativeLib.LoadFunction("vkDestroyVideoSessionParametersKHR",  out vkDestroyVideoSessionParametersKHR_ptr);
-			NativeLib.LoadFunction("vkCmdBeginVideoCodingKHR",  out vkCmdBeginVideoCodingKHR_ptr);
-			NativeLib.LoadFunction("vkCmdEndVideoCodingKHR",  out vkCmdEndVideoCodingKHR_ptr);
-			NativeLib.LoadFunction("vkCmdControlVideoCodingKHR",  out vkCmdControlVideoCodingKHR_ptr);
-			NativeLib.LoadFunction("vkCmdDecodeVideoKHR",  out vkCmdDecodeVideoKHR_ptr);
-			NativeLib.LoadFunction("vkCmdBindTransformFeedbackBuffersEXT",  out vkCmdBindTransformFeedbackBuffersEXT_ptr);
-			NativeLib.LoadFunction("vkCmdBeginTransformFeedbackEXT",  out vkCmdBeginTransformFeedbackEXT_ptr);
-			NativeLib.LoadFunction("vkCmdEndTransformFeedbackEXT",  out vkCmdEndTransformFeedbackEXT_ptr);
-			NativeLib.LoadFunction("vkCmdBeginQueryIndexedEXT",  out vkCmdBeginQueryIndexedEXT_ptr);
-			NativeLib.LoadFunction("vkCmdEndQueryIndexedEXT",  out vkCmdEndQueryIndexedEXT_ptr);
-			NativeLib.LoadFunction("vkCmdDrawIndirectByteCountEXT",  out vkCmdDrawIndirectByteCountEXT_ptr);
-			NativeLib.LoadFunction("vkCreateCuModuleNVX",  out vkCreateCuModuleNVX_ptr);
-			NativeLib.LoadFunction("vkCreateCuFunctionNVX",  out vkCreateCuFunctionNVX_ptr);
-			NativeLib.LoadFunction("vkDestroyCuModuleNVX",  out vkDestroyCuModuleNVX_ptr);
-			NativeLib.LoadFunction("vkDestroyCuFunctionNVX",  out vkDestroyCuFunctionNVX_ptr);
-			NativeLib.LoadFunction("vkCmdCuLaunchKernelNVX",  out vkCmdCuLaunchKernelNVX_ptr);
-			NativeLib.LoadFunction("vkGetImageViewHandleNVX",  out vkGetImageViewHandleNVX_ptr);
-			NativeLib.LoadFunction("vkGetImageViewAddressNVX",  out vkGetImageViewAddressNVX_ptr);
-			NativeLib.LoadFunction("vkGetShaderInfoAMD",  out vkGetShaderInfoAMD_ptr);
-			NativeLib.LoadFunction("vkCreateStreamDescriptorSurfaceGGP",  out vkCreateStreamDescriptorSurfaceGGP_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceExternalImageFormatPropertiesNV",  out vkGetPhysicalDeviceExternalImageFormatPropertiesNV_ptr);
-			NativeLib.LoadFunction("vkGetMemoryWin32HandleNV",  out vkGetMemoryWin32HandleNV_ptr);
-			NativeLib.LoadFunction("vkCreateViSurfaceNN",  out vkCreateViSurfaceNN_ptr);
-			NativeLib.LoadFunction("vkGetMemoryWin32HandleKHR",  out vkGetMemoryWin32HandleKHR_ptr);
-			NativeLib.LoadFunction("vkGetMemoryWin32HandlePropertiesKHR",  out vkGetMemoryWin32HandlePropertiesKHR_ptr);
-			NativeLib.LoadFunction("vkGetMemoryFdKHR",  out vkGetMemoryFdKHR_ptr);
-			NativeLib.LoadFunction("vkGetMemoryFdPropertiesKHR",  out vkGetMemoryFdPropertiesKHR_ptr);
-			NativeLib.LoadFunction("vkImportSemaphoreWin32HandleKHR",  out vkImportSemaphoreWin32HandleKHR_ptr);
-			NativeLib.LoadFunction("vkGetSemaphoreWin32HandleKHR",  out vkGetSemaphoreWin32HandleKHR_ptr);
-			NativeLib.LoadFunction("vkImportSemaphoreFdKHR",  out vkImportSemaphoreFdKHR_ptr);
-			NativeLib.LoadFunction("vkGetSemaphoreFdKHR",  out vkGetSemaphoreFdKHR_ptr);
-			NativeLib.LoadFunction("vkCmdPushDescriptorSetKHR",  out vkCmdPushDescriptorSetKHR_ptr);
-			NativeLib.LoadFunction("vkCmdBeginConditionalRenderingEXT",  out vkCmdBeginConditionalRenderingEXT_ptr);
-			NativeLib.LoadFunction("vkCmdEndConditionalRenderingEXT",  out vkCmdEndConditionalRenderingEXT_ptr);
-			NativeLib.LoadFunction("vkCmdSetViewportWScalingNV",  out vkCmdSetViewportWScalingNV_ptr);
-			NativeLib.LoadFunction("vkReleaseDisplayEXT",  out vkReleaseDisplayEXT_ptr);
-			NativeLib.LoadFunction("vkAcquireXlibDisplayEXT",  out vkAcquireXlibDisplayEXT_ptr);
-			NativeLib.LoadFunction("vkGetRandROutputDisplayEXT",  out vkGetRandROutputDisplayEXT_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceSurfaceCapabilities2EXT",  out vkGetPhysicalDeviceSurfaceCapabilities2EXT_ptr);
-			NativeLib.LoadFunction("vkDisplayPowerControlEXT",  out vkDisplayPowerControlEXT_ptr);
-			NativeLib.LoadFunction("vkRegisterDeviceEventEXT",  out vkRegisterDeviceEventEXT_ptr);
-			NativeLib.LoadFunction("vkRegisterDisplayEventEXT",  out vkRegisterDisplayEventEXT_ptr);
-			NativeLib.LoadFunction("vkGetSwapchainCounterEXT",  out vkGetSwapchainCounterEXT_ptr);
-			NativeLib.LoadFunction("vkGetRefreshCycleDurationGOOGLE",  out vkGetRefreshCycleDurationGOOGLE_ptr);
-			NativeLib.LoadFunction("vkGetPastPresentationTimingGOOGLE",  out vkGetPastPresentationTimingGOOGLE_ptr);
-			NativeLib.LoadFunction("vkCmdSetDiscardRectangleEXT",  out vkCmdSetDiscardRectangleEXT_ptr);
-			NativeLib.LoadFunction("vkSetHdrMetadataEXT",  out vkSetHdrMetadataEXT_ptr);
-			NativeLib.LoadFunction("vkGetSwapchainStatusKHR",  out vkGetSwapchainStatusKHR_ptr);
-			NativeLib.LoadFunction("vkImportFenceWin32HandleKHR",  out vkImportFenceWin32HandleKHR_ptr);
-			NativeLib.LoadFunction("vkGetFenceWin32HandleKHR",  out vkGetFenceWin32HandleKHR_ptr);
-			NativeLib.LoadFunction("vkImportFenceFdKHR",  out vkImportFenceFdKHR_ptr);
-			NativeLib.LoadFunction("vkGetFenceFdKHR",  out vkGetFenceFdKHR_ptr);
-			NativeLib.LoadFunction("vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR",  out vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR",  out vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR_ptr);
-			NativeLib.LoadFunction("vkAcquireProfilingLockKHR",  out vkAcquireProfilingLockKHR_ptr);
-			NativeLib.LoadFunction("vkReleaseProfilingLockKHR",  out vkReleaseProfilingLockKHR_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceSurfaceCapabilities2KHR",  out vkGetPhysicalDeviceSurfaceCapabilities2KHR_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceSurfaceFormats2KHR",  out vkGetPhysicalDeviceSurfaceFormats2KHR_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceDisplayProperties2KHR",  out vkGetPhysicalDeviceDisplayProperties2KHR_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceDisplayPlaneProperties2KHR",  out vkGetPhysicalDeviceDisplayPlaneProperties2KHR_ptr);
-			NativeLib.LoadFunction("vkGetDisplayModeProperties2KHR",  out vkGetDisplayModeProperties2KHR_ptr);
-			NativeLib.LoadFunction("vkGetDisplayPlaneCapabilities2KHR",  out vkGetDisplayPlaneCapabilities2KHR_ptr);
-			NativeLib.LoadFunction("vkCreateIOSSurfaceMVK",  out vkCreateIOSSurfaceMVK_ptr);
-			NativeLib.LoadFunction("vkCreateMacOSSurfaceMVK",  out vkCreateMacOSSurfaceMVK_ptr);
-			NativeLib.LoadFunction("vkSetDebugUtilsObjectNameEXT",  out vkSetDebugUtilsObjectNameEXT_ptr);
-			NativeLib.LoadFunction("vkSetDebugUtilsObjectTagEXT",  out vkSetDebugUtilsObjectTagEXT_ptr);
-			NativeLib.LoadFunction("vkQueueBeginDebugUtilsLabelEXT",  out vkQueueBeginDebugUtilsLabelEXT_ptr);
-			NativeLib.LoadFunction("vkQueueEndDebugUtilsLabelEXT",  out vkQueueEndDebugUtilsLabelEXT_ptr);
-			NativeLib.LoadFunction("vkQueueInsertDebugUtilsLabelEXT",  out vkQueueInsertDebugUtilsLabelEXT_ptr);
-			NativeLib.LoadFunction("vkCmdBeginDebugUtilsLabelEXT",  out vkCmdBeginDebugUtilsLabelEXT_ptr);
-			NativeLib.LoadFunction("vkCmdEndDebugUtilsLabelEXT",  out vkCmdEndDebugUtilsLabelEXT_ptr);
-			NativeLib.LoadFunction("vkCmdInsertDebugUtilsLabelEXT",  out vkCmdInsertDebugUtilsLabelEXT_ptr);
-			NativeLib.LoadFunction("vkCreateDebugUtilsMessengerEXT",  out vkCreateDebugUtilsMessengerEXT_ptr);
-			NativeLib.LoadFunction("vkDestroyDebugUtilsMessengerEXT",  out vkDestroyDebugUtilsMessengerEXT_ptr);
-			NativeLib.LoadFunction("vkSubmitDebugUtilsMessageEXT",  out vkSubmitDebugUtilsMessageEXT_ptr);
-			NativeLib.LoadFunction("vkGetAndroidHardwareBufferPropertiesANDROID",  out vkGetAndroidHardwareBufferPropertiesANDROID_ptr);
-			NativeLib.LoadFunction("vkGetMemoryAndroidHardwareBufferANDROID",  out vkGetMemoryAndroidHardwareBufferANDROID_ptr);
-			NativeLib.LoadFunction("vkCmdSetSampleLocationsEXT",  out vkCmdSetSampleLocationsEXT_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceMultisamplePropertiesEXT",  out vkGetPhysicalDeviceMultisamplePropertiesEXT_ptr);
-			NativeLib.LoadFunction("vkCreateAccelerationStructureKHR",  out vkCreateAccelerationStructureKHR_ptr);
-			NativeLib.LoadFunction("vkDestroyAccelerationStructureKHR",  out vkDestroyAccelerationStructureKHR_ptr);
-			NativeLib.LoadFunction("vkCmdBuildAccelerationStructuresKHR",  out vkCmdBuildAccelerationStructuresKHR_ptr);
-			NativeLib.LoadFunction("vkCmdBuildAccelerationStructuresIndirectKHR",  out vkCmdBuildAccelerationStructuresIndirectKHR_ptr);
-			NativeLib.LoadFunction("vkBuildAccelerationStructuresKHR",  out vkBuildAccelerationStructuresKHR_ptr);
-			NativeLib.LoadFunction("vkCopyAccelerationStructureKHR",  out vkCopyAccelerationStructureKHR_ptr);
-			NativeLib.LoadFunction("vkCopyAccelerationStructureToMemoryKHR",  out vkCopyAccelerationStructureToMemoryKHR_ptr);
-			NativeLib.LoadFunction("vkCopyMemoryToAccelerationStructureKHR",  out vkCopyMemoryToAccelerationStructureKHR_ptr);
-			NativeLib.LoadFunction("vkWriteAccelerationStructuresPropertiesKHR",  out vkWriteAccelerationStructuresPropertiesKHR_ptr);
-			NativeLib.LoadFunction("vkCmdCopyAccelerationStructureKHR",  out vkCmdCopyAccelerationStructureKHR_ptr);
-			NativeLib.LoadFunction("vkCmdCopyAccelerationStructureToMemoryKHR",  out vkCmdCopyAccelerationStructureToMemoryKHR_ptr);
-			NativeLib.LoadFunction("vkCmdCopyMemoryToAccelerationStructureKHR",  out vkCmdCopyMemoryToAccelerationStructureKHR_ptr);
-			NativeLib.LoadFunction("vkGetAccelerationStructureDeviceAddressKHR",  out vkGetAccelerationStructureDeviceAddressKHR_ptr);
-			NativeLib.LoadFunction("vkCmdWriteAccelerationStructuresPropertiesKHR",  out vkCmdWriteAccelerationStructuresPropertiesKHR_ptr);
-			NativeLib.LoadFunction("vkGetDeviceAccelerationStructureCompatibilityKHR",  out vkGetDeviceAccelerationStructureCompatibilityKHR_ptr);
-			NativeLib.LoadFunction("vkGetAccelerationStructureBuildSizesKHR",  out vkGetAccelerationStructureBuildSizesKHR_ptr);
-			NativeLib.LoadFunction("vkCmdTraceRaysKHR",  out vkCmdTraceRaysKHR_ptr);
-			NativeLib.LoadFunction("vkCreateRayTracingPipelinesKHR",  out vkCreateRayTracingPipelinesKHR_ptr);
-			NativeLib.LoadFunction("vkGetRayTracingShaderGroupHandlesKHR",  out vkGetRayTracingShaderGroupHandlesKHR_ptr);
-			NativeLib.LoadFunction("vkGetRayTracingCaptureReplayShaderGroupHandlesKHR",  out vkGetRayTracingCaptureReplayShaderGroupHandlesKHR_ptr);
-			NativeLib.LoadFunction("vkCmdTraceRaysIndirectKHR",  out vkCmdTraceRaysIndirectKHR_ptr);
-			NativeLib.LoadFunction("vkGetRayTracingShaderGroupStackSizeKHR",  out vkGetRayTracingShaderGroupStackSizeKHR_ptr);
-			NativeLib.LoadFunction("vkCmdSetRayTracingPipelineStackSizeKHR",  out vkCmdSetRayTracingPipelineStackSizeKHR_ptr);
-			NativeLib.LoadFunction("vkGetImageDrmFormatModifierPropertiesEXT",  out vkGetImageDrmFormatModifierPropertiesEXT_ptr);
-			NativeLib.LoadFunction("vkCreateValidationCacheEXT",  out vkCreateValidationCacheEXT_ptr);
-			NativeLib.LoadFunction("vkDestroyValidationCacheEXT",  out vkDestroyValidationCacheEXT_ptr);
-			NativeLib.LoadFunction("vkMergeValidationCachesEXT",  out vkMergeValidationCachesEXT_ptr);
-			NativeLib.LoadFunction("vkGetValidationCacheDataEXT",  out vkGetValidationCacheDataEXT_ptr);
-			NativeLib.LoadFunction("vkCmdBindShadingRateImageNV",  out vkCmdBindShadingRateImageNV_ptr);
-			NativeLib.LoadFunction("vkCmdSetViewportShadingRatePaletteNV",  out vkCmdSetViewportShadingRatePaletteNV_ptr);
-			NativeLib.LoadFunction("vkCmdSetCoarseSampleOrderNV",  out vkCmdSetCoarseSampleOrderNV_ptr);
-			NativeLib.LoadFunction("vkCreateAccelerationStructureNV",  out vkCreateAccelerationStructureNV_ptr);
-			NativeLib.LoadFunction("vkDestroyAccelerationStructureNV",  out vkDestroyAccelerationStructureNV_ptr);
-			NativeLib.LoadFunction("vkGetAccelerationStructureMemoryRequirementsNV",  out vkGetAccelerationStructureMemoryRequirementsNV_ptr);
-			NativeLib.LoadFunction("vkBindAccelerationStructureMemoryNV",  out vkBindAccelerationStructureMemoryNV_ptr);
-			NativeLib.LoadFunction("vkCmdBuildAccelerationStructureNV",  out vkCmdBuildAccelerationStructureNV_ptr);
-			NativeLib.LoadFunction("vkCmdCopyAccelerationStructureNV",  out vkCmdCopyAccelerationStructureNV_ptr);
-			NativeLib.LoadFunction("vkCmdTraceRaysNV",  out vkCmdTraceRaysNV_ptr);
-			NativeLib.LoadFunction("vkCreateRayTracingPipelinesNV",  out vkCreateRayTracingPipelinesNV_ptr);
-			NativeLib.LoadFunction("vkGetAccelerationStructureHandleNV",  out vkGetAccelerationStructureHandleNV_ptr);
-			NativeLib.LoadFunction("vkCmdWriteAccelerationStructuresPropertiesNV",  out vkCmdWriteAccelerationStructuresPropertiesNV_ptr);
-			NativeLib.LoadFunction("vkCompileDeferredNV",  out vkCompileDeferredNV_ptr);
-			NativeLib.LoadFunction("vkGetMemoryHostPointerPropertiesEXT",  out vkGetMemoryHostPointerPropertiesEXT_ptr);
-			NativeLib.LoadFunction("vkCmdWriteBufferMarkerAMD",  out vkCmdWriteBufferMarkerAMD_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceCalibrateableTimeDomainsEXT",  out vkGetPhysicalDeviceCalibrateableTimeDomainsEXT_ptr);
-			NativeLib.LoadFunction("vkGetCalibratedTimestampsEXT",  out vkGetCalibratedTimestampsEXT_ptr);
-			NativeLib.LoadFunction("vkCmdDrawMeshTasksNV",  out vkCmdDrawMeshTasksNV_ptr);
-			NativeLib.LoadFunction("vkCmdDrawMeshTasksIndirectNV",  out vkCmdDrawMeshTasksIndirectNV_ptr);
-			NativeLib.LoadFunction("vkCmdDrawMeshTasksIndirectCountNV",  out vkCmdDrawMeshTasksIndirectCountNV_ptr);
-			NativeLib.LoadFunction("vkCmdSetExclusiveScissorNV",  out vkCmdSetExclusiveScissorNV_ptr);
-			NativeLib.LoadFunction("vkCmdSetCheckpointNV",  out vkCmdSetCheckpointNV_ptr);
-			NativeLib.LoadFunction("vkGetQueueCheckpointDataNV",  out vkGetQueueCheckpointDataNV_ptr);
-			NativeLib.LoadFunction("vkInitializePerformanceApiINTEL",  out vkInitializePerformanceApiINTEL_ptr);
-			NativeLib.LoadFunction("vkUninitializePerformanceApiINTEL",  out vkUninitializePerformanceApiINTEL_ptr);
-			NativeLib.LoadFunction("vkCmdSetPerformanceMarkerINTEL",  out vkCmdSetPerformanceMarkerINTEL_ptr);
-			NativeLib.LoadFunction("vkCmdSetPerformanceStreamMarkerINTEL",  out vkCmdSetPerformanceStreamMarkerINTEL_ptr);
-			NativeLib.LoadFunction("vkCmdSetPerformanceOverrideINTEL",  out vkCmdSetPerformanceOverrideINTEL_ptr);
-			NativeLib.LoadFunction("vkAcquirePerformanceConfigurationINTEL",  out vkAcquirePerformanceConfigurationINTEL_ptr);
-			NativeLib.LoadFunction("vkReleasePerformanceConfigurationINTEL",  out vkReleasePerformanceConfigurationINTEL_ptr);
-			NativeLib.LoadFunction("vkQueueSetPerformanceConfigurationINTEL",  out vkQueueSetPerformanceConfigurationINTEL_ptr);
-			NativeLib.LoadFunction("vkGetPerformanceParameterINTEL",  out vkGetPerformanceParameterINTEL_ptr);
-			NativeLib.LoadFunction("vkSetLocalDimmingAMD",  out vkSetLocalDimmingAMD_ptr);
-			NativeLib.LoadFunction("vkCreateImagePipeSurfaceFUCHSIA",  out vkCreateImagePipeSurfaceFUCHSIA_ptr);
-			NativeLib.LoadFunction("vkCreateMetalSurfaceEXT",  out vkCreateMetalSurfaceEXT_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceFragmentShadingRatesKHR",  out vkGetPhysicalDeviceFragmentShadingRatesKHR_ptr);
-			NativeLib.LoadFunction("vkCmdSetFragmentShadingRateKHR",  out vkCmdSetFragmentShadingRateKHR_ptr);
-			NativeLib.LoadFunction("vkWaitForPresentKHR",  out vkWaitForPresentKHR_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceCooperativeMatrixPropertiesNV",  out vkGetPhysicalDeviceCooperativeMatrixPropertiesNV_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV",  out vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceSurfacePresentModes2EXT",  out vkGetPhysicalDeviceSurfacePresentModes2EXT_ptr);
-			NativeLib.LoadFunction("vkAcquireFullScreenExclusiveModeEXT",  out vkAcquireFullScreenExclusiveModeEXT_ptr);
-			NativeLib.LoadFunction("vkReleaseFullScreenExclusiveModeEXT",  out vkReleaseFullScreenExclusiveModeEXT_ptr);
-			NativeLib.LoadFunction("vkCreateHeadlessSurfaceEXT",  out vkCreateHeadlessSurfaceEXT_ptr);
-			NativeLib.LoadFunction("vkCmdSetLineStippleEXT",  out vkCmdSetLineStippleEXT_ptr);
-			NativeLib.LoadFunction("vkCreateDeferredOperationKHR",  out vkCreateDeferredOperationKHR_ptr);
-			NativeLib.LoadFunction("vkDestroyDeferredOperationKHR",  out vkDestroyDeferredOperationKHR_ptr);
-			NativeLib.LoadFunction("vkGetDeferredOperationMaxConcurrencyKHR",  out vkGetDeferredOperationMaxConcurrencyKHR_ptr);
-			NativeLib.LoadFunction("vkGetDeferredOperationResultKHR",  out vkGetDeferredOperationResultKHR_ptr);
-			NativeLib.LoadFunction("vkDeferredOperationJoinKHR",  out vkDeferredOperationJoinKHR_ptr);
-			NativeLib.LoadFunction("vkGetPipelineExecutablePropertiesKHR",  out vkGetPipelineExecutablePropertiesKHR_ptr);
-			NativeLib.LoadFunction("vkGetPipelineExecutableStatisticsKHR",  out vkGetPipelineExecutableStatisticsKHR_ptr);
-			NativeLib.LoadFunction("vkGetPipelineExecutableInternalRepresentationsKHR",  out vkGetPipelineExecutableInternalRepresentationsKHR_ptr);
-			NativeLib.LoadFunction("vkGetGeneratedCommandsMemoryRequirementsNV",  out vkGetGeneratedCommandsMemoryRequirementsNV_ptr);
-			NativeLib.LoadFunction("vkCmdPreprocessGeneratedCommandsNV",  out vkCmdPreprocessGeneratedCommandsNV_ptr);
-			NativeLib.LoadFunction("vkCmdExecuteGeneratedCommandsNV",  out vkCmdExecuteGeneratedCommandsNV_ptr);
-			NativeLib.LoadFunction("vkCmdBindPipelineShaderGroupNV",  out vkCmdBindPipelineShaderGroupNV_ptr);
-			NativeLib.LoadFunction("vkCreateIndirectCommandsLayoutNV",  out vkCreateIndirectCommandsLayoutNV_ptr);
-			NativeLib.LoadFunction("vkDestroyIndirectCommandsLayoutNV",  out vkDestroyIndirectCommandsLayoutNV_ptr);
-			NativeLib.LoadFunction("vkAcquireDrmDisplayEXT",  out vkAcquireDrmDisplayEXT_ptr);
-			NativeLib.LoadFunction("vkGetDrmDisplayEXT",  out vkGetDrmDisplayEXT_ptr);
-			NativeLib.LoadFunction("vkCmdEncodeVideoKHR",  out vkCmdEncodeVideoKHR_ptr);
-			NativeLib.LoadFunction("vkCmdSetFragmentShadingRateEnumNV",  out vkCmdSetFragmentShadingRateEnumNV_ptr);
-			NativeLib.LoadFunction("vkAcquireWinrtDisplayNV",  out vkAcquireWinrtDisplayNV_ptr);
-			NativeLib.LoadFunction("vkGetWinrtDisplayNV",  out vkGetWinrtDisplayNV_ptr);
-			NativeLib.LoadFunction("vkCreateDirectFBSurfaceEXT",  out vkCreateDirectFBSurfaceEXT_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceDirectFBPresentationSupportEXT",  out vkGetPhysicalDeviceDirectFBPresentationSupportEXT_ptr);
-			NativeLib.LoadFunction("vkCmdSetVertexInputEXT",  out vkCmdSetVertexInputEXT_ptr);
-			NativeLib.LoadFunction("vkGetMemoryZirconHandleFUCHSIA",  out vkGetMemoryZirconHandleFUCHSIA_ptr);
-			NativeLib.LoadFunction("vkGetMemoryZirconHandlePropertiesFUCHSIA",  out vkGetMemoryZirconHandlePropertiesFUCHSIA_ptr);
-			NativeLib.LoadFunction("vkImportSemaphoreZirconHandleFUCHSIA",  out vkImportSemaphoreZirconHandleFUCHSIA_ptr);
-			NativeLib.LoadFunction("vkGetSemaphoreZirconHandleFUCHSIA",  out vkGetSemaphoreZirconHandleFUCHSIA_ptr);
-			NativeLib.LoadFunction("vkCreateBufferCollectionFUCHSIA",  out vkCreateBufferCollectionFUCHSIA_ptr);
-			NativeLib.LoadFunction("vkSetBufferCollectionImageConstraintsFUCHSIA",  out vkSetBufferCollectionImageConstraintsFUCHSIA_ptr);
-			NativeLib.LoadFunction("vkSetBufferCollectionBufferConstraintsFUCHSIA",  out vkSetBufferCollectionBufferConstraintsFUCHSIA_ptr);
-			NativeLib.LoadFunction("vkDestroyBufferCollectionFUCHSIA",  out vkDestroyBufferCollectionFUCHSIA_ptr);
-			NativeLib.LoadFunction("vkGetBufferCollectionPropertiesFUCHSIA",  out vkGetBufferCollectionPropertiesFUCHSIA_ptr);
-			NativeLib.LoadFunction("vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI",  out vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI_ptr);
-			NativeLib.LoadFunction("vkCmdSubpassShadingHUAWEI",  out vkCmdSubpassShadingHUAWEI_ptr);
-			NativeLib.LoadFunction("vkCmdBindInvocationMaskHUAWEI",  out vkCmdBindInvocationMaskHUAWEI_ptr);
-			NativeLib.LoadFunction("vkGetMemoryRemoteAddressNV",  out vkGetMemoryRemoteAddressNV_ptr);
-			NativeLib.LoadFunction("vkCmdSetPatchControlPointsEXT",  out vkCmdSetPatchControlPointsEXT_ptr);
-			NativeLib.LoadFunction("vkCmdSetLogicOpEXT",  out vkCmdSetLogicOpEXT_ptr);
-			NativeLib.LoadFunction("vkCreateScreenSurfaceQNX",  out vkCreateScreenSurfaceQNX_ptr);
-			NativeLib.LoadFunction("vkGetPhysicalDeviceScreenPresentationSupportQNX",  out vkGetPhysicalDeviceScreenPresentationSupportQNX_ptr);
-			NativeLib.LoadFunction("vkCmdSetColorWriteEnableEXT",  out vkCmdSetColorWriteEnableEXT_ptr);
-			NativeLib.LoadFunction("vkCmdDrawMultiEXT",  out vkCmdDrawMultiEXT_ptr);
-			NativeLib.LoadFunction("vkCmdDrawMultiIndexedEXT",  out vkCmdDrawMultiIndexedEXT_ptr);
-			NativeLib.LoadFunction("vkSetDeviceMemoryPriorityEXT",  out vkSetDeviceMemoryPriorityEXT_ptr);
-			NativeLib.LoadFunction("vkGetDescriptorSetLayoutHostMappingInfoVALVE",  out vkGetDescriptorSetLayoutHostMappingInfoVALVE_ptr);
-			NativeLib.LoadFunction("vkGetDescriptorSetHostMappingVALVE",  out vkGetDescriptorSetHostMappingVALVE_ptr);
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateInstance"))
+				LoadFunction("vkCreateInstance");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyInstance"))
+				LoadFunction("vkDestroyInstance");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkEnumeratePhysicalDevices"))
+				LoadFunction("vkEnumeratePhysicalDevices");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceFeatures"))
+				LoadFunction("vkGetPhysicalDeviceFeatures");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceFormatProperties"))
+				LoadFunction("vkGetPhysicalDeviceFormatProperties");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceImageFormatProperties"))
+				LoadFunction("vkGetPhysicalDeviceImageFormatProperties");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceProperties"))
+				LoadFunction("vkGetPhysicalDeviceProperties");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceQueueFamilyProperties"))
+				LoadFunction("vkGetPhysicalDeviceQueueFamilyProperties");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceMemoryProperties"))
+				LoadFunction("vkGetPhysicalDeviceMemoryProperties");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetInstanceProcAddr"))
+				LoadFunction("vkGetInstanceProcAddr");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDeviceProcAddr"))
+				LoadFunction("vkGetDeviceProcAddr");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateDevice"))
+				LoadFunction("vkCreateDevice");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyDevice"))
+				LoadFunction("vkDestroyDevice");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkEnumerateInstanceExtensionProperties"))
+				LoadFunction("vkEnumerateInstanceExtensionProperties");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkEnumerateDeviceExtensionProperties"))
+				LoadFunction("vkEnumerateDeviceExtensionProperties");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkEnumerateInstanceLayerProperties"))
+				LoadFunction("vkEnumerateInstanceLayerProperties");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkEnumerateDeviceLayerProperties"))
+				LoadFunction("vkEnumerateDeviceLayerProperties");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDeviceQueue"))
+				LoadFunction("vkGetDeviceQueue");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkQueueSubmit"))
+				LoadFunction("vkQueueSubmit");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkQueueWaitIdle"))
+				LoadFunction("vkQueueWaitIdle");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDeviceWaitIdle"))
+				LoadFunction("vkDeviceWaitIdle");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkAllocateMemory"))
+				LoadFunction("vkAllocateMemory");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkFreeMemory"))
+				LoadFunction("vkFreeMemory");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkMapMemory"))
+				LoadFunction("vkMapMemory");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkUnmapMemory"))
+				LoadFunction("vkUnmapMemory");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkFlushMappedMemoryRanges"))
+				LoadFunction("vkFlushMappedMemoryRanges");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkInvalidateMappedMemoryRanges"))
+				LoadFunction("vkInvalidateMappedMemoryRanges");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDeviceMemoryCommitment"))
+				LoadFunction("vkGetDeviceMemoryCommitment");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkBindBufferMemory"))
+				LoadFunction("vkBindBufferMemory");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkBindImageMemory"))
+				LoadFunction("vkBindImageMemory");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetBufferMemoryRequirements"))
+				LoadFunction("vkGetBufferMemoryRequirements");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetImageMemoryRequirements"))
+				LoadFunction("vkGetImageMemoryRequirements");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetImageSparseMemoryRequirements"))
+				LoadFunction("vkGetImageSparseMemoryRequirements");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceSparseImageFormatProperties"))
+				LoadFunction("vkGetPhysicalDeviceSparseImageFormatProperties");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkQueueBindSparse"))
+				LoadFunction("vkQueueBindSparse");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateFence"))
+				LoadFunction("vkCreateFence");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyFence"))
+				LoadFunction("vkDestroyFence");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkResetFences"))
+				LoadFunction("vkResetFences");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetFenceStatus"))
+				LoadFunction("vkGetFenceStatus");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkWaitForFences"))
+				LoadFunction("vkWaitForFences");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateSemaphore"))
+				LoadFunction("vkCreateSemaphore");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroySemaphore"))
+				LoadFunction("vkDestroySemaphore");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateEvent"))
+				LoadFunction("vkCreateEvent");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyEvent"))
+				LoadFunction("vkDestroyEvent");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetEventStatus"))
+				LoadFunction("vkGetEventStatus");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkSetEvent"))
+				LoadFunction("vkSetEvent");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkResetEvent"))
+				LoadFunction("vkResetEvent");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateQueryPool"))
+				LoadFunction("vkCreateQueryPool");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyQueryPool"))
+				LoadFunction("vkDestroyQueryPool");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetQueryPoolResults"))
+				LoadFunction("vkGetQueryPoolResults");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateBuffer"))
+				LoadFunction("vkCreateBuffer");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyBuffer"))
+				LoadFunction("vkDestroyBuffer");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateBufferView"))
+				LoadFunction("vkCreateBufferView");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyBufferView"))
+				LoadFunction("vkDestroyBufferView");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateImage"))
+				LoadFunction("vkCreateImage");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyImage"))
+				LoadFunction("vkDestroyImage");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetImageSubresourceLayout"))
+				LoadFunction("vkGetImageSubresourceLayout");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateImageView"))
+				LoadFunction("vkCreateImageView");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyImageView"))
+				LoadFunction("vkDestroyImageView");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateShaderModule"))
+				LoadFunction("vkCreateShaderModule");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyShaderModule"))
+				LoadFunction("vkDestroyShaderModule");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreatePipelineCache"))
+				LoadFunction("vkCreatePipelineCache");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyPipelineCache"))
+				LoadFunction("vkDestroyPipelineCache");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPipelineCacheData"))
+				LoadFunction("vkGetPipelineCacheData");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkMergePipelineCaches"))
+				LoadFunction("vkMergePipelineCaches");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateGraphicsPipelines"))
+				LoadFunction("vkCreateGraphicsPipelines");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateComputePipelines"))
+				LoadFunction("vkCreateComputePipelines");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyPipeline"))
+				LoadFunction("vkDestroyPipeline");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreatePipelineLayout"))
+				LoadFunction("vkCreatePipelineLayout");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyPipelineLayout"))
+				LoadFunction("vkDestroyPipelineLayout");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateSampler"))
+				LoadFunction("vkCreateSampler");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroySampler"))
+				LoadFunction("vkDestroySampler");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateDescriptorSetLayout"))
+				LoadFunction("vkCreateDescriptorSetLayout");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyDescriptorSetLayout"))
+				LoadFunction("vkDestroyDescriptorSetLayout");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateDescriptorPool"))
+				LoadFunction("vkCreateDescriptorPool");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyDescriptorPool"))
+				LoadFunction("vkDestroyDescriptorPool");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkResetDescriptorPool"))
+				LoadFunction("vkResetDescriptorPool");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkAllocateDescriptorSets"))
+				LoadFunction("vkAllocateDescriptorSets");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkFreeDescriptorSets"))
+				LoadFunction("vkFreeDescriptorSets");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkUpdateDescriptorSets"))
+				LoadFunction("vkUpdateDescriptorSets");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateFramebuffer"))
+				LoadFunction("vkCreateFramebuffer");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyFramebuffer"))
+				LoadFunction("vkDestroyFramebuffer");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateRenderPass"))
+				LoadFunction("vkCreateRenderPass");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyRenderPass"))
+				LoadFunction("vkDestroyRenderPass");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetRenderAreaGranularity"))
+				LoadFunction("vkGetRenderAreaGranularity");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateCommandPool"))
+				LoadFunction("vkCreateCommandPool");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyCommandPool"))
+				LoadFunction("vkDestroyCommandPool");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkResetCommandPool"))
+				LoadFunction("vkResetCommandPool");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkAllocateCommandBuffers"))
+				LoadFunction("vkAllocateCommandBuffers");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkFreeCommandBuffers"))
+				LoadFunction("vkFreeCommandBuffers");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkBeginCommandBuffer"))
+				LoadFunction("vkBeginCommandBuffer");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkEndCommandBuffer"))
+				LoadFunction("vkEndCommandBuffer");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkResetCommandBuffer"))
+				LoadFunction("vkResetCommandBuffer");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBindPipeline"))
+				LoadFunction("vkCmdBindPipeline");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetViewport"))
+				LoadFunction("vkCmdSetViewport");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetScissor"))
+				LoadFunction("vkCmdSetScissor");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetLineWidth"))
+				LoadFunction("vkCmdSetLineWidth");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetDepthBias"))
+				LoadFunction("vkCmdSetDepthBias");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetBlendConstants"))
+				LoadFunction("vkCmdSetBlendConstants");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetDepthBounds"))
+				LoadFunction("vkCmdSetDepthBounds");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetStencilCompareMask"))
+				LoadFunction("vkCmdSetStencilCompareMask");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetStencilWriteMask"))
+				LoadFunction("vkCmdSetStencilWriteMask");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetStencilReference"))
+				LoadFunction("vkCmdSetStencilReference");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBindDescriptorSets"))
+				LoadFunction("vkCmdBindDescriptorSets");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBindIndexBuffer"))
+				LoadFunction("vkCmdBindIndexBuffer");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBindVertexBuffers"))
+				LoadFunction("vkCmdBindVertexBuffers");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDraw"))
+				LoadFunction("vkCmdDraw");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDrawIndexed"))
+				LoadFunction("vkCmdDrawIndexed");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDrawIndirect"))
+				LoadFunction("vkCmdDrawIndirect");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDrawIndexedIndirect"))
+				LoadFunction("vkCmdDrawIndexedIndirect");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDispatch"))
+				LoadFunction("vkCmdDispatch");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDispatchIndirect"))
+				LoadFunction("vkCmdDispatchIndirect");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdCopyBuffer"))
+				LoadFunction("vkCmdCopyBuffer");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdCopyImage"))
+				LoadFunction("vkCmdCopyImage");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBlitImage"))
+				LoadFunction("vkCmdBlitImage");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdCopyBufferToImage"))
+				LoadFunction("vkCmdCopyBufferToImage");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdCopyImageToBuffer"))
+				LoadFunction("vkCmdCopyImageToBuffer");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdUpdateBuffer"))
+				LoadFunction("vkCmdUpdateBuffer");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdFillBuffer"))
+				LoadFunction("vkCmdFillBuffer");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdClearColorImage"))
+				LoadFunction("vkCmdClearColorImage");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdClearDepthStencilImage"))
+				LoadFunction("vkCmdClearDepthStencilImage");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdClearAttachments"))
+				LoadFunction("vkCmdClearAttachments");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdResolveImage"))
+				LoadFunction("vkCmdResolveImage");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetEvent"))
+				LoadFunction("vkCmdSetEvent");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdResetEvent"))
+				LoadFunction("vkCmdResetEvent");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdWaitEvents"))
+				LoadFunction("vkCmdWaitEvents");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdPipelineBarrier"))
+				LoadFunction("vkCmdPipelineBarrier");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBeginQuery"))
+				LoadFunction("vkCmdBeginQuery");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdEndQuery"))
+				LoadFunction("vkCmdEndQuery");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdResetQueryPool"))
+				LoadFunction("vkCmdResetQueryPool");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdWriteTimestamp"))
+				LoadFunction("vkCmdWriteTimestamp");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdCopyQueryPoolResults"))
+				LoadFunction("vkCmdCopyQueryPoolResults");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdPushConstants"))
+				LoadFunction("vkCmdPushConstants");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBeginRenderPass"))
+				LoadFunction("vkCmdBeginRenderPass");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdNextSubpass"))
+				LoadFunction("vkCmdNextSubpass");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdEndRenderPass"))
+				LoadFunction("vkCmdEndRenderPass");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdExecuteCommands"))
+				LoadFunction("vkCmdExecuteCommands");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkEnumerateInstanceVersion"))
+				LoadFunction("vkEnumerateInstanceVersion");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkBindBufferMemory2"))
+				LoadFunction("vkBindBufferMemory2");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkBindImageMemory2"))
+				LoadFunction("vkBindImageMemory2");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDeviceGroupPeerMemoryFeatures"))
+				LoadFunction("vkGetDeviceGroupPeerMemoryFeatures");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetDeviceMask"))
+				LoadFunction("vkCmdSetDeviceMask");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDispatchBase"))
+				LoadFunction("vkCmdDispatchBase");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkEnumeratePhysicalDeviceGroups"))
+				LoadFunction("vkEnumeratePhysicalDeviceGroups");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetImageMemoryRequirements2"))
+				LoadFunction("vkGetImageMemoryRequirements2");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetBufferMemoryRequirements2"))
+				LoadFunction("vkGetBufferMemoryRequirements2");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetImageSparseMemoryRequirements2"))
+				LoadFunction("vkGetImageSparseMemoryRequirements2");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceFeatures2"))
+				LoadFunction("vkGetPhysicalDeviceFeatures2");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceProperties2"))
+				LoadFunction("vkGetPhysicalDeviceProperties2");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceFormatProperties2"))
+				LoadFunction("vkGetPhysicalDeviceFormatProperties2");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceImageFormatProperties2"))
+				LoadFunction("vkGetPhysicalDeviceImageFormatProperties2");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceQueueFamilyProperties2"))
+				LoadFunction("vkGetPhysicalDeviceQueueFamilyProperties2");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceMemoryProperties2"))
+				LoadFunction("vkGetPhysicalDeviceMemoryProperties2");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceSparseImageFormatProperties2"))
+				LoadFunction("vkGetPhysicalDeviceSparseImageFormatProperties2");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkTrimCommandPool"))
+				LoadFunction("vkTrimCommandPool");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDeviceQueue2"))
+				LoadFunction("vkGetDeviceQueue2");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateSamplerYcbcrConversion"))
+				LoadFunction("vkCreateSamplerYcbcrConversion");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroySamplerYcbcrConversion"))
+				LoadFunction("vkDestroySamplerYcbcrConversion");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateDescriptorUpdateTemplate"))
+				LoadFunction("vkCreateDescriptorUpdateTemplate");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyDescriptorUpdateTemplate"))
+				LoadFunction("vkDestroyDescriptorUpdateTemplate");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkUpdateDescriptorSetWithTemplate"))
+				LoadFunction("vkUpdateDescriptorSetWithTemplate");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceExternalBufferProperties"))
+				LoadFunction("vkGetPhysicalDeviceExternalBufferProperties");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceExternalFenceProperties"))
+				LoadFunction("vkGetPhysicalDeviceExternalFenceProperties");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceExternalSemaphoreProperties"))
+				LoadFunction("vkGetPhysicalDeviceExternalSemaphoreProperties");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDescriptorSetLayoutSupport"))
+				LoadFunction("vkGetDescriptorSetLayoutSupport");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDrawIndirectCount"))
+				LoadFunction("vkCmdDrawIndirectCount");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDrawIndexedIndirectCount"))
+				LoadFunction("vkCmdDrawIndexedIndirectCount");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateRenderPass2"))
+				LoadFunction("vkCreateRenderPass2");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBeginRenderPass2"))
+				LoadFunction("vkCmdBeginRenderPass2");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdNextSubpass2"))
+				LoadFunction("vkCmdNextSubpass2");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdEndRenderPass2"))
+				LoadFunction("vkCmdEndRenderPass2");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkResetQueryPool"))
+				LoadFunction("vkResetQueryPool");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetSemaphoreCounterValue"))
+				LoadFunction("vkGetSemaphoreCounterValue");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkWaitSemaphores"))
+				LoadFunction("vkWaitSemaphores");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkSignalSemaphore"))
+				LoadFunction("vkSignalSemaphore");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetBufferDeviceAddress"))
+				LoadFunction("vkGetBufferDeviceAddress");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetBufferOpaqueCaptureAddress"))
+				LoadFunction("vkGetBufferOpaqueCaptureAddress");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDeviceMemoryOpaqueCaptureAddress"))
+				LoadFunction("vkGetDeviceMemoryOpaqueCaptureAddress");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceToolProperties"))
+				LoadFunction("vkGetPhysicalDeviceToolProperties");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreatePrivateDataSlot"))
+				LoadFunction("vkCreatePrivateDataSlot");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyPrivateDataSlot"))
+				LoadFunction("vkDestroyPrivateDataSlot");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkSetPrivateData"))
+				LoadFunction("vkSetPrivateData");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPrivateData"))
+				LoadFunction("vkGetPrivateData");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetEvent2"))
+				LoadFunction("vkCmdSetEvent2");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdResetEvent2"))
+				LoadFunction("vkCmdResetEvent2");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdWaitEvents2"))
+				LoadFunction("vkCmdWaitEvents2");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdPipelineBarrier2"))
+				LoadFunction("vkCmdPipelineBarrier2");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdWriteTimestamp2"))
+				LoadFunction("vkCmdWriteTimestamp2");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkQueueSubmit2"))
+				LoadFunction("vkQueueSubmit2");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdCopyBuffer2"))
+				LoadFunction("vkCmdCopyBuffer2");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdCopyImage2"))
+				LoadFunction("vkCmdCopyImage2");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdCopyBufferToImage2"))
+				LoadFunction("vkCmdCopyBufferToImage2");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdCopyImageToBuffer2"))
+				LoadFunction("vkCmdCopyImageToBuffer2");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBlitImage2"))
+				LoadFunction("vkCmdBlitImage2");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdResolveImage2"))
+				LoadFunction("vkCmdResolveImage2");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBeginRendering"))
+				LoadFunction("vkCmdBeginRendering");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdEndRendering"))
+				LoadFunction("vkCmdEndRendering");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetCullMode"))
+				LoadFunction("vkCmdSetCullMode");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetFrontFace"))
+				LoadFunction("vkCmdSetFrontFace");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetPrimitiveTopology"))
+				LoadFunction("vkCmdSetPrimitiveTopology");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetViewportWithCount"))
+				LoadFunction("vkCmdSetViewportWithCount");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetScissorWithCount"))
+				LoadFunction("vkCmdSetScissorWithCount");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBindVertexBuffers2"))
+				LoadFunction("vkCmdBindVertexBuffers2");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetDepthTestEnable"))
+				LoadFunction("vkCmdSetDepthTestEnable");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetDepthWriteEnable"))
+				LoadFunction("vkCmdSetDepthWriteEnable");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetDepthCompareOp"))
+				LoadFunction("vkCmdSetDepthCompareOp");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetDepthBoundsTestEnable"))
+				LoadFunction("vkCmdSetDepthBoundsTestEnable");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetStencilTestEnable"))
+				LoadFunction("vkCmdSetStencilTestEnable");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetStencilOp"))
+				LoadFunction("vkCmdSetStencilOp");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetRasterizerDiscardEnable"))
+				LoadFunction("vkCmdSetRasterizerDiscardEnable");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetDepthBiasEnable"))
+				LoadFunction("vkCmdSetDepthBiasEnable");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetPrimitiveRestartEnable"))
+				LoadFunction("vkCmdSetPrimitiveRestartEnable");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDeviceBufferMemoryRequirements"))
+				LoadFunction("vkGetDeviceBufferMemoryRequirements");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDeviceImageMemoryRequirements"))
+				LoadFunction("vkGetDeviceImageMemoryRequirements");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDeviceImageSparseMemoryRequirements"))
+				LoadFunction("vkGetDeviceImageSparseMemoryRequirements");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroySurfaceKHR"))
+				LoadFunction("vkDestroySurfaceKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceSurfaceSupportKHR"))
+				LoadFunction("vkGetPhysicalDeviceSurfaceSupportKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceSurfaceCapabilitiesKHR"))
+				LoadFunction("vkGetPhysicalDeviceSurfaceCapabilitiesKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceSurfaceFormatsKHR"))
+				LoadFunction("vkGetPhysicalDeviceSurfaceFormatsKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceSurfacePresentModesKHR"))
+				LoadFunction("vkGetPhysicalDeviceSurfacePresentModesKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateSwapchainKHR"))
+				LoadFunction("vkCreateSwapchainKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroySwapchainKHR"))
+				LoadFunction("vkDestroySwapchainKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetSwapchainImagesKHR"))
+				LoadFunction("vkGetSwapchainImagesKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkAcquireNextImageKHR"))
+				LoadFunction("vkAcquireNextImageKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkQueuePresentKHR"))
+				LoadFunction("vkQueuePresentKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceDisplayPropertiesKHR"))
+				LoadFunction("vkGetPhysicalDeviceDisplayPropertiesKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceDisplayPlanePropertiesKHR"))
+				LoadFunction("vkGetPhysicalDeviceDisplayPlanePropertiesKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDisplayPlaneSupportedDisplaysKHR"))
+				LoadFunction("vkGetDisplayPlaneSupportedDisplaysKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDisplayModePropertiesKHR"))
+				LoadFunction("vkGetDisplayModePropertiesKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateDisplayModeKHR"))
+				LoadFunction("vkCreateDisplayModeKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDisplayPlaneCapabilitiesKHR"))
+				LoadFunction("vkGetDisplayPlaneCapabilitiesKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateDisplayPlaneSurfaceKHR"))
+				LoadFunction("vkCreateDisplayPlaneSurfaceKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateSharedSwapchainsKHR"))
+				LoadFunction("vkCreateSharedSwapchainsKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateXlibSurfaceKHR"))
+				LoadFunction("vkCreateXlibSurfaceKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceXlibPresentationSupportKHR"))
+				LoadFunction("vkGetPhysicalDeviceXlibPresentationSupportKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateXcbSurfaceKHR"))
+				LoadFunction("vkCreateXcbSurfaceKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceXcbPresentationSupportKHR"))
+				LoadFunction("vkGetPhysicalDeviceXcbPresentationSupportKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateWaylandSurfaceKHR"))
+				LoadFunction("vkCreateWaylandSurfaceKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceWaylandPresentationSupportKHR"))
+				LoadFunction("vkGetPhysicalDeviceWaylandPresentationSupportKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateAndroidSurfaceKHR"))
+				LoadFunction("vkCreateAndroidSurfaceKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateWin32SurfaceKHR"))
+				LoadFunction("vkCreateWin32SurfaceKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceWin32PresentationSupportKHR"))
+				LoadFunction("vkGetPhysicalDeviceWin32PresentationSupportKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateDebugReportCallbackEXT"))
+				LoadFunction("vkCreateDebugReportCallbackEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyDebugReportCallbackEXT"))
+				LoadFunction("vkDestroyDebugReportCallbackEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDebugReportMessageEXT"))
+				LoadFunction("vkDebugReportMessageEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDebugMarkerSetObjectTagEXT"))
+				LoadFunction("vkDebugMarkerSetObjectTagEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDebugMarkerSetObjectNameEXT"))
+				LoadFunction("vkDebugMarkerSetObjectNameEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDebugMarkerBeginEXT"))
+				LoadFunction("vkCmdDebugMarkerBeginEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDebugMarkerEndEXT"))
+				LoadFunction("vkCmdDebugMarkerEndEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDebugMarkerInsertEXT"))
+				LoadFunction("vkCmdDebugMarkerInsertEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceVideoCapabilitiesKHR"))
+				LoadFunction("vkGetPhysicalDeviceVideoCapabilitiesKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceVideoFormatPropertiesKHR"))
+				LoadFunction("vkGetPhysicalDeviceVideoFormatPropertiesKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateVideoSessionKHR"))
+				LoadFunction("vkCreateVideoSessionKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyVideoSessionKHR"))
+				LoadFunction("vkDestroyVideoSessionKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetVideoSessionMemoryRequirementsKHR"))
+				LoadFunction("vkGetVideoSessionMemoryRequirementsKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkBindVideoSessionMemoryKHR"))
+				LoadFunction("vkBindVideoSessionMemoryKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateVideoSessionParametersKHR"))
+				LoadFunction("vkCreateVideoSessionParametersKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkUpdateVideoSessionParametersKHR"))
+				LoadFunction("vkUpdateVideoSessionParametersKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyVideoSessionParametersKHR"))
+				LoadFunction("vkDestroyVideoSessionParametersKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBeginVideoCodingKHR"))
+				LoadFunction("vkCmdBeginVideoCodingKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdEndVideoCodingKHR"))
+				LoadFunction("vkCmdEndVideoCodingKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdControlVideoCodingKHR"))
+				LoadFunction("vkCmdControlVideoCodingKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDecodeVideoKHR"))
+				LoadFunction("vkCmdDecodeVideoKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBindTransformFeedbackBuffersEXT"))
+				LoadFunction("vkCmdBindTransformFeedbackBuffersEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBeginTransformFeedbackEXT"))
+				LoadFunction("vkCmdBeginTransformFeedbackEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdEndTransformFeedbackEXT"))
+				LoadFunction("vkCmdEndTransformFeedbackEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBeginQueryIndexedEXT"))
+				LoadFunction("vkCmdBeginQueryIndexedEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdEndQueryIndexedEXT"))
+				LoadFunction("vkCmdEndQueryIndexedEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDrawIndirectByteCountEXT"))
+				LoadFunction("vkCmdDrawIndirectByteCountEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateCuModuleNVX"))
+				LoadFunction("vkCreateCuModuleNVX");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateCuFunctionNVX"))
+				LoadFunction("vkCreateCuFunctionNVX");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyCuModuleNVX"))
+				LoadFunction("vkDestroyCuModuleNVX");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyCuFunctionNVX"))
+				LoadFunction("vkDestroyCuFunctionNVX");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdCuLaunchKernelNVX"))
+				LoadFunction("vkCmdCuLaunchKernelNVX");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetImageViewHandleNVX"))
+				LoadFunction("vkGetImageViewHandleNVX");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetImageViewAddressNVX"))
+				LoadFunction("vkGetImageViewAddressNVX");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetShaderInfoAMD"))
+				LoadFunction("vkGetShaderInfoAMD");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateStreamDescriptorSurfaceGGP"))
+				LoadFunction("vkCreateStreamDescriptorSurfaceGGP");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceExternalImageFormatPropertiesNV"))
+				LoadFunction("vkGetPhysicalDeviceExternalImageFormatPropertiesNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetMemoryWin32HandleNV"))
+				LoadFunction("vkGetMemoryWin32HandleNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateViSurfaceNN"))
+				LoadFunction("vkCreateViSurfaceNN");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetMemoryWin32HandleKHR"))
+				LoadFunction("vkGetMemoryWin32HandleKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetMemoryWin32HandlePropertiesKHR"))
+				LoadFunction("vkGetMemoryWin32HandlePropertiesKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetMemoryFdKHR"))
+				LoadFunction("vkGetMemoryFdKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetMemoryFdPropertiesKHR"))
+				LoadFunction("vkGetMemoryFdPropertiesKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkImportSemaphoreWin32HandleKHR"))
+				LoadFunction("vkImportSemaphoreWin32HandleKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetSemaphoreWin32HandleKHR"))
+				LoadFunction("vkGetSemaphoreWin32HandleKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkImportSemaphoreFdKHR"))
+				LoadFunction("vkImportSemaphoreFdKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetSemaphoreFdKHR"))
+				LoadFunction("vkGetSemaphoreFdKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdPushDescriptorSetKHR"))
+				LoadFunction("vkCmdPushDescriptorSetKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBeginConditionalRenderingEXT"))
+				LoadFunction("vkCmdBeginConditionalRenderingEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdEndConditionalRenderingEXT"))
+				LoadFunction("vkCmdEndConditionalRenderingEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetViewportWScalingNV"))
+				LoadFunction("vkCmdSetViewportWScalingNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkReleaseDisplayEXT"))
+				LoadFunction("vkReleaseDisplayEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkAcquireXlibDisplayEXT"))
+				LoadFunction("vkAcquireXlibDisplayEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetRandROutputDisplayEXT"))
+				LoadFunction("vkGetRandROutputDisplayEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceSurfaceCapabilities2EXT"))
+				LoadFunction("vkGetPhysicalDeviceSurfaceCapabilities2EXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDisplayPowerControlEXT"))
+				LoadFunction("vkDisplayPowerControlEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkRegisterDeviceEventEXT"))
+				LoadFunction("vkRegisterDeviceEventEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkRegisterDisplayEventEXT"))
+				LoadFunction("vkRegisterDisplayEventEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetSwapchainCounterEXT"))
+				LoadFunction("vkGetSwapchainCounterEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetRefreshCycleDurationGOOGLE"))
+				LoadFunction("vkGetRefreshCycleDurationGOOGLE");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPastPresentationTimingGOOGLE"))
+				LoadFunction("vkGetPastPresentationTimingGOOGLE");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetDiscardRectangleEXT"))
+				LoadFunction("vkCmdSetDiscardRectangleEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkSetHdrMetadataEXT"))
+				LoadFunction("vkSetHdrMetadataEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetSwapchainStatusKHR"))
+				LoadFunction("vkGetSwapchainStatusKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkImportFenceWin32HandleKHR"))
+				LoadFunction("vkImportFenceWin32HandleKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetFenceWin32HandleKHR"))
+				LoadFunction("vkGetFenceWin32HandleKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkImportFenceFdKHR"))
+				LoadFunction("vkImportFenceFdKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetFenceFdKHR"))
+				LoadFunction("vkGetFenceFdKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR"))
+				LoadFunction("vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR"))
+				LoadFunction("vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkAcquireProfilingLockKHR"))
+				LoadFunction("vkAcquireProfilingLockKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkReleaseProfilingLockKHR"))
+				LoadFunction("vkReleaseProfilingLockKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceSurfaceCapabilities2KHR"))
+				LoadFunction("vkGetPhysicalDeviceSurfaceCapabilities2KHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceSurfaceFormats2KHR"))
+				LoadFunction("vkGetPhysicalDeviceSurfaceFormats2KHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceDisplayProperties2KHR"))
+				LoadFunction("vkGetPhysicalDeviceDisplayProperties2KHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceDisplayPlaneProperties2KHR"))
+				LoadFunction("vkGetPhysicalDeviceDisplayPlaneProperties2KHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDisplayModeProperties2KHR"))
+				LoadFunction("vkGetDisplayModeProperties2KHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDisplayPlaneCapabilities2KHR"))
+				LoadFunction("vkGetDisplayPlaneCapabilities2KHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateIOSSurfaceMVK"))
+				LoadFunction("vkCreateIOSSurfaceMVK");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateMacOSSurfaceMVK"))
+				LoadFunction("vkCreateMacOSSurfaceMVK");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkSetDebugUtilsObjectNameEXT"))
+				LoadFunction("vkSetDebugUtilsObjectNameEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkSetDebugUtilsObjectTagEXT"))
+				LoadFunction("vkSetDebugUtilsObjectTagEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkQueueBeginDebugUtilsLabelEXT"))
+				LoadFunction("vkQueueBeginDebugUtilsLabelEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkQueueEndDebugUtilsLabelEXT"))
+				LoadFunction("vkQueueEndDebugUtilsLabelEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkQueueInsertDebugUtilsLabelEXT"))
+				LoadFunction("vkQueueInsertDebugUtilsLabelEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBeginDebugUtilsLabelEXT"))
+				LoadFunction("vkCmdBeginDebugUtilsLabelEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdEndDebugUtilsLabelEXT"))
+				LoadFunction("vkCmdEndDebugUtilsLabelEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdInsertDebugUtilsLabelEXT"))
+				LoadFunction("vkCmdInsertDebugUtilsLabelEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateDebugUtilsMessengerEXT"))
+				LoadFunction("vkCreateDebugUtilsMessengerEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyDebugUtilsMessengerEXT"))
+				LoadFunction("vkDestroyDebugUtilsMessengerEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkSubmitDebugUtilsMessageEXT"))
+				LoadFunction("vkSubmitDebugUtilsMessageEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetAndroidHardwareBufferPropertiesANDROID"))
+				LoadFunction("vkGetAndroidHardwareBufferPropertiesANDROID");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetMemoryAndroidHardwareBufferANDROID"))
+				LoadFunction("vkGetMemoryAndroidHardwareBufferANDROID");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetSampleLocationsEXT"))
+				LoadFunction("vkCmdSetSampleLocationsEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceMultisamplePropertiesEXT"))
+				LoadFunction("vkGetPhysicalDeviceMultisamplePropertiesEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateAccelerationStructureKHR"))
+				LoadFunction("vkCreateAccelerationStructureKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyAccelerationStructureKHR"))
+				LoadFunction("vkDestroyAccelerationStructureKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBuildAccelerationStructuresKHR"))
+				LoadFunction("vkCmdBuildAccelerationStructuresKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBuildAccelerationStructuresIndirectKHR"))
+				LoadFunction("vkCmdBuildAccelerationStructuresIndirectKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkBuildAccelerationStructuresKHR"))
+				LoadFunction("vkBuildAccelerationStructuresKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCopyAccelerationStructureKHR"))
+				LoadFunction("vkCopyAccelerationStructureKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCopyAccelerationStructureToMemoryKHR"))
+				LoadFunction("vkCopyAccelerationStructureToMemoryKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCopyMemoryToAccelerationStructureKHR"))
+				LoadFunction("vkCopyMemoryToAccelerationStructureKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkWriteAccelerationStructuresPropertiesKHR"))
+				LoadFunction("vkWriteAccelerationStructuresPropertiesKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdCopyAccelerationStructureKHR"))
+				LoadFunction("vkCmdCopyAccelerationStructureKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdCopyAccelerationStructureToMemoryKHR"))
+				LoadFunction("vkCmdCopyAccelerationStructureToMemoryKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdCopyMemoryToAccelerationStructureKHR"))
+				LoadFunction("vkCmdCopyMemoryToAccelerationStructureKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetAccelerationStructureDeviceAddressKHR"))
+				LoadFunction("vkGetAccelerationStructureDeviceAddressKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdWriteAccelerationStructuresPropertiesKHR"))
+				LoadFunction("vkCmdWriteAccelerationStructuresPropertiesKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDeviceAccelerationStructureCompatibilityKHR"))
+				LoadFunction("vkGetDeviceAccelerationStructureCompatibilityKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetAccelerationStructureBuildSizesKHR"))
+				LoadFunction("vkGetAccelerationStructureBuildSizesKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdTraceRaysKHR"))
+				LoadFunction("vkCmdTraceRaysKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateRayTracingPipelinesKHR"))
+				LoadFunction("vkCreateRayTracingPipelinesKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetRayTracingShaderGroupHandlesKHR"))
+				LoadFunction("vkGetRayTracingShaderGroupHandlesKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetRayTracingCaptureReplayShaderGroupHandlesKHR"))
+				LoadFunction("vkGetRayTracingCaptureReplayShaderGroupHandlesKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdTraceRaysIndirectKHR"))
+				LoadFunction("vkCmdTraceRaysIndirectKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetRayTracingShaderGroupStackSizeKHR"))
+				LoadFunction("vkGetRayTracingShaderGroupStackSizeKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetRayTracingPipelineStackSizeKHR"))
+				LoadFunction("vkCmdSetRayTracingPipelineStackSizeKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetImageDrmFormatModifierPropertiesEXT"))
+				LoadFunction("vkGetImageDrmFormatModifierPropertiesEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateValidationCacheEXT"))
+				LoadFunction("vkCreateValidationCacheEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyValidationCacheEXT"))
+				LoadFunction("vkDestroyValidationCacheEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkMergeValidationCachesEXT"))
+				LoadFunction("vkMergeValidationCachesEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetValidationCacheDataEXT"))
+				LoadFunction("vkGetValidationCacheDataEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBindShadingRateImageNV"))
+				LoadFunction("vkCmdBindShadingRateImageNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetViewportShadingRatePaletteNV"))
+				LoadFunction("vkCmdSetViewportShadingRatePaletteNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetCoarseSampleOrderNV"))
+				LoadFunction("vkCmdSetCoarseSampleOrderNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateAccelerationStructureNV"))
+				LoadFunction("vkCreateAccelerationStructureNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyAccelerationStructureNV"))
+				LoadFunction("vkDestroyAccelerationStructureNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetAccelerationStructureMemoryRequirementsNV"))
+				LoadFunction("vkGetAccelerationStructureMemoryRequirementsNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkBindAccelerationStructureMemoryNV"))
+				LoadFunction("vkBindAccelerationStructureMemoryNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBuildAccelerationStructureNV"))
+				LoadFunction("vkCmdBuildAccelerationStructureNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdCopyAccelerationStructureNV"))
+				LoadFunction("vkCmdCopyAccelerationStructureNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdTraceRaysNV"))
+				LoadFunction("vkCmdTraceRaysNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateRayTracingPipelinesNV"))
+				LoadFunction("vkCreateRayTracingPipelinesNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetAccelerationStructureHandleNV"))
+				LoadFunction("vkGetAccelerationStructureHandleNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdWriteAccelerationStructuresPropertiesNV"))
+				LoadFunction("vkCmdWriteAccelerationStructuresPropertiesNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCompileDeferredNV"))
+				LoadFunction("vkCompileDeferredNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetMemoryHostPointerPropertiesEXT"))
+				LoadFunction("vkGetMemoryHostPointerPropertiesEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdWriteBufferMarkerAMD"))
+				LoadFunction("vkCmdWriteBufferMarkerAMD");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceCalibrateableTimeDomainsEXT"))
+				LoadFunction("vkGetPhysicalDeviceCalibrateableTimeDomainsEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetCalibratedTimestampsEXT"))
+				LoadFunction("vkGetCalibratedTimestampsEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDrawMeshTasksNV"))
+				LoadFunction("vkCmdDrawMeshTasksNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDrawMeshTasksIndirectNV"))
+				LoadFunction("vkCmdDrawMeshTasksIndirectNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDrawMeshTasksIndirectCountNV"))
+				LoadFunction("vkCmdDrawMeshTasksIndirectCountNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetExclusiveScissorNV"))
+				LoadFunction("vkCmdSetExclusiveScissorNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetCheckpointNV"))
+				LoadFunction("vkCmdSetCheckpointNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetQueueCheckpointDataNV"))
+				LoadFunction("vkGetQueueCheckpointDataNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkInitializePerformanceApiINTEL"))
+				LoadFunction("vkInitializePerformanceApiINTEL");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkUninitializePerformanceApiINTEL"))
+				LoadFunction("vkUninitializePerformanceApiINTEL");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetPerformanceMarkerINTEL"))
+				LoadFunction("vkCmdSetPerformanceMarkerINTEL");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetPerformanceStreamMarkerINTEL"))
+				LoadFunction("vkCmdSetPerformanceStreamMarkerINTEL");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetPerformanceOverrideINTEL"))
+				LoadFunction("vkCmdSetPerformanceOverrideINTEL");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkAcquirePerformanceConfigurationINTEL"))
+				LoadFunction("vkAcquirePerformanceConfigurationINTEL");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkReleasePerformanceConfigurationINTEL"))
+				LoadFunction("vkReleasePerformanceConfigurationINTEL");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkQueueSetPerformanceConfigurationINTEL"))
+				LoadFunction("vkQueueSetPerformanceConfigurationINTEL");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPerformanceParameterINTEL"))
+				LoadFunction("vkGetPerformanceParameterINTEL");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkSetLocalDimmingAMD"))
+				LoadFunction("vkSetLocalDimmingAMD");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateImagePipeSurfaceFUCHSIA"))
+				LoadFunction("vkCreateImagePipeSurfaceFUCHSIA");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateMetalSurfaceEXT"))
+				LoadFunction("vkCreateMetalSurfaceEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceFragmentShadingRatesKHR"))
+				LoadFunction("vkGetPhysicalDeviceFragmentShadingRatesKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetFragmentShadingRateKHR"))
+				LoadFunction("vkCmdSetFragmentShadingRateKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkWaitForPresentKHR"))
+				LoadFunction("vkWaitForPresentKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceCooperativeMatrixPropertiesNV"))
+				LoadFunction("vkGetPhysicalDeviceCooperativeMatrixPropertiesNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV"))
+				LoadFunction("vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceSurfacePresentModes2EXT"))
+				LoadFunction("vkGetPhysicalDeviceSurfacePresentModes2EXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkAcquireFullScreenExclusiveModeEXT"))
+				LoadFunction("vkAcquireFullScreenExclusiveModeEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkReleaseFullScreenExclusiveModeEXT"))
+				LoadFunction("vkReleaseFullScreenExclusiveModeEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateHeadlessSurfaceEXT"))
+				LoadFunction("vkCreateHeadlessSurfaceEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetLineStippleEXT"))
+				LoadFunction("vkCmdSetLineStippleEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateDeferredOperationKHR"))
+				LoadFunction("vkCreateDeferredOperationKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyDeferredOperationKHR"))
+				LoadFunction("vkDestroyDeferredOperationKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDeferredOperationMaxConcurrencyKHR"))
+				LoadFunction("vkGetDeferredOperationMaxConcurrencyKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDeferredOperationResultKHR"))
+				LoadFunction("vkGetDeferredOperationResultKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDeferredOperationJoinKHR"))
+				LoadFunction("vkDeferredOperationJoinKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPipelineExecutablePropertiesKHR"))
+				LoadFunction("vkGetPipelineExecutablePropertiesKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPipelineExecutableStatisticsKHR"))
+				LoadFunction("vkGetPipelineExecutableStatisticsKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPipelineExecutableInternalRepresentationsKHR"))
+				LoadFunction("vkGetPipelineExecutableInternalRepresentationsKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetGeneratedCommandsMemoryRequirementsNV"))
+				LoadFunction("vkGetGeneratedCommandsMemoryRequirementsNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdPreprocessGeneratedCommandsNV"))
+				LoadFunction("vkCmdPreprocessGeneratedCommandsNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdExecuteGeneratedCommandsNV"))
+				LoadFunction("vkCmdExecuteGeneratedCommandsNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBindPipelineShaderGroupNV"))
+				LoadFunction("vkCmdBindPipelineShaderGroupNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateIndirectCommandsLayoutNV"))
+				LoadFunction("vkCreateIndirectCommandsLayoutNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyIndirectCommandsLayoutNV"))
+				LoadFunction("vkDestroyIndirectCommandsLayoutNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkAcquireDrmDisplayEXT"))
+				LoadFunction("vkAcquireDrmDisplayEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDrmDisplayEXT"))
+				LoadFunction("vkGetDrmDisplayEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdEncodeVideoKHR"))
+				LoadFunction("vkCmdEncodeVideoKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetFragmentShadingRateEnumNV"))
+				LoadFunction("vkCmdSetFragmentShadingRateEnumNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkAcquireWinrtDisplayNV"))
+				LoadFunction("vkAcquireWinrtDisplayNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetWinrtDisplayNV"))
+				LoadFunction("vkGetWinrtDisplayNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateDirectFBSurfaceEXT"))
+				LoadFunction("vkCreateDirectFBSurfaceEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceDirectFBPresentationSupportEXT"))
+				LoadFunction("vkGetPhysicalDeviceDirectFBPresentationSupportEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetVertexInputEXT"))
+				LoadFunction("vkCmdSetVertexInputEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetMemoryZirconHandleFUCHSIA"))
+				LoadFunction("vkGetMemoryZirconHandleFUCHSIA");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetMemoryZirconHandlePropertiesFUCHSIA"))
+				LoadFunction("vkGetMemoryZirconHandlePropertiesFUCHSIA");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkImportSemaphoreZirconHandleFUCHSIA"))
+				LoadFunction("vkImportSemaphoreZirconHandleFUCHSIA");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetSemaphoreZirconHandleFUCHSIA"))
+				LoadFunction("vkGetSemaphoreZirconHandleFUCHSIA");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateBufferCollectionFUCHSIA"))
+				LoadFunction("vkCreateBufferCollectionFUCHSIA");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkSetBufferCollectionImageConstraintsFUCHSIA"))
+				LoadFunction("vkSetBufferCollectionImageConstraintsFUCHSIA");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkSetBufferCollectionBufferConstraintsFUCHSIA"))
+				LoadFunction("vkSetBufferCollectionBufferConstraintsFUCHSIA");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyBufferCollectionFUCHSIA"))
+				LoadFunction("vkDestroyBufferCollectionFUCHSIA");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetBufferCollectionPropertiesFUCHSIA"))
+				LoadFunction("vkGetBufferCollectionPropertiesFUCHSIA");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI"))
+				LoadFunction("vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSubpassShadingHUAWEI"))
+				LoadFunction("vkCmdSubpassShadingHUAWEI");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBindInvocationMaskHUAWEI"))
+				LoadFunction("vkCmdBindInvocationMaskHUAWEI");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetMemoryRemoteAddressNV"))
+				LoadFunction("vkGetMemoryRemoteAddressNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetPatchControlPointsEXT"))
+				LoadFunction("vkCmdSetPatchControlPointsEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetLogicOpEXT"))
+				LoadFunction("vkCmdSetLogicOpEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateScreenSurfaceQNX"))
+				LoadFunction("vkCreateScreenSurfaceQNX");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceScreenPresentationSupportQNX"))
+				LoadFunction("vkGetPhysicalDeviceScreenPresentationSupportQNX");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetColorWriteEnableEXT"))
+				LoadFunction("vkCmdSetColorWriteEnableEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDrawMultiEXT"))
+				LoadFunction("vkCmdDrawMultiEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDrawMultiIndexedEXT"))
+				LoadFunction("vkCmdDrawMultiIndexedEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkSetDeviceMemoryPriorityEXT"))
+				LoadFunction("vkSetDeviceMemoryPriorityEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDescriptorSetLayoutHostMappingInfoVALVE"))
+				LoadFunction("vkGetDescriptorSetLayoutHostMappingInfoVALVE");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDescriptorSetHostMappingVALVE"))
+				LoadFunction("vkGetDescriptorSetHostMappingVALVE");
+
+		}
+
+		public static void LoadFunction<T>(in StringView name, out T funcPtr)
+		{
+			NativeLib.LoadFunction(name, out funcPtr);
 		}
 	}
 }

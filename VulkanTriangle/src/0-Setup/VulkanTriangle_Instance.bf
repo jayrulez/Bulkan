@@ -22,6 +22,9 @@ namespace VulkanTriangle
 
 		private void CreateInstance()
 		{
+			VulkanNative.Initialize();
+			VulkanNative.LoadAllFuncions();
+
 		    VkApplicationInfo appInfo = .()
 		    {
 		        sType = VkStructureType.VK_STRUCTURE_TYPE_APPLICATION_INFO,
@@ -60,7 +63,7 @@ namespace VulkanTriangle
 
 		    
 		    Helpers.CheckErrors(VulkanNative.vkCreateInstance(&createInfo, null, &instance));
-			VulkanNative.LoadFuncionPointers(instance);
+			VulkanNative.LoadAllFuncions(instance);
 		}
 
 		private void GetAllInstanceExtensionsAvailables()

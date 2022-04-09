@@ -21,6 +21,8 @@ namespace Bulkan
 		public const int32 RTLD_NOW = 0x002;
 	}
 
+	delegate void LoanFunctionErrorCallBack(in StringView procName);
+
 	abstract class NativeLibrary : IDisposable
 	{
 		private readonly String mLibraryName;
@@ -28,6 +30,8 @@ namespace Bulkan
 		internal VkInstance mInstance;
 
 		public int NativeHandle => mLibraryHandle;
+
+		public LoanFunctionErrorCallBack LoanFunctionErrorCallBack = null;
 
 		public this(String libraryName)
 		{
@@ -37,6 +41,15 @@ namespace Bulkan
 			if (mLibraryHandle == default)
 			{
 				Runtime.FatalError(scope $"Could not load {libraryName}.");
+			}
+		}
+
+		public ~this()
+		{
+			if (LoanFunctionErrorCallBack != null)
+			{
+				delete LoanFunctionErrorCallBack;
+				LoanFunctionErrorCallBack = null;
 			}
 		}
 
@@ -65,7 +78,10 @@ namespace Bulkan
 			} else
 			{
 				field = default;
-				Console.WriteLine(scope $"Error loading function {name}");
+				if (LoanFunctionErrorCallBack != null)
+				{
+					LoanFunctionErrorCallBack.Invoke(name);
+				}
 			}
 		}
 
@@ -80,12 +96,11 @@ namespace Bulkan
 
 #if BF_PLATFORM_WINDOWS
 			handle = new WindowsNativeLibrary(libraryName);
-#elif BF_PLATFORM_LINUX || BF_PLATFORM_MACOS
+			#elif BF_PLATFORM_LINUX || BF_PLATFORM_MACOS
 			handle = new UnixNativeLibrary(libraryName);
 #else
 			Runtime.FatalError("Unsupported platform.");
 #endif
-
 		}
 
 #if BF_PLATFORM_WINDOWS
@@ -116,7 +131,6 @@ namespace Bulkan
 		{
 			public this(String libraryName) : base(libraryName)
 			{
-
 			}
 
 			public override int LoadLibrary(StringView libraryName)
@@ -125,15 +139,14 @@ namespace Bulkan
 				int handle = Libdl.dlopen(libraryName.Ptr, Libdl.RTLD_NOW);
 				if (handle == 0 && !Path.IsPathRooted(libraryName))
 				{
-					
-				    String baseDir = scope String();
+					String baseDir = scope String();
 					Environment.GetExecutableFilePath(baseDir);
-				    if (!String.IsNullOrWhiteSpace(baseDir))
-				    {
+					if (!String.IsNullOrWhiteSpace(baseDir))
+					{
 						String localPath = scope String();
-				       	Path.InternalCombine(localPath, baseDir, libraryName);
-				        handle = Libdl.dlopen(localPath, Libdl.RTLD_NOW);
-				    }
+						Path.InternalCombine(localPath, baseDir, libraryName);
+						handle = Libdl.dlopen(localPath, Libdl.RTLD_NOW);
+					}
 				}
 
 				return handle;
