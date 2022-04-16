@@ -18,13 +18,15 @@ namespace Bulkan
 
 		private const CallingConventionAttribute.Kind CallConv = .Stdcall;
 
-		private static NativeLibrary NativeLib;
+		private static NativeLibrary mNativeLib;
 
-		private static bool Initialized = false;
+		private static bool mInitialized = false;
 
-		private static List<StringView> LoadedFunctions = new .() ~ delete _;
+		private static List<StringView> mLoadedFunctions = new .() ~ delete _;
 
-		private static List<StringView> PreInstanceFunctions = new .()
+		public static readonly Span<StringView> LoadedFunctions { get => mLoadedFunctions; }
+
+		private static List<StringView> mPreInstanceFunctions = new .()
 			{
 				"vkCreateInstance",
 				"vkEnumerateInstanceExtensionProperties",
@@ -32,7 +34,7 @@ namespace Bulkan
 				"vkGetInstanceProcAddr"
 			} ~ delete _;
 
-		private static List<StringView> InstanceFunctions = new .()
+		private static List<StringView> mInstanceFunctions = new .()
 			{
 				"vkGetPhysicalDeviceSurfaceFormatsKHR",
 				"vkGetPhysicalDeviceSurfaceSupportKHR",
@@ -65,17 +67,17 @@ namespace Bulkan
 
 		static ~this()
 		{
-			NativeLib.Dispose();
-			delete NativeLib;
+			mNativeLib.Dispose();
+			delete mNativeLib;
 		}
 
 		public static Result<void> Initialize(String libraryName = null)
 		{
-			if (!Initialized)
+			if (!mInitialized)
 			{
-				LoadNativeLibrary(libraryName, out NativeLib);
+				LoadNativeLibrary(libraryName, out mNativeLib);
 
-				Initialized = true;
+				mInitialized = true;
 			}
 
 			return .Ok;
@@ -83,7 +85,7 @@ namespace Bulkan
 
 		public static void SetLoadFunctionErrorCallBack(LoanFunctionErrorCallBack callback)
 		{
-			NativeLib.LoanFunctionErrorCallBack = callback;
+			mNativeLib.LoanFunctionErrorCallBack = callback;
 		}
 
 		public static Result<void> LoadPreInstanceFunctions(List<String> additionalFunctions = null)
@@ -92,16 +94,16 @@ namespace Bulkan
 			{
 				for (var func in additionalFunctions)
 				{
-					if (func != null && !PreInstanceFunctions.Contains(func))
+					if (func != null && !mPreInstanceFunctions.Contains(func))
 					{
-						PreInstanceFunctions.Add(func);
+						mPreInstanceFunctions.Add(func);
 					}
 				}
 			}
 
-			LoadFunctions(PreInstanceFunctions);
+			LoadFunctions(mPreInstanceFunctions);
 
-			LoadedFunctions.AddRange(PreInstanceFunctions);
+			mLoadedFunctions.AddRange(mPreInstanceFunctions);
 
 			return .Ok;
 		}
@@ -112,25 +114,25 @@ namespace Bulkan
 			{
 				for (var func in additionalFunctions)
 				{
-					if (func != null && !InstanceFunctions.Contains(func))
+					if (func != null && !mInstanceFunctions.Contains(func))
 					{
-						InstanceFunctions.Add(func);
+						mInstanceFunctions.Add(func);
 					}
 				}
 			}
 
 			SetInstance(instance);
 
-			LoadFunctions(InstanceFunctions);
+			LoadFunctions(mInstanceFunctions);
 
-			LoadedFunctions.AddRange(InstanceFunctions);
+			mLoadedFunctions.AddRange(mInstanceFunctions);
 
 			return .Ok;
 		}
 
 		public static Result<void> LoadPostInstanceFunctions(VkInstance? instance = null)
 		{
-			LoadAllFuncions(instance, LoadedFunctions);
+			LoadAllFuncions(instance, mLoadedFunctions);
 			return .Ok;
 		}
 

@@ -4588,7 +4588,7 @@ namespace Bulkan
 			}
 		}
 
-		private static void LoadFunctions(in Span<StringView> functions, VkInstance? instance = null)
+		public static void LoadFunctions(in Span<StringView> functions, VkInstance? instance = null)
 		{
 			if(instance != null)
 				SetInstance(instance.Value);
