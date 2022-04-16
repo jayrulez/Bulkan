@@ -2749,1838 +2749,1838 @@ namespace Bulkan
 
 		public static void SetInstance(VkInstance instance)
 		{
-			NativeLib.mInstance = instance;
+			mNativeLib.mInstance = instance;
 		}
 
 		private static void LoadFunction(in StringView name)
 		{
 			switch (name) {
 			case "vkCreateInstance":
-				NativeLib.LoadFunction("vkCreateInstance", out vkCreateInstance_ptr);
+				mNativeLib.LoadFunction("vkCreateInstance", out vkCreateInstance_ptr);
 				break;
 
 			case "vkDestroyInstance":
-				NativeLib.LoadFunction("vkDestroyInstance", out vkDestroyInstance_ptr);
+				mNativeLib.LoadFunction("vkDestroyInstance", out vkDestroyInstance_ptr);
 				break;
 
 			case "vkEnumeratePhysicalDevices":
-				NativeLib.LoadFunction("vkEnumeratePhysicalDevices", out vkEnumeratePhysicalDevices_ptr);
+				mNativeLib.LoadFunction("vkEnumeratePhysicalDevices", out vkEnumeratePhysicalDevices_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceFeatures":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceFeatures", out vkGetPhysicalDeviceFeatures_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceFeatures", out vkGetPhysicalDeviceFeatures_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceFormatProperties":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceFormatProperties", out vkGetPhysicalDeviceFormatProperties_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceFormatProperties", out vkGetPhysicalDeviceFormatProperties_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceImageFormatProperties":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceImageFormatProperties", out vkGetPhysicalDeviceImageFormatProperties_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceImageFormatProperties", out vkGetPhysicalDeviceImageFormatProperties_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceProperties":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceProperties", out vkGetPhysicalDeviceProperties_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceProperties", out vkGetPhysicalDeviceProperties_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceQueueFamilyProperties":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceQueueFamilyProperties", out vkGetPhysicalDeviceQueueFamilyProperties_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceQueueFamilyProperties", out vkGetPhysicalDeviceQueueFamilyProperties_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceMemoryProperties":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceMemoryProperties", out vkGetPhysicalDeviceMemoryProperties_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceMemoryProperties", out vkGetPhysicalDeviceMemoryProperties_ptr);
 				break;
 
 			case "vkGetInstanceProcAddr":
-				NativeLib.LoadFunction("vkGetInstanceProcAddr", out vkGetInstanceProcAddr_ptr);
+				mNativeLib.LoadFunction("vkGetInstanceProcAddr", out vkGetInstanceProcAddr_ptr);
 				break;
 
 			case "vkGetDeviceProcAddr":
-				NativeLib.LoadFunction("vkGetDeviceProcAddr", out vkGetDeviceProcAddr_ptr);
+				mNativeLib.LoadFunction("vkGetDeviceProcAddr", out vkGetDeviceProcAddr_ptr);
 				break;
 
 			case "vkCreateDevice":
-				NativeLib.LoadFunction("vkCreateDevice", out vkCreateDevice_ptr);
+				mNativeLib.LoadFunction("vkCreateDevice", out vkCreateDevice_ptr);
 				break;
 
 			case "vkDestroyDevice":
-				NativeLib.LoadFunction("vkDestroyDevice", out vkDestroyDevice_ptr);
+				mNativeLib.LoadFunction("vkDestroyDevice", out vkDestroyDevice_ptr);
 				break;
 
 			case "vkEnumerateInstanceExtensionProperties":
-				NativeLib.LoadFunction("vkEnumerateInstanceExtensionProperties", out vkEnumerateInstanceExtensionProperties_ptr);
+				mNativeLib.LoadFunction("vkEnumerateInstanceExtensionProperties", out vkEnumerateInstanceExtensionProperties_ptr);
 				break;
 
 			case "vkEnumerateDeviceExtensionProperties":
-				NativeLib.LoadFunction("vkEnumerateDeviceExtensionProperties", out vkEnumerateDeviceExtensionProperties_ptr);
+				mNativeLib.LoadFunction("vkEnumerateDeviceExtensionProperties", out vkEnumerateDeviceExtensionProperties_ptr);
 				break;
 
 			case "vkEnumerateInstanceLayerProperties":
-				NativeLib.LoadFunction("vkEnumerateInstanceLayerProperties", out vkEnumerateInstanceLayerProperties_ptr);
+				mNativeLib.LoadFunction("vkEnumerateInstanceLayerProperties", out vkEnumerateInstanceLayerProperties_ptr);
 				break;
 
 			case "vkEnumerateDeviceLayerProperties":
-				NativeLib.LoadFunction("vkEnumerateDeviceLayerProperties", out vkEnumerateDeviceLayerProperties_ptr);
+				mNativeLib.LoadFunction("vkEnumerateDeviceLayerProperties", out vkEnumerateDeviceLayerProperties_ptr);
 				break;
 
 			case "vkGetDeviceQueue":
-				NativeLib.LoadFunction("vkGetDeviceQueue", out vkGetDeviceQueue_ptr);
+				mNativeLib.LoadFunction("vkGetDeviceQueue", out vkGetDeviceQueue_ptr);
 				break;
 
 			case "vkQueueSubmit":
-				NativeLib.LoadFunction("vkQueueSubmit", out vkQueueSubmit_ptr);
+				mNativeLib.LoadFunction("vkQueueSubmit", out vkQueueSubmit_ptr);
 				break;
 
 			case "vkQueueWaitIdle":
-				NativeLib.LoadFunction("vkQueueWaitIdle", out vkQueueWaitIdle_ptr);
+				mNativeLib.LoadFunction("vkQueueWaitIdle", out vkQueueWaitIdle_ptr);
 				break;
 
 			case "vkDeviceWaitIdle":
-				NativeLib.LoadFunction("vkDeviceWaitIdle", out vkDeviceWaitIdle_ptr);
+				mNativeLib.LoadFunction("vkDeviceWaitIdle", out vkDeviceWaitIdle_ptr);
 				break;
 
 			case "vkAllocateMemory":
-				NativeLib.LoadFunction("vkAllocateMemory", out vkAllocateMemory_ptr);
+				mNativeLib.LoadFunction("vkAllocateMemory", out vkAllocateMemory_ptr);
 				break;
 
 			case "vkFreeMemory":
-				NativeLib.LoadFunction("vkFreeMemory", out vkFreeMemory_ptr);
+				mNativeLib.LoadFunction("vkFreeMemory", out vkFreeMemory_ptr);
 				break;
 
 			case "vkMapMemory":
-				NativeLib.LoadFunction("vkMapMemory", out vkMapMemory_ptr);
+				mNativeLib.LoadFunction("vkMapMemory", out vkMapMemory_ptr);
 				break;
 
 			case "vkUnmapMemory":
-				NativeLib.LoadFunction("vkUnmapMemory", out vkUnmapMemory_ptr);
+				mNativeLib.LoadFunction("vkUnmapMemory", out vkUnmapMemory_ptr);
 				break;
 
 			case "vkFlushMappedMemoryRanges":
-				NativeLib.LoadFunction("vkFlushMappedMemoryRanges", out vkFlushMappedMemoryRanges_ptr);
+				mNativeLib.LoadFunction("vkFlushMappedMemoryRanges", out vkFlushMappedMemoryRanges_ptr);
 				break;
 
 			case "vkInvalidateMappedMemoryRanges":
-				NativeLib.LoadFunction("vkInvalidateMappedMemoryRanges", out vkInvalidateMappedMemoryRanges_ptr);
+				mNativeLib.LoadFunction("vkInvalidateMappedMemoryRanges", out vkInvalidateMappedMemoryRanges_ptr);
 				break;
 
 			case "vkGetDeviceMemoryCommitment":
-				NativeLib.LoadFunction("vkGetDeviceMemoryCommitment", out vkGetDeviceMemoryCommitment_ptr);
+				mNativeLib.LoadFunction("vkGetDeviceMemoryCommitment", out vkGetDeviceMemoryCommitment_ptr);
 				break;
 
 			case "vkBindBufferMemory":
-				NativeLib.LoadFunction("vkBindBufferMemory", out vkBindBufferMemory_ptr);
+				mNativeLib.LoadFunction("vkBindBufferMemory", out vkBindBufferMemory_ptr);
 				break;
 
 			case "vkBindImageMemory":
-				NativeLib.LoadFunction("vkBindImageMemory", out vkBindImageMemory_ptr);
+				mNativeLib.LoadFunction("vkBindImageMemory", out vkBindImageMemory_ptr);
 				break;
 
 			case "vkGetBufferMemoryRequirements":
-				NativeLib.LoadFunction("vkGetBufferMemoryRequirements", out vkGetBufferMemoryRequirements_ptr);
+				mNativeLib.LoadFunction("vkGetBufferMemoryRequirements", out vkGetBufferMemoryRequirements_ptr);
 				break;
 
 			case "vkGetImageMemoryRequirements":
-				NativeLib.LoadFunction("vkGetImageMemoryRequirements", out vkGetImageMemoryRequirements_ptr);
+				mNativeLib.LoadFunction("vkGetImageMemoryRequirements", out vkGetImageMemoryRequirements_ptr);
 				break;
 
 			case "vkGetImageSparseMemoryRequirements":
-				NativeLib.LoadFunction("vkGetImageSparseMemoryRequirements", out vkGetImageSparseMemoryRequirements_ptr);
+				mNativeLib.LoadFunction("vkGetImageSparseMemoryRequirements", out vkGetImageSparseMemoryRequirements_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceSparseImageFormatProperties":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceSparseImageFormatProperties", out vkGetPhysicalDeviceSparseImageFormatProperties_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceSparseImageFormatProperties", out vkGetPhysicalDeviceSparseImageFormatProperties_ptr);
 				break;
 
 			case "vkQueueBindSparse":
-				NativeLib.LoadFunction("vkQueueBindSparse", out vkQueueBindSparse_ptr);
+				mNativeLib.LoadFunction("vkQueueBindSparse", out vkQueueBindSparse_ptr);
 				break;
 
 			case "vkCreateFence":
-				NativeLib.LoadFunction("vkCreateFence", out vkCreateFence_ptr);
+				mNativeLib.LoadFunction("vkCreateFence", out vkCreateFence_ptr);
 				break;
 
 			case "vkDestroyFence":
-				NativeLib.LoadFunction("vkDestroyFence", out vkDestroyFence_ptr);
+				mNativeLib.LoadFunction("vkDestroyFence", out vkDestroyFence_ptr);
 				break;
 
 			case "vkResetFences":
-				NativeLib.LoadFunction("vkResetFences", out vkResetFences_ptr);
+				mNativeLib.LoadFunction("vkResetFences", out vkResetFences_ptr);
 				break;
 
 			case "vkGetFenceStatus":
-				NativeLib.LoadFunction("vkGetFenceStatus", out vkGetFenceStatus_ptr);
+				mNativeLib.LoadFunction("vkGetFenceStatus", out vkGetFenceStatus_ptr);
 				break;
 
 			case "vkWaitForFences":
-				NativeLib.LoadFunction("vkWaitForFences", out vkWaitForFences_ptr);
+				mNativeLib.LoadFunction("vkWaitForFences", out vkWaitForFences_ptr);
 				break;
 
 			case "vkCreateSemaphore":
-				NativeLib.LoadFunction("vkCreateSemaphore", out vkCreateSemaphore_ptr);
+				mNativeLib.LoadFunction("vkCreateSemaphore", out vkCreateSemaphore_ptr);
 				break;
 
 			case "vkDestroySemaphore":
-				NativeLib.LoadFunction("vkDestroySemaphore", out vkDestroySemaphore_ptr);
+				mNativeLib.LoadFunction("vkDestroySemaphore", out vkDestroySemaphore_ptr);
 				break;
 
 			case "vkCreateEvent":
-				NativeLib.LoadFunction("vkCreateEvent", out vkCreateEvent_ptr);
+				mNativeLib.LoadFunction("vkCreateEvent", out vkCreateEvent_ptr);
 				break;
 
 			case "vkDestroyEvent":
-				NativeLib.LoadFunction("vkDestroyEvent", out vkDestroyEvent_ptr);
+				mNativeLib.LoadFunction("vkDestroyEvent", out vkDestroyEvent_ptr);
 				break;
 
 			case "vkGetEventStatus":
-				NativeLib.LoadFunction("vkGetEventStatus", out vkGetEventStatus_ptr);
+				mNativeLib.LoadFunction("vkGetEventStatus", out vkGetEventStatus_ptr);
 				break;
 
 			case "vkSetEvent":
-				NativeLib.LoadFunction("vkSetEvent", out vkSetEvent_ptr);
+				mNativeLib.LoadFunction("vkSetEvent", out vkSetEvent_ptr);
 				break;
 
 			case "vkResetEvent":
-				NativeLib.LoadFunction("vkResetEvent", out vkResetEvent_ptr);
+				mNativeLib.LoadFunction("vkResetEvent", out vkResetEvent_ptr);
 				break;
 
 			case "vkCreateQueryPool":
-				NativeLib.LoadFunction("vkCreateQueryPool", out vkCreateQueryPool_ptr);
+				mNativeLib.LoadFunction("vkCreateQueryPool", out vkCreateQueryPool_ptr);
 				break;
 
 			case "vkDestroyQueryPool":
-				NativeLib.LoadFunction("vkDestroyQueryPool", out vkDestroyQueryPool_ptr);
+				mNativeLib.LoadFunction("vkDestroyQueryPool", out vkDestroyQueryPool_ptr);
 				break;
 
 			case "vkGetQueryPoolResults":
-				NativeLib.LoadFunction("vkGetQueryPoolResults", out vkGetQueryPoolResults_ptr);
+				mNativeLib.LoadFunction("vkGetQueryPoolResults", out vkGetQueryPoolResults_ptr);
 				break;
 
 			case "vkCreateBuffer":
-				NativeLib.LoadFunction("vkCreateBuffer", out vkCreateBuffer_ptr);
+				mNativeLib.LoadFunction("vkCreateBuffer", out vkCreateBuffer_ptr);
 				break;
 
 			case "vkDestroyBuffer":
-				NativeLib.LoadFunction("vkDestroyBuffer", out vkDestroyBuffer_ptr);
+				mNativeLib.LoadFunction("vkDestroyBuffer", out vkDestroyBuffer_ptr);
 				break;
 
 			case "vkCreateBufferView":
-				NativeLib.LoadFunction("vkCreateBufferView", out vkCreateBufferView_ptr);
+				mNativeLib.LoadFunction("vkCreateBufferView", out vkCreateBufferView_ptr);
 				break;
 
 			case "vkDestroyBufferView":
-				NativeLib.LoadFunction("vkDestroyBufferView", out vkDestroyBufferView_ptr);
+				mNativeLib.LoadFunction("vkDestroyBufferView", out vkDestroyBufferView_ptr);
 				break;
 
 			case "vkCreateImage":
-				NativeLib.LoadFunction("vkCreateImage", out vkCreateImage_ptr);
+				mNativeLib.LoadFunction("vkCreateImage", out vkCreateImage_ptr);
 				break;
 
 			case "vkDestroyImage":
-				NativeLib.LoadFunction("vkDestroyImage", out vkDestroyImage_ptr);
+				mNativeLib.LoadFunction("vkDestroyImage", out vkDestroyImage_ptr);
 				break;
 
 			case "vkGetImageSubresourceLayout":
-				NativeLib.LoadFunction("vkGetImageSubresourceLayout", out vkGetImageSubresourceLayout_ptr);
+				mNativeLib.LoadFunction("vkGetImageSubresourceLayout", out vkGetImageSubresourceLayout_ptr);
 				break;
 
 			case "vkCreateImageView":
-				NativeLib.LoadFunction("vkCreateImageView", out vkCreateImageView_ptr);
+				mNativeLib.LoadFunction("vkCreateImageView", out vkCreateImageView_ptr);
 				break;
 
 			case "vkDestroyImageView":
-				NativeLib.LoadFunction("vkDestroyImageView", out vkDestroyImageView_ptr);
+				mNativeLib.LoadFunction("vkDestroyImageView", out vkDestroyImageView_ptr);
 				break;
 
 			case "vkCreateShaderModule":
-				NativeLib.LoadFunction("vkCreateShaderModule", out vkCreateShaderModule_ptr);
+				mNativeLib.LoadFunction("vkCreateShaderModule", out vkCreateShaderModule_ptr);
 				break;
 
 			case "vkDestroyShaderModule":
-				NativeLib.LoadFunction("vkDestroyShaderModule", out vkDestroyShaderModule_ptr);
+				mNativeLib.LoadFunction("vkDestroyShaderModule", out vkDestroyShaderModule_ptr);
 				break;
 
 			case "vkCreatePipelineCache":
-				NativeLib.LoadFunction("vkCreatePipelineCache", out vkCreatePipelineCache_ptr);
+				mNativeLib.LoadFunction("vkCreatePipelineCache", out vkCreatePipelineCache_ptr);
 				break;
 
 			case "vkDestroyPipelineCache":
-				NativeLib.LoadFunction("vkDestroyPipelineCache", out vkDestroyPipelineCache_ptr);
+				mNativeLib.LoadFunction("vkDestroyPipelineCache", out vkDestroyPipelineCache_ptr);
 				break;
 
 			case "vkGetPipelineCacheData":
-				NativeLib.LoadFunction("vkGetPipelineCacheData", out vkGetPipelineCacheData_ptr);
+				mNativeLib.LoadFunction("vkGetPipelineCacheData", out vkGetPipelineCacheData_ptr);
 				break;
 
 			case "vkMergePipelineCaches":
-				NativeLib.LoadFunction("vkMergePipelineCaches", out vkMergePipelineCaches_ptr);
+				mNativeLib.LoadFunction("vkMergePipelineCaches", out vkMergePipelineCaches_ptr);
 				break;
 
 			case "vkCreateGraphicsPipelines":
-				NativeLib.LoadFunction("vkCreateGraphicsPipelines", out vkCreateGraphicsPipelines_ptr);
+				mNativeLib.LoadFunction("vkCreateGraphicsPipelines", out vkCreateGraphicsPipelines_ptr);
 				break;
 
 			case "vkCreateComputePipelines":
-				NativeLib.LoadFunction("vkCreateComputePipelines", out vkCreateComputePipelines_ptr);
+				mNativeLib.LoadFunction("vkCreateComputePipelines", out vkCreateComputePipelines_ptr);
 				break;
 
 			case "vkDestroyPipeline":
-				NativeLib.LoadFunction("vkDestroyPipeline", out vkDestroyPipeline_ptr);
+				mNativeLib.LoadFunction("vkDestroyPipeline", out vkDestroyPipeline_ptr);
 				break;
 
 			case "vkCreatePipelineLayout":
-				NativeLib.LoadFunction("vkCreatePipelineLayout", out vkCreatePipelineLayout_ptr);
+				mNativeLib.LoadFunction("vkCreatePipelineLayout", out vkCreatePipelineLayout_ptr);
 				break;
 
 			case "vkDestroyPipelineLayout":
-				NativeLib.LoadFunction("vkDestroyPipelineLayout", out vkDestroyPipelineLayout_ptr);
+				mNativeLib.LoadFunction("vkDestroyPipelineLayout", out vkDestroyPipelineLayout_ptr);
 				break;
 
 			case "vkCreateSampler":
-				NativeLib.LoadFunction("vkCreateSampler", out vkCreateSampler_ptr);
+				mNativeLib.LoadFunction("vkCreateSampler", out vkCreateSampler_ptr);
 				break;
 
 			case "vkDestroySampler":
-				NativeLib.LoadFunction("vkDestroySampler", out vkDestroySampler_ptr);
+				mNativeLib.LoadFunction("vkDestroySampler", out vkDestroySampler_ptr);
 				break;
 
 			case "vkCreateDescriptorSetLayout":
-				NativeLib.LoadFunction("vkCreateDescriptorSetLayout", out vkCreateDescriptorSetLayout_ptr);
+				mNativeLib.LoadFunction("vkCreateDescriptorSetLayout", out vkCreateDescriptorSetLayout_ptr);
 				break;
 
 			case "vkDestroyDescriptorSetLayout":
-				NativeLib.LoadFunction("vkDestroyDescriptorSetLayout", out vkDestroyDescriptorSetLayout_ptr);
+				mNativeLib.LoadFunction("vkDestroyDescriptorSetLayout", out vkDestroyDescriptorSetLayout_ptr);
 				break;
 
 			case "vkCreateDescriptorPool":
-				NativeLib.LoadFunction("vkCreateDescriptorPool", out vkCreateDescriptorPool_ptr);
+				mNativeLib.LoadFunction("vkCreateDescriptorPool", out vkCreateDescriptorPool_ptr);
 				break;
 
 			case "vkDestroyDescriptorPool":
-				NativeLib.LoadFunction("vkDestroyDescriptorPool", out vkDestroyDescriptorPool_ptr);
+				mNativeLib.LoadFunction("vkDestroyDescriptorPool", out vkDestroyDescriptorPool_ptr);
 				break;
 
 			case "vkResetDescriptorPool":
-				NativeLib.LoadFunction("vkResetDescriptorPool", out vkResetDescriptorPool_ptr);
+				mNativeLib.LoadFunction("vkResetDescriptorPool", out vkResetDescriptorPool_ptr);
 				break;
 
 			case "vkAllocateDescriptorSets":
-				NativeLib.LoadFunction("vkAllocateDescriptorSets", out vkAllocateDescriptorSets_ptr);
+				mNativeLib.LoadFunction("vkAllocateDescriptorSets", out vkAllocateDescriptorSets_ptr);
 				break;
 
 			case "vkFreeDescriptorSets":
-				NativeLib.LoadFunction("vkFreeDescriptorSets", out vkFreeDescriptorSets_ptr);
+				mNativeLib.LoadFunction("vkFreeDescriptorSets", out vkFreeDescriptorSets_ptr);
 				break;
 
 			case "vkUpdateDescriptorSets":
-				NativeLib.LoadFunction("vkUpdateDescriptorSets", out vkUpdateDescriptorSets_ptr);
+				mNativeLib.LoadFunction("vkUpdateDescriptorSets", out vkUpdateDescriptorSets_ptr);
 				break;
 
 			case "vkCreateFramebuffer":
-				NativeLib.LoadFunction("vkCreateFramebuffer", out vkCreateFramebuffer_ptr);
+				mNativeLib.LoadFunction("vkCreateFramebuffer", out vkCreateFramebuffer_ptr);
 				break;
 
 			case "vkDestroyFramebuffer":
-				NativeLib.LoadFunction("vkDestroyFramebuffer", out vkDestroyFramebuffer_ptr);
+				mNativeLib.LoadFunction("vkDestroyFramebuffer", out vkDestroyFramebuffer_ptr);
 				break;
 
 			case "vkCreateRenderPass":
-				NativeLib.LoadFunction("vkCreateRenderPass", out vkCreateRenderPass_ptr);
+				mNativeLib.LoadFunction("vkCreateRenderPass", out vkCreateRenderPass_ptr);
 				break;
 
 			case "vkDestroyRenderPass":
-				NativeLib.LoadFunction("vkDestroyRenderPass", out vkDestroyRenderPass_ptr);
+				mNativeLib.LoadFunction("vkDestroyRenderPass", out vkDestroyRenderPass_ptr);
 				break;
 
 			case "vkGetRenderAreaGranularity":
-				NativeLib.LoadFunction("vkGetRenderAreaGranularity", out vkGetRenderAreaGranularity_ptr);
+				mNativeLib.LoadFunction("vkGetRenderAreaGranularity", out vkGetRenderAreaGranularity_ptr);
 				break;
 
 			case "vkCreateCommandPool":
-				NativeLib.LoadFunction("vkCreateCommandPool", out vkCreateCommandPool_ptr);
+				mNativeLib.LoadFunction("vkCreateCommandPool", out vkCreateCommandPool_ptr);
 				break;
 
 			case "vkDestroyCommandPool":
-				NativeLib.LoadFunction("vkDestroyCommandPool", out vkDestroyCommandPool_ptr);
+				mNativeLib.LoadFunction("vkDestroyCommandPool", out vkDestroyCommandPool_ptr);
 				break;
 
 			case "vkResetCommandPool":
-				NativeLib.LoadFunction("vkResetCommandPool", out vkResetCommandPool_ptr);
+				mNativeLib.LoadFunction("vkResetCommandPool", out vkResetCommandPool_ptr);
 				break;
 
 			case "vkAllocateCommandBuffers":
-				NativeLib.LoadFunction("vkAllocateCommandBuffers", out vkAllocateCommandBuffers_ptr);
+				mNativeLib.LoadFunction("vkAllocateCommandBuffers", out vkAllocateCommandBuffers_ptr);
 				break;
 
 			case "vkFreeCommandBuffers":
-				NativeLib.LoadFunction("vkFreeCommandBuffers", out vkFreeCommandBuffers_ptr);
+				mNativeLib.LoadFunction("vkFreeCommandBuffers", out vkFreeCommandBuffers_ptr);
 				break;
 
 			case "vkBeginCommandBuffer":
-				NativeLib.LoadFunction("vkBeginCommandBuffer", out vkBeginCommandBuffer_ptr);
+				mNativeLib.LoadFunction("vkBeginCommandBuffer", out vkBeginCommandBuffer_ptr);
 				break;
 
 			case "vkEndCommandBuffer":
-				NativeLib.LoadFunction("vkEndCommandBuffer", out vkEndCommandBuffer_ptr);
+				mNativeLib.LoadFunction("vkEndCommandBuffer", out vkEndCommandBuffer_ptr);
 				break;
 
 			case "vkResetCommandBuffer":
-				NativeLib.LoadFunction("vkResetCommandBuffer", out vkResetCommandBuffer_ptr);
+				mNativeLib.LoadFunction("vkResetCommandBuffer", out vkResetCommandBuffer_ptr);
 				break;
 
 			case "vkCmdBindPipeline":
-				NativeLib.LoadFunction("vkCmdBindPipeline", out vkCmdBindPipeline_ptr);
+				mNativeLib.LoadFunction("vkCmdBindPipeline", out vkCmdBindPipeline_ptr);
 				break;
 
 			case "vkCmdSetViewport":
-				NativeLib.LoadFunction("vkCmdSetViewport", out vkCmdSetViewport_ptr);
+				mNativeLib.LoadFunction("vkCmdSetViewport", out vkCmdSetViewport_ptr);
 				break;
 
 			case "vkCmdSetScissor":
-				NativeLib.LoadFunction("vkCmdSetScissor", out vkCmdSetScissor_ptr);
+				mNativeLib.LoadFunction("vkCmdSetScissor", out vkCmdSetScissor_ptr);
 				break;
 
 			case "vkCmdSetLineWidth":
-				NativeLib.LoadFunction("vkCmdSetLineWidth", out vkCmdSetLineWidth_ptr);
+				mNativeLib.LoadFunction("vkCmdSetLineWidth", out vkCmdSetLineWidth_ptr);
 				break;
 
 			case "vkCmdSetDepthBias":
-				NativeLib.LoadFunction("vkCmdSetDepthBias", out vkCmdSetDepthBias_ptr);
+				mNativeLib.LoadFunction("vkCmdSetDepthBias", out vkCmdSetDepthBias_ptr);
 				break;
 
 			case "vkCmdSetBlendConstants":
-				NativeLib.LoadFunction("vkCmdSetBlendConstants", out vkCmdSetBlendConstants_ptr);
+				mNativeLib.LoadFunction("vkCmdSetBlendConstants", out vkCmdSetBlendConstants_ptr);
 				break;
 
 			case "vkCmdSetDepthBounds":
-				NativeLib.LoadFunction("vkCmdSetDepthBounds", out vkCmdSetDepthBounds_ptr);
+				mNativeLib.LoadFunction("vkCmdSetDepthBounds", out vkCmdSetDepthBounds_ptr);
 				break;
 
 			case "vkCmdSetStencilCompareMask":
-				NativeLib.LoadFunction("vkCmdSetStencilCompareMask", out vkCmdSetStencilCompareMask_ptr);
+				mNativeLib.LoadFunction("vkCmdSetStencilCompareMask", out vkCmdSetStencilCompareMask_ptr);
 				break;
 
 			case "vkCmdSetStencilWriteMask":
-				NativeLib.LoadFunction("vkCmdSetStencilWriteMask", out vkCmdSetStencilWriteMask_ptr);
+				mNativeLib.LoadFunction("vkCmdSetStencilWriteMask", out vkCmdSetStencilWriteMask_ptr);
 				break;
 
 			case "vkCmdSetStencilReference":
-				NativeLib.LoadFunction("vkCmdSetStencilReference", out vkCmdSetStencilReference_ptr);
+				mNativeLib.LoadFunction("vkCmdSetStencilReference", out vkCmdSetStencilReference_ptr);
 				break;
 
 			case "vkCmdBindDescriptorSets":
-				NativeLib.LoadFunction("vkCmdBindDescriptorSets", out vkCmdBindDescriptorSets_ptr);
+				mNativeLib.LoadFunction("vkCmdBindDescriptorSets", out vkCmdBindDescriptorSets_ptr);
 				break;
 
 			case "vkCmdBindIndexBuffer":
-				NativeLib.LoadFunction("vkCmdBindIndexBuffer", out vkCmdBindIndexBuffer_ptr);
+				mNativeLib.LoadFunction("vkCmdBindIndexBuffer", out vkCmdBindIndexBuffer_ptr);
 				break;
 
 			case "vkCmdBindVertexBuffers":
-				NativeLib.LoadFunction("vkCmdBindVertexBuffers", out vkCmdBindVertexBuffers_ptr);
+				mNativeLib.LoadFunction("vkCmdBindVertexBuffers", out vkCmdBindVertexBuffers_ptr);
 				break;
 
 			case "vkCmdDraw":
-				NativeLib.LoadFunction("vkCmdDraw", out vkCmdDraw_ptr);
+				mNativeLib.LoadFunction("vkCmdDraw", out vkCmdDraw_ptr);
 				break;
 
 			case "vkCmdDrawIndexed":
-				NativeLib.LoadFunction("vkCmdDrawIndexed", out vkCmdDrawIndexed_ptr);
+				mNativeLib.LoadFunction("vkCmdDrawIndexed", out vkCmdDrawIndexed_ptr);
 				break;
 
 			case "vkCmdDrawIndirect":
-				NativeLib.LoadFunction("vkCmdDrawIndirect", out vkCmdDrawIndirect_ptr);
+				mNativeLib.LoadFunction("vkCmdDrawIndirect", out vkCmdDrawIndirect_ptr);
 				break;
 
 			case "vkCmdDrawIndexedIndirect":
-				NativeLib.LoadFunction("vkCmdDrawIndexedIndirect", out vkCmdDrawIndexedIndirect_ptr);
+				mNativeLib.LoadFunction("vkCmdDrawIndexedIndirect", out vkCmdDrawIndexedIndirect_ptr);
 				break;
 
 			case "vkCmdDispatch":
-				NativeLib.LoadFunction("vkCmdDispatch", out vkCmdDispatch_ptr);
+				mNativeLib.LoadFunction("vkCmdDispatch", out vkCmdDispatch_ptr);
 				break;
 
 			case "vkCmdDispatchIndirect":
-				NativeLib.LoadFunction("vkCmdDispatchIndirect", out vkCmdDispatchIndirect_ptr);
+				mNativeLib.LoadFunction("vkCmdDispatchIndirect", out vkCmdDispatchIndirect_ptr);
 				break;
 
 			case "vkCmdCopyBuffer":
-				NativeLib.LoadFunction("vkCmdCopyBuffer", out vkCmdCopyBuffer_ptr);
+				mNativeLib.LoadFunction("vkCmdCopyBuffer", out vkCmdCopyBuffer_ptr);
 				break;
 
 			case "vkCmdCopyImage":
-				NativeLib.LoadFunction("vkCmdCopyImage", out vkCmdCopyImage_ptr);
+				mNativeLib.LoadFunction("vkCmdCopyImage", out vkCmdCopyImage_ptr);
 				break;
 
 			case "vkCmdBlitImage":
-				NativeLib.LoadFunction("vkCmdBlitImage", out vkCmdBlitImage_ptr);
+				mNativeLib.LoadFunction("vkCmdBlitImage", out vkCmdBlitImage_ptr);
 				break;
 
 			case "vkCmdCopyBufferToImage":
-				NativeLib.LoadFunction("vkCmdCopyBufferToImage", out vkCmdCopyBufferToImage_ptr);
+				mNativeLib.LoadFunction("vkCmdCopyBufferToImage", out vkCmdCopyBufferToImage_ptr);
 				break;
 
 			case "vkCmdCopyImageToBuffer":
-				NativeLib.LoadFunction("vkCmdCopyImageToBuffer", out vkCmdCopyImageToBuffer_ptr);
+				mNativeLib.LoadFunction("vkCmdCopyImageToBuffer", out vkCmdCopyImageToBuffer_ptr);
 				break;
 
 			case "vkCmdUpdateBuffer":
-				NativeLib.LoadFunction("vkCmdUpdateBuffer", out vkCmdUpdateBuffer_ptr);
+				mNativeLib.LoadFunction("vkCmdUpdateBuffer", out vkCmdUpdateBuffer_ptr);
 				break;
 
 			case "vkCmdFillBuffer":
-				NativeLib.LoadFunction("vkCmdFillBuffer", out vkCmdFillBuffer_ptr);
+				mNativeLib.LoadFunction("vkCmdFillBuffer", out vkCmdFillBuffer_ptr);
 				break;
 
 			case "vkCmdClearColorImage":
-				NativeLib.LoadFunction("vkCmdClearColorImage", out vkCmdClearColorImage_ptr);
+				mNativeLib.LoadFunction("vkCmdClearColorImage", out vkCmdClearColorImage_ptr);
 				break;
 
 			case "vkCmdClearDepthStencilImage":
-				NativeLib.LoadFunction("vkCmdClearDepthStencilImage", out vkCmdClearDepthStencilImage_ptr);
+				mNativeLib.LoadFunction("vkCmdClearDepthStencilImage", out vkCmdClearDepthStencilImage_ptr);
 				break;
 
 			case "vkCmdClearAttachments":
-				NativeLib.LoadFunction("vkCmdClearAttachments", out vkCmdClearAttachments_ptr);
+				mNativeLib.LoadFunction("vkCmdClearAttachments", out vkCmdClearAttachments_ptr);
 				break;
 
 			case "vkCmdResolveImage":
-				NativeLib.LoadFunction("vkCmdResolveImage", out vkCmdResolveImage_ptr);
+				mNativeLib.LoadFunction("vkCmdResolveImage", out vkCmdResolveImage_ptr);
 				break;
 
 			case "vkCmdSetEvent":
-				NativeLib.LoadFunction("vkCmdSetEvent", out vkCmdSetEvent_ptr);
+				mNativeLib.LoadFunction("vkCmdSetEvent", out vkCmdSetEvent_ptr);
 				break;
 
 			case "vkCmdResetEvent":
-				NativeLib.LoadFunction("vkCmdResetEvent", out vkCmdResetEvent_ptr);
+				mNativeLib.LoadFunction("vkCmdResetEvent", out vkCmdResetEvent_ptr);
 				break;
 
 			case "vkCmdWaitEvents":
-				NativeLib.LoadFunction("vkCmdWaitEvents", out vkCmdWaitEvents_ptr);
+				mNativeLib.LoadFunction("vkCmdWaitEvents", out vkCmdWaitEvents_ptr);
 				break;
 
 			case "vkCmdPipelineBarrier":
-				NativeLib.LoadFunction("vkCmdPipelineBarrier", out vkCmdPipelineBarrier_ptr);
+				mNativeLib.LoadFunction("vkCmdPipelineBarrier", out vkCmdPipelineBarrier_ptr);
 				break;
 
 			case "vkCmdBeginQuery":
-				NativeLib.LoadFunction("vkCmdBeginQuery", out vkCmdBeginQuery_ptr);
+				mNativeLib.LoadFunction("vkCmdBeginQuery", out vkCmdBeginQuery_ptr);
 				break;
 
 			case "vkCmdEndQuery":
-				NativeLib.LoadFunction("vkCmdEndQuery", out vkCmdEndQuery_ptr);
+				mNativeLib.LoadFunction("vkCmdEndQuery", out vkCmdEndQuery_ptr);
 				break;
 
 			case "vkCmdResetQueryPool":
-				NativeLib.LoadFunction("vkCmdResetQueryPool", out vkCmdResetQueryPool_ptr);
+				mNativeLib.LoadFunction("vkCmdResetQueryPool", out vkCmdResetQueryPool_ptr);
 				break;
 
 			case "vkCmdWriteTimestamp":
-				NativeLib.LoadFunction("vkCmdWriteTimestamp", out vkCmdWriteTimestamp_ptr);
+				mNativeLib.LoadFunction("vkCmdWriteTimestamp", out vkCmdWriteTimestamp_ptr);
 				break;
 
 			case "vkCmdCopyQueryPoolResults":
-				NativeLib.LoadFunction("vkCmdCopyQueryPoolResults", out vkCmdCopyQueryPoolResults_ptr);
+				mNativeLib.LoadFunction("vkCmdCopyQueryPoolResults", out vkCmdCopyQueryPoolResults_ptr);
 				break;
 
 			case "vkCmdPushConstants":
-				NativeLib.LoadFunction("vkCmdPushConstants", out vkCmdPushConstants_ptr);
+				mNativeLib.LoadFunction("vkCmdPushConstants", out vkCmdPushConstants_ptr);
 				break;
 
 			case "vkCmdBeginRenderPass":
-				NativeLib.LoadFunction("vkCmdBeginRenderPass", out vkCmdBeginRenderPass_ptr);
+				mNativeLib.LoadFunction("vkCmdBeginRenderPass", out vkCmdBeginRenderPass_ptr);
 				break;
 
 			case "vkCmdNextSubpass":
-				NativeLib.LoadFunction("vkCmdNextSubpass", out vkCmdNextSubpass_ptr);
+				mNativeLib.LoadFunction("vkCmdNextSubpass", out vkCmdNextSubpass_ptr);
 				break;
 
 			case "vkCmdEndRenderPass":
-				NativeLib.LoadFunction("vkCmdEndRenderPass", out vkCmdEndRenderPass_ptr);
+				mNativeLib.LoadFunction("vkCmdEndRenderPass", out vkCmdEndRenderPass_ptr);
 				break;
 
 			case "vkCmdExecuteCommands":
-				NativeLib.LoadFunction("vkCmdExecuteCommands", out vkCmdExecuteCommands_ptr);
+				mNativeLib.LoadFunction("vkCmdExecuteCommands", out vkCmdExecuteCommands_ptr);
 				break;
 
 			case "vkEnumerateInstanceVersion":
-				NativeLib.LoadFunction("vkEnumerateInstanceVersion", out vkEnumerateInstanceVersion_ptr);
+				mNativeLib.LoadFunction("vkEnumerateInstanceVersion", out vkEnumerateInstanceVersion_ptr);
 				break;
 
 			case "vkBindBufferMemory2":
-				NativeLib.LoadFunction("vkBindBufferMemory2", out vkBindBufferMemory2_ptr);
+				mNativeLib.LoadFunction("vkBindBufferMemory2", out vkBindBufferMemory2_ptr);
 				break;
 
 			case "vkBindImageMemory2":
-				NativeLib.LoadFunction("vkBindImageMemory2", out vkBindImageMemory2_ptr);
+				mNativeLib.LoadFunction("vkBindImageMemory2", out vkBindImageMemory2_ptr);
 				break;
 
 			case "vkGetDeviceGroupPeerMemoryFeatures":
-				NativeLib.LoadFunction("vkGetDeviceGroupPeerMemoryFeatures", out vkGetDeviceGroupPeerMemoryFeatures_ptr);
+				mNativeLib.LoadFunction("vkGetDeviceGroupPeerMemoryFeatures", out vkGetDeviceGroupPeerMemoryFeatures_ptr);
 				break;
 
 			case "vkCmdSetDeviceMask":
-				NativeLib.LoadFunction("vkCmdSetDeviceMask", out vkCmdSetDeviceMask_ptr);
+				mNativeLib.LoadFunction("vkCmdSetDeviceMask", out vkCmdSetDeviceMask_ptr);
 				break;
 
 			case "vkCmdDispatchBase":
-				NativeLib.LoadFunction("vkCmdDispatchBase", out vkCmdDispatchBase_ptr);
+				mNativeLib.LoadFunction("vkCmdDispatchBase", out vkCmdDispatchBase_ptr);
 				break;
 
 			case "vkEnumeratePhysicalDeviceGroups":
-				NativeLib.LoadFunction("vkEnumeratePhysicalDeviceGroups", out vkEnumeratePhysicalDeviceGroups_ptr);
+				mNativeLib.LoadFunction("vkEnumeratePhysicalDeviceGroups", out vkEnumeratePhysicalDeviceGroups_ptr);
 				break;
 
 			case "vkGetImageMemoryRequirements2":
-				NativeLib.LoadFunction("vkGetImageMemoryRequirements2", out vkGetImageMemoryRequirements2_ptr);
+				mNativeLib.LoadFunction("vkGetImageMemoryRequirements2", out vkGetImageMemoryRequirements2_ptr);
 				break;
 
 			case "vkGetBufferMemoryRequirements2":
-				NativeLib.LoadFunction("vkGetBufferMemoryRequirements2", out vkGetBufferMemoryRequirements2_ptr);
+				mNativeLib.LoadFunction("vkGetBufferMemoryRequirements2", out vkGetBufferMemoryRequirements2_ptr);
 				break;
 
 			case "vkGetImageSparseMemoryRequirements2":
-				NativeLib.LoadFunction("vkGetImageSparseMemoryRequirements2", out vkGetImageSparseMemoryRequirements2_ptr);
+				mNativeLib.LoadFunction("vkGetImageSparseMemoryRequirements2", out vkGetImageSparseMemoryRequirements2_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceFeatures2":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceFeatures2", out vkGetPhysicalDeviceFeatures2_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceFeatures2", out vkGetPhysicalDeviceFeatures2_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceProperties2":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceProperties2", out vkGetPhysicalDeviceProperties2_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceProperties2", out vkGetPhysicalDeviceProperties2_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceFormatProperties2":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceFormatProperties2", out vkGetPhysicalDeviceFormatProperties2_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceFormatProperties2", out vkGetPhysicalDeviceFormatProperties2_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceImageFormatProperties2":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceImageFormatProperties2", out vkGetPhysicalDeviceImageFormatProperties2_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceImageFormatProperties2", out vkGetPhysicalDeviceImageFormatProperties2_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceQueueFamilyProperties2":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceQueueFamilyProperties2", out vkGetPhysicalDeviceQueueFamilyProperties2_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceQueueFamilyProperties2", out vkGetPhysicalDeviceQueueFamilyProperties2_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceMemoryProperties2":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceMemoryProperties2", out vkGetPhysicalDeviceMemoryProperties2_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceMemoryProperties2", out vkGetPhysicalDeviceMemoryProperties2_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceSparseImageFormatProperties2":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceSparseImageFormatProperties2", out vkGetPhysicalDeviceSparseImageFormatProperties2_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceSparseImageFormatProperties2", out vkGetPhysicalDeviceSparseImageFormatProperties2_ptr);
 				break;
 
 			case "vkTrimCommandPool":
-				NativeLib.LoadFunction("vkTrimCommandPool", out vkTrimCommandPool_ptr);
+				mNativeLib.LoadFunction("vkTrimCommandPool", out vkTrimCommandPool_ptr);
 				break;
 
 			case "vkGetDeviceQueue2":
-				NativeLib.LoadFunction("vkGetDeviceQueue2", out vkGetDeviceQueue2_ptr);
+				mNativeLib.LoadFunction("vkGetDeviceQueue2", out vkGetDeviceQueue2_ptr);
 				break;
 
 			case "vkCreateSamplerYcbcrConversion":
-				NativeLib.LoadFunction("vkCreateSamplerYcbcrConversion", out vkCreateSamplerYcbcrConversion_ptr);
+				mNativeLib.LoadFunction("vkCreateSamplerYcbcrConversion", out vkCreateSamplerYcbcrConversion_ptr);
 				break;
 
 			case "vkDestroySamplerYcbcrConversion":
-				NativeLib.LoadFunction("vkDestroySamplerYcbcrConversion", out vkDestroySamplerYcbcrConversion_ptr);
+				mNativeLib.LoadFunction("vkDestroySamplerYcbcrConversion", out vkDestroySamplerYcbcrConversion_ptr);
 				break;
 
 			case "vkCreateDescriptorUpdateTemplate":
-				NativeLib.LoadFunction("vkCreateDescriptorUpdateTemplate", out vkCreateDescriptorUpdateTemplate_ptr);
+				mNativeLib.LoadFunction("vkCreateDescriptorUpdateTemplate", out vkCreateDescriptorUpdateTemplate_ptr);
 				break;
 
 			case "vkDestroyDescriptorUpdateTemplate":
-				NativeLib.LoadFunction("vkDestroyDescriptorUpdateTemplate", out vkDestroyDescriptorUpdateTemplate_ptr);
+				mNativeLib.LoadFunction("vkDestroyDescriptorUpdateTemplate", out vkDestroyDescriptorUpdateTemplate_ptr);
 				break;
 
 			case "vkUpdateDescriptorSetWithTemplate":
-				NativeLib.LoadFunction("vkUpdateDescriptorSetWithTemplate", out vkUpdateDescriptorSetWithTemplate_ptr);
+				mNativeLib.LoadFunction("vkUpdateDescriptorSetWithTemplate", out vkUpdateDescriptorSetWithTemplate_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceExternalBufferProperties":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceExternalBufferProperties", out vkGetPhysicalDeviceExternalBufferProperties_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceExternalBufferProperties", out vkGetPhysicalDeviceExternalBufferProperties_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceExternalFenceProperties":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceExternalFenceProperties", out vkGetPhysicalDeviceExternalFenceProperties_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceExternalFenceProperties", out vkGetPhysicalDeviceExternalFenceProperties_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceExternalSemaphoreProperties":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceExternalSemaphoreProperties", out vkGetPhysicalDeviceExternalSemaphoreProperties_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceExternalSemaphoreProperties", out vkGetPhysicalDeviceExternalSemaphoreProperties_ptr);
 				break;
 
 			case "vkGetDescriptorSetLayoutSupport":
-				NativeLib.LoadFunction("vkGetDescriptorSetLayoutSupport", out vkGetDescriptorSetLayoutSupport_ptr);
+				mNativeLib.LoadFunction("vkGetDescriptorSetLayoutSupport", out vkGetDescriptorSetLayoutSupport_ptr);
 				break;
 
 			case "vkCmdDrawIndirectCount":
-				NativeLib.LoadFunction("vkCmdDrawIndirectCount", out vkCmdDrawIndirectCount_ptr);
+				mNativeLib.LoadFunction("vkCmdDrawIndirectCount", out vkCmdDrawIndirectCount_ptr);
 				break;
 
 			case "vkCmdDrawIndexedIndirectCount":
-				NativeLib.LoadFunction("vkCmdDrawIndexedIndirectCount", out vkCmdDrawIndexedIndirectCount_ptr);
+				mNativeLib.LoadFunction("vkCmdDrawIndexedIndirectCount", out vkCmdDrawIndexedIndirectCount_ptr);
 				break;
 
 			case "vkCreateRenderPass2":
-				NativeLib.LoadFunction("vkCreateRenderPass2", out vkCreateRenderPass2_ptr);
+				mNativeLib.LoadFunction("vkCreateRenderPass2", out vkCreateRenderPass2_ptr);
 				break;
 
 			case "vkCmdBeginRenderPass2":
-				NativeLib.LoadFunction("vkCmdBeginRenderPass2", out vkCmdBeginRenderPass2_ptr);
+				mNativeLib.LoadFunction("vkCmdBeginRenderPass2", out vkCmdBeginRenderPass2_ptr);
 				break;
 
 			case "vkCmdNextSubpass2":
-				NativeLib.LoadFunction("vkCmdNextSubpass2", out vkCmdNextSubpass2_ptr);
+				mNativeLib.LoadFunction("vkCmdNextSubpass2", out vkCmdNextSubpass2_ptr);
 				break;
 
 			case "vkCmdEndRenderPass2":
-				NativeLib.LoadFunction("vkCmdEndRenderPass2", out vkCmdEndRenderPass2_ptr);
+				mNativeLib.LoadFunction("vkCmdEndRenderPass2", out vkCmdEndRenderPass2_ptr);
 				break;
 
 			case "vkResetQueryPool":
-				NativeLib.LoadFunction("vkResetQueryPool", out vkResetQueryPool_ptr);
+				mNativeLib.LoadFunction("vkResetQueryPool", out vkResetQueryPool_ptr);
 				break;
 
 			case "vkGetSemaphoreCounterValue":
-				NativeLib.LoadFunction("vkGetSemaphoreCounterValue", out vkGetSemaphoreCounterValue_ptr);
+				mNativeLib.LoadFunction("vkGetSemaphoreCounterValue", out vkGetSemaphoreCounterValue_ptr);
 				break;
 
 			case "vkWaitSemaphores":
-				NativeLib.LoadFunction("vkWaitSemaphores", out vkWaitSemaphores_ptr);
+				mNativeLib.LoadFunction("vkWaitSemaphores", out vkWaitSemaphores_ptr);
 				break;
 
 			case "vkSignalSemaphore":
-				NativeLib.LoadFunction("vkSignalSemaphore", out vkSignalSemaphore_ptr);
+				mNativeLib.LoadFunction("vkSignalSemaphore", out vkSignalSemaphore_ptr);
 				break;
 
 			case "vkGetBufferDeviceAddress":
-				NativeLib.LoadFunction("vkGetBufferDeviceAddress", out vkGetBufferDeviceAddress_ptr);
+				mNativeLib.LoadFunction("vkGetBufferDeviceAddress", out vkGetBufferDeviceAddress_ptr);
 				break;
 
 			case "vkGetBufferOpaqueCaptureAddress":
-				NativeLib.LoadFunction("vkGetBufferOpaqueCaptureAddress", out vkGetBufferOpaqueCaptureAddress_ptr);
+				mNativeLib.LoadFunction("vkGetBufferOpaqueCaptureAddress", out vkGetBufferOpaqueCaptureAddress_ptr);
 				break;
 
 			case "vkGetDeviceMemoryOpaqueCaptureAddress":
-				NativeLib.LoadFunction("vkGetDeviceMemoryOpaqueCaptureAddress", out vkGetDeviceMemoryOpaqueCaptureAddress_ptr);
+				mNativeLib.LoadFunction("vkGetDeviceMemoryOpaqueCaptureAddress", out vkGetDeviceMemoryOpaqueCaptureAddress_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceToolProperties":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceToolProperties", out vkGetPhysicalDeviceToolProperties_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceToolProperties", out vkGetPhysicalDeviceToolProperties_ptr);
 				break;
 
 			case "vkCreatePrivateDataSlot":
-				NativeLib.LoadFunction("vkCreatePrivateDataSlot", out vkCreatePrivateDataSlot_ptr);
+				mNativeLib.LoadFunction("vkCreatePrivateDataSlot", out vkCreatePrivateDataSlot_ptr);
 				break;
 
 			case "vkDestroyPrivateDataSlot":
-				NativeLib.LoadFunction("vkDestroyPrivateDataSlot", out vkDestroyPrivateDataSlot_ptr);
+				mNativeLib.LoadFunction("vkDestroyPrivateDataSlot", out vkDestroyPrivateDataSlot_ptr);
 				break;
 
 			case "vkSetPrivateData":
-				NativeLib.LoadFunction("vkSetPrivateData", out vkSetPrivateData_ptr);
+				mNativeLib.LoadFunction("vkSetPrivateData", out vkSetPrivateData_ptr);
 				break;
 
 			case "vkGetPrivateData":
-				NativeLib.LoadFunction("vkGetPrivateData", out vkGetPrivateData_ptr);
+				mNativeLib.LoadFunction("vkGetPrivateData", out vkGetPrivateData_ptr);
 				break;
 
 			case "vkCmdSetEvent2":
-				NativeLib.LoadFunction("vkCmdSetEvent2", out vkCmdSetEvent2_ptr);
+				mNativeLib.LoadFunction("vkCmdSetEvent2", out vkCmdSetEvent2_ptr);
 				break;
 
 			case "vkCmdResetEvent2":
-				NativeLib.LoadFunction("vkCmdResetEvent2", out vkCmdResetEvent2_ptr);
+				mNativeLib.LoadFunction("vkCmdResetEvent2", out vkCmdResetEvent2_ptr);
 				break;
 
 			case "vkCmdWaitEvents2":
-				NativeLib.LoadFunction("vkCmdWaitEvents2", out vkCmdWaitEvents2_ptr);
+				mNativeLib.LoadFunction("vkCmdWaitEvents2", out vkCmdWaitEvents2_ptr);
 				break;
 
 			case "vkCmdPipelineBarrier2":
-				NativeLib.LoadFunction("vkCmdPipelineBarrier2", out vkCmdPipelineBarrier2_ptr);
+				mNativeLib.LoadFunction("vkCmdPipelineBarrier2", out vkCmdPipelineBarrier2_ptr);
 				break;
 
 			case "vkCmdWriteTimestamp2":
-				NativeLib.LoadFunction("vkCmdWriteTimestamp2", out vkCmdWriteTimestamp2_ptr);
+				mNativeLib.LoadFunction("vkCmdWriteTimestamp2", out vkCmdWriteTimestamp2_ptr);
 				break;
 
 			case "vkQueueSubmit2":
-				NativeLib.LoadFunction("vkQueueSubmit2", out vkQueueSubmit2_ptr);
+				mNativeLib.LoadFunction("vkQueueSubmit2", out vkQueueSubmit2_ptr);
 				break;
 
 			case "vkCmdCopyBuffer2":
-				NativeLib.LoadFunction("vkCmdCopyBuffer2", out vkCmdCopyBuffer2_ptr);
+				mNativeLib.LoadFunction("vkCmdCopyBuffer2", out vkCmdCopyBuffer2_ptr);
 				break;
 
 			case "vkCmdCopyImage2":
-				NativeLib.LoadFunction("vkCmdCopyImage2", out vkCmdCopyImage2_ptr);
+				mNativeLib.LoadFunction("vkCmdCopyImage2", out vkCmdCopyImage2_ptr);
 				break;
 
 			case "vkCmdCopyBufferToImage2":
-				NativeLib.LoadFunction("vkCmdCopyBufferToImage2", out vkCmdCopyBufferToImage2_ptr);
+				mNativeLib.LoadFunction("vkCmdCopyBufferToImage2", out vkCmdCopyBufferToImage2_ptr);
 				break;
 
 			case "vkCmdCopyImageToBuffer2":
-				NativeLib.LoadFunction("vkCmdCopyImageToBuffer2", out vkCmdCopyImageToBuffer2_ptr);
+				mNativeLib.LoadFunction("vkCmdCopyImageToBuffer2", out vkCmdCopyImageToBuffer2_ptr);
 				break;
 
 			case "vkCmdBlitImage2":
-				NativeLib.LoadFunction("vkCmdBlitImage2", out vkCmdBlitImage2_ptr);
+				mNativeLib.LoadFunction("vkCmdBlitImage2", out vkCmdBlitImage2_ptr);
 				break;
 
 			case "vkCmdResolveImage2":
-				NativeLib.LoadFunction("vkCmdResolveImage2", out vkCmdResolveImage2_ptr);
+				mNativeLib.LoadFunction("vkCmdResolveImage2", out vkCmdResolveImage2_ptr);
 				break;
 
 			case "vkCmdBeginRendering":
-				NativeLib.LoadFunction("vkCmdBeginRendering", out vkCmdBeginRendering_ptr);
+				mNativeLib.LoadFunction("vkCmdBeginRendering", out vkCmdBeginRendering_ptr);
 				break;
 
 			case "vkCmdEndRendering":
-				NativeLib.LoadFunction("vkCmdEndRendering", out vkCmdEndRendering_ptr);
+				mNativeLib.LoadFunction("vkCmdEndRendering", out vkCmdEndRendering_ptr);
 				break;
 
 			case "vkCmdSetCullMode":
-				NativeLib.LoadFunction("vkCmdSetCullMode", out vkCmdSetCullMode_ptr);
+				mNativeLib.LoadFunction("vkCmdSetCullMode", out vkCmdSetCullMode_ptr);
 				break;
 
 			case "vkCmdSetFrontFace":
-				NativeLib.LoadFunction("vkCmdSetFrontFace", out vkCmdSetFrontFace_ptr);
+				mNativeLib.LoadFunction("vkCmdSetFrontFace", out vkCmdSetFrontFace_ptr);
 				break;
 
 			case "vkCmdSetPrimitiveTopology":
-				NativeLib.LoadFunction("vkCmdSetPrimitiveTopology", out vkCmdSetPrimitiveTopology_ptr);
+				mNativeLib.LoadFunction("vkCmdSetPrimitiveTopology", out vkCmdSetPrimitiveTopology_ptr);
 				break;
 
 			case "vkCmdSetViewportWithCount":
-				NativeLib.LoadFunction("vkCmdSetViewportWithCount", out vkCmdSetViewportWithCount_ptr);
+				mNativeLib.LoadFunction("vkCmdSetViewportWithCount", out vkCmdSetViewportWithCount_ptr);
 				break;
 
 			case "vkCmdSetScissorWithCount":
-				NativeLib.LoadFunction("vkCmdSetScissorWithCount", out vkCmdSetScissorWithCount_ptr);
+				mNativeLib.LoadFunction("vkCmdSetScissorWithCount", out vkCmdSetScissorWithCount_ptr);
 				break;
 
 			case "vkCmdBindVertexBuffers2":
-				NativeLib.LoadFunction("vkCmdBindVertexBuffers2", out vkCmdBindVertexBuffers2_ptr);
+				mNativeLib.LoadFunction("vkCmdBindVertexBuffers2", out vkCmdBindVertexBuffers2_ptr);
 				break;
 
 			case "vkCmdSetDepthTestEnable":
-				NativeLib.LoadFunction("vkCmdSetDepthTestEnable", out vkCmdSetDepthTestEnable_ptr);
+				mNativeLib.LoadFunction("vkCmdSetDepthTestEnable", out vkCmdSetDepthTestEnable_ptr);
 				break;
 
 			case "vkCmdSetDepthWriteEnable":
-				NativeLib.LoadFunction("vkCmdSetDepthWriteEnable", out vkCmdSetDepthWriteEnable_ptr);
+				mNativeLib.LoadFunction("vkCmdSetDepthWriteEnable", out vkCmdSetDepthWriteEnable_ptr);
 				break;
 
 			case "vkCmdSetDepthCompareOp":
-				NativeLib.LoadFunction("vkCmdSetDepthCompareOp", out vkCmdSetDepthCompareOp_ptr);
+				mNativeLib.LoadFunction("vkCmdSetDepthCompareOp", out vkCmdSetDepthCompareOp_ptr);
 				break;
 
 			case "vkCmdSetDepthBoundsTestEnable":
-				NativeLib.LoadFunction("vkCmdSetDepthBoundsTestEnable", out vkCmdSetDepthBoundsTestEnable_ptr);
+				mNativeLib.LoadFunction("vkCmdSetDepthBoundsTestEnable", out vkCmdSetDepthBoundsTestEnable_ptr);
 				break;
 
 			case "vkCmdSetStencilTestEnable":
-				NativeLib.LoadFunction("vkCmdSetStencilTestEnable", out vkCmdSetStencilTestEnable_ptr);
+				mNativeLib.LoadFunction("vkCmdSetStencilTestEnable", out vkCmdSetStencilTestEnable_ptr);
 				break;
 
 			case "vkCmdSetStencilOp":
-				NativeLib.LoadFunction("vkCmdSetStencilOp", out vkCmdSetStencilOp_ptr);
+				mNativeLib.LoadFunction("vkCmdSetStencilOp", out vkCmdSetStencilOp_ptr);
 				break;
 
 			case "vkCmdSetRasterizerDiscardEnable":
-				NativeLib.LoadFunction("vkCmdSetRasterizerDiscardEnable", out vkCmdSetRasterizerDiscardEnable_ptr);
+				mNativeLib.LoadFunction("vkCmdSetRasterizerDiscardEnable", out vkCmdSetRasterizerDiscardEnable_ptr);
 				break;
 
 			case "vkCmdSetDepthBiasEnable":
-				NativeLib.LoadFunction("vkCmdSetDepthBiasEnable", out vkCmdSetDepthBiasEnable_ptr);
+				mNativeLib.LoadFunction("vkCmdSetDepthBiasEnable", out vkCmdSetDepthBiasEnable_ptr);
 				break;
 
 			case "vkCmdSetPrimitiveRestartEnable":
-				NativeLib.LoadFunction("vkCmdSetPrimitiveRestartEnable", out vkCmdSetPrimitiveRestartEnable_ptr);
+				mNativeLib.LoadFunction("vkCmdSetPrimitiveRestartEnable", out vkCmdSetPrimitiveRestartEnable_ptr);
 				break;
 
 			case "vkGetDeviceBufferMemoryRequirements":
-				NativeLib.LoadFunction("vkGetDeviceBufferMemoryRequirements", out vkGetDeviceBufferMemoryRequirements_ptr);
+				mNativeLib.LoadFunction("vkGetDeviceBufferMemoryRequirements", out vkGetDeviceBufferMemoryRequirements_ptr);
 				break;
 
 			case "vkGetDeviceImageMemoryRequirements":
-				NativeLib.LoadFunction("vkGetDeviceImageMemoryRequirements", out vkGetDeviceImageMemoryRequirements_ptr);
+				mNativeLib.LoadFunction("vkGetDeviceImageMemoryRequirements", out vkGetDeviceImageMemoryRequirements_ptr);
 				break;
 
 			case "vkGetDeviceImageSparseMemoryRequirements":
-				NativeLib.LoadFunction("vkGetDeviceImageSparseMemoryRequirements", out vkGetDeviceImageSparseMemoryRequirements_ptr);
+				mNativeLib.LoadFunction("vkGetDeviceImageSparseMemoryRequirements", out vkGetDeviceImageSparseMemoryRequirements_ptr);
 				break;
 
 			case "vkDestroySurfaceKHR":
-				NativeLib.LoadFunction("vkDestroySurfaceKHR", out vkDestroySurfaceKHR_ptr);
+				mNativeLib.LoadFunction("vkDestroySurfaceKHR", out vkDestroySurfaceKHR_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceSurfaceSupportKHR":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceSurfaceSupportKHR", out vkGetPhysicalDeviceSurfaceSupportKHR_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceSurfaceSupportKHR", out vkGetPhysicalDeviceSurfaceSupportKHR_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceSurfaceCapabilitiesKHR":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceSurfaceCapabilitiesKHR", out vkGetPhysicalDeviceSurfaceCapabilitiesKHR_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceSurfaceCapabilitiesKHR", out vkGetPhysicalDeviceSurfaceCapabilitiesKHR_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceSurfaceFormatsKHR":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceSurfaceFormatsKHR", out vkGetPhysicalDeviceSurfaceFormatsKHR_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceSurfaceFormatsKHR", out vkGetPhysicalDeviceSurfaceFormatsKHR_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceSurfacePresentModesKHR":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceSurfacePresentModesKHR", out vkGetPhysicalDeviceSurfacePresentModesKHR_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceSurfacePresentModesKHR", out vkGetPhysicalDeviceSurfacePresentModesKHR_ptr);
 				break;
 
 			case "vkCreateSwapchainKHR":
-				NativeLib.LoadFunction("vkCreateSwapchainKHR", out vkCreateSwapchainKHR_ptr);
+				mNativeLib.LoadFunction("vkCreateSwapchainKHR", out vkCreateSwapchainKHR_ptr);
 				break;
 
 			case "vkDestroySwapchainKHR":
-				NativeLib.LoadFunction("vkDestroySwapchainKHR", out vkDestroySwapchainKHR_ptr);
+				mNativeLib.LoadFunction("vkDestroySwapchainKHR", out vkDestroySwapchainKHR_ptr);
 				break;
 
 			case "vkGetSwapchainImagesKHR":
-				NativeLib.LoadFunction("vkGetSwapchainImagesKHR", out vkGetSwapchainImagesKHR_ptr);
+				mNativeLib.LoadFunction("vkGetSwapchainImagesKHR", out vkGetSwapchainImagesKHR_ptr);
 				break;
 
 			case "vkAcquireNextImageKHR":
-				NativeLib.LoadFunction("vkAcquireNextImageKHR", out vkAcquireNextImageKHR_ptr);
+				mNativeLib.LoadFunction("vkAcquireNextImageKHR", out vkAcquireNextImageKHR_ptr);
 				break;
 
 			case "vkQueuePresentKHR":
-				NativeLib.LoadFunction("vkQueuePresentKHR", out vkQueuePresentKHR_ptr);
+				mNativeLib.LoadFunction("vkQueuePresentKHR", out vkQueuePresentKHR_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceDisplayPropertiesKHR":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceDisplayPropertiesKHR", out vkGetPhysicalDeviceDisplayPropertiesKHR_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceDisplayPropertiesKHR", out vkGetPhysicalDeviceDisplayPropertiesKHR_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceDisplayPlanePropertiesKHR":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceDisplayPlanePropertiesKHR", out vkGetPhysicalDeviceDisplayPlanePropertiesKHR_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceDisplayPlanePropertiesKHR", out vkGetPhysicalDeviceDisplayPlanePropertiesKHR_ptr);
 				break;
 
 			case "vkGetDisplayPlaneSupportedDisplaysKHR":
-				NativeLib.LoadFunction("vkGetDisplayPlaneSupportedDisplaysKHR", out vkGetDisplayPlaneSupportedDisplaysKHR_ptr);
+				mNativeLib.LoadFunction("vkGetDisplayPlaneSupportedDisplaysKHR", out vkGetDisplayPlaneSupportedDisplaysKHR_ptr);
 				break;
 
 			case "vkGetDisplayModePropertiesKHR":
-				NativeLib.LoadFunction("vkGetDisplayModePropertiesKHR", out vkGetDisplayModePropertiesKHR_ptr);
+				mNativeLib.LoadFunction("vkGetDisplayModePropertiesKHR", out vkGetDisplayModePropertiesKHR_ptr);
 				break;
 
 			case "vkCreateDisplayModeKHR":
-				NativeLib.LoadFunction("vkCreateDisplayModeKHR", out vkCreateDisplayModeKHR_ptr);
+				mNativeLib.LoadFunction("vkCreateDisplayModeKHR", out vkCreateDisplayModeKHR_ptr);
 				break;
 
 			case "vkGetDisplayPlaneCapabilitiesKHR":
-				NativeLib.LoadFunction("vkGetDisplayPlaneCapabilitiesKHR", out vkGetDisplayPlaneCapabilitiesKHR_ptr);
+				mNativeLib.LoadFunction("vkGetDisplayPlaneCapabilitiesKHR", out vkGetDisplayPlaneCapabilitiesKHR_ptr);
 				break;
 
 			case "vkCreateDisplayPlaneSurfaceKHR":
-				NativeLib.LoadFunction("vkCreateDisplayPlaneSurfaceKHR", out vkCreateDisplayPlaneSurfaceKHR_ptr);
+				mNativeLib.LoadFunction("vkCreateDisplayPlaneSurfaceKHR", out vkCreateDisplayPlaneSurfaceKHR_ptr);
 				break;
 
 			case "vkCreateSharedSwapchainsKHR":
-				NativeLib.LoadFunction("vkCreateSharedSwapchainsKHR", out vkCreateSharedSwapchainsKHR_ptr);
+				mNativeLib.LoadFunction("vkCreateSharedSwapchainsKHR", out vkCreateSharedSwapchainsKHR_ptr);
 				break;
 
 			case "vkCreateXlibSurfaceKHR":
-				NativeLib.LoadFunction("vkCreateXlibSurfaceKHR", out vkCreateXlibSurfaceKHR_ptr);
+				mNativeLib.LoadFunction("vkCreateXlibSurfaceKHR", out vkCreateXlibSurfaceKHR_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceXlibPresentationSupportKHR":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceXlibPresentationSupportKHR", out vkGetPhysicalDeviceXlibPresentationSupportKHR_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceXlibPresentationSupportKHR", out vkGetPhysicalDeviceXlibPresentationSupportKHR_ptr);
 				break;
 
 			case "vkCreateXcbSurfaceKHR":
-				NativeLib.LoadFunction("vkCreateXcbSurfaceKHR", out vkCreateXcbSurfaceKHR_ptr);
+				mNativeLib.LoadFunction("vkCreateXcbSurfaceKHR", out vkCreateXcbSurfaceKHR_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceXcbPresentationSupportKHR":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceXcbPresentationSupportKHR", out vkGetPhysicalDeviceXcbPresentationSupportKHR_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceXcbPresentationSupportKHR", out vkGetPhysicalDeviceXcbPresentationSupportKHR_ptr);
 				break;
 
 			case "vkCreateWaylandSurfaceKHR":
-				NativeLib.LoadFunction("vkCreateWaylandSurfaceKHR", out vkCreateWaylandSurfaceKHR_ptr);
+				mNativeLib.LoadFunction("vkCreateWaylandSurfaceKHR", out vkCreateWaylandSurfaceKHR_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceWaylandPresentationSupportKHR":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceWaylandPresentationSupportKHR", out vkGetPhysicalDeviceWaylandPresentationSupportKHR_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceWaylandPresentationSupportKHR", out vkGetPhysicalDeviceWaylandPresentationSupportKHR_ptr);
 				break;
 
 			case "vkCreateAndroidSurfaceKHR":
-				NativeLib.LoadFunction("vkCreateAndroidSurfaceKHR", out vkCreateAndroidSurfaceKHR_ptr);
+				mNativeLib.LoadFunction("vkCreateAndroidSurfaceKHR", out vkCreateAndroidSurfaceKHR_ptr);
 				break;
 
 			case "vkCreateWin32SurfaceKHR":
-				NativeLib.LoadFunction("vkCreateWin32SurfaceKHR", out vkCreateWin32SurfaceKHR_ptr);
+				mNativeLib.LoadFunction("vkCreateWin32SurfaceKHR", out vkCreateWin32SurfaceKHR_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceWin32PresentationSupportKHR":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceWin32PresentationSupportKHR", out vkGetPhysicalDeviceWin32PresentationSupportKHR_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceWin32PresentationSupportKHR", out vkGetPhysicalDeviceWin32PresentationSupportKHR_ptr);
 				break;
 
 			case "vkCreateDebugReportCallbackEXT":
-				NativeLib.LoadFunction("vkCreateDebugReportCallbackEXT", out vkCreateDebugReportCallbackEXT_ptr);
+				mNativeLib.LoadFunction("vkCreateDebugReportCallbackEXT", out vkCreateDebugReportCallbackEXT_ptr);
 				break;
 
 			case "vkDestroyDebugReportCallbackEXT":
-				NativeLib.LoadFunction("vkDestroyDebugReportCallbackEXT", out vkDestroyDebugReportCallbackEXT_ptr);
+				mNativeLib.LoadFunction("vkDestroyDebugReportCallbackEXT", out vkDestroyDebugReportCallbackEXT_ptr);
 				break;
 
 			case "vkDebugReportMessageEXT":
-				NativeLib.LoadFunction("vkDebugReportMessageEXT", out vkDebugReportMessageEXT_ptr);
+				mNativeLib.LoadFunction("vkDebugReportMessageEXT", out vkDebugReportMessageEXT_ptr);
 				break;
 
 			case "vkDebugMarkerSetObjectTagEXT":
-				NativeLib.LoadFunction("vkDebugMarkerSetObjectTagEXT", out vkDebugMarkerSetObjectTagEXT_ptr);
+				mNativeLib.LoadFunction("vkDebugMarkerSetObjectTagEXT", out vkDebugMarkerSetObjectTagEXT_ptr);
 				break;
 
 			case "vkDebugMarkerSetObjectNameEXT":
-				NativeLib.LoadFunction("vkDebugMarkerSetObjectNameEXT", out vkDebugMarkerSetObjectNameEXT_ptr);
+				mNativeLib.LoadFunction("vkDebugMarkerSetObjectNameEXT", out vkDebugMarkerSetObjectNameEXT_ptr);
 				break;
 
 			case "vkCmdDebugMarkerBeginEXT":
-				NativeLib.LoadFunction("vkCmdDebugMarkerBeginEXT", out vkCmdDebugMarkerBeginEXT_ptr);
+				mNativeLib.LoadFunction("vkCmdDebugMarkerBeginEXT", out vkCmdDebugMarkerBeginEXT_ptr);
 				break;
 
 			case "vkCmdDebugMarkerEndEXT":
-				NativeLib.LoadFunction("vkCmdDebugMarkerEndEXT", out vkCmdDebugMarkerEndEXT_ptr);
+				mNativeLib.LoadFunction("vkCmdDebugMarkerEndEXT", out vkCmdDebugMarkerEndEXT_ptr);
 				break;
 
 			case "vkCmdDebugMarkerInsertEXT":
-				NativeLib.LoadFunction("vkCmdDebugMarkerInsertEXT", out vkCmdDebugMarkerInsertEXT_ptr);
+				mNativeLib.LoadFunction("vkCmdDebugMarkerInsertEXT", out vkCmdDebugMarkerInsertEXT_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceVideoCapabilitiesKHR":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceVideoCapabilitiesKHR", out vkGetPhysicalDeviceVideoCapabilitiesKHR_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceVideoCapabilitiesKHR", out vkGetPhysicalDeviceVideoCapabilitiesKHR_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceVideoFormatPropertiesKHR":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceVideoFormatPropertiesKHR", out vkGetPhysicalDeviceVideoFormatPropertiesKHR_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceVideoFormatPropertiesKHR", out vkGetPhysicalDeviceVideoFormatPropertiesKHR_ptr);
 				break;
 
 			case "vkCreateVideoSessionKHR":
-				NativeLib.LoadFunction("vkCreateVideoSessionKHR", out vkCreateVideoSessionKHR_ptr);
+				mNativeLib.LoadFunction("vkCreateVideoSessionKHR", out vkCreateVideoSessionKHR_ptr);
 				break;
 
 			case "vkDestroyVideoSessionKHR":
-				NativeLib.LoadFunction("vkDestroyVideoSessionKHR", out vkDestroyVideoSessionKHR_ptr);
+				mNativeLib.LoadFunction("vkDestroyVideoSessionKHR", out vkDestroyVideoSessionKHR_ptr);
 				break;
 
 			case "vkGetVideoSessionMemoryRequirementsKHR":
-				NativeLib.LoadFunction("vkGetVideoSessionMemoryRequirementsKHR", out vkGetVideoSessionMemoryRequirementsKHR_ptr);
+				mNativeLib.LoadFunction("vkGetVideoSessionMemoryRequirementsKHR", out vkGetVideoSessionMemoryRequirementsKHR_ptr);
 				break;
 
 			case "vkBindVideoSessionMemoryKHR":
-				NativeLib.LoadFunction("vkBindVideoSessionMemoryKHR", out vkBindVideoSessionMemoryKHR_ptr);
+				mNativeLib.LoadFunction("vkBindVideoSessionMemoryKHR", out vkBindVideoSessionMemoryKHR_ptr);
 				break;
 
 			case "vkCreateVideoSessionParametersKHR":
-				NativeLib.LoadFunction("vkCreateVideoSessionParametersKHR", out vkCreateVideoSessionParametersKHR_ptr);
+				mNativeLib.LoadFunction("vkCreateVideoSessionParametersKHR", out vkCreateVideoSessionParametersKHR_ptr);
 				break;
 
 			case "vkUpdateVideoSessionParametersKHR":
-				NativeLib.LoadFunction("vkUpdateVideoSessionParametersKHR", out vkUpdateVideoSessionParametersKHR_ptr);
+				mNativeLib.LoadFunction("vkUpdateVideoSessionParametersKHR", out vkUpdateVideoSessionParametersKHR_ptr);
 				break;
 
 			case "vkDestroyVideoSessionParametersKHR":
-				NativeLib.LoadFunction("vkDestroyVideoSessionParametersKHR", out vkDestroyVideoSessionParametersKHR_ptr);
+				mNativeLib.LoadFunction("vkDestroyVideoSessionParametersKHR", out vkDestroyVideoSessionParametersKHR_ptr);
 				break;
 
 			case "vkCmdBeginVideoCodingKHR":
-				NativeLib.LoadFunction("vkCmdBeginVideoCodingKHR", out vkCmdBeginVideoCodingKHR_ptr);
+				mNativeLib.LoadFunction("vkCmdBeginVideoCodingKHR", out vkCmdBeginVideoCodingKHR_ptr);
 				break;
 
 			case "vkCmdEndVideoCodingKHR":
-				NativeLib.LoadFunction("vkCmdEndVideoCodingKHR", out vkCmdEndVideoCodingKHR_ptr);
+				mNativeLib.LoadFunction("vkCmdEndVideoCodingKHR", out vkCmdEndVideoCodingKHR_ptr);
 				break;
 
 			case "vkCmdControlVideoCodingKHR":
-				NativeLib.LoadFunction("vkCmdControlVideoCodingKHR", out vkCmdControlVideoCodingKHR_ptr);
+				mNativeLib.LoadFunction("vkCmdControlVideoCodingKHR", out vkCmdControlVideoCodingKHR_ptr);
 				break;
 
 			case "vkCmdDecodeVideoKHR":
-				NativeLib.LoadFunction("vkCmdDecodeVideoKHR", out vkCmdDecodeVideoKHR_ptr);
+				mNativeLib.LoadFunction("vkCmdDecodeVideoKHR", out vkCmdDecodeVideoKHR_ptr);
 				break;
 
 			case "vkCmdBindTransformFeedbackBuffersEXT":
-				NativeLib.LoadFunction("vkCmdBindTransformFeedbackBuffersEXT", out vkCmdBindTransformFeedbackBuffersEXT_ptr);
+				mNativeLib.LoadFunction("vkCmdBindTransformFeedbackBuffersEXT", out vkCmdBindTransformFeedbackBuffersEXT_ptr);
 				break;
 
 			case "vkCmdBeginTransformFeedbackEXT":
-				NativeLib.LoadFunction("vkCmdBeginTransformFeedbackEXT", out vkCmdBeginTransformFeedbackEXT_ptr);
+				mNativeLib.LoadFunction("vkCmdBeginTransformFeedbackEXT", out vkCmdBeginTransformFeedbackEXT_ptr);
 				break;
 
 			case "vkCmdEndTransformFeedbackEXT":
-				NativeLib.LoadFunction("vkCmdEndTransformFeedbackEXT", out vkCmdEndTransformFeedbackEXT_ptr);
+				mNativeLib.LoadFunction("vkCmdEndTransformFeedbackEXT", out vkCmdEndTransformFeedbackEXT_ptr);
 				break;
 
 			case "vkCmdBeginQueryIndexedEXT":
-				NativeLib.LoadFunction("vkCmdBeginQueryIndexedEXT", out vkCmdBeginQueryIndexedEXT_ptr);
+				mNativeLib.LoadFunction("vkCmdBeginQueryIndexedEXT", out vkCmdBeginQueryIndexedEXT_ptr);
 				break;
 
 			case "vkCmdEndQueryIndexedEXT":
-				NativeLib.LoadFunction("vkCmdEndQueryIndexedEXT", out vkCmdEndQueryIndexedEXT_ptr);
+				mNativeLib.LoadFunction("vkCmdEndQueryIndexedEXT", out vkCmdEndQueryIndexedEXT_ptr);
 				break;
 
 			case "vkCmdDrawIndirectByteCountEXT":
-				NativeLib.LoadFunction("vkCmdDrawIndirectByteCountEXT", out vkCmdDrawIndirectByteCountEXT_ptr);
+				mNativeLib.LoadFunction("vkCmdDrawIndirectByteCountEXT", out vkCmdDrawIndirectByteCountEXT_ptr);
 				break;
 
 			case "vkCreateCuModuleNVX":
-				NativeLib.LoadFunction("vkCreateCuModuleNVX", out vkCreateCuModuleNVX_ptr);
+				mNativeLib.LoadFunction("vkCreateCuModuleNVX", out vkCreateCuModuleNVX_ptr);
 				break;
 
 			case "vkCreateCuFunctionNVX":
-				NativeLib.LoadFunction("vkCreateCuFunctionNVX", out vkCreateCuFunctionNVX_ptr);
+				mNativeLib.LoadFunction("vkCreateCuFunctionNVX", out vkCreateCuFunctionNVX_ptr);
 				break;
 
 			case "vkDestroyCuModuleNVX":
-				NativeLib.LoadFunction("vkDestroyCuModuleNVX", out vkDestroyCuModuleNVX_ptr);
+				mNativeLib.LoadFunction("vkDestroyCuModuleNVX", out vkDestroyCuModuleNVX_ptr);
 				break;
 
 			case "vkDestroyCuFunctionNVX":
-				NativeLib.LoadFunction("vkDestroyCuFunctionNVX", out vkDestroyCuFunctionNVX_ptr);
+				mNativeLib.LoadFunction("vkDestroyCuFunctionNVX", out vkDestroyCuFunctionNVX_ptr);
 				break;
 
 			case "vkCmdCuLaunchKernelNVX":
-				NativeLib.LoadFunction("vkCmdCuLaunchKernelNVX", out vkCmdCuLaunchKernelNVX_ptr);
+				mNativeLib.LoadFunction("vkCmdCuLaunchKernelNVX", out vkCmdCuLaunchKernelNVX_ptr);
 				break;
 
 			case "vkGetImageViewHandleNVX":
-				NativeLib.LoadFunction("vkGetImageViewHandleNVX", out vkGetImageViewHandleNVX_ptr);
+				mNativeLib.LoadFunction("vkGetImageViewHandleNVX", out vkGetImageViewHandleNVX_ptr);
 				break;
 
 			case "vkGetImageViewAddressNVX":
-				NativeLib.LoadFunction("vkGetImageViewAddressNVX", out vkGetImageViewAddressNVX_ptr);
+				mNativeLib.LoadFunction("vkGetImageViewAddressNVX", out vkGetImageViewAddressNVX_ptr);
 				break;
 
 			case "vkGetShaderInfoAMD":
-				NativeLib.LoadFunction("vkGetShaderInfoAMD", out vkGetShaderInfoAMD_ptr);
+				mNativeLib.LoadFunction("vkGetShaderInfoAMD", out vkGetShaderInfoAMD_ptr);
 				break;
 
 			case "vkCreateStreamDescriptorSurfaceGGP":
-				NativeLib.LoadFunction("vkCreateStreamDescriptorSurfaceGGP", out vkCreateStreamDescriptorSurfaceGGP_ptr);
+				mNativeLib.LoadFunction("vkCreateStreamDescriptorSurfaceGGP", out vkCreateStreamDescriptorSurfaceGGP_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceExternalImageFormatPropertiesNV":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceExternalImageFormatPropertiesNV", out vkGetPhysicalDeviceExternalImageFormatPropertiesNV_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceExternalImageFormatPropertiesNV", out vkGetPhysicalDeviceExternalImageFormatPropertiesNV_ptr);
 				break;
 
 			case "vkGetMemoryWin32HandleNV":
-				NativeLib.LoadFunction("vkGetMemoryWin32HandleNV", out vkGetMemoryWin32HandleNV_ptr);
+				mNativeLib.LoadFunction("vkGetMemoryWin32HandleNV", out vkGetMemoryWin32HandleNV_ptr);
 				break;
 
 			case "vkCreateViSurfaceNN":
-				NativeLib.LoadFunction("vkCreateViSurfaceNN", out vkCreateViSurfaceNN_ptr);
+				mNativeLib.LoadFunction("vkCreateViSurfaceNN", out vkCreateViSurfaceNN_ptr);
 				break;
 
 			case "vkGetMemoryWin32HandleKHR":
-				NativeLib.LoadFunction("vkGetMemoryWin32HandleKHR", out vkGetMemoryWin32HandleKHR_ptr);
+				mNativeLib.LoadFunction("vkGetMemoryWin32HandleKHR", out vkGetMemoryWin32HandleKHR_ptr);
 				break;
 
 			case "vkGetMemoryWin32HandlePropertiesKHR":
-				NativeLib.LoadFunction("vkGetMemoryWin32HandlePropertiesKHR", out vkGetMemoryWin32HandlePropertiesKHR_ptr);
+				mNativeLib.LoadFunction("vkGetMemoryWin32HandlePropertiesKHR", out vkGetMemoryWin32HandlePropertiesKHR_ptr);
 				break;
 
 			case "vkGetMemoryFdKHR":
-				NativeLib.LoadFunction("vkGetMemoryFdKHR", out vkGetMemoryFdKHR_ptr);
+				mNativeLib.LoadFunction("vkGetMemoryFdKHR", out vkGetMemoryFdKHR_ptr);
 				break;
 
 			case "vkGetMemoryFdPropertiesKHR":
-				NativeLib.LoadFunction("vkGetMemoryFdPropertiesKHR", out vkGetMemoryFdPropertiesKHR_ptr);
+				mNativeLib.LoadFunction("vkGetMemoryFdPropertiesKHR", out vkGetMemoryFdPropertiesKHR_ptr);
 				break;
 
 			case "vkImportSemaphoreWin32HandleKHR":
-				NativeLib.LoadFunction("vkImportSemaphoreWin32HandleKHR", out vkImportSemaphoreWin32HandleKHR_ptr);
+				mNativeLib.LoadFunction("vkImportSemaphoreWin32HandleKHR", out vkImportSemaphoreWin32HandleKHR_ptr);
 				break;
 
 			case "vkGetSemaphoreWin32HandleKHR":
-				NativeLib.LoadFunction("vkGetSemaphoreWin32HandleKHR", out vkGetSemaphoreWin32HandleKHR_ptr);
+				mNativeLib.LoadFunction("vkGetSemaphoreWin32HandleKHR", out vkGetSemaphoreWin32HandleKHR_ptr);
 				break;
 
 			case "vkImportSemaphoreFdKHR":
-				NativeLib.LoadFunction("vkImportSemaphoreFdKHR", out vkImportSemaphoreFdKHR_ptr);
+				mNativeLib.LoadFunction("vkImportSemaphoreFdKHR", out vkImportSemaphoreFdKHR_ptr);
 				break;
 
 			case "vkGetSemaphoreFdKHR":
-				NativeLib.LoadFunction("vkGetSemaphoreFdKHR", out vkGetSemaphoreFdKHR_ptr);
+				mNativeLib.LoadFunction("vkGetSemaphoreFdKHR", out vkGetSemaphoreFdKHR_ptr);
 				break;
 
 			case "vkCmdPushDescriptorSetKHR":
-				NativeLib.LoadFunction("vkCmdPushDescriptorSetKHR", out vkCmdPushDescriptorSetKHR_ptr);
+				mNativeLib.LoadFunction("vkCmdPushDescriptorSetKHR", out vkCmdPushDescriptorSetKHR_ptr);
 				break;
 
 			case "vkCmdBeginConditionalRenderingEXT":
-				NativeLib.LoadFunction("vkCmdBeginConditionalRenderingEXT", out vkCmdBeginConditionalRenderingEXT_ptr);
+				mNativeLib.LoadFunction("vkCmdBeginConditionalRenderingEXT", out vkCmdBeginConditionalRenderingEXT_ptr);
 				break;
 
 			case "vkCmdEndConditionalRenderingEXT":
-				NativeLib.LoadFunction("vkCmdEndConditionalRenderingEXT", out vkCmdEndConditionalRenderingEXT_ptr);
+				mNativeLib.LoadFunction("vkCmdEndConditionalRenderingEXT", out vkCmdEndConditionalRenderingEXT_ptr);
 				break;
 
 			case "vkCmdSetViewportWScalingNV":
-				NativeLib.LoadFunction("vkCmdSetViewportWScalingNV", out vkCmdSetViewportWScalingNV_ptr);
+				mNativeLib.LoadFunction("vkCmdSetViewportWScalingNV", out vkCmdSetViewportWScalingNV_ptr);
 				break;
 
 			case "vkReleaseDisplayEXT":
-				NativeLib.LoadFunction("vkReleaseDisplayEXT", out vkReleaseDisplayEXT_ptr);
+				mNativeLib.LoadFunction("vkReleaseDisplayEXT", out vkReleaseDisplayEXT_ptr);
 				break;
 
 			case "vkAcquireXlibDisplayEXT":
-				NativeLib.LoadFunction("vkAcquireXlibDisplayEXT", out vkAcquireXlibDisplayEXT_ptr);
+				mNativeLib.LoadFunction("vkAcquireXlibDisplayEXT", out vkAcquireXlibDisplayEXT_ptr);
 				break;
 
 			case "vkGetRandROutputDisplayEXT":
-				NativeLib.LoadFunction("vkGetRandROutputDisplayEXT", out vkGetRandROutputDisplayEXT_ptr);
+				mNativeLib.LoadFunction("vkGetRandROutputDisplayEXT", out vkGetRandROutputDisplayEXT_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceSurfaceCapabilities2EXT":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceSurfaceCapabilities2EXT", out vkGetPhysicalDeviceSurfaceCapabilities2EXT_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceSurfaceCapabilities2EXT", out vkGetPhysicalDeviceSurfaceCapabilities2EXT_ptr);
 				break;
 
 			case "vkDisplayPowerControlEXT":
-				NativeLib.LoadFunction("vkDisplayPowerControlEXT", out vkDisplayPowerControlEXT_ptr);
+				mNativeLib.LoadFunction("vkDisplayPowerControlEXT", out vkDisplayPowerControlEXT_ptr);
 				break;
 
 			case "vkRegisterDeviceEventEXT":
-				NativeLib.LoadFunction("vkRegisterDeviceEventEXT", out vkRegisterDeviceEventEXT_ptr);
+				mNativeLib.LoadFunction("vkRegisterDeviceEventEXT", out vkRegisterDeviceEventEXT_ptr);
 				break;
 
 			case "vkRegisterDisplayEventEXT":
-				NativeLib.LoadFunction("vkRegisterDisplayEventEXT", out vkRegisterDisplayEventEXT_ptr);
+				mNativeLib.LoadFunction("vkRegisterDisplayEventEXT", out vkRegisterDisplayEventEXT_ptr);
 				break;
 
 			case "vkGetSwapchainCounterEXT":
-				NativeLib.LoadFunction("vkGetSwapchainCounterEXT", out vkGetSwapchainCounterEXT_ptr);
+				mNativeLib.LoadFunction("vkGetSwapchainCounterEXT", out vkGetSwapchainCounterEXT_ptr);
 				break;
 
 			case "vkGetRefreshCycleDurationGOOGLE":
-				NativeLib.LoadFunction("vkGetRefreshCycleDurationGOOGLE", out vkGetRefreshCycleDurationGOOGLE_ptr);
+				mNativeLib.LoadFunction("vkGetRefreshCycleDurationGOOGLE", out vkGetRefreshCycleDurationGOOGLE_ptr);
 				break;
 
 			case "vkGetPastPresentationTimingGOOGLE":
-				NativeLib.LoadFunction("vkGetPastPresentationTimingGOOGLE", out vkGetPastPresentationTimingGOOGLE_ptr);
+				mNativeLib.LoadFunction("vkGetPastPresentationTimingGOOGLE", out vkGetPastPresentationTimingGOOGLE_ptr);
 				break;
 
 			case "vkCmdSetDiscardRectangleEXT":
-				NativeLib.LoadFunction("vkCmdSetDiscardRectangleEXT", out vkCmdSetDiscardRectangleEXT_ptr);
+				mNativeLib.LoadFunction("vkCmdSetDiscardRectangleEXT", out vkCmdSetDiscardRectangleEXT_ptr);
 				break;
 
 			case "vkSetHdrMetadataEXT":
-				NativeLib.LoadFunction("vkSetHdrMetadataEXT", out vkSetHdrMetadataEXT_ptr);
+				mNativeLib.LoadFunction("vkSetHdrMetadataEXT", out vkSetHdrMetadataEXT_ptr);
 				break;
 
 			case "vkGetSwapchainStatusKHR":
-				NativeLib.LoadFunction("vkGetSwapchainStatusKHR", out vkGetSwapchainStatusKHR_ptr);
+				mNativeLib.LoadFunction("vkGetSwapchainStatusKHR", out vkGetSwapchainStatusKHR_ptr);
 				break;
 
 			case "vkImportFenceWin32HandleKHR":
-				NativeLib.LoadFunction("vkImportFenceWin32HandleKHR", out vkImportFenceWin32HandleKHR_ptr);
+				mNativeLib.LoadFunction("vkImportFenceWin32HandleKHR", out vkImportFenceWin32HandleKHR_ptr);
 				break;
 
 			case "vkGetFenceWin32HandleKHR":
-				NativeLib.LoadFunction("vkGetFenceWin32HandleKHR", out vkGetFenceWin32HandleKHR_ptr);
+				mNativeLib.LoadFunction("vkGetFenceWin32HandleKHR", out vkGetFenceWin32HandleKHR_ptr);
 				break;
 
 			case "vkImportFenceFdKHR":
-				NativeLib.LoadFunction("vkImportFenceFdKHR", out vkImportFenceFdKHR_ptr);
+				mNativeLib.LoadFunction("vkImportFenceFdKHR", out vkImportFenceFdKHR_ptr);
 				break;
 
 			case "vkGetFenceFdKHR":
-				NativeLib.LoadFunction("vkGetFenceFdKHR", out vkGetFenceFdKHR_ptr);
+				mNativeLib.LoadFunction("vkGetFenceFdKHR", out vkGetFenceFdKHR_ptr);
 				break;
 
 			case "vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR":
-				NativeLib.LoadFunction("vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR", out vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR_ptr);
+				mNativeLib.LoadFunction("vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR", out vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR", out vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR", out vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR_ptr);
 				break;
 
 			case "vkAcquireProfilingLockKHR":
-				NativeLib.LoadFunction("vkAcquireProfilingLockKHR", out vkAcquireProfilingLockKHR_ptr);
+				mNativeLib.LoadFunction("vkAcquireProfilingLockKHR", out vkAcquireProfilingLockKHR_ptr);
 				break;
 
 			case "vkReleaseProfilingLockKHR":
-				NativeLib.LoadFunction("vkReleaseProfilingLockKHR", out vkReleaseProfilingLockKHR_ptr);
+				mNativeLib.LoadFunction("vkReleaseProfilingLockKHR", out vkReleaseProfilingLockKHR_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceSurfaceCapabilities2KHR":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceSurfaceCapabilities2KHR", out vkGetPhysicalDeviceSurfaceCapabilities2KHR_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceSurfaceCapabilities2KHR", out vkGetPhysicalDeviceSurfaceCapabilities2KHR_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceSurfaceFormats2KHR":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceSurfaceFormats2KHR", out vkGetPhysicalDeviceSurfaceFormats2KHR_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceSurfaceFormats2KHR", out vkGetPhysicalDeviceSurfaceFormats2KHR_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceDisplayProperties2KHR":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceDisplayProperties2KHR", out vkGetPhysicalDeviceDisplayProperties2KHR_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceDisplayProperties2KHR", out vkGetPhysicalDeviceDisplayProperties2KHR_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceDisplayPlaneProperties2KHR":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceDisplayPlaneProperties2KHR", out vkGetPhysicalDeviceDisplayPlaneProperties2KHR_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceDisplayPlaneProperties2KHR", out vkGetPhysicalDeviceDisplayPlaneProperties2KHR_ptr);
 				break;
 
 			case "vkGetDisplayModeProperties2KHR":
-				NativeLib.LoadFunction("vkGetDisplayModeProperties2KHR", out vkGetDisplayModeProperties2KHR_ptr);
+				mNativeLib.LoadFunction("vkGetDisplayModeProperties2KHR", out vkGetDisplayModeProperties2KHR_ptr);
 				break;
 
 			case "vkGetDisplayPlaneCapabilities2KHR":
-				NativeLib.LoadFunction("vkGetDisplayPlaneCapabilities2KHR", out vkGetDisplayPlaneCapabilities2KHR_ptr);
+				mNativeLib.LoadFunction("vkGetDisplayPlaneCapabilities2KHR", out vkGetDisplayPlaneCapabilities2KHR_ptr);
 				break;
 
 			case "vkCreateIOSSurfaceMVK":
-				NativeLib.LoadFunction("vkCreateIOSSurfaceMVK", out vkCreateIOSSurfaceMVK_ptr);
+				mNativeLib.LoadFunction("vkCreateIOSSurfaceMVK", out vkCreateIOSSurfaceMVK_ptr);
 				break;
 
 			case "vkCreateMacOSSurfaceMVK":
-				NativeLib.LoadFunction("vkCreateMacOSSurfaceMVK", out vkCreateMacOSSurfaceMVK_ptr);
+				mNativeLib.LoadFunction("vkCreateMacOSSurfaceMVK", out vkCreateMacOSSurfaceMVK_ptr);
 				break;
 
 			case "vkSetDebugUtilsObjectNameEXT":
-				NativeLib.LoadFunction("vkSetDebugUtilsObjectNameEXT", out vkSetDebugUtilsObjectNameEXT_ptr);
+				mNativeLib.LoadFunction("vkSetDebugUtilsObjectNameEXT", out vkSetDebugUtilsObjectNameEXT_ptr);
 				break;
 
 			case "vkSetDebugUtilsObjectTagEXT":
-				NativeLib.LoadFunction("vkSetDebugUtilsObjectTagEXT", out vkSetDebugUtilsObjectTagEXT_ptr);
+				mNativeLib.LoadFunction("vkSetDebugUtilsObjectTagEXT", out vkSetDebugUtilsObjectTagEXT_ptr);
 				break;
 
 			case "vkQueueBeginDebugUtilsLabelEXT":
-				NativeLib.LoadFunction("vkQueueBeginDebugUtilsLabelEXT", out vkQueueBeginDebugUtilsLabelEXT_ptr);
+				mNativeLib.LoadFunction("vkQueueBeginDebugUtilsLabelEXT", out vkQueueBeginDebugUtilsLabelEXT_ptr);
 				break;
 
 			case "vkQueueEndDebugUtilsLabelEXT":
-				NativeLib.LoadFunction("vkQueueEndDebugUtilsLabelEXT", out vkQueueEndDebugUtilsLabelEXT_ptr);
+				mNativeLib.LoadFunction("vkQueueEndDebugUtilsLabelEXT", out vkQueueEndDebugUtilsLabelEXT_ptr);
 				break;
 
 			case "vkQueueInsertDebugUtilsLabelEXT":
-				NativeLib.LoadFunction("vkQueueInsertDebugUtilsLabelEXT", out vkQueueInsertDebugUtilsLabelEXT_ptr);
+				mNativeLib.LoadFunction("vkQueueInsertDebugUtilsLabelEXT", out vkQueueInsertDebugUtilsLabelEXT_ptr);
 				break;
 
 			case "vkCmdBeginDebugUtilsLabelEXT":
-				NativeLib.LoadFunction("vkCmdBeginDebugUtilsLabelEXT", out vkCmdBeginDebugUtilsLabelEXT_ptr);
+				mNativeLib.LoadFunction("vkCmdBeginDebugUtilsLabelEXT", out vkCmdBeginDebugUtilsLabelEXT_ptr);
 				break;
 
 			case "vkCmdEndDebugUtilsLabelEXT":
-				NativeLib.LoadFunction("vkCmdEndDebugUtilsLabelEXT", out vkCmdEndDebugUtilsLabelEXT_ptr);
+				mNativeLib.LoadFunction("vkCmdEndDebugUtilsLabelEXT", out vkCmdEndDebugUtilsLabelEXT_ptr);
 				break;
 
 			case "vkCmdInsertDebugUtilsLabelEXT":
-				NativeLib.LoadFunction("vkCmdInsertDebugUtilsLabelEXT", out vkCmdInsertDebugUtilsLabelEXT_ptr);
+				mNativeLib.LoadFunction("vkCmdInsertDebugUtilsLabelEXT", out vkCmdInsertDebugUtilsLabelEXT_ptr);
 				break;
 
 			case "vkCreateDebugUtilsMessengerEXT":
-				NativeLib.LoadFunction("vkCreateDebugUtilsMessengerEXT", out vkCreateDebugUtilsMessengerEXT_ptr);
+				mNativeLib.LoadFunction("vkCreateDebugUtilsMessengerEXT", out vkCreateDebugUtilsMessengerEXT_ptr);
 				break;
 
 			case "vkDestroyDebugUtilsMessengerEXT":
-				NativeLib.LoadFunction("vkDestroyDebugUtilsMessengerEXT", out vkDestroyDebugUtilsMessengerEXT_ptr);
+				mNativeLib.LoadFunction("vkDestroyDebugUtilsMessengerEXT", out vkDestroyDebugUtilsMessengerEXT_ptr);
 				break;
 
 			case "vkSubmitDebugUtilsMessageEXT":
-				NativeLib.LoadFunction("vkSubmitDebugUtilsMessageEXT", out vkSubmitDebugUtilsMessageEXT_ptr);
+				mNativeLib.LoadFunction("vkSubmitDebugUtilsMessageEXT", out vkSubmitDebugUtilsMessageEXT_ptr);
 				break;
 
 			case "vkGetAndroidHardwareBufferPropertiesANDROID":
-				NativeLib.LoadFunction("vkGetAndroidHardwareBufferPropertiesANDROID", out vkGetAndroidHardwareBufferPropertiesANDROID_ptr);
+				mNativeLib.LoadFunction("vkGetAndroidHardwareBufferPropertiesANDROID", out vkGetAndroidHardwareBufferPropertiesANDROID_ptr);
 				break;
 
 			case "vkGetMemoryAndroidHardwareBufferANDROID":
-				NativeLib.LoadFunction("vkGetMemoryAndroidHardwareBufferANDROID", out vkGetMemoryAndroidHardwareBufferANDROID_ptr);
+				mNativeLib.LoadFunction("vkGetMemoryAndroidHardwareBufferANDROID", out vkGetMemoryAndroidHardwareBufferANDROID_ptr);
 				break;
 
 			case "vkCmdSetSampleLocationsEXT":
-				NativeLib.LoadFunction("vkCmdSetSampleLocationsEXT", out vkCmdSetSampleLocationsEXT_ptr);
+				mNativeLib.LoadFunction("vkCmdSetSampleLocationsEXT", out vkCmdSetSampleLocationsEXT_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceMultisamplePropertiesEXT":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceMultisamplePropertiesEXT", out vkGetPhysicalDeviceMultisamplePropertiesEXT_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceMultisamplePropertiesEXT", out vkGetPhysicalDeviceMultisamplePropertiesEXT_ptr);
 				break;
 
 			case "vkCreateAccelerationStructureKHR":
-				NativeLib.LoadFunction("vkCreateAccelerationStructureKHR", out vkCreateAccelerationStructureKHR_ptr);
+				mNativeLib.LoadFunction("vkCreateAccelerationStructureKHR", out vkCreateAccelerationStructureKHR_ptr);
 				break;
 
 			case "vkDestroyAccelerationStructureKHR":
-				NativeLib.LoadFunction("vkDestroyAccelerationStructureKHR", out vkDestroyAccelerationStructureKHR_ptr);
+				mNativeLib.LoadFunction("vkDestroyAccelerationStructureKHR", out vkDestroyAccelerationStructureKHR_ptr);
 				break;
 
 			case "vkCmdBuildAccelerationStructuresKHR":
-				NativeLib.LoadFunction("vkCmdBuildAccelerationStructuresKHR", out vkCmdBuildAccelerationStructuresKHR_ptr);
+				mNativeLib.LoadFunction("vkCmdBuildAccelerationStructuresKHR", out vkCmdBuildAccelerationStructuresKHR_ptr);
 				break;
 
 			case "vkCmdBuildAccelerationStructuresIndirectKHR":
-				NativeLib.LoadFunction("vkCmdBuildAccelerationStructuresIndirectKHR", out vkCmdBuildAccelerationStructuresIndirectKHR_ptr);
+				mNativeLib.LoadFunction("vkCmdBuildAccelerationStructuresIndirectKHR", out vkCmdBuildAccelerationStructuresIndirectKHR_ptr);
 				break;
 
 			case "vkBuildAccelerationStructuresKHR":
-				NativeLib.LoadFunction("vkBuildAccelerationStructuresKHR", out vkBuildAccelerationStructuresKHR_ptr);
+				mNativeLib.LoadFunction("vkBuildAccelerationStructuresKHR", out vkBuildAccelerationStructuresKHR_ptr);
 				break;
 
 			case "vkCopyAccelerationStructureKHR":
-				NativeLib.LoadFunction("vkCopyAccelerationStructureKHR", out vkCopyAccelerationStructureKHR_ptr);
+				mNativeLib.LoadFunction("vkCopyAccelerationStructureKHR", out vkCopyAccelerationStructureKHR_ptr);
 				break;
 
 			case "vkCopyAccelerationStructureToMemoryKHR":
-				NativeLib.LoadFunction("vkCopyAccelerationStructureToMemoryKHR", out vkCopyAccelerationStructureToMemoryKHR_ptr);
+				mNativeLib.LoadFunction("vkCopyAccelerationStructureToMemoryKHR", out vkCopyAccelerationStructureToMemoryKHR_ptr);
 				break;
 
 			case "vkCopyMemoryToAccelerationStructureKHR":
-				NativeLib.LoadFunction("vkCopyMemoryToAccelerationStructureKHR", out vkCopyMemoryToAccelerationStructureKHR_ptr);
+				mNativeLib.LoadFunction("vkCopyMemoryToAccelerationStructureKHR", out vkCopyMemoryToAccelerationStructureKHR_ptr);
 				break;
 
 			case "vkWriteAccelerationStructuresPropertiesKHR":
-				NativeLib.LoadFunction("vkWriteAccelerationStructuresPropertiesKHR", out vkWriteAccelerationStructuresPropertiesKHR_ptr);
+				mNativeLib.LoadFunction("vkWriteAccelerationStructuresPropertiesKHR", out vkWriteAccelerationStructuresPropertiesKHR_ptr);
 				break;
 
 			case "vkCmdCopyAccelerationStructureKHR":
-				NativeLib.LoadFunction("vkCmdCopyAccelerationStructureKHR", out vkCmdCopyAccelerationStructureKHR_ptr);
+				mNativeLib.LoadFunction("vkCmdCopyAccelerationStructureKHR", out vkCmdCopyAccelerationStructureKHR_ptr);
 				break;
 
 			case "vkCmdCopyAccelerationStructureToMemoryKHR":
-				NativeLib.LoadFunction("vkCmdCopyAccelerationStructureToMemoryKHR", out vkCmdCopyAccelerationStructureToMemoryKHR_ptr);
+				mNativeLib.LoadFunction("vkCmdCopyAccelerationStructureToMemoryKHR", out vkCmdCopyAccelerationStructureToMemoryKHR_ptr);
 				break;
 
 			case "vkCmdCopyMemoryToAccelerationStructureKHR":
-				NativeLib.LoadFunction("vkCmdCopyMemoryToAccelerationStructureKHR", out vkCmdCopyMemoryToAccelerationStructureKHR_ptr);
+				mNativeLib.LoadFunction("vkCmdCopyMemoryToAccelerationStructureKHR", out vkCmdCopyMemoryToAccelerationStructureKHR_ptr);
 				break;
 
 			case "vkGetAccelerationStructureDeviceAddressKHR":
-				NativeLib.LoadFunction("vkGetAccelerationStructureDeviceAddressKHR", out vkGetAccelerationStructureDeviceAddressKHR_ptr);
+				mNativeLib.LoadFunction("vkGetAccelerationStructureDeviceAddressKHR", out vkGetAccelerationStructureDeviceAddressKHR_ptr);
 				break;
 
 			case "vkCmdWriteAccelerationStructuresPropertiesKHR":
-				NativeLib.LoadFunction("vkCmdWriteAccelerationStructuresPropertiesKHR", out vkCmdWriteAccelerationStructuresPropertiesKHR_ptr);
+				mNativeLib.LoadFunction("vkCmdWriteAccelerationStructuresPropertiesKHR", out vkCmdWriteAccelerationStructuresPropertiesKHR_ptr);
 				break;
 
 			case "vkGetDeviceAccelerationStructureCompatibilityKHR":
-				NativeLib.LoadFunction("vkGetDeviceAccelerationStructureCompatibilityKHR", out vkGetDeviceAccelerationStructureCompatibilityKHR_ptr);
+				mNativeLib.LoadFunction("vkGetDeviceAccelerationStructureCompatibilityKHR", out vkGetDeviceAccelerationStructureCompatibilityKHR_ptr);
 				break;
 
 			case "vkGetAccelerationStructureBuildSizesKHR":
-				NativeLib.LoadFunction("vkGetAccelerationStructureBuildSizesKHR", out vkGetAccelerationStructureBuildSizesKHR_ptr);
+				mNativeLib.LoadFunction("vkGetAccelerationStructureBuildSizesKHR", out vkGetAccelerationStructureBuildSizesKHR_ptr);
 				break;
 
 			case "vkCmdTraceRaysKHR":
-				NativeLib.LoadFunction("vkCmdTraceRaysKHR", out vkCmdTraceRaysKHR_ptr);
+				mNativeLib.LoadFunction("vkCmdTraceRaysKHR", out vkCmdTraceRaysKHR_ptr);
 				break;
 
 			case "vkCreateRayTracingPipelinesKHR":
-				NativeLib.LoadFunction("vkCreateRayTracingPipelinesKHR", out vkCreateRayTracingPipelinesKHR_ptr);
+				mNativeLib.LoadFunction("vkCreateRayTracingPipelinesKHR", out vkCreateRayTracingPipelinesKHR_ptr);
 				break;
 
 			case "vkGetRayTracingShaderGroupHandlesKHR":
-				NativeLib.LoadFunction("vkGetRayTracingShaderGroupHandlesKHR", out vkGetRayTracingShaderGroupHandlesKHR_ptr);
+				mNativeLib.LoadFunction("vkGetRayTracingShaderGroupHandlesKHR", out vkGetRayTracingShaderGroupHandlesKHR_ptr);
 				break;
 
 			case "vkGetRayTracingCaptureReplayShaderGroupHandlesKHR":
-				NativeLib.LoadFunction("vkGetRayTracingCaptureReplayShaderGroupHandlesKHR", out vkGetRayTracingCaptureReplayShaderGroupHandlesKHR_ptr);
+				mNativeLib.LoadFunction("vkGetRayTracingCaptureReplayShaderGroupHandlesKHR", out vkGetRayTracingCaptureReplayShaderGroupHandlesKHR_ptr);
 				break;
 
 			case "vkCmdTraceRaysIndirectKHR":
-				NativeLib.LoadFunction("vkCmdTraceRaysIndirectKHR", out vkCmdTraceRaysIndirectKHR_ptr);
+				mNativeLib.LoadFunction("vkCmdTraceRaysIndirectKHR", out vkCmdTraceRaysIndirectKHR_ptr);
 				break;
 
 			case "vkGetRayTracingShaderGroupStackSizeKHR":
-				NativeLib.LoadFunction("vkGetRayTracingShaderGroupStackSizeKHR", out vkGetRayTracingShaderGroupStackSizeKHR_ptr);
+				mNativeLib.LoadFunction("vkGetRayTracingShaderGroupStackSizeKHR", out vkGetRayTracingShaderGroupStackSizeKHR_ptr);
 				break;
 
 			case "vkCmdSetRayTracingPipelineStackSizeKHR":
-				NativeLib.LoadFunction("vkCmdSetRayTracingPipelineStackSizeKHR", out vkCmdSetRayTracingPipelineStackSizeKHR_ptr);
+				mNativeLib.LoadFunction("vkCmdSetRayTracingPipelineStackSizeKHR", out vkCmdSetRayTracingPipelineStackSizeKHR_ptr);
 				break;
 
 			case "vkGetImageDrmFormatModifierPropertiesEXT":
-				NativeLib.LoadFunction("vkGetImageDrmFormatModifierPropertiesEXT", out vkGetImageDrmFormatModifierPropertiesEXT_ptr);
+				mNativeLib.LoadFunction("vkGetImageDrmFormatModifierPropertiesEXT", out vkGetImageDrmFormatModifierPropertiesEXT_ptr);
 				break;
 
 			case "vkCreateValidationCacheEXT":
-				NativeLib.LoadFunction("vkCreateValidationCacheEXT", out vkCreateValidationCacheEXT_ptr);
+				mNativeLib.LoadFunction("vkCreateValidationCacheEXT", out vkCreateValidationCacheEXT_ptr);
 				break;
 
 			case "vkDestroyValidationCacheEXT":
-				NativeLib.LoadFunction("vkDestroyValidationCacheEXT", out vkDestroyValidationCacheEXT_ptr);
+				mNativeLib.LoadFunction("vkDestroyValidationCacheEXT", out vkDestroyValidationCacheEXT_ptr);
 				break;
 
 			case "vkMergeValidationCachesEXT":
-				NativeLib.LoadFunction("vkMergeValidationCachesEXT", out vkMergeValidationCachesEXT_ptr);
+				mNativeLib.LoadFunction("vkMergeValidationCachesEXT", out vkMergeValidationCachesEXT_ptr);
 				break;
 
 			case "vkGetValidationCacheDataEXT":
-				NativeLib.LoadFunction("vkGetValidationCacheDataEXT", out vkGetValidationCacheDataEXT_ptr);
+				mNativeLib.LoadFunction("vkGetValidationCacheDataEXT", out vkGetValidationCacheDataEXT_ptr);
 				break;
 
 			case "vkCmdBindShadingRateImageNV":
-				NativeLib.LoadFunction("vkCmdBindShadingRateImageNV", out vkCmdBindShadingRateImageNV_ptr);
+				mNativeLib.LoadFunction("vkCmdBindShadingRateImageNV", out vkCmdBindShadingRateImageNV_ptr);
 				break;
 
 			case "vkCmdSetViewportShadingRatePaletteNV":
-				NativeLib.LoadFunction("vkCmdSetViewportShadingRatePaletteNV", out vkCmdSetViewportShadingRatePaletteNV_ptr);
+				mNativeLib.LoadFunction("vkCmdSetViewportShadingRatePaletteNV", out vkCmdSetViewportShadingRatePaletteNV_ptr);
 				break;
 
 			case "vkCmdSetCoarseSampleOrderNV":
-				NativeLib.LoadFunction("vkCmdSetCoarseSampleOrderNV", out vkCmdSetCoarseSampleOrderNV_ptr);
+				mNativeLib.LoadFunction("vkCmdSetCoarseSampleOrderNV", out vkCmdSetCoarseSampleOrderNV_ptr);
 				break;
 
 			case "vkCreateAccelerationStructureNV":
-				NativeLib.LoadFunction("vkCreateAccelerationStructureNV", out vkCreateAccelerationStructureNV_ptr);
+				mNativeLib.LoadFunction("vkCreateAccelerationStructureNV", out vkCreateAccelerationStructureNV_ptr);
 				break;
 
 			case "vkDestroyAccelerationStructureNV":
-				NativeLib.LoadFunction("vkDestroyAccelerationStructureNV", out vkDestroyAccelerationStructureNV_ptr);
+				mNativeLib.LoadFunction("vkDestroyAccelerationStructureNV", out vkDestroyAccelerationStructureNV_ptr);
 				break;
 
 			case "vkGetAccelerationStructureMemoryRequirementsNV":
-				NativeLib.LoadFunction("vkGetAccelerationStructureMemoryRequirementsNV", out vkGetAccelerationStructureMemoryRequirementsNV_ptr);
+				mNativeLib.LoadFunction("vkGetAccelerationStructureMemoryRequirementsNV", out vkGetAccelerationStructureMemoryRequirementsNV_ptr);
 				break;
 
 			case "vkBindAccelerationStructureMemoryNV":
-				NativeLib.LoadFunction("vkBindAccelerationStructureMemoryNV", out vkBindAccelerationStructureMemoryNV_ptr);
+				mNativeLib.LoadFunction("vkBindAccelerationStructureMemoryNV", out vkBindAccelerationStructureMemoryNV_ptr);
 				break;
 
 			case "vkCmdBuildAccelerationStructureNV":
-				NativeLib.LoadFunction("vkCmdBuildAccelerationStructureNV", out vkCmdBuildAccelerationStructureNV_ptr);
+				mNativeLib.LoadFunction("vkCmdBuildAccelerationStructureNV", out vkCmdBuildAccelerationStructureNV_ptr);
 				break;
 
 			case "vkCmdCopyAccelerationStructureNV":
-				NativeLib.LoadFunction("vkCmdCopyAccelerationStructureNV", out vkCmdCopyAccelerationStructureNV_ptr);
+				mNativeLib.LoadFunction("vkCmdCopyAccelerationStructureNV", out vkCmdCopyAccelerationStructureNV_ptr);
 				break;
 
 			case "vkCmdTraceRaysNV":
-				NativeLib.LoadFunction("vkCmdTraceRaysNV", out vkCmdTraceRaysNV_ptr);
+				mNativeLib.LoadFunction("vkCmdTraceRaysNV", out vkCmdTraceRaysNV_ptr);
 				break;
 
 			case "vkCreateRayTracingPipelinesNV":
-				NativeLib.LoadFunction("vkCreateRayTracingPipelinesNV", out vkCreateRayTracingPipelinesNV_ptr);
+				mNativeLib.LoadFunction("vkCreateRayTracingPipelinesNV", out vkCreateRayTracingPipelinesNV_ptr);
 				break;
 
 			case "vkGetAccelerationStructureHandleNV":
-				NativeLib.LoadFunction("vkGetAccelerationStructureHandleNV", out vkGetAccelerationStructureHandleNV_ptr);
+				mNativeLib.LoadFunction("vkGetAccelerationStructureHandleNV", out vkGetAccelerationStructureHandleNV_ptr);
 				break;
 
 			case "vkCmdWriteAccelerationStructuresPropertiesNV":
-				NativeLib.LoadFunction("vkCmdWriteAccelerationStructuresPropertiesNV", out vkCmdWriteAccelerationStructuresPropertiesNV_ptr);
+				mNativeLib.LoadFunction("vkCmdWriteAccelerationStructuresPropertiesNV", out vkCmdWriteAccelerationStructuresPropertiesNV_ptr);
 				break;
 
 			case "vkCompileDeferredNV":
-				NativeLib.LoadFunction("vkCompileDeferredNV", out vkCompileDeferredNV_ptr);
+				mNativeLib.LoadFunction("vkCompileDeferredNV", out vkCompileDeferredNV_ptr);
 				break;
 
 			case "vkGetMemoryHostPointerPropertiesEXT":
-				NativeLib.LoadFunction("vkGetMemoryHostPointerPropertiesEXT", out vkGetMemoryHostPointerPropertiesEXT_ptr);
+				mNativeLib.LoadFunction("vkGetMemoryHostPointerPropertiesEXT", out vkGetMemoryHostPointerPropertiesEXT_ptr);
 				break;
 
 			case "vkCmdWriteBufferMarkerAMD":
-				NativeLib.LoadFunction("vkCmdWriteBufferMarkerAMD", out vkCmdWriteBufferMarkerAMD_ptr);
+				mNativeLib.LoadFunction("vkCmdWriteBufferMarkerAMD", out vkCmdWriteBufferMarkerAMD_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceCalibrateableTimeDomainsEXT":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceCalibrateableTimeDomainsEXT", out vkGetPhysicalDeviceCalibrateableTimeDomainsEXT_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceCalibrateableTimeDomainsEXT", out vkGetPhysicalDeviceCalibrateableTimeDomainsEXT_ptr);
 				break;
 
 			case "vkGetCalibratedTimestampsEXT":
-				NativeLib.LoadFunction("vkGetCalibratedTimestampsEXT", out vkGetCalibratedTimestampsEXT_ptr);
+				mNativeLib.LoadFunction("vkGetCalibratedTimestampsEXT", out vkGetCalibratedTimestampsEXT_ptr);
 				break;
 
 			case "vkCmdDrawMeshTasksNV":
-				NativeLib.LoadFunction("vkCmdDrawMeshTasksNV", out vkCmdDrawMeshTasksNV_ptr);
+				mNativeLib.LoadFunction("vkCmdDrawMeshTasksNV", out vkCmdDrawMeshTasksNV_ptr);
 				break;
 
 			case "vkCmdDrawMeshTasksIndirectNV":
-				NativeLib.LoadFunction("vkCmdDrawMeshTasksIndirectNV", out vkCmdDrawMeshTasksIndirectNV_ptr);
+				mNativeLib.LoadFunction("vkCmdDrawMeshTasksIndirectNV", out vkCmdDrawMeshTasksIndirectNV_ptr);
 				break;
 
 			case "vkCmdDrawMeshTasksIndirectCountNV":
-				NativeLib.LoadFunction("vkCmdDrawMeshTasksIndirectCountNV", out vkCmdDrawMeshTasksIndirectCountNV_ptr);
+				mNativeLib.LoadFunction("vkCmdDrawMeshTasksIndirectCountNV", out vkCmdDrawMeshTasksIndirectCountNV_ptr);
 				break;
 
 			case "vkCmdSetExclusiveScissorNV":
-				NativeLib.LoadFunction("vkCmdSetExclusiveScissorNV", out vkCmdSetExclusiveScissorNV_ptr);
+				mNativeLib.LoadFunction("vkCmdSetExclusiveScissorNV", out vkCmdSetExclusiveScissorNV_ptr);
 				break;
 
 			case "vkCmdSetCheckpointNV":
-				NativeLib.LoadFunction("vkCmdSetCheckpointNV", out vkCmdSetCheckpointNV_ptr);
+				mNativeLib.LoadFunction("vkCmdSetCheckpointNV", out vkCmdSetCheckpointNV_ptr);
 				break;
 
 			case "vkGetQueueCheckpointDataNV":
-				NativeLib.LoadFunction("vkGetQueueCheckpointDataNV", out vkGetQueueCheckpointDataNV_ptr);
+				mNativeLib.LoadFunction("vkGetQueueCheckpointDataNV", out vkGetQueueCheckpointDataNV_ptr);
 				break;
 
 			case "vkInitializePerformanceApiINTEL":
-				NativeLib.LoadFunction("vkInitializePerformanceApiINTEL", out vkInitializePerformanceApiINTEL_ptr);
+				mNativeLib.LoadFunction("vkInitializePerformanceApiINTEL", out vkInitializePerformanceApiINTEL_ptr);
 				break;
 
 			case "vkUninitializePerformanceApiINTEL":
-				NativeLib.LoadFunction("vkUninitializePerformanceApiINTEL", out vkUninitializePerformanceApiINTEL_ptr);
+				mNativeLib.LoadFunction("vkUninitializePerformanceApiINTEL", out vkUninitializePerformanceApiINTEL_ptr);
 				break;
 
 			case "vkCmdSetPerformanceMarkerINTEL":
-				NativeLib.LoadFunction("vkCmdSetPerformanceMarkerINTEL", out vkCmdSetPerformanceMarkerINTEL_ptr);
+				mNativeLib.LoadFunction("vkCmdSetPerformanceMarkerINTEL", out vkCmdSetPerformanceMarkerINTEL_ptr);
 				break;
 
 			case "vkCmdSetPerformanceStreamMarkerINTEL":
-				NativeLib.LoadFunction("vkCmdSetPerformanceStreamMarkerINTEL", out vkCmdSetPerformanceStreamMarkerINTEL_ptr);
+				mNativeLib.LoadFunction("vkCmdSetPerformanceStreamMarkerINTEL", out vkCmdSetPerformanceStreamMarkerINTEL_ptr);
 				break;
 
 			case "vkCmdSetPerformanceOverrideINTEL":
-				NativeLib.LoadFunction("vkCmdSetPerformanceOverrideINTEL", out vkCmdSetPerformanceOverrideINTEL_ptr);
+				mNativeLib.LoadFunction("vkCmdSetPerformanceOverrideINTEL", out vkCmdSetPerformanceOverrideINTEL_ptr);
 				break;
 
 			case "vkAcquirePerformanceConfigurationINTEL":
-				NativeLib.LoadFunction("vkAcquirePerformanceConfigurationINTEL", out vkAcquirePerformanceConfigurationINTEL_ptr);
+				mNativeLib.LoadFunction("vkAcquirePerformanceConfigurationINTEL", out vkAcquirePerformanceConfigurationINTEL_ptr);
 				break;
 
 			case "vkReleasePerformanceConfigurationINTEL":
-				NativeLib.LoadFunction("vkReleasePerformanceConfigurationINTEL", out vkReleasePerformanceConfigurationINTEL_ptr);
+				mNativeLib.LoadFunction("vkReleasePerformanceConfigurationINTEL", out vkReleasePerformanceConfigurationINTEL_ptr);
 				break;
 
 			case "vkQueueSetPerformanceConfigurationINTEL":
-				NativeLib.LoadFunction("vkQueueSetPerformanceConfigurationINTEL", out vkQueueSetPerformanceConfigurationINTEL_ptr);
+				mNativeLib.LoadFunction("vkQueueSetPerformanceConfigurationINTEL", out vkQueueSetPerformanceConfigurationINTEL_ptr);
 				break;
 
 			case "vkGetPerformanceParameterINTEL":
-				NativeLib.LoadFunction("vkGetPerformanceParameterINTEL", out vkGetPerformanceParameterINTEL_ptr);
+				mNativeLib.LoadFunction("vkGetPerformanceParameterINTEL", out vkGetPerformanceParameterINTEL_ptr);
 				break;
 
 			case "vkSetLocalDimmingAMD":
-				NativeLib.LoadFunction("vkSetLocalDimmingAMD", out vkSetLocalDimmingAMD_ptr);
+				mNativeLib.LoadFunction("vkSetLocalDimmingAMD", out vkSetLocalDimmingAMD_ptr);
 				break;
 
 			case "vkCreateImagePipeSurfaceFUCHSIA":
-				NativeLib.LoadFunction("vkCreateImagePipeSurfaceFUCHSIA", out vkCreateImagePipeSurfaceFUCHSIA_ptr);
+				mNativeLib.LoadFunction("vkCreateImagePipeSurfaceFUCHSIA", out vkCreateImagePipeSurfaceFUCHSIA_ptr);
 				break;
 
 			case "vkCreateMetalSurfaceEXT":
-				NativeLib.LoadFunction("vkCreateMetalSurfaceEXT", out vkCreateMetalSurfaceEXT_ptr);
+				mNativeLib.LoadFunction("vkCreateMetalSurfaceEXT", out vkCreateMetalSurfaceEXT_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceFragmentShadingRatesKHR":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceFragmentShadingRatesKHR", out vkGetPhysicalDeviceFragmentShadingRatesKHR_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceFragmentShadingRatesKHR", out vkGetPhysicalDeviceFragmentShadingRatesKHR_ptr);
 				break;
 
 			case "vkCmdSetFragmentShadingRateKHR":
-				NativeLib.LoadFunction("vkCmdSetFragmentShadingRateKHR", out vkCmdSetFragmentShadingRateKHR_ptr);
+				mNativeLib.LoadFunction("vkCmdSetFragmentShadingRateKHR", out vkCmdSetFragmentShadingRateKHR_ptr);
 				break;
 
 			case "vkWaitForPresentKHR":
-				NativeLib.LoadFunction("vkWaitForPresentKHR", out vkWaitForPresentKHR_ptr);
+				mNativeLib.LoadFunction("vkWaitForPresentKHR", out vkWaitForPresentKHR_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceCooperativeMatrixPropertiesNV":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceCooperativeMatrixPropertiesNV", out vkGetPhysicalDeviceCooperativeMatrixPropertiesNV_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceCooperativeMatrixPropertiesNV", out vkGetPhysicalDeviceCooperativeMatrixPropertiesNV_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV", out vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV", out vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceSurfacePresentModes2EXT":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceSurfacePresentModes2EXT", out vkGetPhysicalDeviceSurfacePresentModes2EXT_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceSurfacePresentModes2EXT", out vkGetPhysicalDeviceSurfacePresentModes2EXT_ptr);
 				break;
 
 			case "vkAcquireFullScreenExclusiveModeEXT":
-				NativeLib.LoadFunction("vkAcquireFullScreenExclusiveModeEXT", out vkAcquireFullScreenExclusiveModeEXT_ptr);
+				mNativeLib.LoadFunction("vkAcquireFullScreenExclusiveModeEXT", out vkAcquireFullScreenExclusiveModeEXT_ptr);
 				break;
 
 			case "vkReleaseFullScreenExclusiveModeEXT":
-				NativeLib.LoadFunction("vkReleaseFullScreenExclusiveModeEXT", out vkReleaseFullScreenExclusiveModeEXT_ptr);
+				mNativeLib.LoadFunction("vkReleaseFullScreenExclusiveModeEXT", out vkReleaseFullScreenExclusiveModeEXT_ptr);
 				break;
 
 			case "vkCreateHeadlessSurfaceEXT":
-				NativeLib.LoadFunction("vkCreateHeadlessSurfaceEXT", out vkCreateHeadlessSurfaceEXT_ptr);
+				mNativeLib.LoadFunction("vkCreateHeadlessSurfaceEXT", out vkCreateHeadlessSurfaceEXT_ptr);
 				break;
 
 			case "vkCmdSetLineStippleEXT":
-				NativeLib.LoadFunction("vkCmdSetLineStippleEXT", out vkCmdSetLineStippleEXT_ptr);
+				mNativeLib.LoadFunction("vkCmdSetLineStippleEXT", out vkCmdSetLineStippleEXT_ptr);
 				break;
 
 			case "vkCreateDeferredOperationKHR":
-				NativeLib.LoadFunction("vkCreateDeferredOperationKHR", out vkCreateDeferredOperationKHR_ptr);
+				mNativeLib.LoadFunction("vkCreateDeferredOperationKHR", out vkCreateDeferredOperationKHR_ptr);
 				break;
 
 			case "vkDestroyDeferredOperationKHR":
-				NativeLib.LoadFunction("vkDestroyDeferredOperationKHR", out vkDestroyDeferredOperationKHR_ptr);
+				mNativeLib.LoadFunction("vkDestroyDeferredOperationKHR", out vkDestroyDeferredOperationKHR_ptr);
 				break;
 
 			case "vkGetDeferredOperationMaxConcurrencyKHR":
-				NativeLib.LoadFunction("vkGetDeferredOperationMaxConcurrencyKHR", out vkGetDeferredOperationMaxConcurrencyKHR_ptr);
+				mNativeLib.LoadFunction("vkGetDeferredOperationMaxConcurrencyKHR", out vkGetDeferredOperationMaxConcurrencyKHR_ptr);
 				break;
 
 			case "vkGetDeferredOperationResultKHR":
-				NativeLib.LoadFunction("vkGetDeferredOperationResultKHR", out vkGetDeferredOperationResultKHR_ptr);
+				mNativeLib.LoadFunction("vkGetDeferredOperationResultKHR", out vkGetDeferredOperationResultKHR_ptr);
 				break;
 
 			case "vkDeferredOperationJoinKHR":
-				NativeLib.LoadFunction("vkDeferredOperationJoinKHR", out vkDeferredOperationJoinKHR_ptr);
+				mNativeLib.LoadFunction("vkDeferredOperationJoinKHR", out vkDeferredOperationJoinKHR_ptr);
 				break;
 
 			case "vkGetPipelineExecutablePropertiesKHR":
-				NativeLib.LoadFunction("vkGetPipelineExecutablePropertiesKHR", out vkGetPipelineExecutablePropertiesKHR_ptr);
+				mNativeLib.LoadFunction("vkGetPipelineExecutablePropertiesKHR", out vkGetPipelineExecutablePropertiesKHR_ptr);
 				break;
 
 			case "vkGetPipelineExecutableStatisticsKHR":
-				NativeLib.LoadFunction("vkGetPipelineExecutableStatisticsKHR", out vkGetPipelineExecutableStatisticsKHR_ptr);
+				mNativeLib.LoadFunction("vkGetPipelineExecutableStatisticsKHR", out vkGetPipelineExecutableStatisticsKHR_ptr);
 				break;
 
 			case "vkGetPipelineExecutableInternalRepresentationsKHR":
-				NativeLib.LoadFunction("vkGetPipelineExecutableInternalRepresentationsKHR", out vkGetPipelineExecutableInternalRepresentationsKHR_ptr);
+				mNativeLib.LoadFunction("vkGetPipelineExecutableInternalRepresentationsKHR", out vkGetPipelineExecutableInternalRepresentationsKHR_ptr);
 				break;
 
 			case "vkGetGeneratedCommandsMemoryRequirementsNV":
-				NativeLib.LoadFunction("vkGetGeneratedCommandsMemoryRequirementsNV", out vkGetGeneratedCommandsMemoryRequirementsNV_ptr);
+				mNativeLib.LoadFunction("vkGetGeneratedCommandsMemoryRequirementsNV", out vkGetGeneratedCommandsMemoryRequirementsNV_ptr);
 				break;
 
 			case "vkCmdPreprocessGeneratedCommandsNV":
-				NativeLib.LoadFunction("vkCmdPreprocessGeneratedCommandsNV", out vkCmdPreprocessGeneratedCommandsNV_ptr);
+				mNativeLib.LoadFunction("vkCmdPreprocessGeneratedCommandsNV", out vkCmdPreprocessGeneratedCommandsNV_ptr);
 				break;
 
 			case "vkCmdExecuteGeneratedCommandsNV":
-				NativeLib.LoadFunction("vkCmdExecuteGeneratedCommandsNV", out vkCmdExecuteGeneratedCommandsNV_ptr);
+				mNativeLib.LoadFunction("vkCmdExecuteGeneratedCommandsNV", out vkCmdExecuteGeneratedCommandsNV_ptr);
 				break;
 
 			case "vkCmdBindPipelineShaderGroupNV":
-				NativeLib.LoadFunction("vkCmdBindPipelineShaderGroupNV", out vkCmdBindPipelineShaderGroupNV_ptr);
+				mNativeLib.LoadFunction("vkCmdBindPipelineShaderGroupNV", out vkCmdBindPipelineShaderGroupNV_ptr);
 				break;
 
 			case "vkCreateIndirectCommandsLayoutNV":
-				NativeLib.LoadFunction("vkCreateIndirectCommandsLayoutNV", out vkCreateIndirectCommandsLayoutNV_ptr);
+				mNativeLib.LoadFunction("vkCreateIndirectCommandsLayoutNV", out vkCreateIndirectCommandsLayoutNV_ptr);
 				break;
 
 			case "vkDestroyIndirectCommandsLayoutNV":
-				NativeLib.LoadFunction("vkDestroyIndirectCommandsLayoutNV", out vkDestroyIndirectCommandsLayoutNV_ptr);
+				mNativeLib.LoadFunction("vkDestroyIndirectCommandsLayoutNV", out vkDestroyIndirectCommandsLayoutNV_ptr);
 				break;
 
 			case "vkAcquireDrmDisplayEXT":
-				NativeLib.LoadFunction("vkAcquireDrmDisplayEXT", out vkAcquireDrmDisplayEXT_ptr);
+				mNativeLib.LoadFunction("vkAcquireDrmDisplayEXT", out vkAcquireDrmDisplayEXT_ptr);
 				break;
 
 			case "vkGetDrmDisplayEXT":
-				NativeLib.LoadFunction("vkGetDrmDisplayEXT", out vkGetDrmDisplayEXT_ptr);
+				mNativeLib.LoadFunction("vkGetDrmDisplayEXT", out vkGetDrmDisplayEXT_ptr);
 				break;
 
 			case "vkCmdEncodeVideoKHR":
-				NativeLib.LoadFunction("vkCmdEncodeVideoKHR", out vkCmdEncodeVideoKHR_ptr);
+				mNativeLib.LoadFunction("vkCmdEncodeVideoKHR", out vkCmdEncodeVideoKHR_ptr);
 				break;
 
 			case "vkCmdSetFragmentShadingRateEnumNV":
-				NativeLib.LoadFunction("vkCmdSetFragmentShadingRateEnumNV", out vkCmdSetFragmentShadingRateEnumNV_ptr);
+				mNativeLib.LoadFunction("vkCmdSetFragmentShadingRateEnumNV", out vkCmdSetFragmentShadingRateEnumNV_ptr);
 				break;
 
 			case "vkAcquireWinrtDisplayNV":
-				NativeLib.LoadFunction("vkAcquireWinrtDisplayNV", out vkAcquireWinrtDisplayNV_ptr);
+				mNativeLib.LoadFunction("vkAcquireWinrtDisplayNV", out vkAcquireWinrtDisplayNV_ptr);
 				break;
 
 			case "vkGetWinrtDisplayNV":
-				NativeLib.LoadFunction("vkGetWinrtDisplayNV", out vkGetWinrtDisplayNV_ptr);
+				mNativeLib.LoadFunction("vkGetWinrtDisplayNV", out vkGetWinrtDisplayNV_ptr);
 				break;
 
 			case "vkCreateDirectFBSurfaceEXT":
-				NativeLib.LoadFunction("vkCreateDirectFBSurfaceEXT", out vkCreateDirectFBSurfaceEXT_ptr);
+				mNativeLib.LoadFunction("vkCreateDirectFBSurfaceEXT", out vkCreateDirectFBSurfaceEXT_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceDirectFBPresentationSupportEXT":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceDirectFBPresentationSupportEXT", out vkGetPhysicalDeviceDirectFBPresentationSupportEXT_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceDirectFBPresentationSupportEXT", out vkGetPhysicalDeviceDirectFBPresentationSupportEXT_ptr);
 				break;
 
 			case "vkCmdSetVertexInputEXT":
-				NativeLib.LoadFunction("vkCmdSetVertexInputEXT", out vkCmdSetVertexInputEXT_ptr);
+				mNativeLib.LoadFunction("vkCmdSetVertexInputEXT", out vkCmdSetVertexInputEXT_ptr);
 				break;
 
 			case "vkGetMemoryZirconHandleFUCHSIA":
-				NativeLib.LoadFunction("vkGetMemoryZirconHandleFUCHSIA", out vkGetMemoryZirconHandleFUCHSIA_ptr);
+				mNativeLib.LoadFunction("vkGetMemoryZirconHandleFUCHSIA", out vkGetMemoryZirconHandleFUCHSIA_ptr);
 				break;
 
 			case "vkGetMemoryZirconHandlePropertiesFUCHSIA":
-				NativeLib.LoadFunction("vkGetMemoryZirconHandlePropertiesFUCHSIA", out vkGetMemoryZirconHandlePropertiesFUCHSIA_ptr);
+				mNativeLib.LoadFunction("vkGetMemoryZirconHandlePropertiesFUCHSIA", out vkGetMemoryZirconHandlePropertiesFUCHSIA_ptr);
 				break;
 
 			case "vkImportSemaphoreZirconHandleFUCHSIA":
-				NativeLib.LoadFunction("vkImportSemaphoreZirconHandleFUCHSIA", out vkImportSemaphoreZirconHandleFUCHSIA_ptr);
+				mNativeLib.LoadFunction("vkImportSemaphoreZirconHandleFUCHSIA", out vkImportSemaphoreZirconHandleFUCHSIA_ptr);
 				break;
 
 			case "vkGetSemaphoreZirconHandleFUCHSIA":
-				NativeLib.LoadFunction("vkGetSemaphoreZirconHandleFUCHSIA", out vkGetSemaphoreZirconHandleFUCHSIA_ptr);
+				mNativeLib.LoadFunction("vkGetSemaphoreZirconHandleFUCHSIA", out vkGetSemaphoreZirconHandleFUCHSIA_ptr);
 				break;
 
 			case "vkCreateBufferCollectionFUCHSIA":
-				NativeLib.LoadFunction("vkCreateBufferCollectionFUCHSIA", out vkCreateBufferCollectionFUCHSIA_ptr);
+				mNativeLib.LoadFunction("vkCreateBufferCollectionFUCHSIA", out vkCreateBufferCollectionFUCHSIA_ptr);
 				break;
 
 			case "vkSetBufferCollectionImageConstraintsFUCHSIA":
-				NativeLib.LoadFunction("vkSetBufferCollectionImageConstraintsFUCHSIA", out vkSetBufferCollectionImageConstraintsFUCHSIA_ptr);
+				mNativeLib.LoadFunction("vkSetBufferCollectionImageConstraintsFUCHSIA", out vkSetBufferCollectionImageConstraintsFUCHSIA_ptr);
 				break;
 
 			case "vkSetBufferCollectionBufferConstraintsFUCHSIA":
-				NativeLib.LoadFunction("vkSetBufferCollectionBufferConstraintsFUCHSIA", out vkSetBufferCollectionBufferConstraintsFUCHSIA_ptr);
+				mNativeLib.LoadFunction("vkSetBufferCollectionBufferConstraintsFUCHSIA", out vkSetBufferCollectionBufferConstraintsFUCHSIA_ptr);
 				break;
 
 			case "vkDestroyBufferCollectionFUCHSIA":
-				NativeLib.LoadFunction("vkDestroyBufferCollectionFUCHSIA", out vkDestroyBufferCollectionFUCHSIA_ptr);
+				mNativeLib.LoadFunction("vkDestroyBufferCollectionFUCHSIA", out vkDestroyBufferCollectionFUCHSIA_ptr);
 				break;
 
 			case "vkGetBufferCollectionPropertiesFUCHSIA":
-				NativeLib.LoadFunction("vkGetBufferCollectionPropertiesFUCHSIA", out vkGetBufferCollectionPropertiesFUCHSIA_ptr);
+				mNativeLib.LoadFunction("vkGetBufferCollectionPropertiesFUCHSIA", out vkGetBufferCollectionPropertiesFUCHSIA_ptr);
 				break;
 
 			case "vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI":
-				NativeLib.LoadFunction("vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI", out vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI_ptr);
+				mNativeLib.LoadFunction("vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI", out vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI_ptr);
 				break;
 
 			case "vkCmdSubpassShadingHUAWEI":
-				NativeLib.LoadFunction("vkCmdSubpassShadingHUAWEI", out vkCmdSubpassShadingHUAWEI_ptr);
+				mNativeLib.LoadFunction("vkCmdSubpassShadingHUAWEI", out vkCmdSubpassShadingHUAWEI_ptr);
 				break;
 
 			case "vkCmdBindInvocationMaskHUAWEI":
-				NativeLib.LoadFunction("vkCmdBindInvocationMaskHUAWEI", out vkCmdBindInvocationMaskHUAWEI_ptr);
+				mNativeLib.LoadFunction("vkCmdBindInvocationMaskHUAWEI", out vkCmdBindInvocationMaskHUAWEI_ptr);
 				break;
 
 			case "vkGetMemoryRemoteAddressNV":
-				NativeLib.LoadFunction("vkGetMemoryRemoteAddressNV", out vkGetMemoryRemoteAddressNV_ptr);
+				mNativeLib.LoadFunction("vkGetMemoryRemoteAddressNV", out vkGetMemoryRemoteAddressNV_ptr);
 				break;
 
 			case "vkCmdSetPatchControlPointsEXT":
-				NativeLib.LoadFunction("vkCmdSetPatchControlPointsEXT", out vkCmdSetPatchControlPointsEXT_ptr);
+				mNativeLib.LoadFunction("vkCmdSetPatchControlPointsEXT", out vkCmdSetPatchControlPointsEXT_ptr);
 				break;
 
 			case "vkCmdSetLogicOpEXT":
-				NativeLib.LoadFunction("vkCmdSetLogicOpEXT", out vkCmdSetLogicOpEXT_ptr);
+				mNativeLib.LoadFunction("vkCmdSetLogicOpEXT", out vkCmdSetLogicOpEXT_ptr);
 				break;
 
 			case "vkCreateScreenSurfaceQNX":
-				NativeLib.LoadFunction("vkCreateScreenSurfaceQNX", out vkCreateScreenSurfaceQNX_ptr);
+				mNativeLib.LoadFunction("vkCreateScreenSurfaceQNX", out vkCreateScreenSurfaceQNX_ptr);
 				break;
 
 			case "vkGetPhysicalDeviceScreenPresentationSupportQNX":
-				NativeLib.LoadFunction("vkGetPhysicalDeviceScreenPresentationSupportQNX", out vkGetPhysicalDeviceScreenPresentationSupportQNX_ptr);
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceScreenPresentationSupportQNX", out vkGetPhysicalDeviceScreenPresentationSupportQNX_ptr);
 				break;
 
 			case "vkCmdSetColorWriteEnableEXT":
-				NativeLib.LoadFunction("vkCmdSetColorWriteEnableEXT", out vkCmdSetColorWriteEnableEXT_ptr);
+				mNativeLib.LoadFunction("vkCmdSetColorWriteEnableEXT", out vkCmdSetColorWriteEnableEXT_ptr);
 				break;
 
 			case "vkCmdDrawMultiEXT":
-				NativeLib.LoadFunction("vkCmdDrawMultiEXT", out vkCmdDrawMultiEXT_ptr);
+				mNativeLib.LoadFunction("vkCmdDrawMultiEXT", out vkCmdDrawMultiEXT_ptr);
 				break;
 
 			case "vkCmdDrawMultiIndexedEXT":
-				NativeLib.LoadFunction("vkCmdDrawMultiIndexedEXT", out vkCmdDrawMultiIndexedEXT_ptr);
+				mNativeLib.LoadFunction("vkCmdDrawMultiIndexedEXT", out vkCmdDrawMultiIndexedEXT_ptr);
 				break;
 
 			case "vkSetDeviceMemoryPriorityEXT":
-				NativeLib.LoadFunction("vkSetDeviceMemoryPriorityEXT", out vkSetDeviceMemoryPriorityEXT_ptr);
+				mNativeLib.LoadFunction("vkSetDeviceMemoryPriorityEXT", out vkSetDeviceMemoryPriorityEXT_ptr);
 				break;
 
 			case "vkGetDescriptorSetLayoutHostMappingInfoVALVE":
-				NativeLib.LoadFunction("vkGetDescriptorSetLayoutHostMappingInfoVALVE", out vkGetDescriptorSetLayoutHostMappingInfoVALVE_ptr);
+				mNativeLib.LoadFunction("vkGetDescriptorSetLayoutHostMappingInfoVALVE", out vkGetDescriptorSetLayoutHostMappingInfoVALVE_ptr);
 				break;
 
 			case "vkGetDescriptorSetHostMappingVALVE":
-				NativeLib.LoadFunction("vkGetDescriptorSetHostMappingVALVE", out vkGetDescriptorSetHostMappingVALVE_ptr);
+				mNativeLib.LoadFunction("vkGetDescriptorSetHostMappingVALVE", out vkGetDescriptorSetHostMappingVALVE_ptr);
 				break;
 
 			default:
@@ -5979,7 +5979,7 @@ namespace Bulkan
 
 		public static void LoadFunction<T>(in StringView name, out T funcPtr)
 		{
-			NativeLib.LoadFunction(name, out funcPtr);
+			mNativeLib.LoadFunction(name, out funcPtr);
 		}
 	}
 }
