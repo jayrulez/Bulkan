@@ -22,6 +22,8 @@ namespace Bulkan
 
 		private static bool Initialized = false;
 
+		private static List<StringView> LoadedFunctions = new .() ~ delete _;
+
 		private static List<StringView> PreInstanceFunctions = new .()
 			{
 				"vkCreateInstance",
@@ -50,7 +52,8 @@ namespace Bulkan
 				"vkGetPhysicalDeviceFeatures",
 				"vkGetPhysicalDeviceFeatures2",
 				"vkGetPhysicalDeviceQueueFamilyProperties",
-				"vkEnumerateDeviceExtensionProperties"
+				"vkEnumerateDeviceExtensionProperties",
+				"vkCreateDebugReportCallbackEXT"
 #if BF_PLATFORM_WINDOWS
 				"vkCreateWin32SurfaceKHR",
 #endif
@@ -98,10 +101,12 @@ namespace Bulkan
 
 			LoadFunctions(PreInstanceFunctions);
 
+			LoadedFunctions.AddRange(PreInstanceFunctions);
+
 			return .Ok;
 		}
 
-		public static Result<void> LoadInstanceFunctions(VkInstance? instance = null, List<String> additionalFunctions = null)
+		public static Result<void> LoadInstanceFunctions(VkInstance instance, List<String> additionalFunctions = null)
 		{
 			if (additionalFunctions != null)
 			{
@@ -114,19 +119,18 @@ namespace Bulkan
 				}
 			}
 
+			SetInstance(instance);
+
 			LoadFunctions(InstanceFunctions);
+
+			LoadedFunctions.AddRange(InstanceFunctions);
 
 			return .Ok;
 		}
 
-		public static Result<void> LoadPostInstanceFunctions()
+		public static Result<void> LoadPostInstanceFunctions(VkInstance? instance = null)
 		{
-			List<StringView> loadedFunctions = scope .();
-
-			loadedFunctions.AddRange(PreInstanceFunctions);
-			loadedFunctions.AddRange(InstanceFunctions);
-
-			LoadAllFuncions(default, loadedFunctions);
+			LoadAllFuncions(instance, LoadedFunctions);
 			return .Ok;
 		}
 

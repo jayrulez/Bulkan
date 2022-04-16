@@ -2752,7 +2752,7 @@ namespace Bulkan
 			NativeLib.mInstance = instance;
 		}
 
-		public static void LoadFunction(in StringView name)
+		private static void LoadFunction(in StringView name)
 		{
 			switch (name) {
 			case "vkCreateInstance":
@@ -4588,20 +4588,21 @@ namespace Bulkan
 			}
 		}
 
-		public static void LoadFunctions(in Span<StringView> functions)
+		private static void LoadFunctions(in Span<StringView> functions, VkInstance? instance = null)
 		{
+			if(instance != null)
+				SetInstance(instance.Value);
+
 			for (var func in functions)
 			{
 				LoadFunction(func);
 			}
 		}
 
-		public static void LoadAllFuncions(VkInstance instance = default, List<StringView> excludeFunctions = null)
+		private static void LoadAllFuncions(VkInstance? instance = null, List<StringView> excludeFunctions = null)
 		{
-			if (instance != default)
-			{
-				NativeLib.mInstance = instance;
-			}
+			if (instance != null)
+				SetInstance(instance.Value);
 
 			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateInstance"))
 				LoadFunction("vkCreateInstance");
