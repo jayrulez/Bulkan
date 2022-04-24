@@ -3,7 +3,7 @@ This repository contains low-level [Beef](https://www.beeflang.org) bindings for
 These binding were generated using [Bulkan.Generator](https://github.com/jayrulez/Bulkan.Generator).
 
 # *Note*
-These bindings won't work with the stable version of Beef (0.43.1). Due to taking advantage of several fixes that have gone into Beef since, you will need to use the nightly version *01/22/2022* or later. You can grab a compatible version [here](https://nightly.beeflang.org/index.html).
+These bindings are usually tested against the latest [nightly build](https://nightly.beeflang.org/index.html) when updated. However, they should work with version 0.43.2 or later. If you experience any issues when using with the latest stable release then please create an [issue](https://github.com/jayrulez/Bulkan/issues).
 
 # Projects using Bulkan
 [imgui-vulkan-beef](https://github.com/MineGame159/imgui-vulkan-beef)
