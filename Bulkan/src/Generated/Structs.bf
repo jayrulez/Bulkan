@@ -4280,14 +4280,6 @@ namespace Bulkan
 	}
 
 	[CRepr]
-	public struct VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV
-	{
-		public VkStructureType sType = .VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADER_BARYCENTRIC_FEATURES_NV;
-		public void* pNext;
-		public VkBool32 fragmentShaderBarycentric;
-	}
-
-	[CRepr]
 	public struct VkPhysicalDeviceShaderImageFootprintFeaturesNV
 	{
 		public VkStructureType sType = .VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_IMAGE_FOOTPRINT_FEATURES_NV;
@@ -4667,6 +4659,34 @@ namespace Bulkan
 		public uint32 width;
 		public uint32 height;
 		public uint32 depth;
+	}
+
+	[CRepr]
+	public struct VkTraceRaysIndirectCommand2KHR
+	{
+		public uint64 raygenShaderRecordAddress;
+		public uint64 raygenShaderRecordSize;
+		public uint64 missShaderBindingTableAddress;
+		public uint64 missShaderBindingTableSize;
+		public uint64 missShaderBindingTableStride;
+		public uint64 hitShaderBindingTableAddress;
+		public uint64 hitShaderBindingTableSize;
+		public uint64 hitShaderBindingTableStride;
+		public uint64 callableShaderBindingTableAddress;
+		public uint64 callableShaderBindingTableSize;
+		public uint64 callableShaderBindingTableStride;
+		public uint32 width;
+		public uint32 height;
+		public uint32 depth;
+	}
+
+	[CRepr]
+	public struct VkPhysicalDeviceRayTracingMaintenance1FeaturesKHR
+	{
+		public VkStructureType sType = .VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_MAINTENANCE_1_FEATURES_KHR;
+		public void* pNext;
+		public VkBool32 rayTracingMaintenance1;
+		public VkBool32 rayTracingPipelineTraceRaysIndirect2;
 	}
 
 	[CRepr]
@@ -6417,6 +6437,15 @@ namespace Bulkan
 	}
 
 	[CRepr]
+	public struct VkPhysicalDeviceImage2DViewOf3DFeaturesEXT
+	{
+		public VkStructureType sType = .VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_2D_VIEW_OF_3D_FEATURES_EXT;
+		public void* pNext;
+		public VkBool32 image2DViewOf3D;
+		public VkBool32 sampler2DViewOf3D;
+	}
+
+	[CRepr]
 	public struct VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE
 	{
 		public VkStructureType sType = .VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_VALVE;
@@ -6761,8 +6790,6 @@ namespace Bulkan
 		public VkStructureType sType = .VK_STRUCTURE_TYPE_VIDEO_DECODE_INFO_KHR;
 		public void* pNext;
 		public VkVideoDecodeFlagsKHR flags;
-		public VkOffset2D codedOffset;
-		public VkExtent2D codedExtent;
 		public VkBuffer srcBuffer;
 		public uint64 srcBufferOffset;
 		public uint64 srcBufferRange;
@@ -6786,7 +6813,7 @@ namespace Bulkan
 	{
 		public VkStructureType sType = .VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_CAPABILITIES_EXT;
 		public void* pNext;
-		public uint32 maxLevel;
+		public StdVideoH264Level maxLevel;
 		public VkOffset2D fieldOffsetGranularity;
 	}
 
@@ -6850,7 +6877,7 @@ namespace Bulkan
 	{
 		public VkStructureType sType = .VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_CAPABILITIES_EXT;
 		public void* pNext;
-		public uint32 maxLevel;
+		public StdVideoH265Level maxLevel;
 	}
 
 	[CRepr]
@@ -6964,7 +6991,6 @@ namespace Bulkan
 		public void* pNext;
 		public VkVideoEncodeFlagsKHR flags;
 		public uint32 qualityLevel;
-		public VkExtent2D codedExtent;
 		public VkBuffer dstBitstreamBuffer;
 		public uint64 dstBitstreamBufferOffset;
 		public uint64 dstBitstreamBufferMaxRange;
@@ -7461,6 +7487,22 @@ namespace Bulkan
 	}
 
 	[CRepr]
+	public struct VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR
+	{
+		public VkStructureType sType = .VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADER_BARYCENTRIC_FEATURES_KHR;
+		public void* pNext;
+		public VkBool32 fragmentShaderBarycentric;
+	}
+
+	[CRepr]
+	public struct VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR
+	{
+		public VkStructureType sType = .VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADER_BARYCENTRIC_PROPERTIES_KHR;
+		public void* pNext;
+		public VkBool32 triStripVertexOrderIndependentOfProvokingVertex;
+	}
+
+	[CRepr]
 	public struct VkPhysicalDeviceRayTracingMotionBlurFeaturesNV
 	{
 		public VkStructureType sType = .VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_MOTION_BLUR_FEATURES_NV;
@@ -7890,6 +7932,127 @@ namespace Bulkan
 		public void* pNext;
 		public uint descriptorOffset;
 		public uint32 descriptorSize;
+	}
+
+	[CRepr]
+	public struct VkImageCompressionControlEXT
+	{
+		public VkStructureType sType = .VK_STRUCTURE_TYPE_IMAGE_COMPRESSION_CONTROL_EXT;
+		public void* pNext;
+		public VkImageCompressionFlagsEXT flags;
+		public uint32 compressionControlPlaneCount;
+		public VkImageCompressionFixedRateFlagsEXT* pFixedRateFlags;
+	}
+
+	[CRepr]
+	public struct VkPhysicalDeviceImageCompressionControlFeaturesEXT
+	{
+		public VkStructureType sType = .VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_FEATURES_EXT;
+		public void* pNext;
+		public VkBool32 imageCompressionControl;
+	}
+
+	[CRepr]
+	public struct VkImageCompressionPropertiesEXT
+	{
+		public VkStructureType sType = .VK_STRUCTURE_TYPE_IMAGE_COMPRESSION_PROPERTIES_EXT;
+		public void* pNext;
+		public VkImageCompressionFlagsEXT imageCompressionFlags;
+		public VkImageCompressionFixedRateFlagsEXT imageCompressionFixedRateFlags;
+	}
+
+	[CRepr]
+	public struct VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT
+	{
+		public VkStructureType sType = .VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_FEATURES_EXT;
+		public void* pNext;
+		public VkBool32 imageCompressionControlSwapchain;
+	}
+
+	[CRepr]
+	public struct VkImageSubresource2EXT
+	{
+		public VkStructureType sType = .VK_STRUCTURE_TYPE_IMAGE_SUBRESOURCE_2_EXT;
+		public void* pNext;
+		public VkImageSubresource imageSubresource;
+	}
+
+	[CRepr]
+	public struct VkSubresourceLayout2EXT
+	{
+		public VkStructureType sType = .VK_STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2_EXT;
+		public void* pNext;
+		public VkSubresourceLayout subresourceLayout;
+	}
+
+	[CRepr]
+	public struct VkRenderPassCreationControlEXT
+	{
+		public VkStructureType sType = .VK_STRUCTURE_TYPE_RENDER_PASS_CREATION_CONTROL_EXT;
+		public void* pNext;
+		public VkBool32 disallowMerging;
+	}
+
+	[CRepr]
+	public struct VkRenderPassCreationFeedbackInfoEXT
+	{
+		public uint32 postMergeSubpassCount;
+	}
+
+	[CRepr]
+	public struct VkRenderPassCreationFeedbackCreateInfoEXT
+	{
+		public VkStructureType sType = .VK_STRUCTURE_TYPE_RENDER_PASS_CREATION_FEEDBACK_CREATE_INFO_EXT;
+		public void* pNext;
+		public VkRenderPassCreationFeedbackInfoEXT* pRenderPassFeedback;
+	}
+
+	[CRepr]
+	public struct VkRenderPassSubpassFeedbackInfoEXT
+	{
+		public VkSubpassMergeStatusEXT subpassMergeStatus;
+		public char8[(int)VulkanNative.VK_MAX_DESCRIPTION_SIZE] description;
+		public uint32 postMergeIndex;
+	}
+
+	[CRepr]
+	public struct VkRenderPassSubpassFeedbackCreateInfoEXT
+	{
+		public VkStructureType sType = .VK_STRUCTURE_TYPE_RENDER_PASS_SUBPASS_FEEDBACK_CREATE_INFO_EXT;
+		public void* pNext;
+		public VkRenderPassSubpassFeedbackInfoEXT* pSubpassFeedback;
+	}
+
+	[CRepr]
+	public struct VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT
+	{
+		public VkStructureType sType = .VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_MERGE_FEEDBACK_FEATURES_EXT;
+		public void* pNext;
+		public VkBool32 subpassMergeFeedback;
+	}
+
+	[CRepr]
+	public struct VkPipelinePropertiesIdentifierEXT
+	{
+		public VkStructureType sType = .VK_STRUCTURE_TYPE_PIPELINE_PROPERTIES_IDENTIFIER_EXT;
+		public void* pNext;
+		public uint8[(int)VulkanNative.VK_UUID_SIZE] pipelineIdentifier;
+	}
+
+	[CRepr]
+	public struct VkPhysicalDevicePipelinePropertiesFeaturesEXT
+	{
+		public VkStructureType sType = .VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_PROPERTIES_FEATURES_EXT;
+		public void* pNext;
+		public VkBool32 pipelinePropertiesIdentifier;
+	}
+
+	[CRepr]
+	public struct VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD
+	{
+		public VkStructureType sType = .VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_EARLY_AND_LATE_FRAGMENT_TESTS_FEATURES_AMD;
+		public void* pNext;
+		public VkBool32 shaderEarlyAndLateFragmentTests;
 	}
 
 }

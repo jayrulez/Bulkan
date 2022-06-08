@@ -2579,6 +2579,12 @@ namespace Bulkan
 		public static void vkCmdSetFragmentShadingRateEnumNV(VkCommandBuffer commandBuffer, VkFragmentShadingRateNV shadingRate, VkFragmentShadingRateCombinerOpKHR combinerOps)
 			=> vkCmdSetFragmentShadingRateEnumNV_ptr(commandBuffer, shadingRate, combinerOps);
 
+		public typealias vkGetImageSubresourceLayout2EXTFunction = function void(VkDevice device, VkImage image, VkImageSubresource2EXT* pSubresource, VkSubresourceLayout2EXT* pLayout);
+		private static vkGetImageSubresourceLayout2EXTFunction vkGetImageSubresourceLayout2EXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkGetImageSubresourceLayout2EXT(VkDevice device, VkImage image, VkImageSubresource2EXT* pSubresource, VkSubresourceLayout2EXT* pLayout)
+			=> vkGetImageSubresourceLayout2EXT_ptr(device, image, pSubresource, pLayout);
+
 		public typealias vkAcquireWinrtDisplayNVFunction = function VkResult(VkPhysicalDevice physicalDevice, VkDisplayKHR display);
 		private static vkAcquireWinrtDisplayNVFunction vkAcquireWinrtDisplayNV_ptr;
 		[CallingConvention(VulkanNative.CallConv)]
@@ -2686,6 +2692,12 @@ namespace Bulkan
 		[CallingConvention(VulkanNative.CallConv)]
 		public static VkResult vkGetMemoryRemoteAddressNV(VkDevice device, VkMemoryGetRemoteAddressInfoNV* pMemoryGetRemoteAddressInfo, void* pAddress)
 			=> vkGetMemoryRemoteAddressNV_ptr(device, pMemoryGetRemoteAddressInfo, pAddress);
+
+		public typealias vkGetPipelinePropertiesEXTFunction = function VkResult(VkDevice device, VkPipelineInfoKHR* pPipelineInfo, VkBaseOutStructure* pPipelineProperties);
+		private static vkGetPipelinePropertiesEXTFunction vkGetPipelinePropertiesEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static VkResult vkGetPipelinePropertiesEXT(VkDevice device, VkPipelineInfoKHR* pPipelineInfo, VkBaseOutStructure* pPipelineProperties)
+			=> vkGetPipelinePropertiesEXT_ptr(device, pPipelineInfo, pPipelineProperties);
 
 		public typealias vkCmdSetPatchControlPointsEXTFunction = function void(VkCommandBuffer commandBuffer, uint32 patchControlPoints);
 		private static vkCmdSetPatchControlPointsEXTFunction vkCmdSetPatchControlPointsEXT_ptr;
@@ -4471,6 +4483,10 @@ namespace Bulkan
 				mNativeLib.LoadFunction("vkCmdSetFragmentShadingRateEnumNV", out vkCmdSetFragmentShadingRateEnumNV_ptr);
 				break;
 
+			case "vkGetImageSubresourceLayout2EXT":
+				mNativeLib.LoadFunction("vkGetImageSubresourceLayout2EXT", out vkGetImageSubresourceLayout2EXT_ptr);
+				break;
+
 			case "vkAcquireWinrtDisplayNV":
 				mNativeLib.LoadFunction("vkAcquireWinrtDisplayNV", out vkAcquireWinrtDisplayNV_ptr);
 				break;
@@ -4541,6 +4557,10 @@ namespace Bulkan
 
 			case "vkGetMemoryRemoteAddressNV":
 				mNativeLib.LoadFunction("vkGetMemoryRemoteAddressNV", out vkGetMemoryRemoteAddressNV_ptr);
+				break;
+
+			case "vkGetPipelinePropertiesEXT":
+				mNativeLib.LoadFunction("vkGetPipelinePropertiesEXT", out vkGetPipelinePropertiesEXT_ptr);
 				break;
 
 			case "vkCmdSetPatchControlPointsEXT":
@@ -5891,6 +5911,9 @@ namespace Bulkan
 			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetFragmentShadingRateEnumNV"))
 				LoadFunction("vkCmdSetFragmentShadingRateEnumNV");
 
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetImageSubresourceLayout2EXT"))
+				LoadFunction("vkGetImageSubresourceLayout2EXT");
+
 			if(excludeFunctions == null || !excludeFunctions.Contains("vkAcquireWinrtDisplayNV"))
 				LoadFunction("vkAcquireWinrtDisplayNV");
 
@@ -5944,6 +5967,9 @@ namespace Bulkan
 
 			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetMemoryRemoteAddressNV"))
 				LoadFunction("vkGetMemoryRemoteAddressNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPipelinePropertiesEXT"))
+				LoadFunction("vkGetPipelinePropertiesEXT");
 
 			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetPatchControlPointsEXT"))
 				LoadFunction("vkCmdSetPatchControlPointsEXT");
