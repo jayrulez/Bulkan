@@ -3,7 +3,7 @@ using System;
 namespace Bulkan
 {
 	[CRepr]
-	public struct VkInstance : IEquatable<VkInstance>
+	public struct VkInstance : IEquatable<VkInstance>, IHashable
 	{
 		public readonly int Handle;
 		public this(int existingHandle) { Handle = existingHandle; }
@@ -15,10 +15,12 @@ namespace Bulkan
 		public static bool operator ==(VkInstance left, int right) => left.Handle == right;
 		public static bool operator !=(VkInstance left, int right) => left.Handle != right;
 		public bool Equals(VkInstance h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkPhysicalDevice : IEquatable<VkPhysicalDevice>
+	public struct VkPhysicalDevice : IEquatable<VkPhysicalDevice>, IHashable
 	{
 		public readonly int Handle;
 		public this(int existingHandle) { Handle = existingHandle; }
@@ -30,10 +32,12 @@ namespace Bulkan
 		public static bool operator ==(VkPhysicalDevice left, int right) => left.Handle == right;
 		public static bool operator !=(VkPhysicalDevice left, int right) => left.Handle != right;
 		public bool Equals(VkPhysicalDevice h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkDevice : IEquatable<VkDevice>
+	public struct VkDevice : IEquatable<VkDevice>, IHashable
 	{
 		public readonly int Handle;
 		public this(int existingHandle) { Handle = existingHandle; }
@@ -45,10 +49,12 @@ namespace Bulkan
 		public static bool operator ==(VkDevice left, int right) => left.Handle == right;
 		public static bool operator !=(VkDevice left, int right) => left.Handle != right;
 		public bool Equals(VkDevice h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkQueue : IEquatable<VkQueue>
+	public struct VkQueue : IEquatable<VkQueue>, IHashable
 	{
 		public readonly int Handle;
 		public this(int existingHandle) { Handle = existingHandle; }
@@ -60,10 +66,12 @@ namespace Bulkan
 		public static bool operator ==(VkQueue left, int right) => left.Handle == right;
 		public static bool operator !=(VkQueue left, int right) => left.Handle != right;
 		public bool Equals(VkQueue h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkCommandBuffer : IEquatable<VkCommandBuffer>
+	public struct VkCommandBuffer : IEquatable<VkCommandBuffer>, IHashable
 	{
 		public readonly int Handle;
 		public this(int existingHandle) { Handle = existingHandle; }
@@ -75,10 +83,12 @@ namespace Bulkan
 		public static bool operator ==(VkCommandBuffer left, int right) => left.Handle == right;
 		public static bool operator !=(VkCommandBuffer left, int right) => left.Handle != right;
 		public bool Equals(VkCommandBuffer h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkDeviceMemory : IEquatable<VkDeviceMemory>
+	public struct VkDeviceMemory : IEquatable<VkDeviceMemory>, IHashable
 	{
 		public readonly uint64 Handle;
 		public this(uint64 existingHandle) { Handle = existingHandle; }
@@ -90,10 +100,12 @@ namespace Bulkan
 		public static bool operator ==(VkDeviceMemory left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkDeviceMemory left, uint64 right) => left.Handle != right;
 		public bool Equals(VkDeviceMemory h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkCommandPool : IEquatable<VkCommandPool>
+	public struct VkCommandPool : IEquatable<VkCommandPool>, IHashable
 	{
 		public readonly uint64 Handle;
 		public this(uint64 existingHandle) { Handle = existingHandle; }
@@ -105,10 +117,12 @@ namespace Bulkan
 		public static bool operator ==(VkCommandPool left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkCommandPool left, uint64 right) => left.Handle != right;
 		public bool Equals(VkCommandPool h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkBuffer : IEquatable<VkBuffer>
+	public struct VkBuffer : IEquatable<VkBuffer>, IHashable
 	{
 		public readonly uint64 Handle;
 		public this(uint64 existingHandle) { Handle = existingHandle; }
@@ -120,10 +134,12 @@ namespace Bulkan
 		public static bool operator ==(VkBuffer left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkBuffer left, uint64 right) => left.Handle != right;
 		public bool Equals(VkBuffer h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkBufferView : IEquatable<VkBufferView>
+	public struct VkBufferView : IEquatable<VkBufferView>, IHashable
 	{
 		public readonly uint64 Handle;
 		public this(uint64 existingHandle) { Handle = existingHandle; }
@@ -135,10 +151,12 @@ namespace Bulkan
 		public static bool operator ==(VkBufferView left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkBufferView left, uint64 right) => left.Handle != right;
 		public bool Equals(VkBufferView h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkImage : IEquatable<VkImage>
+	public struct VkImage : IEquatable<VkImage>, IHashable
 	{
 		public readonly uint64 Handle;
 		public this(uint64 existingHandle) { Handle = existingHandle; }
@@ -150,10 +168,12 @@ namespace Bulkan
 		public static bool operator ==(VkImage left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkImage left, uint64 right) => left.Handle != right;
 		public bool Equals(VkImage h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkImageView : IEquatable<VkImageView>
+	public struct VkImageView : IEquatable<VkImageView>, IHashable
 	{
 		public readonly uint64 Handle;
 		public this(uint64 existingHandle) { Handle = existingHandle; }
@@ -165,10 +185,12 @@ namespace Bulkan
 		public static bool operator ==(VkImageView left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkImageView left, uint64 right) => left.Handle != right;
 		public bool Equals(VkImageView h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkShaderModule : IEquatable<VkShaderModule>
+	public struct VkShaderModule : IEquatable<VkShaderModule>, IHashable
 	{
 		public readonly uint64 Handle;
 		public this(uint64 existingHandle) { Handle = existingHandle; }
@@ -180,10 +202,12 @@ namespace Bulkan
 		public static bool operator ==(VkShaderModule left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkShaderModule left, uint64 right) => left.Handle != right;
 		public bool Equals(VkShaderModule h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkPipeline : IEquatable<VkPipeline>
+	public struct VkPipeline : IEquatable<VkPipeline>, IHashable
 	{
 		public readonly uint64 Handle;
 		public this(uint64 existingHandle) { Handle = existingHandle; }
@@ -195,10 +219,12 @@ namespace Bulkan
 		public static bool operator ==(VkPipeline left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkPipeline left, uint64 right) => left.Handle != right;
 		public bool Equals(VkPipeline h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkPipelineLayout : IEquatable<VkPipelineLayout>
+	public struct VkPipelineLayout : IEquatable<VkPipelineLayout>, IHashable
 	{
 		public readonly uint64 Handle;
 		public this(uint64 existingHandle) { Handle = existingHandle; }
@@ -210,10 +236,12 @@ namespace Bulkan
 		public static bool operator ==(VkPipelineLayout left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkPipelineLayout left, uint64 right) => left.Handle != right;
 		public bool Equals(VkPipelineLayout h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkSampler : IEquatable<VkSampler>
+	public struct VkSampler : IEquatable<VkSampler>, IHashable
 	{
 		public readonly uint64 Handle;
 		public this(uint64 existingHandle) { Handle = existingHandle; }
@@ -225,10 +253,12 @@ namespace Bulkan
 		public static bool operator ==(VkSampler left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkSampler left, uint64 right) => left.Handle != right;
 		public bool Equals(VkSampler h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkDescriptorSet : IEquatable<VkDescriptorSet>
+	public struct VkDescriptorSet : IEquatable<VkDescriptorSet>, IHashable
 	{
 		public readonly uint64 Handle;
 		public this(uint64 existingHandle) { Handle = existingHandle; }
@@ -240,10 +270,12 @@ namespace Bulkan
 		public static bool operator ==(VkDescriptorSet left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkDescriptorSet left, uint64 right) => left.Handle != right;
 		public bool Equals(VkDescriptorSet h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkDescriptorSetLayout : IEquatable<VkDescriptorSetLayout>
+	public struct VkDescriptorSetLayout : IEquatable<VkDescriptorSetLayout>, IHashable
 	{
 		public readonly uint64 Handle;
 		public this(uint64 existingHandle) { Handle = existingHandle; }
@@ -255,10 +287,12 @@ namespace Bulkan
 		public static bool operator ==(VkDescriptorSetLayout left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkDescriptorSetLayout left, uint64 right) => left.Handle != right;
 		public bool Equals(VkDescriptorSetLayout h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkDescriptorPool : IEquatable<VkDescriptorPool>
+	public struct VkDescriptorPool : IEquatable<VkDescriptorPool>, IHashable
 	{
 		public readonly uint64 Handle;
 		public this(uint64 existingHandle) { Handle = existingHandle; }
@@ -270,10 +304,12 @@ namespace Bulkan
 		public static bool operator ==(VkDescriptorPool left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkDescriptorPool left, uint64 right) => left.Handle != right;
 		public bool Equals(VkDescriptorPool h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkFence : IEquatable<VkFence>
+	public struct VkFence : IEquatable<VkFence>, IHashable
 	{
 		public readonly uint64 Handle;
 		public this(uint64 existingHandle) { Handle = existingHandle; }
@@ -285,10 +321,12 @@ namespace Bulkan
 		public static bool operator ==(VkFence left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkFence left, uint64 right) => left.Handle != right;
 		public bool Equals(VkFence h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkSemaphore : IEquatable<VkSemaphore>
+	public struct VkSemaphore : IEquatable<VkSemaphore>, IHashable
 	{
 		public readonly uint64 Handle;
 		public this(uint64 existingHandle) { Handle = existingHandle; }
@@ -300,10 +338,12 @@ namespace Bulkan
 		public static bool operator ==(VkSemaphore left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkSemaphore left, uint64 right) => left.Handle != right;
 		public bool Equals(VkSemaphore h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkEvent : IEquatable<VkEvent>
+	public struct VkEvent : IEquatable<VkEvent>, IHashable
 	{
 		public readonly uint64 Handle;
 		public this(uint64 existingHandle) { Handle = existingHandle; }
@@ -315,10 +355,12 @@ namespace Bulkan
 		public static bool operator ==(VkEvent left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkEvent left, uint64 right) => left.Handle != right;
 		public bool Equals(VkEvent h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkQueryPool : IEquatable<VkQueryPool>
+	public struct VkQueryPool : IEquatable<VkQueryPool>, IHashable
 	{
 		public readonly uint64 Handle;
 		public this(uint64 existingHandle) { Handle = existingHandle; }
@@ -330,10 +372,12 @@ namespace Bulkan
 		public static bool operator ==(VkQueryPool left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkQueryPool left, uint64 right) => left.Handle != right;
 		public bool Equals(VkQueryPool h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkFramebuffer : IEquatable<VkFramebuffer>
+	public struct VkFramebuffer : IEquatable<VkFramebuffer>, IHashable
 	{
 		public readonly uint64 Handle;
 		public this(uint64 existingHandle) { Handle = existingHandle; }
@@ -345,10 +389,12 @@ namespace Bulkan
 		public static bool operator ==(VkFramebuffer left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkFramebuffer left, uint64 right) => left.Handle != right;
 		public bool Equals(VkFramebuffer h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkRenderPass : IEquatable<VkRenderPass>
+	public struct VkRenderPass : IEquatable<VkRenderPass>, IHashable
 	{
 		public readonly uint64 Handle;
 		public this(uint64 existingHandle) { Handle = existingHandle; }
@@ -360,10 +406,12 @@ namespace Bulkan
 		public static bool operator ==(VkRenderPass left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkRenderPass left, uint64 right) => left.Handle != right;
 		public bool Equals(VkRenderPass h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkPipelineCache : IEquatable<VkPipelineCache>
+	public struct VkPipelineCache : IEquatable<VkPipelineCache>, IHashable
 	{
 		public readonly uint64 Handle;
 		public this(uint64 existingHandle) { Handle = existingHandle; }
@@ -375,10 +423,12 @@ namespace Bulkan
 		public static bool operator ==(VkPipelineCache left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkPipelineCache left, uint64 right) => left.Handle != right;
 		public bool Equals(VkPipelineCache h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkIndirectCommandsLayoutNV : IEquatable<VkIndirectCommandsLayoutNV>
+	public struct VkIndirectCommandsLayoutNV : IEquatable<VkIndirectCommandsLayoutNV>, IHashable
 	{
 		public readonly uint64 Handle;
 		public this(uint64 existingHandle) { Handle = existingHandle; }
@@ -390,10 +440,12 @@ namespace Bulkan
 		public static bool operator ==(VkIndirectCommandsLayoutNV left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkIndirectCommandsLayoutNV left, uint64 right) => left.Handle != right;
 		public bool Equals(VkIndirectCommandsLayoutNV h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkDescriptorUpdateTemplate : IEquatable<VkDescriptorUpdateTemplate>
+	public struct VkDescriptorUpdateTemplate : IEquatable<VkDescriptorUpdateTemplate>, IHashable
 	{
 		public readonly uint64 Handle;
 		public this(uint64 existingHandle) { Handle = existingHandle; }
@@ -405,10 +457,12 @@ namespace Bulkan
 		public static bool operator ==(VkDescriptorUpdateTemplate left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkDescriptorUpdateTemplate left, uint64 right) => left.Handle != right;
 		public bool Equals(VkDescriptorUpdateTemplate h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkDescriptorUpdateTemplateKHR : IEquatable<VkDescriptorUpdateTemplateKHR>
+	public struct VkDescriptorUpdateTemplateKHR : IEquatable<VkDescriptorUpdateTemplateKHR>, IHashable
 	{
 		public readonly uint64 Handle;
 		public this(uint64 existingHandle) { Handle = existingHandle; }
@@ -420,10 +474,12 @@ namespace Bulkan
 		public static bool operator ==(VkDescriptorUpdateTemplateKHR left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkDescriptorUpdateTemplateKHR left, uint64 right) => left.Handle != right;
 		public bool Equals(VkDescriptorUpdateTemplateKHR h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkSamplerYcbcrConversion : IEquatable<VkSamplerYcbcrConversion>
+	public struct VkSamplerYcbcrConversion : IEquatable<VkSamplerYcbcrConversion>, IHashable
 	{
 		public readonly uint64 Handle;
 		public this(uint64 existingHandle) { Handle = existingHandle; }
@@ -435,10 +491,12 @@ namespace Bulkan
 		public static bool operator ==(VkSamplerYcbcrConversion left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkSamplerYcbcrConversion left, uint64 right) => left.Handle != right;
 		public bool Equals(VkSamplerYcbcrConversion h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkSamplerYcbcrConversionKHR : IEquatable<VkSamplerYcbcrConversionKHR>
+	public struct VkSamplerYcbcrConversionKHR : IEquatable<VkSamplerYcbcrConversionKHR>, IHashable
 	{
 		public readonly uint64 Handle;
 		public this(uint64 existingHandle) { Handle = existingHandle; }
@@ -450,10 +508,12 @@ namespace Bulkan
 		public static bool operator ==(VkSamplerYcbcrConversionKHR left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkSamplerYcbcrConversionKHR left, uint64 right) => left.Handle != right;
 		public bool Equals(VkSamplerYcbcrConversionKHR h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkValidationCacheEXT : IEquatable<VkValidationCacheEXT>
+	public struct VkValidationCacheEXT : IEquatable<VkValidationCacheEXT>, IHashable
 	{
 		public readonly uint64 Handle;
 		public this(uint64 existingHandle) { Handle = existingHandle; }
@@ -465,10 +525,12 @@ namespace Bulkan
 		public static bool operator ==(VkValidationCacheEXT left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkValidationCacheEXT left, uint64 right) => left.Handle != right;
 		public bool Equals(VkValidationCacheEXT h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkAccelerationStructureKHR : IEquatable<VkAccelerationStructureKHR>
+	public struct VkAccelerationStructureKHR : IEquatable<VkAccelerationStructureKHR>, IHashable
 	{
 		public readonly uint64 Handle;
 		public this(uint64 existingHandle) { Handle = existingHandle; }
@@ -480,10 +542,12 @@ namespace Bulkan
 		public static bool operator ==(VkAccelerationStructureKHR left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkAccelerationStructureKHR left, uint64 right) => left.Handle != right;
 		public bool Equals(VkAccelerationStructureKHR h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkAccelerationStructureNV : IEquatable<VkAccelerationStructureNV>
+	public struct VkAccelerationStructureNV : IEquatable<VkAccelerationStructureNV>, IHashable
 	{
 		public readonly uint64 Handle;
 		public this(uint64 existingHandle) { Handle = existingHandle; }
@@ -495,10 +559,12 @@ namespace Bulkan
 		public static bool operator ==(VkAccelerationStructureNV left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkAccelerationStructureNV left, uint64 right) => left.Handle != right;
 		public bool Equals(VkAccelerationStructureNV h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkPerformanceConfigurationINTEL : IEquatable<VkPerformanceConfigurationINTEL>
+	public struct VkPerformanceConfigurationINTEL : IEquatable<VkPerformanceConfigurationINTEL>, IHashable
 	{
 		public readonly uint64 Handle;
 		public this(uint64 existingHandle) { Handle = existingHandle; }
@@ -510,10 +576,12 @@ namespace Bulkan
 		public static bool operator ==(VkPerformanceConfigurationINTEL left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkPerformanceConfigurationINTEL left, uint64 right) => left.Handle != right;
 		public bool Equals(VkPerformanceConfigurationINTEL h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkBufferCollectionFUCHSIA : IEquatable<VkBufferCollectionFUCHSIA>
+	public struct VkBufferCollectionFUCHSIA : IEquatable<VkBufferCollectionFUCHSIA>, IHashable
 	{
 		public readonly uint64 Handle;
 		public this(uint64 existingHandle) { Handle = existingHandle; }
@@ -525,10 +593,12 @@ namespace Bulkan
 		public static bool operator ==(VkBufferCollectionFUCHSIA left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkBufferCollectionFUCHSIA left, uint64 right) => left.Handle != right;
 		public bool Equals(VkBufferCollectionFUCHSIA h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkDeferredOperationKHR : IEquatable<VkDeferredOperationKHR>
+	public struct VkDeferredOperationKHR : IEquatable<VkDeferredOperationKHR>, IHashable
 	{
 		public readonly uint64 Handle;
 		public this(uint64 existingHandle) { Handle = existingHandle; }
@@ -540,10 +610,12 @@ namespace Bulkan
 		public static bool operator ==(VkDeferredOperationKHR left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkDeferredOperationKHR left, uint64 right) => left.Handle != right;
 		public bool Equals(VkDeferredOperationKHR h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkPrivateDataSlot : IEquatable<VkPrivateDataSlot>
+	public struct VkPrivateDataSlot : IEquatable<VkPrivateDataSlot>, IHashable
 	{
 		public readonly uint64 Handle;
 		public this(uint64 existingHandle) { Handle = existingHandle; }
@@ -555,10 +627,12 @@ namespace Bulkan
 		public static bool operator ==(VkPrivateDataSlot left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkPrivateDataSlot left, uint64 right) => left.Handle != right;
 		public bool Equals(VkPrivateDataSlot h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkPrivateDataSlotEXT : IEquatable<VkPrivateDataSlotEXT>
+	public struct VkPrivateDataSlotEXT : IEquatable<VkPrivateDataSlotEXT>, IHashable
 	{
 		public readonly uint64 Handle;
 		public this(uint64 existingHandle) { Handle = existingHandle; }
@@ -570,10 +644,12 @@ namespace Bulkan
 		public static bool operator ==(VkPrivateDataSlotEXT left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkPrivateDataSlotEXT left, uint64 right) => left.Handle != right;
 		public bool Equals(VkPrivateDataSlotEXT h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkCuModuleNVX : IEquatable<VkCuModuleNVX>
+	public struct VkCuModuleNVX : IEquatable<VkCuModuleNVX>, IHashable
 	{
 		public readonly uint64 Handle;
 		public this(uint64 existingHandle) { Handle = existingHandle; }
@@ -585,10 +661,12 @@ namespace Bulkan
 		public static bool operator ==(VkCuModuleNVX left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkCuModuleNVX left, uint64 right) => left.Handle != right;
 		public bool Equals(VkCuModuleNVX h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkCuFunctionNVX : IEquatable<VkCuFunctionNVX>
+	public struct VkCuFunctionNVX : IEquatable<VkCuFunctionNVX>, IHashable
 	{
 		public readonly uint64 Handle;
 		public this(uint64 existingHandle) { Handle = existingHandle; }
@@ -600,10 +678,12 @@ namespace Bulkan
 		public static bool operator ==(VkCuFunctionNVX left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkCuFunctionNVX left, uint64 right) => left.Handle != right;
 		public bool Equals(VkCuFunctionNVX h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkDisplayKHR : IEquatable<VkDisplayKHR>
+	public struct VkDisplayKHR : IEquatable<VkDisplayKHR>, IHashable
 	{
 		public readonly uint64 Handle;
 		public this(uint64 existingHandle) { Handle = existingHandle; }
@@ -615,10 +695,12 @@ namespace Bulkan
 		public static bool operator ==(VkDisplayKHR left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkDisplayKHR left, uint64 right) => left.Handle != right;
 		public bool Equals(VkDisplayKHR h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkDisplayModeKHR : IEquatable<VkDisplayModeKHR>
+	public struct VkDisplayModeKHR : IEquatable<VkDisplayModeKHR>, IHashable
 	{
 		public readonly uint64 Handle;
 		public this(uint64 existingHandle) { Handle = existingHandle; }
@@ -630,10 +712,12 @@ namespace Bulkan
 		public static bool operator ==(VkDisplayModeKHR left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkDisplayModeKHR left, uint64 right) => left.Handle != right;
 		public bool Equals(VkDisplayModeKHR h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkSurfaceKHR : IEquatable<VkSurfaceKHR>
+	public struct VkSurfaceKHR : IEquatable<VkSurfaceKHR>, IHashable
 	{
 		public readonly uint64 Handle;
 		public this(uint64 existingHandle) { Handle = existingHandle; }
@@ -645,10 +729,12 @@ namespace Bulkan
 		public static bool operator ==(VkSurfaceKHR left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkSurfaceKHR left, uint64 right) => left.Handle != right;
 		public bool Equals(VkSurfaceKHR h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkSwapchainKHR : IEquatable<VkSwapchainKHR>
+	public struct VkSwapchainKHR : IEquatable<VkSwapchainKHR>, IHashable
 	{
 		public readonly uint64 Handle;
 		public this(uint64 existingHandle) { Handle = existingHandle; }
@@ -660,10 +746,12 @@ namespace Bulkan
 		public static bool operator ==(VkSwapchainKHR left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkSwapchainKHR left, uint64 right) => left.Handle != right;
 		public bool Equals(VkSwapchainKHR h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkDebugReportCallbackEXT : IEquatable<VkDebugReportCallbackEXT>
+	public struct VkDebugReportCallbackEXT : IEquatable<VkDebugReportCallbackEXT>, IHashable
 	{
 		public readonly uint64 Handle;
 		public this(uint64 existingHandle) { Handle = existingHandle; }
@@ -675,10 +763,12 @@ namespace Bulkan
 		public static bool operator ==(VkDebugReportCallbackEXT left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkDebugReportCallbackEXT left, uint64 right) => left.Handle != right;
 		public bool Equals(VkDebugReportCallbackEXT h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkDebugUtilsMessengerEXT : IEquatable<VkDebugUtilsMessengerEXT>
+	public struct VkDebugUtilsMessengerEXT : IEquatable<VkDebugUtilsMessengerEXT>, IHashable
 	{
 		public readonly uint64 Handle;
 		public this(uint64 existingHandle) { Handle = existingHandle; }
@@ -690,10 +780,12 @@ namespace Bulkan
 		public static bool operator ==(VkDebugUtilsMessengerEXT left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkDebugUtilsMessengerEXT left, uint64 right) => left.Handle != right;
 		public bool Equals(VkDebugUtilsMessengerEXT h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkVideoSessionKHR : IEquatable<VkVideoSessionKHR>
+	public struct VkVideoSessionKHR : IEquatable<VkVideoSessionKHR>, IHashable
 	{
 		public readonly uint64 Handle;
 		public this(uint64 existingHandle) { Handle = existingHandle; }
@@ -705,10 +797,12 @@ namespace Bulkan
 		public static bool operator ==(VkVideoSessionKHR left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkVideoSessionKHR left, uint64 right) => left.Handle != right;
 		public bool Equals(VkVideoSessionKHR h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 	[CRepr]
-	public struct VkVideoSessionParametersKHR : IEquatable<VkVideoSessionParametersKHR>
+	public struct VkVideoSessionParametersKHR : IEquatable<VkVideoSessionParametersKHR>, IHashable
 	{
 		public readonly uint64 Handle;
 		public this(uint64 existingHandle) { Handle = existingHandle; }
@@ -720,6 +814,8 @@ namespace Bulkan
 		public static bool operator ==(VkVideoSessionParametersKHR left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkVideoSessionParametersKHR left, uint64 right) => left.Handle != right;
 		public bool Equals(VkVideoSessionParametersKHR h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
 	}
 
 }
