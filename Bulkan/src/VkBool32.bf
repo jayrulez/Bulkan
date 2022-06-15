@@ -28,6 +28,11 @@ namespace Bulkan
 		/// <param name="value"></param>
 		public this(uint32 value)
 		{
+			// https://www.khronos.org/registry/vulkan/specs/1.3/pdf/vkspec.pdf
+			// Applications must not pass any other values than VK_TRUE or VK_FALSE into a Vulkan implementation where a VkBool32 is expected.
+			if(value != 0 && value != 1)
+				Runtime.FatalError("Invalid value for VkBool32");
+
 		    Value = value;
 		}
 		/// <summary>
