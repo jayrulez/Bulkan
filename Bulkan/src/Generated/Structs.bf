@@ -8055,5 +8055,118 @@ namespace Bulkan
 		public VkBool32 shaderEarlyAndLateFragmentTests;
 	}
 
+	[CRepr]
+	public struct VkExportMetalObjectCreateInfoEXT
+	{
+		public VkStructureType sType = .VK_STRUCTURE_TYPE_EXPORT_METAL_OBJECT_CREATE_INFO_EXT;
+		public void* pNext;
+		public VkExportMetalObjectTypeFlagsEXT exportObjectType;
+	}
+
+	[CRepr]
+	public struct VkExportMetalObjectsInfoEXT
+	{
+		public VkStructureType sType = .VK_STRUCTURE_TYPE_EXPORT_METAL_OBJECTS_INFO_EXT;
+		public void* pNext;
+	}
+
+	[CRepr]
+	public struct VkExportMetalDeviceInfoEXT
+	{
+		public VkStructureType sType = .VK_STRUCTURE_TYPE_EXPORT_METAL_DEVICE_INFO_EXT;
+		public void* pNext;
+		public void* mtlDevice;
+	}
+
+	[CRepr]
+	public struct VkExportMetalCommandQueueInfoEXT
+	{
+		public VkStructureType sType = .VK_STRUCTURE_TYPE_EXPORT_METAL_COMMAND_QUEUE_INFO_EXT;
+		public void* pNext;
+		public VkQueue queue;
+		public void* mtlCommandQueue;
+	}
+
+	[CRepr]
+	public struct VkExportMetalBufferInfoEXT
+	{
+		public VkStructureType sType = .VK_STRUCTURE_TYPE_EXPORT_METAL_BUFFER_INFO_EXT;
+		public void* pNext;
+		public VkDeviceMemory memory;
+		public void* mtlBuffer;
+	}
+
+	[CRepr]
+	public struct VkImportMetalBufferInfoEXT
+	{
+		public VkStructureType sType = .VK_STRUCTURE_TYPE_IMPORT_METAL_BUFFER_INFO_EXT;
+		public void* pNext;
+		public void* mtlBuffer;
+	}
+
+	[CRepr]
+	public struct VkExportMetalTextureInfoEXT
+	{
+		public VkStructureType sType = .VK_STRUCTURE_TYPE_EXPORT_METAL_TEXTURE_INFO_EXT;
+		public void* pNext;
+		public VkImage image;
+		public VkImageView imageView;
+		public VkBufferView bufferView;
+		public VkImageAspectFlags plane;
+		public void* mtlTexture;
+	}
+
+	[CRepr]
+	public struct VkImportMetalTextureInfoEXT
+	{
+		public VkStructureType sType = .VK_STRUCTURE_TYPE_IMPORT_METAL_TEXTURE_INFO_EXT;
+		public void* pNext;
+		public VkImageAspectFlags plane;
+		public void* mtlTexture;
+	}
+
+	[CRepr]
+	public struct VkExportMetalIOSurfaceInfoEXT
+	{
+		public VkStructureType sType = .VK_STRUCTURE_TYPE_EXPORT_METAL_IO_SURFACE_INFO_EXT;
+		public void* pNext;
+		public VkImage image;
+		public void* ioSurface;
+	}
+
+	[CRepr]
+	public struct VkImportMetalIOSurfaceInfoEXT
+	{
+		public VkStructureType sType = .VK_STRUCTURE_TYPE_IMPORT_METAL_IO_SURFACE_INFO_EXT;
+		public void* pNext;
+		public void* ioSurface;
+	}
+
+	[CRepr]
+	public struct VkExportMetalSharedEventInfoEXT
+	{
+		public VkStructureType sType = .VK_STRUCTURE_TYPE_EXPORT_METAL_SHARED_EVENT_INFO_EXT;
+		public void* pNext;
+		public VkSemaphore semaphore;
+		public VkEvent event;
+		public void* mtlSharedEvent;
+	}
+
+	[CRepr]
+	public struct VkImportMetalSharedEventInfoEXT
+	{
+		public VkStructureType sType = .VK_STRUCTURE_TYPE_IMPORT_METAL_SHARED_EVENT_INFO_EXT;
+		public void* pNext;
+		public void* mtlSharedEvent;
+	}
+
+	[CRepr]
+	public struct VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT
+	{
+		public VkStructureType sType = .VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_NON_SEAMLESS_CUBE_MAP_FEATURES_EXT;
+		public void* pNext;
+		public VkBool32 nonSeamlessCubeMap;
+	}
+
 }
 

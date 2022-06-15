@@ -2573,6 +2573,12 @@ namespace Bulkan
 		public static void vkCmdEncodeVideoKHR(VkCommandBuffer commandBuffer, VkVideoEncodeInfoKHR* pEncodeInfo)
 			=> vkCmdEncodeVideoKHR_ptr(commandBuffer, pEncodeInfo);
 
+		public typealias vkExportMetalObjectsEXTFunction = function void(VkDevice device, VkExportMetalObjectsInfoEXT* pMetalObjectsInfo);
+		private static vkExportMetalObjectsEXTFunction vkExportMetalObjectsEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkExportMetalObjectsEXT(VkDevice device, VkExportMetalObjectsInfoEXT* pMetalObjectsInfo)
+			=> vkExportMetalObjectsEXT_ptr(device, pMetalObjectsInfo);
+
 		public typealias vkCmdSetFragmentShadingRateEnumNVFunction = function void(VkCommandBuffer commandBuffer, VkFragmentShadingRateNV shadingRate, VkFragmentShadingRateCombinerOpKHR[2] combinerOps);
 		private static vkCmdSetFragmentShadingRateEnumNVFunction vkCmdSetFragmentShadingRateEnumNV_ptr;
 		[CallingConvention(VulkanNative.CallConv)]
@@ -4479,6 +4485,10 @@ namespace Bulkan
 				mNativeLib.LoadFunction("vkCmdEncodeVideoKHR", out vkCmdEncodeVideoKHR_ptr);
 				break;
 
+			case "vkExportMetalObjectsEXT":
+				mNativeLib.LoadFunction("vkExportMetalObjectsEXT", out vkExportMetalObjectsEXT_ptr);
+				break;
+
 			case "vkCmdSetFragmentShadingRateEnumNV":
 				mNativeLib.LoadFunction("vkCmdSetFragmentShadingRateEnumNV", out vkCmdSetFragmentShadingRateEnumNV_ptr);
 				break;
@@ -5907,6 +5917,9 @@ namespace Bulkan
 
 			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdEncodeVideoKHR"))
 				LoadFunction("vkCmdEncodeVideoKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkExportMetalObjectsEXT"))
+				LoadFunction("vkExportMetalObjectsEXT");
 
 			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetFragmentShadingRateEnumNV"))
 				LoadFunction("vkCmdSetFragmentShadingRateEnumNV");
