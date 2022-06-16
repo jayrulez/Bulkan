@@ -67,8 +67,11 @@ namespace Bulkan
 
 		static ~this()
 		{
-			mNativeLib.Dispose();
-			delete mNativeLib;
+			if (mNativeLib != null)
+			{
+				mNativeLib.Dispose();
+				delete mNativeLib;
+			}
 		}
 
 		public static Result<void> Initialize(String libraryName = null)
