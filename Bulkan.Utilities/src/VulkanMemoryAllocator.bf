@@ -1,9 +1,10 @@
 using System;
+using System.Interop;
 
 using Bulkan;
 using static Bulkan.VulkanNative;
 
-// Ported from https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator - commit fd82bc7b6daa58ff3ac9f581a9399cd22a24285d
+// Ported from https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator - commit f6d6e278a6989f854dcc03adf3360c873ca4bad1
 //
 // Copyright (c) 2017-2022 Advanced Micro Devices, Inc. All rights reserved.
 //
@@ -27,19 +28,18 @@ using static Bulkan.VulkanNative;
 //
 
 namespace Bulkan.Utilities {
-	enum VmaAllocatorCreateFlags : uint32 {
-		None = 0,
+	enum VmaAllocatorCreateFlags : c_uint {
+		NONE = 0,
 		VMA_ALLOCATOR_CREATE_EXTERNALLY_SYNCHRONIZED_BIT = 0x00000001,
 		VMA_ALLOCATOR_CREATE_KHR_DEDICATED_ALLOCATION_BIT = 0x00000002,
 		VMA_ALLOCATOR_CREATE_KHR_BIND_MEMORY2_BIT = 0x00000004,
 		VMA_ALLOCATOR_CREATE_EXT_MEMORY_BUDGET_BIT = 0x00000008,
 		VMA_ALLOCATOR_CREATE_AMD_DEVICE_COHERENT_MEMORY_BIT = 0x00000010,
 		VMA_ALLOCATOR_CREATE_BUFFER_DEVICE_ADDRESS_BIT = 0x00000020,
-		VMA_ALLOCATOR_CREATE_EXT_MEMORY_PRIORITY_BIT = 0x00000040,
-		VMA_ALLOCATOR_CREATE_FLAG_BITS_MAX_ENUM = 0x7FFFFFFF
+		VMA_ALLOCATOR_CREATE_EXT_MEMORY_PRIORITY_BIT = 0x00000040
 	}
 
-	enum VmaMemoryUsage : uint32 {
+	enum VmaMemoryUsage : c_uint {
 		VMA_MEMORY_USAGE_UNKNOWN = 0,
 		VMA_MEMORY_USAGE_GPU_ONLY = 1,
 		VMA_MEMORY_USAGE_CPU_ONLY = 2,
@@ -47,61 +47,70 @@ namespace Bulkan.Utilities {
 		VMA_MEMORY_USAGE_GPU_TO_CPU = 4,
 		VMA_MEMORY_USAGE_CPU_COPY = 5,
 		VMA_MEMORY_USAGE_GPU_LAZILY_ALLOCATED = 6,
-		VMA_MEMORY_USAGE_MAX_ENUM = 0x7FFFFFFF
+		VMA_MEMORY_USAGE_AUTO = 7,
+		VMA_MEMORY_USAGE_AUTO_PREFER_DEVICE = 8,
+		VMA_MEMORY_USAGE_AUTO_PREFER_HOST = 9
 	}
 
 	[AllowDuplicates]
-	enum VmaAllocationCreateFlags : uint32 {
-		None = 0,
+	enum VmaAllocationCreateFlags : c_uint {
+		NONE = 0,
 		VMA_ALLOCATION_CREATE_DEDICATED_MEMORY_BIT = 0x00000001,
 		VMA_ALLOCATION_CREATE_NEVER_ALLOCATE_BIT = 0x00000002,
 		VMA_ALLOCATION_CREATE_MAPPED_BIT = 0x00000004,
-		VMA_ALLOCATION_CREATE_RESERVED_1_BIT = 0x00000008,
-		VMA_ALLOCATION_CREATE_RESERVED_2_BIT = 0x00000010,
 		VMA_ALLOCATION_CREATE_USER_DATA_COPY_STRING_BIT = 0x00000020,
 		VMA_ALLOCATION_CREATE_UPPER_ADDRESS_BIT = 0x00000040,
 		VMA_ALLOCATION_CREATE_DONT_BIND_BIT = 0x00000080,
 		VMA_ALLOCATION_CREATE_WITHIN_BUDGET_BIT = 0x00000100,
 		VMA_ALLOCATION_CREATE_CAN_ALIAS_BIT = 0x00000200,
+		VMA_ALLOCATION_CREATE_HOST_ACCESS_SEQUENTIAL_WRITE_BIT = 0x00000400,
+		VMA_ALLOCATION_CREATE_HOST_ACCESS_RANDOM_BIT = 0x00000800,
+		VMA_ALLOCATION_CREATE_HOST_ACCESS_ALLOW_TRANSFER_INSTEAD_BIT = 0x00001000,
 		VMA_ALLOCATION_CREATE_STRATEGY_MIN_MEMORY_BIT = 0x00010000,
 		VMA_ALLOCATION_CREATE_STRATEGY_MIN_TIME_BIT = 0x00020000,
+		VMA_ALLOCATION_CREATE_STRATEGY_MIN_OFFSET_BIT  = 0x00040000,
 		VMA_ALLOCATION_CREATE_STRATEGY_BEST_FIT_BIT = VMA_ALLOCATION_CREATE_STRATEGY_MIN_MEMORY_BIT,
 		VMA_ALLOCATION_CREATE_STRATEGY_FIRST_FIT_BIT = VMA_ALLOCATION_CREATE_STRATEGY_MIN_TIME_BIT,
-		VMA_ALLOCATION_CREATE_STRATEGY_MASK = VMA_ALLOCATION_CREATE_STRATEGY_MIN_MEMORY_BIT | VMA_ALLOCATION_CREATE_STRATEGY_MIN_TIME_BIT,
-		VMA_ALLOCATION_CREATE_FLAG_BITS_MAX_ENUM = 0x7FFFFFFF
+		VMA_ALLOCATION_CREATE_STRATEGY_MASK = VMA_ALLOCATION_CREATE_STRATEGY_MIN_MEMORY_BIT | VMA_ALLOCATION_CREATE_STRATEGY_MIN_TIME_BIT | VMA_ALLOCATION_CREATE_STRATEGY_MIN_OFFSET_BIT
 	}
 
-	enum VmaPoolCreateFlags : uint32 {
-		None = 0,
+	[AllowDuplicates]
+	enum VmaPoolCreateFlags : c_uint {
+		NONE = 0,
 		VMA_POOL_CREATE_IGNORE_BUFFER_IMAGE_GRANULARITY_BIT = 0x00000002,
 		VMA_POOL_CREATE_LINEAR_ALGORITHM_BIT = 0x00000004,
-		VMA_POOL_CREATE_BUDDY_ALGORITHM_BIT = 0x00000008,
-		VMA_POOL_CREATE_TLSF_ALGORITHM_BIT = 0x00000010,
-		VMA_POOL_CREATE_ALGORITHM_MASK = VMA_POOL_CREATE_LINEAR_ALGORITHM_BIT | VMA_POOL_CREATE_BUDDY_ALGORITHM_BIT | VMA_POOL_CREATE_TLSF_ALGORITHM_BIT,
-		VMA_POOL_CREATE_FLAG_BITS_MAX_ENUM = 0x7FFFFFFF
+		VMA_POOL_CREATE_ALGORITHM_MASK = VMA_POOL_CREATE_LINEAR_ALGORITHM_BIT
 	}
 
-	enum VmaDefragmentationFlags : uint32 {
-		None = 0,
-		VMA_DEFRAGMENTATION_FLAG_INCREMENTAL = 0x1,
-		VMA_DEFRAGMENTATION_FLAG_BITS_MAX_ENUM = 0x7FFFFFFF
+	enum VmaDefragmentationFlags : c_uint {
+		NONE = 0,
+		VMA_DEFRAGMENTATION_FLAG_ALGORITHM_FAST_BIT = 0x1,
+		VMA_DEFRAGMENTATION_FLAG_ALGORITHM_BALANCED_BIT = 0x2,
+		VMA_DEFRAGMENTATION_FLAG_ALGORITHM_FULL_BIT = 0x4,
+		VMA_DEFRAGMENTATION_FLAG_ALGORITHM_EXTENSIVE_BIT = 0x8,
+		VMA_DEFRAGMENTATION_FLAG_ALGORITHM_MASK = VMA_DEFRAGMENTATION_FLAG_ALGORITHM_FAST_BIT | VMA_DEFRAGMENTATION_FLAG_ALGORITHM_BALANCED_BIT | VMA_DEFRAGMENTATION_FLAG_ALGORITHM_FULL_BIT | VMA_DEFRAGMENTATION_FLAG_ALGORITHM_EXTENSIVE_BIT
 	}
 
-	enum VmaVirtualBlockCreateFlags : uint32 {
-		None = 0,
+	enum VmaDefragmentationMoveOperation : c_uint {
+		VMA_DEFRAGMENTATION_MOVE_OPERATION_COPY = 0,
+		VMA_DEFRAGMENTATION_MOVE_OPERATION_IGNORE = 1,
+		VMA_DEFRAGMENTATION_MOVE_OPERATION_DESTROY = 2
+	}
+
+	[AllowDuplicates]
+	enum VmaVirtualBlockCreateFlags : c_uint {
+		NONE = 0,
 		VMA_VIRTUAL_BLOCK_CREATE_LINEAR_ALGORITHM_BIT = 0x00000001,
-		VMA_VIRTUAL_BLOCK_CREATE_BUDDY_ALGORITHM_BIT = 0x00000002,
-		VMA_VIRTUAL_BLOCK_CREATE_TLSF_ALGORITHM_BIT = 0x00000004,
-		VMA_VIRTUAL_BLOCK_CREATE_ALGORITHM_MASK = VMA_VIRTUAL_BLOCK_CREATE_LINEAR_ALGORITHM_BIT | VMA_VIRTUAL_BLOCK_CREATE_BUDDY_ALGORITHM_BIT | VMA_VIRTUAL_BLOCK_CREATE_TLSF_ALGORITHM_BIT,
-		VMA_VIRTUAL_BLOCK_CREATE_FLAG_BITS_MAX_ENUM = 0x7FFFFFFF
+		VMA_VIRTUAL_BLOCK_CREATE_ALGORITHM_MASK = VMA_VIRTUAL_BLOCK_CREATE_LINEAR_ALGORITHM_BIT
 	}
 
-	enum VmaVirtualAllocationCreateFlags : uint32 {
+	enum VmaVirtualAllocationCreateFlags : c_uint {
+		NONE = 0,
 		VMA_VIRTUAL_ALLOCATION_CREATE_UPPER_ADDRESS_BIT = (.) VmaAllocationCreateFlags.VMA_ALLOCATION_CREATE_UPPER_ADDRESS_BIT,
 		VMA_VIRTUAL_ALLOCATION_CREATE_STRATEGY_MIN_MEMORY_BIT = (.) VmaAllocationCreateFlags.VMA_ALLOCATION_CREATE_STRATEGY_MIN_MEMORY_BIT,
 		VMA_VIRTUAL_ALLOCATION_CREATE_STRATEGY_MIN_TIME_BIT = (.) VmaAllocationCreateFlags.VMA_ALLOCATION_CREATE_STRATEGY_MIN_TIME_BIT,
-		VMA_VIRTUAL_ALLOCATION_CREATE_STRATEGY_MASK = (.) VmaAllocationCreateFlags.VMA_ALLOCATION_CREATE_STRATEGY_MASK,
-		VMA_VIRTUAL_ALLOCATION_CREATE_FLAG_BITS_MAX_ENUM = 0x7FFFFFFF
+		VMA_VIRTUAL_ALLOCATION_CREATE_STRATEGY_MIN_OFFSET_BIT = (.) VmaAllocationCreateFlags.VMA_ALLOCATION_CREATE_STRATEGY_MIN_OFFSET_BIT,
+		VMA_VIRTUAL_ALLOCATION_CREATE_STRATEGY_MASK = (.) VmaAllocationCreateFlags.VMA_ALLOCATION_CREATE_STRATEGY_MASK
 	}
 
 	[CRepr]
@@ -169,6 +178,8 @@ namespace Bulkan.Utilities {
 		public void* vkBindBufferMemory2KHR;
 		public void* vkBindImageMemory2KHR;
 		public void* vkGetPhysicalDeviceMemoryProperties2KHR;
+		public void* vkGetDeviceBufferMemoryRequirements;
+		public void* vkGetDeviceImageMemoryRequirements;
 	}
 
 	[CRepr]
@@ -188,35 +199,41 @@ namespace Bulkan.Utilities {
 
 	[CRepr]
 	struct VmaAllocatorInfo {
-	    public VkInstance instance;
-	    public VkPhysicalDevice physicalDevice;
-	    public VkDevice device;
+		public VkInstance instance;
+		public VkPhysicalDevice physicalDevice;
+		public VkDevice device;
 	}
 
 	[CRepr]
-	struct VmaStatInfo {
-	    public uint32 blockCount;
-	    public uint32 allocationCount;
-	    public uint32 unusedRangeCount;
-	    public VkDeviceSize usedBytes;
-	    public VkDeviceSize unusedBytes;
-	    public VkDeviceSize allocationSizeMin, allocationSizeAvg, allocationSizeMax;
-	    public VkDeviceSize unusedRangeSizeMin, unusedRangeSizeAvg, unusedRangeSizeMax;
+	struct VmaStatistics {
+		public uint32 blockCount;
+		public uint32 allocationCount;
+		public VkDeviceSize blockBytes;
+		public VkDeviceSize allocationBytes;
 	}
 
 	[CRepr]
-	struct VmaStats {
-	    public VmaStatInfo[VK_MAX_MEMORY_TYPES] memoryType;
-	    public VmaStatInfo[VK_MAX_MEMORY_HEAPS] memoryHeap;
-	    public VmaStatInfo total;
+	struct VmaDetailedStatistics {
+		public VmaStatistics statistics;
+		public uint32 unusedRangeCount;
+		public VkDeviceSize allocationSizeMin;
+		public VkDeviceSize allocationSizeMax;
+		public VkDeviceSize unusedRangeSizeMin;
+		public VkDeviceSize unusedRangeSizeMax;
+	}
+
+	[CRepr]
+	struct VmaTotalStatistics {
+		public VmaDetailedStatistics[VK_MAX_MEMORY_TYPES] memoryType;
+		public VmaDetailedStatistics[VK_MAX_MEMORY_TYPES] memoryHeap;
+		public VmaDetailedStatistics total;
 	}
 
 	[CRepr]
 	struct VmaBudget {
-	    public VkDeviceSize blockBytes;
-	    public VkDeviceSize allocationBytes;
-	    public VkDeviceSize usage;
-	    public VkDeviceSize budget;
+		public VmaStatistics statistics;
+		public VkDeviceSize usage;
+		public VkDeviceSize budget;
 	}
 
 	[CRepr]
@@ -224,7 +241,7 @@ namespace Bulkan.Utilities {
 		public VmaAllocationCreateFlags flags;
 		public VmaMemoryUsage usage;
 		public VkMemoryPropertyFlags requiredFlags;
-		public VkMemoryPropertyFlags prefferedFlags;
+		public VkMemoryPropertyFlags preferredFlags;
 		public uint32 memoryTypeBits;
 		public VmaPool* pool;
 		public void* pUserData;
@@ -233,23 +250,14 @@ namespace Bulkan.Utilities {
 
 	[CRepr]
 	struct VmaPoolCreateInfo {
-	    public uint32 memoryTypeIndex;
-	    public VmaPoolCreateFlags flags;
-	    public VkDeviceSize blockSize;
-	    public uint minBlockCount;
-	    public uint maxBlockCount;
-	    public float priority;
-	    public VkDeviceSize minAllocationAlignment;
-	    public void* pMemoryAllocateNext;
-	}
-
-	[CRepr]
-	struct VmaPoolStats {
-	    public VkDeviceSize size;
-	    public VkDeviceSize unusedSize;
-	    public uint allocationCount;
-	    public uint unusedRangeCount;
-	    public uint blockCount;
+		public uint32 memoryTypeIndex;
+		public VmaPoolCreateFlags flags;
+		public VkDeviceSize blockSize;
+		public c_size minBlockCount;
+		public c_size maxBlockCount;
+		public float priority;
+		public VkDeviceSize minAllocationAlignment;
+		public void* pMemoryAllocateNext;
 	}
 
 	[CRepr]
@@ -260,68 +268,58 @@ namespace Bulkan.Utilities {
 		public VkDeviceSize size;
 		public void* pMappedData;
 		public void* pUserData;
-	}
-
-	[CRepr]
-	struct VmaDefragmentationInfo2 {
-	    public VmaDefragmentationFlags flags;
-	    public uint32 allocationCount;
-	    public VmaAllocation* pAllocations;
-	    public VkBool32* pAllocationsChanged;
-	    public uint32 poolCount;
-	    public VmaPool* pPools;
-	    public uint32 maxCpuAllocationsToMove;
-	    public uint32 maxGpuAllocationsToMove;
-	    public VkCommandBuffer commandBuffer;
-	}
-
-	[CRepr]
-	struct VmaDefragmentationPassMoveInfo {
-	    public VmaAllocation allocation;
-	    public VkDeviceMemory memory;
-	    public VkDeviceSize offset;
-	}
-
-	[CRepr]
-	struct VmaDefragmentationPassInfo {
-	    public uint32 moveCount;
-	    public VmaDefragmentationPassMoveInfo* pMoves;
+		public c_char* pName;
 	}
 
 	[CRepr]
 	struct VmaDefragmentationInfo {
-	    public VkDeviceSize maxBytesToMove;
-	    public uint32 maxAllocationsToMove;
+		public VmaDefragmentationFlags flags;
+		public VmaPool* pool;
+		public VkDeviceSize maxBytesPerPass;
+		public uint32 maxAllocationPerPass;
+	}
+
+	[CRepr]
+	struct VmaDefragmentationMove {
+		public VmaDefragmentationMoveOperation operation;
+		public VmaAllocation srcAllocation;
+		public VmaAllocation dstTmpAllocation;
+	}
+
+	[CRepr]
+	struct VmaDefragmentationPassMoveInfo {
+		public uint32 moveCount;
+		public VmaDefragmentationMove* pMoves;
 	}
 
 	[CRepr]
 	struct VmaDefragmentationStats {
-	    public VkDeviceSize bytesMoved;
-	    public VkDeviceSize bytesFreed;
-	    public uint32 allocationsMoved;
-	    public uint32 deviceMemoryBlocksFreed;
+		public VkDeviceSize bytesMoved;
+		public VkDeviceSize bytesFreed;
+		public uint32 allocationMoved;
+		public uint32 deviceMemoryBlocksFreed;
 	}
 
 	[CRepr]
 	struct VmaVirtualBlockCreateInfo {
-	    public VkDeviceSize size;
-	    public VmaVirtualBlockCreateFlags flags;
-	    public VkAllocationCallbacks* pAllocationCallbacks;
+		public VkDeviceSize size;
+		public VmaVirtualBlockCreateFlags flags;
+		public VkAllocationCallbacks* pAllocationCallbacks;
 	}
 
 	[CRepr]
 	struct VmaVirtualAllocationCreateInfo {
-	    public VkDeviceSize size;
-	    public VkDeviceSize alignment;
-	    public VmaVirtualAllocationCreateFlags flags;
-	    public void* pUserData;
+		public VkDeviceSize size;
+		public VkDeviceSize alignment;
+		public VmaVirtualAllocationCreateFlags flags;
+		public void* pUserData;
 	}
 
 	[CRepr]
 	struct VmaVirtualAllocationInfo {
-	    public VkDeviceSize offset;
-	    public VkDeviceSize size;
-	    public void* pUserData;
+		public VkDeviceSize offset;
+		public VkDeviceSize size;
+		public void* pUserData;
 	}
 
 	static class VulkanMemoryAllocator {
@@ -353,7 +351,9 @@ namespace Bulkan.Utilities {
 					vkGetImageMemoryRequirements2KHR = [Friend]vkGetImageMemoryRequirements2_ptr,
 					vkBindBufferMemory2KHR = [Friend]vkBindBufferMemory2_ptr,
 					vkBindImageMemory2KHR = [Friend]vkBindImageMemory2_ptr,
-					vkGetPhysicalDeviceMemoryProperties2KHR = [Friend]vkGetPhysicalDeviceMemoryProperties2_ptr
+					vkGetPhysicalDeviceMemoryProperties2KHR = [Friend]vkGetPhysicalDeviceMemoryProperties2_ptr,
+					vkGetDeviceBufferMemoryRequirements = [Friend]vkGetDeviceBufferMemoryRequirements_ptr,
+					vkGetDeviceImageMemoryRequirements = [Friend]vkGetDeviceImageMemoryRequirements_ptr
 				};
 
 				pCreateInfo.pVulkanFunctions = &vulkanFunctions;
@@ -381,7 +381,7 @@ namespace Bulkan.Utilities {
 		public static extern void vmaSetCurrentFrameIndex(VmaAllocator allocator, uint32 frameIndex);
 
 		[CLink]
-		public static extern void vmaCalculateStats(VmaAllocator allocator, VmaStats* pStats);
+		public static extern void vmaCalculateStatistics(VmaAllocator allocator, VmaTotalStatistics* pStats);
 
 		[CLink]
 		public static extern void vmaGetHeapBudgets(VmaAllocator allocator, VmaBudget* pBudgets);
@@ -400,25 +400,28 @@ namespace Bulkan.Utilities {
 
 		[CLink]
 		public static extern void vmaDestroyPool(VmaAllocator allocator, VmaPool pool);
+		
+		[CLink]
+		public static extern void vmaGetPoolStatistics(VmaAllocator allocator, VmaPool pool, VmaStatistics* pPoolStats);
 
 		[CLink]
-		public static extern void vmaGetPoolStats(VmaAllocator allocator, VmaPool pool, VmaPoolStats* pPoolStats);
+		public static extern void vmaCalculatePoolStatistics(VmaAllocator allocator, VmaPool pool, VmaDetailedStatistics* pPoolStats);
 
 		[CLink]
 		public static extern VkResult vmaCheckPoolCorruption(VmaAllocator allocator, VmaPool pool);
 
 		[CLink]
-		public static extern void vmaGetPoolName(VmaAllocator allocator, VmaPool pool, char8** ppName);
+		public static extern void vmaGetPoolName(VmaAllocator allocator, VmaPool pool, c_char** ppName);
 
 		[CLink]
-		public static extern void vmaSetPoolName(VmaAllocator allocator, VmaPool pool, char8* pName);
+		public static extern void vmaSetPoolName(VmaAllocator allocator, VmaPool pool, c_char* pName);
 
 		[CLink]
 		public static extern VkResult vmaAllocateMemory(VmaAllocator allocator, VkMemoryRequirements* pVkMemoryRequirements, VmaAllocationCreateInfo* pCreateInfo, VmaAllocation* pAllocation, VmaAllocationInfo* pAllocationInfo);
 
 		[CLink]
-		public static extern VkResult vmaAllocateMemoryPages(VmaAllocator allocator, VkMemoryRequirements* pVkMemoryRequirements, VmaAllocationCreateInfo* pCreateInfo, uint allocationCount, VmaAllocation* pAllocations, VmaAllocationInfo* pAllocationInfo);
-
+		public static extern VkResult vmaAllocateMemoryPages(VmaAllocator allocator, VkMemoryRequirements* pVkMemoryRequirements, VmaAllocationCreateInfo* pCreateInfo, c_size allocationCount, VmaAllocation* pAllocations, VmaAllocationInfo* pAllocationInfo);
+		
 		[CLink]
 		public static extern VkResult vmaAllocateMemoryForBuffer(VmaAllocator allocator, VkBuffer buffer, VmaAllocationCreateInfo* pCreateInfo, VmaAllocation* pAllocation, VmaAllocationInfo* pAllocationInfo);
 
@@ -429,7 +432,7 @@ namespace Bulkan.Utilities {
 		public static extern void vmaFreeMemory(VmaAllocator allocator, VmaAllocation allocation);
 
 		[CLink]
-		public static extern void vmaFreeMemoryPages(VmaAllocator allocator, uint allocationCount, VmaAllocation* pAllocations);
+		public static extern void vmaFreeMemoryPages(VmaAllocator allocator, c_size allocationCount, VmaAllocation* pAllocations);
 
 		[CLink]
 		public static extern void vmaGetAllocationInfo(VmaAllocator allocator, VmaAllocation allocation, VmaAllocationInfo* pAllocationInfo);
@@ -438,14 +441,17 @@ namespace Bulkan.Utilities {
 		public static extern void vmaSetAllocationUserData(VmaAllocator allocator, VmaAllocation allocation, void* pUserData);
 
 		[CLink]
-		public static extern void vmaGetAllocationMemoryProperties(VmaAllocator allocator, VmaAllocation allocation, VkMemoryPropertyFlags* pFlags);
+		public static extern void vmaSetAllocationName(VmaAllocator allocator, VmaAllocation allocation, c_char* pName);
 
+		[CLink]
+		public static extern void vmaGetAllocationMemoryProperties(VmaAllocator allocator, VmaAllocation allocation, VkMemoryPropertyFlags* pFlags);
+		
 		[CLink]
 		public static extern VkResult vmaMapMemory(VmaAllocator allocator, VmaAllocation allocation, void** ppData);
 
 		[CLink]
 		public static extern void vmaUnmapMemory(VmaAllocator allocator, VmaAllocation allocation);
-
+		
 		[CLink]
 		public static extern VkResult vmaFlushAllocation(VmaAllocator allocator, VmaAllocation allocation, VkDeviceSize offset, VkDeviceSize size);
 
@@ -462,37 +468,37 @@ namespace Bulkan.Utilities {
 		public static extern VkResult vmaCheckCorruption(VmaAllocator allocator, uint32 memoryTypeBits);
 
 		[CLink]
-		public static extern VkResult vmaDefragmentationBegin(VmaAllocator allocator, VmaDefragmentationInfo2* pInfo, VmaDefragmentationStats* pStats, VmaDefragmentationContext* pContext);
+		public static extern VkResult vmaBeginDefragmentation(VmaAllocator allocator, VmaDefragmentationInfo* pInfo, VmaDefragmentationContext* pContext);
 
 		[CLink]
-		public static extern VkResult vmaDefragmentationEnd(VmaAllocator allocator, VmaDefragmentationContext context);
+		public static extern VkResult vmaEndDefragmentation(VmaAllocator allocator, VmaDefragmentationContext context, VmaDefragmentationStats* pStats);
+		
+		[CLink]
+		public static extern VkResult vmaBeginDefragmentationPass(VmaAllocator allocator, VmaDefragmentationContext context, VmaDefragmentationPassMoveInfo* pPassInfo);
 
 		[CLink]
-		public static extern VkResult vmaBeginDefragmentationPass(VmaAllocator allocator, VmaDefragmentationContext context, VmaDefragmentationPassInfo* pInfo);
-
-		[CLink]
-		public static extern VkResult vmaEndDefragmentationPass(VmaAllocator allocator, VmaDefragmentationContext context);
-
-		[CLink]
-		public static extern VkResult vmaDefragment(VmaAllocator allocator, VmaAllocation* pAllocations, uint allocationCount, VkBool32* pAllocationsChanged, VmaDefragmentationInfo* pDefragmentationInfo, VmaDefragmentationStats* pDefragmentationStats);
-
+		public static extern VkResult vmaEndDefragmentationPass(VmaAllocator allocator, VmaDefragmentationContext context, VmaDefragmentationPassMoveInfo* pPassInfo);
+		
 		[CLink]
 		public static extern VkResult vmaBindBufferMemory(VmaAllocator allocator, VmaAllocation allocation, VkBuffer buffer);
 
 		[CLink]
 		public static extern VkResult vmaBindBufferMemory2(VmaAllocator allocator, VmaAllocation allocation, VkDeviceSize allocationLocalOffset, VkBuffer buffer, void* pNext);
-
+		
 		[CLink]
 		public static extern VkResult vmaBindImageMemory(VmaAllocator allocator, VmaAllocation allocation, VkImage image);
 
 		[CLink]
 		public static extern VkResult vmaBindImageMemory2(VmaAllocator allocator, VmaAllocation allocation, VkDeviceSize allocationLocalOffset, VkImage image, void* pNext);
-
+		
 		[CLink]
-		public static extern VkResult vmaCreateBuffer(VmaAllocator allocator, VkBufferCreateInfo* pBufferCreateInfo, VmaAllocationCreateInfo* pAllocationCreateInfo, VkBuffer* pBuffer, VmaAllocation* pAllocation, VmaAllocationInfo* pAllocationIfno);
+		public static extern VkResult vmaCreateBuffer(VmaAllocator allocator, VkBufferCreateInfo* pBufferCreateInfo, VmaAllocationCreateInfo* pAllocationCreateInfo, VkBuffer* pBuffer, VmaAllocation* pAllocation, VmaAllocationInfo* pAllocationInfo);
 
 		[CLink]
 		public static extern VkResult vmaCreateBufferWithAlignment(VmaAllocator allocator, VkBufferCreateInfo* pBufferCreateInfo, VmaAllocationCreateInfo* pAllocationCreateInfo, VkDeviceSize minAlignment, VkBuffer* pBuffer, VmaAllocation* pAllocation, VmaAllocationInfo* pAllocationInfo);
+
+		[CLink]
+		public static extern VkResult vmaCreateAliasingBuffer(VmaAllocator allocator, VmaAllocation allocation, VkBufferCreateInfo* pBufferCreateInfo, VkBuffer* pBuffer);
 
 		[CLink]
 		public static extern void vmaDestroyBuffer(VmaAllocator allocator, VkBuffer buffer, VmaAllocation allocation);
@@ -501,11 +507,14 @@ namespace Bulkan.Utilities {
 		public static extern VkResult vmaCreateImage(VmaAllocator allocator, VkImageCreateInfo* pImageCreateInfo, VmaAllocationCreateInfo* pAllocationCreateInfo, VkImage* pImage, VmaAllocation* pAllocation, VmaAllocationInfo* pAllocationInfo);
 
 		[CLink]
+		public static extern VkResult vmaCreateAliasingImage(VmaAllocator allocator, VmaAllocation allocation, VkImageCreateInfo* pImageCreateInfo, VkImage* pImage);
+		
+		[CLink]
 		public static extern void vmaDestroyImage(VmaAllocator allocator, VkImage image, VmaAllocation allocation);
-
+		
 		[CLink]
 		public static extern VkResult vmaCreateVirtualBlock(VmaVirtualBlockCreateInfo* pCreateInfo, VmaVirtualBlock* pVirtualBlock);
-
+		
 		[CLink]
 		public static extern void vmaDestroyVirtualBlock(VmaVirtualBlock virtualBlock);
 
@@ -514,13 +523,13 @@ namespace Bulkan.Utilities {
 
 		[CLink]
 		public static extern void vmaGetVirtualAllocationInfo(VmaVirtualBlock virtualBlock, VmaVirtualAllocation allocation, VmaVirtualAllocationInfo* pVirtualAllocInfo);
-
+		
 		[CLink]
 		public static extern VkResult vmaVirtualAllocate(VmaVirtualBlock virtualBlock, VmaVirtualAllocationCreateInfo* pCreateInfo, VmaVirtualAllocation* pAllocation, VkDeviceSize* pOffset);
 
 		[CLink]
 		public static extern void vmaVirtualFree(VmaVirtualBlock virtualBlock, VmaVirtualAllocation allocation);
-
+		
 		[CLink]
 		public static extern void vmaClearVirtualBlock(VmaVirtualBlock virtualBlock);
 
@@ -528,18 +537,21 @@ namespace Bulkan.Utilities {
 		public static extern void vmaSetVirtualAllocationUserData(VmaVirtualBlock virtualBlock, VmaVirtualAllocation allocation, void* pUserData);
 
 		[CLink]
-		public static extern void vmaCalculateVirtualBlockStats(VmaVirtualBlock virtualBlock, VmaStatInfo* pStatInfo);
+		public static extern void vmaGetVirtualBlockStatistics(VmaVirtualBlock virtualBlock, VmaStatistics* pStats);
+		
+		[CLink]
+		public static extern void vmaCalculateVirtualBlockStatistics(VmaVirtualBlock virtualBlock, VmaDetailedStatistics* pStats);
+		
+		[CLink]
+		public static extern void vmaBuildVirtualBlockStatsString(VmaVirtualBlock virtualBlock, c_char** ppStatsString, VkBool32 detailedMap);
 
 		[CLink]
-		public static extern void vmaBuildVirtualBlockStatsString(VmaVirtualBlock virtualBlock, char8** ppStatsString, VkBool32 detailedMap);
+		public static extern void vmaFreeVirtualBlockStatsString(VmaVirtualBlock virtualBlock, c_char* pStatsString);
+		
+		[CLink]
+		public static extern void vmaBuildStatsString(VmaAllocator allocator, c_char** ppStatsString, VkBool32 detailedMap);
 
 		[CLink]
-		public static extern void vmaFreeVirtualBlockStatsString(VmaVirtualBlock virtualBlock, char8* pStatsString);
-
-		[CLink]
-		public static extern void vmaBuildStatsString(VmaAllocator allocator, char8** ppStatsString, VkBool32 detailedMap);
-
-		[CLink]
-		public static extern void vmaFreeStatsString(VmaAllocator allocator, char8* pStatsString);
+		public static extern void vmaFreeStatsString(VmaAllocator allocator, c_char* pStatsString);
 	}
 }
