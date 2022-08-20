@@ -32,6 +32,7 @@ namespace Bulkan
 		public const uint32 VK_SHADER_UNUSED_NV = VK_SHADER_UNUSED_KHR;
 		public const uint32 VK_MAX_GLOBAL_PRIORITY_SIZE_KHR = 16;
 		public const uint32 VK_MAX_GLOBAL_PRIORITY_SIZE_EXT = VK_MAX_GLOBAL_PRIORITY_SIZE_KHR;
+		public const uint32 VK_MAX_SHADER_MODULE_IDENTIFIER_SIZE_EXT = 32;
 		public const uint32 VK_KHR_SURFACE_SPEC_VERSION = 25;
 		public const char8* VK_KHR_SURFACE_EXTENSION_NAME = "VK_KHR_surface";
 		public const uint32 VK_KHR_SWAPCHAIN_SPEC_VERSION = 70;
@@ -68,7 +69,7 @@ namespace Bulkan
 		public const char8* VK_AMD_SHADER_EXPLICIT_VERTEX_PARAMETER_EXTENSION_NAME = "VK_AMD_shader_explicit_vertex_parameter";
 		public const uint32 VK_EXT_DEBUG_MARKER_SPEC_VERSION = 4;
 		public const char8* VK_EXT_DEBUG_MARKER_EXTENSION_NAME = "VK_EXT_debug_marker";
-		public const uint32 VK_KHR_VIDEO_QUEUE_SPEC_VERSION = 3;
+		public const uint32 VK_KHR_VIDEO_QUEUE_SPEC_VERSION = 4;
 		public const char8* VK_KHR_VIDEO_QUEUE_EXTENSION_NAME = "VK_KHR_video_queue";
 		public const uint32 VK_KHR_VIDEO_DECODE_QUEUE_SPEC_VERSION = 4;
 		public const char8* VK_KHR_VIDEO_DECODE_QUEUE_EXTENSION_NAME = "VK_KHR_video_decode_queue";
@@ -138,6 +139,8 @@ namespace Bulkan
 		public const char8* VK_EXT_TEXTURE_COMPRESSION_ASTC_HDR_EXTENSION_NAME = "VK_EXT_texture_compression_astc_hdr";
 		public const uint32 VK_EXT_ASTC_DECODE_MODE_SPEC_VERSION = 1;
 		public const char8* VK_EXT_ASTC_DECODE_MODE_EXTENSION_NAME = "VK_EXT_astc_decode_mode";
+		public const uint32 VK_EXT_PIPELINE_ROBUSTNESS_SPEC_VERSION = 1;
+		public const char8* VK_EXT_PIPELINE_ROBUSTNESS_EXTENSION_NAME = "VK_EXT_pipeline_robustness";
 		public const uint32 VK_KHR_MAINTENANCE_1_SPEC_VERSION = 2;
 		public const char8* VK_KHR_MAINTENANCE_1_EXTENSION_NAME = "VK_KHR_maintenance1";
 		public const uint32 VK_KHR_MAINTENANCE1_SPEC_VERSION = VK_KHR_MAINTENANCE_1_SPEC_VERSION;
@@ -476,7 +479,7 @@ namespace Bulkan
 		public const char8* VK_KHR_SHADER_INTEGER_DOT_PRODUCT_EXTENSION_NAME = "VK_KHR_shader_integer_dot_product";
 		public const uint32 VK_EXT_TEXEL_BUFFER_ALIGNMENT_SPEC_VERSION = 1;
 		public const char8* VK_EXT_TEXEL_BUFFER_ALIGNMENT_EXTENSION_NAME = "VK_EXT_texel_buffer_alignment";
-		public const uint32 VK_QCOM_RENDER_PASS_TRANSFORM_SPEC_VERSION = 2;
+		public const uint32 VK_QCOM_RENDER_PASS_TRANSFORM_SPEC_VERSION = 3;
 		public const char8* VK_QCOM_RENDER_PASS_TRANSFORM_EXTENSION_NAME = "VK_QCOM_render_pass_transform";
 		public const uint32 VK_EXT_DEVICE_MEMORY_REPORT_SPEC_VERSION = 2;
 		public const char8* VK_EXT_DEVICE_MEMORY_REPORT_EXTENSION_NAME = "VK_EXT_device_memory_report";
@@ -572,6 +575,8 @@ namespace Bulkan
 		public const char8* VK_NV_EXTERNAL_MEMORY_RDMA_EXTENSION_NAME = "VK_NV_external_memory_rdma";
 		public const uint32 VK_EXT_PIPELINE_PROPERTIES_SPEC_VERSION = 1;
 		public const char8* VK_EXT_PIPELINE_PROPERTIES_EXTENSION_NAME = "VK_EXT_pipeline_properties";
+		public const uint32 VK_EXT_MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_SPEC_VERSION = 1;
+		public const char8* VK_EXT_MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_EXTENSION_NAME = "VK_EXT_multisampled_render_to_single_sampled";
 		public const uint32 VK_EXT_EXTENDED_DYNAMIC_STATE_2_SPEC_VERSION = 1;
 		public const char8* VK_EXT_EXTENDED_DYNAMIC_STATE_2_EXTENSION_NAME = "VK_EXT_extended_dynamic_state2";
 		public const uint32 VK_QNX_SCREEN_SURFACE_SPEC_VERSION = 1;
@@ -612,7 +617,13 @@ namespace Bulkan
 		public const char8* VK_GOOGLE_SURFACELESS_QUERY_EXTENSION_NAME = "VK_GOOGLE_surfaceless_query";
 		public const uint32 VK_EXT_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_SPEC_VERSION = 1;
 		public const char8* VK_EXT_IMAGE_COMPRESSION_CONTROL_SWAPCHAIN_EXTENSION_NAME = "VK_EXT_image_compression_control_swapchain";
+		public const uint32 VK_QCOM_IMAGE_PROCESSING_SPEC_VERSION = 1;
+		public const char8* VK_QCOM_IMAGE_PROCESSING_EXTENSION_NAME = "VK_QCOM_image_processing";
 		public const uint32 VK_EXT_SUBPASS_MERGE_FEEDBACK_SPEC_VERSION = 2;
 		public const char8* VK_EXT_SUBPASS_MERGE_FEEDBACK_EXTENSION_NAME = "VK_EXT_subpass_merge_feedback";
+		public const uint32 VK_EXT_SHADER_MODULE_IDENTIFIER_SPEC_VERSION = 1;
+		public const char8* VK_EXT_SHADER_MODULE_IDENTIFIER_EXTENSION_NAME = "VK_EXT_shader_module_identifier";
+		public const uint32 VK_QCOM_TILE_PROPERTIES_SPEC_VERSION = 1;
+		public const char8* VK_QCOM_TILE_PROPERTIES_EXTENSION_NAME = "VK_QCOM_tile_properties";
 	}
 }

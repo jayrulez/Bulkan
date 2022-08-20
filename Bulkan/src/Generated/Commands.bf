@@ -2765,6 +2765,30 @@ namespace Bulkan
 		public static void vkGetDescriptorSetHostMappingVALVE(VkDevice device, VkDescriptorSet descriptorSet, void** ppData)
 			=> vkGetDescriptorSetHostMappingVALVE_ptr(device, descriptorSet, ppData);
 
+		public typealias vkGetShaderModuleIdentifierEXTFunction = function void(VkDevice device, VkShaderModule shaderModule, VkShaderModuleIdentifierEXT* pIdentifier);
+		private static vkGetShaderModuleIdentifierEXTFunction vkGetShaderModuleIdentifierEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkGetShaderModuleIdentifierEXT(VkDevice device, VkShaderModule shaderModule, VkShaderModuleIdentifierEXT* pIdentifier)
+			=> vkGetShaderModuleIdentifierEXT_ptr(device, shaderModule, pIdentifier);
+
+		public typealias vkGetShaderModuleCreateInfoIdentifierEXTFunction = function void(VkDevice device, VkShaderModuleCreateInfo* pCreateInfo, VkShaderModuleIdentifierEXT* pIdentifier);
+		private static vkGetShaderModuleCreateInfoIdentifierEXTFunction vkGetShaderModuleCreateInfoIdentifierEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkGetShaderModuleCreateInfoIdentifierEXT(VkDevice device, VkShaderModuleCreateInfo* pCreateInfo, VkShaderModuleIdentifierEXT* pIdentifier)
+			=> vkGetShaderModuleCreateInfoIdentifierEXT_ptr(device, pCreateInfo, pIdentifier);
+
+		public typealias vkGetFramebufferTilePropertiesQCOMFunction = function VkResult(VkDevice device, VkFramebuffer framebuffer, uint32* pPropertiesCount, VkTilePropertiesQCOM* pProperties);
+		private static vkGetFramebufferTilePropertiesQCOMFunction vkGetFramebufferTilePropertiesQCOM_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static VkResult vkGetFramebufferTilePropertiesQCOM(VkDevice device, VkFramebuffer framebuffer, uint32* pPropertiesCount, VkTilePropertiesQCOM* pProperties)
+			=> vkGetFramebufferTilePropertiesQCOM_ptr(device, framebuffer, pPropertiesCount, pProperties);
+
+		public typealias vkGetDynamicRenderingTilePropertiesQCOMFunction = function VkResult(VkDevice device, VkRenderingInfo* pRenderingInfo, VkTilePropertiesQCOM* pProperties);
+		private static vkGetDynamicRenderingTilePropertiesQCOMFunction vkGetDynamicRenderingTilePropertiesQCOM_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static VkResult vkGetDynamicRenderingTilePropertiesQCOM(VkDevice device, VkRenderingInfo* pRenderingInfo, VkTilePropertiesQCOM* pProperties)
+			=> vkGetDynamicRenderingTilePropertiesQCOM_ptr(device, pRenderingInfo, pProperties);
+
 		public static void SetInstance(VkInstance instance)
 		{
 			mNativeLib.mInstance = instance;
@@ -4613,6 +4637,22 @@ namespace Bulkan
 				mNativeLib.LoadFunction("vkGetDescriptorSetHostMappingVALVE", out vkGetDescriptorSetHostMappingVALVE_ptr);
 				break;
 
+			case "vkGetShaderModuleIdentifierEXT":
+				mNativeLib.LoadFunction("vkGetShaderModuleIdentifierEXT", out vkGetShaderModuleIdentifierEXT_ptr);
+				break;
+
+			case "vkGetShaderModuleCreateInfoIdentifierEXT":
+				mNativeLib.LoadFunction("vkGetShaderModuleCreateInfoIdentifierEXT", out vkGetShaderModuleCreateInfoIdentifierEXT_ptr);
+				break;
+
+			case "vkGetFramebufferTilePropertiesQCOM":
+				mNativeLib.LoadFunction("vkGetFramebufferTilePropertiesQCOM", out vkGetFramebufferTilePropertiesQCOM_ptr);
+				break;
+
+			case "vkGetDynamicRenderingTilePropertiesQCOM":
+				mNativeLib.LoadFunction("vkGetDynamicRenderingTilePropertiesQCOM", out vkGetDynamicRenderingTilePropertiesQCOM_ptr);
+				break;
+
 			default:
 				Runtime.FatalError(scope $"Unknown function name '{name}'.");
 			}
@@ -6013,6 +6053,18 @@ namespace Bulkan
 
 			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDescriptorSetHostMappingVALVE"))
 				LoadFunction("vkGetDescriptorSetHostMappingVALVE");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetShaderModuleIdentifierEXT"))
+				LoadFunction("vkGetShaderModuleIdentifierEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetShaderModuleCreateInfoIdentifierEXT"))
+				LoadFunction("vkGetShaderModuleCreateInfoIdentifierEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetFramebufferTilePropertiesQCOM"))
+				LoadFunction("vkGetFramebufferTilePropertiesQCOM");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDynamicRenderingTilePropertiesQCOM"))
+				LoadFunction("vkGetDynamicRenderingTilePropertiesQCOM");
 
 		}
 
