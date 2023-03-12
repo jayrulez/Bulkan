@@ -59,7 +59,7 @@ namespace Bulkan
 
 		public abstract void LoadFunction(StringView functionName, out void* handle);
 
-		public void LoadFunction<T>(StringView name, out T field)
+		public void LoadFunction<T>(StringView name, out T field, bool invokeErrorCallback = true)
 		{
 			void* funcPtr = null;
 			LoadFunction(name, out funcPtr);
@@ -78,7 +78,7 @@ namespace Bulkan
 			} else
 			{
 				field = default;
-				if (LoanFunctionErrorCallBack != null)
+				if (LoanFunctionErrorCallBack != null && invokeErrorCallback)
 				{
 					LoanFunctionErrorCallBack.Invoke(name);
 				}
@@ -96,7 +96,7 @@ namespace Bulkan
 
 #if BF_PLATFORM_WINDOWS
 			handle = new WindowsNativeLibrary(libraryName);
-			#elif BF_PLATFORM_LINUX || BF_PLATFORM_MACOS
+#elif BF_PLATFORM_LINUX || BF_PLATFORM_MACOS
 			handle = new UnixNativeLibrary(libraryName);
 #else
 			Runtime.FatalError("Unsupported platform.");
