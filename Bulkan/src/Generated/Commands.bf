@@ -1295,6 +1295,18 @@ namespace Bulkan
 		public static void vkGetDeviceImageSparseMemoryRequirements(VkDevice device, VkDeviceImageMemoryRequirements* pInfo, uint32* pSparseMemoryRequirementCount, VkSparseImageMemoryRequirements2* pSparseMemoryRequirements)
 			=> vkGetDeviceImageSparseMemoryRequirements_ptr(device, pInfo, pSparseMemoryRequirementCount, pSparseMemoryRequirements);
 
+		public typealias vkGetCommandPoolMemoryConsumptionFunction = function void(VkDevice device, VkCommandPool commandPool, VkCommandBuffer commandBuffer, VkCommandPoolMemoryConsumption* pConsumption);
+		private static vkGetCommandPoolMemoryConsumptionFunction vkGetCommandPoolMemoryConsumption_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkGetCommandPoolMemoryConsumption(VkDevice device, VkCommandPool commandPool, VkCommandBuffer commandBuffer, VkCommandPoolMemoryConsumption* pConsumption)
+			=> vkGetCommandPoolMemoryConsumption_ptr(device, commandPool, commandBuffer, pConsumption);
+
+		public typealias vkGetFaultDataFunction = function VkResult(VkDevice device, VkFaultQueryBehavior faultQueryBehavior, VkBool32* pUnrecordedFaults, uint32* pFaultCount, VkFaultData* pFaults);
+		private static vkGetFaultDataFunction vkGetFaultData_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static VkResult vkGetFaultData(VkDevice device, VkFaultQueryBehavior faultQueryBehavior, VkBool32* pUnrecordedFaults, uint32* pFaultCount, VkFaultData* pFaults)
+			=> vkGetFaultData_ptr(device, faultQueryBehavior, pUnrecordedFaults, pFaultCount, pFaults);
+
 		public typealias vkDestroySurfaceKHRFunction = function void(VkInstance instance, VkSurfaceKHR surface, VkAllocationCallbacks* pAllocator);
 		private static vkDestroySurfaceKHRFunction vkDestroySurfaceKHR_ptr;
 		[CallingConvention(VulkanNative.CallConv)]
@@ -1505,10 +1517,10 @@ namespace Bulkan
 		public static void vkCmdDebugMarkerInsertEXT(VkCommandBuffer commandBuffer, VkDebugMarkerMarkerInfoEXT* pMarkerInfo)
 			=> vkCmdDebugMarkerInsertEXT_ptr(commandBuffer, pMarkerInfo);
 
-		public typealias vkGetPhysicalDeviceVideoCapabilitiesKHRFunction = function VkResult(VkPhysicalDevice physicalDevice, VkVideoProfileKHR* pVideoProfile, VkVideoCapabilitiesKHR* pCapabilities);
+		public typealias vkGetPhysicalDeviceVideoCapabilitiesKHRFunction = function VkResult(VkPhysicalDevice physicalDevice, VkVideoProfileInfoKHR* pVideoProfile, VkVideoCapabilitiesKHR* pCapabilities);
 		private static vkGetPhysicalDeviceVideoCapabilitiesKHRFunction vkGetPhysicalDeviceVideoCapabilitiesKHR_ptr;
 		[CallingConvention(VulkanNative.CallConv)]
-		public static VkResult vkGetPhysicalDeviceVideoCapabilitiesKHR(VkPhysicalDevice physicalDevice, VkVideoProfileKHR* pVideoProfile, VkVideoCapabilitiesKHR* pCapabilities)
+		public static VkResult vkGetPhysicalDeviceVideoCapabilitiesKHR(VkPhysicalDevice physicalDevice, VkVideoProfileInfoKHR* pVideoProfile, VkVideoCapabilitiesKHR* pCapabilities)
 			=> vkGetPhysicalDeviceVideoCapabilitiesKHR_ptr(physicalDevice, pVideoProfile, pCapabilities);
 
 		public typealias vkGetPhysicalDeviceVideoFormatPropertiesKHRFunction = function VkResult(VkPhysicalDevice physicalDevice, VkPhysicalDeviceVideoFormatInfoKHR* pVideoFormatInfo, uint32* pVideoFormatPropertyCount, VkVideoFormatPropertiesKHR* pVideoFormatProperties);
@@ -1529,17 +1541,17 @@ namespace Bulkan
 		public static void vkDestroyVideoSessionKHR(VkDevice device, VkVideoSessionKHR videoSession, VkAllocationCallbacks* pAllocator)
 			=> vkDestroyVideoSessionKHR_ptr(device, videoSession, pAllocator);
 
-		public typealias vkGetVideoSessionMemoryRequirementsKHRFunction = function VkResult(VkDevice device, VkVideoSessionKHR videoSession, uint32* pVideoSessionMemoryRequirementsCount, VkVideoGetMemoryPropertiesKHR* pVideoSessionMemoryRequirements);
+		public typealias vkGetVideoSessionMemoryRequirementsKHRFunction = function VkResult(VkDevice device, VkVideoSessionKHR videoSession, uint32* pMemoryRequirementsCount, VkVideoSessionMemoryRequirementsKHR* pMemoryRequirements);
 		private static vkGetVideoSessionMemoryRequirementsKHRFunction vkGetVideoSessionMemoryRequirementsKHR_ptr;
 		[CallingConvention(VulkanNative.CallConv)]
-		public static VkResult vkGetVideoSessionMemoryRequirementsKHR(VkDevice device, VkVideoSessionKHR videoSession, uint32* pVideoSessionMemoryRequirementsCount, VkVideoGetMemoryPropertiesKHR* pVideoSessionMemoryRequirements)
-			=> vkGetVideoSessionMemoryRequirementsKHR_ptr(device, videoSession, pVideoSessionMemoryRequirementsCount, pVideoSessionMemoryRequirements);
+		public static VkResult vkGetVideoSessionMemoryRequirementsKHR(VkDevice device, VkVideoSessionKHR videoSession, uint32* pMemoryRequirementsCount, VkVideoSessionMemoryRequirementsKHR* pMemoryRequirements)
+			=> vkGetVideoSessionMemoryRequirementsKHR_ptr(device, videoSession, pMemoryRequirementsCount, pMemoryRequirements);
 
-		public typealias vkBindVideoSessionMemoryKHRFunction = function VkResult(VkDevice device, VkVideoSessionKHR videoSession, uint32 videoSessionBindMemoryCount, VkVideoBindMemoryKHR* pVideoSessionBindMemories);
+		public typealias vkBindVideoSessionMemoryKHRFunction = function VkResult(VkDevice device, VkVideoSessionKHR videoSession, uint32 bindSessionMemoryInfoCount, VkBindVideoSessionMemoryInfoKHR* pBindSessionMemoryInfos);
 		private static vkBindVideoSessionMemoryKHRFunction vkBindVideoSessionMemoryKHR_ptr;
 		[CallingConvention(VulkanNative.CallConv)]
-		public static VkResult vkBindVideoSessionMemoryKHR(VkDevice device, VkVideoSessionKHR videoSession, uint32 videoSessionBindMemoryCount, VkVideoBindMemoryKHR* pVideoSessionBindMemories)
-			=> vkBindVideoSessionMemoryKHR_ptr(device, videoSession, videoSessionBindMemoryCount, pVideoSessionBindMemories);
+		public static VkResult vkBindVideoSessionMemoryKHR(VkDevice device, VkVideoSessionKHR videoSession, uint32 bindSessionMemoryInfoCount, VkBindVideoSessionMemoryInfoKHR* pBindSessionMemoryInfos)
+			=> vkBindVideoSessionMemoryKHR_ptr(device, videoSession, bindSessionMemoryInfoCount, pBindSessionMemoryInfos);
 
 		public typealias vkCreateVideoSessionParametersKHRFunction = function VkResult(VkDevice device, VkVideoSessionParametersCreateInfoKHR* pCreateInfo, VkAllocationCallbacks* pAllocator, VkVideoSessionParametersKHR* pVideoSessionParameters);
 		private static vkCreateVideoSessionParametersKHRFunction vkCreateVideoSessionParametersKHR_ptr;
@@ -1577,11 +1589,11 @@ namespace Bulkan
 		public static void vkCmdControlVideoCodingKHR(VkCommandBuffer commandBuffer, VkVideoCodingControlInfoKHR* pCodingControlInfo)
 			=> vkCmdControlVideoCodingKHR_ptr(commandBuffer, pCodingControlInfo);
 
-		public typealias vkCmdDecodeVideoKHRFunction = function void(VkCommandBuffer commandBuffer, VkVideoDecodeInfoKHR* pFrameInfo);
+		public typealias vkCmdDecodeVideoKHRFunction = function void(VkCommandBuffer commandBuffer, VkVideoDecodeInfoKHR* pDecodeInfo);
 		private static vkCmdDecodeVideoKHRFunction vkCmdDecodeVideoKHR_ptr;
 		[CallingConvention(VulkanNative.CallConv)]
-		public static void vkCmdDecodeVideoKHR(VkCommandBuffer commandBuffer, VkVideoDecodeInfoKHR* pFrameInfo)
-			=> vkCmdDecodeVideoKHR_ptr(commandBuffer, pFrameInfo);
+		public static void vkCmdDecodeVideoKHR(VkCommandBuffer commandBuffer, VkVideoDecodeInfoKHR* pDecodeInfo)
+			=> vkCmdDecodeVideoKHR_ptr(commandBuffer, pDecodeInfo);
 
 		public typealias vkCmdBindTransformFeedbackBuffersEXTFunction = function void(VkCommandBuffer commandBuffer, uint32 firstBinding, uint32 bindingCount, VkBuffer* pBuffers, uint64* pOffsets, uint64* pSizes);
 		private static vkCmdBindTransformFeedbackBuffersEXTFunction vkCmdBindTransformFeedbackBuffersEXT_ptr;
@@ -1828,6 +1840,18 @@ namespace Bulkan
 		[CallingConvention(VulkanNative.CallConv)]
 		public static void vkCmdSetDiscardRectangleEXT(VkCommandBuffer commandBuffer, uint32 firstDiscardRectangle, uint32 discardRectangleCount, VkRect2D* pDiscardRectangles)
 			=> vkCmdSetDiscardRectangleEXT_ptr(commandBuffer, firstDiscardRectangle, discardRectangleCount, pDiscardRectangles);
+
+		public typealias vkCmdSetDiscardRectangleEnableEXTFunction = function void(VkCommandBuffer commandBuffer, VkBool32 discardRectangleEnable);
+		private static vkCmdSetDiscardRectangleEnableEXTFunction vkCmdSetDiscardRectangleEnableEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdSetDiscardRectangleEnableEXT(VkCommandBuffer commandBuffer, VkBool32 discardRectangleEnable)
+			=> vkCmdSetDiscardRectangleEnableEXT_ptr(commandBuffer, discardRectangleEnable);
+
+		public typealias vkCmdSetDiscardRectangleModeEXTFunction = function void(VkCommandBuffer commandBuffer, VkDiscardRectangleModeEXT discardRectangleMode);
+		private static vkCmdSetDiscardRectangleModeEXTFunction vkCmdSetDiscardRectangleModeEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdSetDiscardRectangleModeEXT(VkCommandBuffer commandBuffer, VkDiscardRectangleModeEXT discardRectangleMode)
+			=> vkCmdSetDiscardRectangleModeEXT_ptr(commandBuffer, discardRectangleMode);
 
 		public typealias vkSetHdrMetadataEXTFunction = function void(VkDevice device, uint32 swapchainCount, VkSwapchainKHR* pSwapchains, VkHdrMetadataEXT* pMetadata);
 		private static vkSetHdrMetadataEXTFunction vkSetHdrMetadataEXT_ptr;
@@ -2321,6 +2345,12 @@ namespace Bulkan
 		public static void vkCmdDrawMeshTasksIndirectCountNV(VkCommandBuffer commandBuffer, VkBuffer buffer, uint64 offset, VkBuffer countBuffer, uint64 countBufferOffset, uint32 maxDrawCount, uint32 stride)
 			=> vkCmdDrawMeshTasksIndirectCountNV_ptr(commandBuffer, buffer, offset, countBuffer, countBufferOffset, maxDrawCount, stride);
 
+		public typealias vkCmdSetExclusiveScissorEnableNVFunction = function void(VkCommandBuffer commandBuffer, uint32 firstExclusiveScissor, uint32 exclusiveScissorCount, VkBool32* pExclusiveScissorEnables);
+		private static vkCmdSetExclusiveScissorEnableNVFunction vkCmdSetExclusiveScissorEnableNV_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdSetExclusiveScissorEnableNV(VkCommandBuffer commandBuffer, uint32 firstExclusiveScissor, uint32 exclusiveScissorCount, VkBool32* pExclusiveScissorEnables)
+			=> vkCmdSetExclusiveScissorEnableNV_ptr(commandBuffer, firstExclusiveScissor, exclusiveScissorCount, pExclusiveScissorEnables);
+
 		public typealias vkCmdSetExclusiveScissorNVFunction = function void(VkCommandBuffer commandBuffer, uint32 firstExclusiveScissor, uint32 exclusiveScissorCount, VkRect2D* pExclusiveScissors);
 		private static vkCmdSetExclusiveScissorNVFunction vkCmdSetExclusiveScissorNV_ptr;
 		[CallingConvention(VulkanNative.CallConv)]
@@ -2519,6 +2549,12 @@ namespace Bulkan
 		public static VkResult vkGetPipelineExecutableInternalRepresentationsKHR(VkDevice device, VkPipelineExecutableInfoKHR* pExecutableInfo, uint32* pInternalRepresentationCount, VkPipelineExecutableInternalRepresentationKHR* pInternalRepresentations)
 			=> vkGetPipelineExecutableInternalRepresentationsKHR_ptr(device, pExecutableInfo, pInternalRepresentationCount, pInternalRepresentations);
 
+		public typealias vkReleaseSwapchainImagesEXTFunction = function VkResult(VkDevice device, VkReleaseSwapchainImagesInfoEXT* pReleaseInfo);
+		private static vkReleaseSwapchainImagesEXTFunction vkReleaseSwapchainImagesEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static VkResult vkReleaseSwapchainImagesEXT(VkDevice device, VkReleaseSwapchainImagesInfoEXT* pReleaseInfo)
+			=> vkReleaseSwapchainImagesEXT_ptr(device, pReleaseInfo);
+
 		public typealias vkGetGeneratedCommandsMemoryRequirementsNVFunction = function void(VkDevice device, VkGeneratedCommandsMemoryRequirementsInfoNV* pInfo, VkMemoryRequirements2* pMemoryRequirements);
 		private static vkGetGeneratedCommandsMemoryRequirementsNVFunction vkGetGeneratedCommandsMemoryRequirementsNV_ptr;
 		[CallingConvention(VulkanNative.CallConv)]
@@ -2573,11 +2609,83 @@ namespace Bulkan
 		public static void vkCmdEncodeVideoKHR(VkCommandBuffer commandBuffer, VkVideoEncodeInfoKHR* pEncodeInfo)
 			=> vkCmdEncodeVideoKHR_ptr(commandBuffer, pEncodeInfo);
 
+		public typealias vkCmdRefreshObjectsKHRFunction = function void(VkCommandBuffer commandBuffer, VkRefreshObjectListKHR* pRefreshObjects);
+		private static vkCmdRefreshObjectsKHRFunction vkCmdRefreshObjectsKHR_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdRefreshObjectsKHR(VkCommandBuffer commandBuffer, VkRefreshObjectListKHR* pRefreshObjects)
+			=> vkCmdRefreshObjectsKHR_ptr(commandBuffer, pRefreshObjects);
+
+		public typealias vkGetPhysicalDeviceRefreshableObjectTypesKHRFunction = function VkResult(VkPhysicalDevice physicalDevice, uint32* pRefreshableObjectTypeCount, VkObjectType* pRefreshableObjectTypes);
+		private static vkGetPhysicalDeviceRefreshableObjectTypesKHRFunction vkGetPhysicalDeviceRefreshableObjectTypesKHR_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static VkResult vkGetPhysicalDeviceRefreshableObjectTypesKHR(VkPhysicalDevice physicalDevice, uint32* pRefreshableObjectTypeCount, VkObjectType* pRefreshableObjectTypes)
+			=> vkGetPhysicalDeviceRefreshableObjectTypesKHR_ptr(physicalDevice, pRefreshableObjectTypeCount, pRefreshableObjectTypes);
+
 		public typealias vkExportMetalObjectsEXTFunction = function void(VkDevice device, VkExportMetalObjectsInfoEXT* pMetalObjectsInfo);
 		private static vkExportMetalObjectsEXTFunction vkExportMetalObjectsEXT_ptr;
 		[CallingConvention(VulkanNative.CallConv)]
 		public static void vkExportMetalObjectsEXT(VkDevice device, VkExportMetalObjectsInfoEXT* pMetalObjectsInfo)
 			=> vkExportMetalObjectsEXT_ptr(device, pMetalObjectsInfo);
+
+		public typealias vkGetDescriptorSetLayoutSizeEXTFunction = function void(VkDevice device, VkDescriptorSetLayout layout, uint64* pLayoutSizeInBytes);
+		private static vkGetDescriptorSetLayoutSizeEXTFunction vkGetDescriptorSetLayoutSizeEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkGetDescriptorSetLayoutSizeEXT(VkDevice device, VkDescriptorSetLayout layout, uint64* pLayoutSizeInBytes)
+			=> vkGetDescriptorSetLayoutSizeEXT_ptr(device, layout, pLayoutSizeInBytes);
+
+		public typealias vkGetDescriptorSetLayoutBindingOffsetEXTFunction = function void(VkDevice device, VkDescriptorSetLayout layout, uint32 binding, uint64* pOffset);
+		private static vkGetDescriptorSetLayoutBindingOffsetEXTFunction vkGetDescriptorSetLayoutBindingOffsetEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkGetDescriptorSetLayoutBindingOffsetEXT(VkDevice device, VkDescriptorSetLayout layout, uint32 binding, uint64* pOffset)
+			=> vkGetDescriptorSetLayoutBindingOffsetEXT_ptr(device, layout, binding, pOffset);
+
+		public typealias vkGetDescriptorEXTFunction = function void(VkDevice device, VkDescriptorGetInfoEXT* pDescriptorInfo, uint dataSize, void* pDescriptor);
+		private static vkGetDescriptorEXTFunction vkGetDescriptorEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkGetDescriptorEXT(VkDevice device, VkDescriptorGetInfoEXT* pDescriptorInfo, uint dataSize, void* pDescriptor)
+			=> vkGetDescriptorEXT_ptr(device, pDescriptorInfo, dataSize, pDescriptor);
+
+		public typealias vkCmdBindDescriptorBuffersEXTFunction = function void(VkCommandBuffer commandBuffer, uint32 bufferCount, VkDescriptorBufferBindingInfoEXT* pBindingInfos);
+		private static vkCmdBindDescriptorBuffersEXTFunction vkCmdBindDescriptorBuffersEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdBindDescriptorBuffersEXT(VkCommandBuffer commandBuffer, uint32 bufferCount, VkDescriptorBufferBindingInfoEXT* pBindingInfos)
+			=> vkCmdBindDescriptorBuffersEXT_ptr(commandBuffer, bufferCount, pBindingInfos);
+
+		public typealias vkCmdSetDescriptorBufferOffsetsEXTFunction = function void(VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipelineLayout layout, uint32 firstSet, uint32 setCount, uint32* pBufferIndices, uint64* pOffsets);
+		private static vkCmdSetDescriptorBufferOffsetsEXTFunction vkCmdSetDescriptorBufferOffsetsEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdSetDescriptorBufferOffsetsEXT(VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipelineLayout layout, uint32 firstSet, uint32 setCount, uint32* pBufferIndices, uint64* pOffsets)
+			=> vkCmdSetDescriptorBufferOffsetsEXT_ptr(commandBuffer, pipelineBindPoint, layout, firstSet, setCount, pBufferIndices, pOffsets);
+
+		public typealias vkCmdBindDescriptorBufferEmbeddedSamplersEXTFunction = function void(VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipelineLayout layout, uint32 set);
+		private static vkCmdBindDescriptorBufferEmbeddedSamplersEXTFunction vkCmdBindDescriptorBufferEmbeddedSamplersEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdBindDescriptorBufferEmbeddedSamplersEXT(VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipelineLayout layout, uint32 set)
+			=> vkCmdBindDescriptorBufferEmbeddedSamplersEXT_ptr(commandBuffer, pipelineBindPoint, layout, set);
+
+		public typealias vkGetBufferOpaqueCaptureDescriptorDataEXTFunction = function VkResult(VkDevice device, VkBufferCaptureDescriptorDataInfoEXT* pInfo, void* pData);
+		private static vkGetBufferOpaqueCaptureDescriptorDataEXTFunction vkGetBufferOpaqueCaptureDescriptorDataEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static VkResult vkGetBufferOpaqueCaptureDescriptorDataEXT(VkDevice device, VkBufferCaptureDescriptorDataInfoEXT* pInfo, void* pData)
+			=> vkGetBufferOpaqueCaptureDescriptorDataEXT_ptr(device, pInfo, pData);
+
+		public typealias vkGetImageOpaqueCaptureDescriptorDataEXTFunction = function VkResult(VkDevice device, VkImageCaptureDescriptorDataInfoEXT* pInfo, void* pData);
+		private static vkGetImageOpaqueCaptureDescriptorDataEXTFunction vkGetImageOpaqueCaptureDescriptorDataEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static VkResult vkGetImageOpaqueCaptureDescriptorDataEXT(VkDevice device, VkImageCaptureDescriptorDataInfoEXT* pInfo, void* pData)
+			=> vkGetImageOpaqueCaptureDescriptorDataEXT_ptr(device, pInfo, pData);
+
+		public typealias vkGetImageViewOpaqueCaptureDescriptorDataEXTFunction = function VkResult(VkDevice device, VkImageViewCaptureDescriptorDataInfoEXT* pInfo, void* pData);
+		private static vkGetImageViewOpaqueCaptureDescriptorDataEXTFunction vkGetImageViewOpaqueCaptureDescriptorDataEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static VkResult vkGetImageViewOpaqueCaptureDescriptorDataEXT(VkDevice device, VkImageViewCaptureDescriptorDataInfoEXT* pInfo, void* pData)
+			=> vkGetImageViewOpaqueCaptureDescriptorDataEXT_ptr(device, pInfo, pData);
+
+		public typealias vkGetSamplerOpaqueCaptureDescriptorDataEXTFunction = function VkResult(VkDevice device, VkSamplerCaptureDescriptorDataInfoEXT* pInfo, void* pData);
+		private static vkGetSamplerOpaqueCaptureDescriptorDataEXTFunction vkGetSamplerOpaqueCaptureDescriptorDataEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static VkResult vkGetSamplerOpaqueCaptureDescriptorDataEXT(VkDevice device, VkSamplerCaptureDescriptorDataInfoEXT* pInfo, void* pData)
+			=> vkGetSamplerOpaqueCaptureDescriptorDataEXT_ptr(device, pInfo, pData);
 
 		public typealias vkCmdSetFragmentShadingRateEnumNVFunction = function void(VkCommandBuffer commandBuffer, VkFragmentShadingRateNV shadingRate, VkFragmentShadingRateCombinerOpKHR[2] combinerOps);
 		private static vkCmdSetFragmentShadingRateEnumNVFunction vkCmdSetFragmentShadingRateEnumNV_ptr;
@@ -2585,11 +2693,35 @@ namespace Bulkan
 		public static void vkCmdSetFragmentShadingRateEnumNV(VkCommandBuffer commandBuffer, VkFragmentShadingRateNV shadingRate, VkFragmentShadingRateCombinerOpKHR[2] combinerOps)
 			=> vkCmdSetFragmentShadingRateEnumNV_ptr(commandBuffer, shadingRate, combinerOps);
 
+		public typealias vkCmdDrawMeshTasksEXTFunction = function void(VkCommandBuffer commandBuffer, uint32 groupCountX, uint32 groupCountY, uint32 groupCountZ);
+		private static vkCmdDrawMeshTasksEXTFunction vkCmdDrawMeshTasksEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdDrawMeshTasksEXT(VkCommandBuffer commandBuffer, uint32 groupCountX, uint32 groupCountY, uint32 groupCountZ)
+			=> vkCmdDrawMeshTasksEXT_ptr(commandBuffer, groupCountX, groupCountY, groupCountZ);
+
+		public typealias vkCmdDrawMeshTasksIndirectEXTFunction = function void(VkCommandBuffer commandBuffer, VkBuffer buffer, uint64 offset, uint32 drawCount, uint32 stride);
+		private static vkCmdDrawMeshTasksIndirectEXTFunction vkCmdDrawMeshTasksIndirectEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdDrawMeshTasksIndirectEXT(VkCommandBuffer commandBuffer, VkBuffer buffer, uint64 offset, uint32 drawCount, uint32 stride)
+			=> vkCmdDrawMeshTasksIndirectEXT_ptr(commandBuffer, buffer, offset, drawCount, stride);
+
+		public typealias vkCmdDrawMeshTasksIndirectCountEXTFunction = function void(VkCommandBuffer commandBuffer, VkBuffer buffer, uint64 offset, VkBuffer countBuffer, uint64 countBufferOffset, uint32 maxDrawCount, uint32 stride);
+		private static vkCmdDrawMeshTasksIndirectCountEXTFunction vkCmdDrawMeshTasksIndirectCountEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdDrawMeshTasksIndirectCountEXT(VkCommandBuffer commandBuffer, VkBuffer buffer, uint64 offset, VkBuffer countBuffer, uint64 countBufferOffset, uint32 maxDrawCount, uint32 stride)
+			=> vkCmdDrawMeshTasksIndirectCountEXT_ptr(commandBuffer, buffer, offset, countBuffer, countBufferOffset, maxDrawCount, stride);
+
 		public typealias vkGetImageSubresourceLayout2EXTFunction = function void(VkDevice device, VkImage image, VkImageSubresource2EXT* pSubresource, VkSubresourceLayout2EXT* pLayout);
 		private static vkGetImageSubresourceLayout2EXTFunction vkGetImageSubresourceLayout2EXT_ptr;
 		[CallingConvention(VulkanNative.CallConv)]
 		public static void vkGetImageSubresourceLayout2EXT(VkDevice device, VkImage image, VkImageSubresource2EXT* pSubresource, VkSubresourceLayout2EXT* pLayout)
 			=> vkGetImageSubresourceLayout2EXT_ptr(device, image, pSubresource, pLayout);
+
+		public typealias vkGetDeviceFaultInfoEXTFunction = function VkResult(VkDevice device, VkDeviceFaultCountsEXT* pFaultCounts, VkDeviceFaultInfoEXT* pFaultInfo);
+		private static vkGetDeviceFaultInfoEXTFunction vkGetDeviceFaultInfoEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static VkResult vkGetDeviceFaultInfoEXT(VkDevice device, VkDeviceFaultCountsEXT* pFaultCounts, VkDeviceFaultInfoEXT* pFaultInfo)
+			=> vkGetDeviceFaultInfoEXT_ptr(device, pFaultCounts, pFaultInfo);
 
 		public typealias vkAcquireWinrtDisplayNVFunction = function VkResult(VkPhysicalDevice physicalDevice, VkDisplayKHR display);
 		private static vkAcquireWinrtDisplayNVFunction vkAcquireWinrtDisplayNV_ptr;
@@ -2705,6 +2837,66 @@ namespace Bulkan
 		public static VkResult vkGetPipelinePropertiesEXT(VkDevice device, VkPipelineInfoKHR* pPipelineInfo, VkBaseOutStructure* pPipelineProperties)
 			=> vkGetPipelinePropertiesEXT_ptr(device, pPipelineInfo, pPipelineProperties);
 
+		public typealias vkGetFenceSciSyncFenceNVFunction = function VkResult(VkDevice device, VkFenceGetSciSyncInfoNV* pGetSciSyncHandleInfo, void* pHandle);
+		private static vkGetFenceSciSyncFenceNVFunction vkGetFenceSciSyncFenceNV_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static VkResult vkGetFenceSciSyncFenceNV(VkDevice device, VkFenceGetSciSyncInfoNV* pGetSciSyncHandleInfo, void* pHandle)
+			=> vkGetFenceSciSyncFenceNV_ptr(device, pGetSciSyncHandleInfo, pHandle);
+
+		public typealias vkGetFenceSciSyncObjNVFunction = function VkResult(VkDevice device, VkFenceGetSciSyncInfoNV* pGetSciSyncHandleInfo, void* pHandle);
+		private static vkGetFenceSciSyncObjNVFunction vkGetFenceSciSyncObjNV_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static VkResult vkGetFenceSciSyncObjNV(VkDevice device, VkFenceGetSciSyncInfoNV* pGetSciSyncHandleInfo, void* pHandle)
+			=> vkGetFenceSciSyncObjNV_ptr(device, pGetSciSyncHandleInfo, pHandle);
+
+		public typealias vkImportFenceSciSyncFenceNVFunction = function VkResult(VkDevice device, VkImportFenceSciSyncInfoNV* pImportFenceSciSyncInfo);
+		private static vkImportFenceSciSyncFenceNVFunction vkImportFenceSciSyncFenceNV_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static VkResult vkImportFenceSciSyncFenceNV(VkDevice device, VkImportFenceSciSyncInfoNV* pImportFenceSciSyncInfo)
+			=> vkImportFenceSciSyncFenceNV_ptr(device, pImportFenceSciSyncInfo);
+
+		public typealias vkImportFenceSciSyncObjNVFunction = function VkResult(VkDevice device, VkImportFenceSciSyncInfoNV* pImportFenceSciSyncInfo);
+		private static vkImportFenceSciSyncObjNVFunction vkImportFenceSciSyncObjNV_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static VkResult vkImportFenceSciSyncObjNV(VkDevice device, VkImportFenceSciSyncInfoNV* pImportFenceSciSyncInfo)
+			=> vkImportFenceSciSyncObjNV_ptr(device, pImportFenceSciSyncInfo);
+
+		public typealias vkGetPhysicalDeviceSciSyncAttributesNVFunction = function VkResult(VkPhysicalDevice physicalDevice, VkSciSyncAttributesInfoNV* pSciSyncAttributesInfo, void* pAttributes);
+		private static vkGetPhysicalDeviceSciSyncAttributesNVFunction vkGetPhysicalDeviceSciSyncAttributesNV_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static VkResult vkGetPhysicalDeviceSciSyncAttributesNV(VkPhysicalDevice physicalDevice, VkSciSyncAttributesInfoNV* pSciSyncAttributesInfo, void* pAttributes)
+			=> vkGetPhysicalDeviceSciSyncAttributesNV_ptr(physicalDevice, pSciSyncAttributesInfo, pAttributes);
+
+		public typealias vkGetSemaphoreSciSyncObjNVFunction = function VkResult(VkDevice device, VkSemaphoreGetSciSyncInfoNV* pGetSciSyncInfo, void* pHandle);
+		private static vkGetSemaphoreSciSyncObjNVFunction vkGetSemaphoreSciSyncObjNV_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static VkResult vkGetSemaphoreSciSyncObjNV(VkDevice device, VkSemaphoreGetSciSyncInfoNV* pGetSciSyncInfo, void* pHandle)
+			=> vkGetSemaphoreSciSyncObjNV_ptr(device, pGetSciSyncInfo, pHandle);
+
+		public typealias vkImportSemaphoreSciSyncObjNVFunction = function VkResult(VkDevice device, VkImportSemaphoreSciSyncInfoNV* pImportSemaphoreSciSyncInfo);
+		private static vkImportSemaphoreSciSyncObjNVFunction vkImportSemaphoreSciSyncObjNV_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static VkResult vkImportSemaphoreSciSyncObjNV(VkDevice device, VkImportSemaphoreSciSyncInfoNV* pImportSemaphoreSciSyncInfo)
+			=> vkImportSemaphoreSciSyncObjNV_ptr(device, pImportSemaphoreSciSyncInfo);
+
+		public typealias vkGetMemorySciBufNVFunction = function VkResult(VkDevice device, VkMemoryGetSciBufInfoNV* pGetSciBufInfo, void* pHandle);
+		private static vkGetMemorySciBufNVFunction vkGetMemorySciBufNV_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static VkResult vkGetMemorySciBufNV(VkDevice device, VkMemoryGetSciBufInfoNV* pGetSciBufInfo, void* pHandle)
+			=> vkGetMemorySciBufNV_ptr(device, pGetSciBufInfo, pHandle);
+
+		public typealias vkGetPhysicalDeviceExternalMemorySciBufPropertiesNVFunction = function VkResult(VkPhysicalDevice physicalDevice, VkExternalMemoryHandleTypeFlags handleType, void* handle, VkMemorySciBufPropertiesNV* pMemorySciBufProperties);
+		private static vkGetPhysicalDeviceExternalMemorySciBufPropertiesNVFunction vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static VkResult vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV(VkPhysicalDevice physicalDevice, VkExternalMemoryHandleTypeFlags handleType, void* handle, VkMemorySciBufPropertiesNV* pMemorySciBufProperties)
+			=> vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV_ptr(physicalDevice, handleType, handle, pMemorySciBufProperties);
+
+		public typealias vkGetPhysicalDeviceSciBufAttributesNVFunction = function VkResult(VkPhysicalDevice physicalDevice, void* pAttributes);
+		private static vkGetPhysicalDeviceSciBufAttributesNVFunction vkGetPhysicalDeviceSciBufAttributesNV_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static VkResult vkGetPhysicalDeviceSciBufAttributesNV(VkPhysicalDevice physicalDevice, void* pAttributes)
+			=> vkGetPhysicalDeviceSciBufAttributesNV_ptr(physicalDevice, pAttributes);
+
 		public typealias vkCmdSetPatchControlPointsEXTFunction = function void(VkCommandBuffer commandBuffer, uint32 patchControlPoints);
 		private static vkCmdSetPatchControlPointsEXTFunction vkCmdSetPatchControlPointsEXT_ptr;
 		[CallingConvention(VulkanNative.CallConv)]
@@ -2747,6 +2939,102 @@ namespace Bulkan
 		public static void vkCmdDrawMultiIndexedEXT(VkCommandBuffer commandBuffer, uint32 drawCount, VkMultiDrawIndexedInfoEXT* pIndexInfo, uint32 instanceCount, uint32 firstInstance, uint32 stride, int32* pVertexOffset)
 			=> vkCmdDrawMultiIndexedEXT_ptr(commandBuffer, drawCount, pIndexInfo, instanceCount, firstInstance, stride, pVertexOffset);
 
+		public typealias vkCreateMicromapEXTFunction = function VkResult(VkDevice device, VkMicromapCreateInfoEXT* pCreateInfo, VkAllocationCallbacks* pAllocator, VkMicromapEXT* pMicromap);
+		private static vkCreateMicromapEXTFunction vkCreateMicromapEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static VkResult vkCreateMicromapEXT(VkDevice device, VkMicromapCreateInfoEXT* pCreateInfo, VkAllocationCallbacks* pAllocator, VkMicromapEXT* pMicromap)
+			=> vkCreateMicromapEXT_ptr(device, pCreateInfo, pAllocator, pMicromap);
+
+		public typealias vkDestroyMicromapEXTFunction = function void(VkDevice device, VkMicromapEXT micromap, VkAllocationCallbacks* pAllocator);
+		private static vkDestroyMicromapEXTFunction vkDestroyMicromapEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkDestroyMicromapEXT(VkDevice device, VkMicromapEXT micromap, VkAllocationCallbacks* pAllocator)
+			=> vkDestroyMicromapEXT_ptr(device, micromap, pAllocator);
+
+		public typealias vkCmdBuildMicromapsEXTFunction = function void(VkCommandBuffer commandBuffer, uint32 infoCount, VkMicromapBuildInfoEXT* pInfos);
+		private static vkCmdBuildMicromapsEXTFunction vkCmdBuildMicromapsEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdBuildMicromapsEXT(VkCommandBuffer commandBuffer, uint32 infoCount, VkMicromapBuildInfoEXT* pInfos)
+			=> vkCmdBuildMicromapsEXT_ptr(commandBuffer, infoCount, pInfos);
+
+		public typealias vkBuildMicromapsEXTFunction = function VkResult(VkDevice device, VkDeferredOperationKHR deferredOperation, uint32 infoCount, VkMicromapBuildInfoEXT* pInfos);
+		private static vkBuildMicromapsEXTFunction vkBuildMicromapsEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static VkResult vkBuildMicromapsEXT(VkDevice device, VkDeferredOperationKHR deferredOperation, uint32 infoCount, VkMicromapBuildInfoEXT* pInfos)
+			=> vkBuildMicromapsEXT_ptr(device, deferredOperation, infoCount, pInfos);
+
+		public typealias vkCopyMicromapEXTFunction = function VkResult(VkDevice device, VkDeferredOperationKHR deferredOperation, VkCopyMicromapInfoEXT* pInfo);
+		private static vkCopyMicromapEXTFunction vkCopyMicromapEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static VkResult vkCopyMicromapEXT(VkDevice device, VkDeferredOperationKHR deferredOperation, VkCopyMicromapInfoEXT* pInfo)
+			=> vkCopyMicromapEXT_ptr(device, deferredOperation, pInfo);
+
+		public typealias vkCopyMicromapToMemoryEXTFunction = function VkResult(VkDevice device, VkDeferredOperationKHR deferredOperation, VkCopyMicromapToMemoryInfoEXT* pInfo);
+		private static vkCopyMicromapToMemoryEXTFunction vkCopyMicromapToMemoryEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static VkResult vkCopyMicromapToMemoryEXT(VkDevice device, VkDeferredOperationKHR deferredOperation, VkCopyMicromapToMemoryInfoEXT* pInfo)
+			=> vkCopyMicromapToMemoryEXT_ptr(device, deferredOperation, pInfo);
+
+		public typealias vkCopyMemoryToMicromapEXTFunction = function VkResult(VkDevice device, VkDeferredOperationKHR deferredOperation, VkCopyMemoryToMicromapInfoEXT* pInfo);
+		private static vkCopyMemoryToMicromapEXTFunction vkCopyMemoryToMicromapEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static VkResult vkCopyMemoryToMicromapEXT(VkDevice device, VkDeferredOperationKHR deferredOperation, VkCopyMemoryToMicromapInfoEXT* pInfo)
+			=> vkCopyMemoryToMicromapEXT_ptr(device, deferredOperation, pInfo);
+
+		public typealias vkWriteMicromapsPropertiesEXTFunction = function VkResult(VkDevice device, uint32 micromapCount, VkMicromapEXT* pMicromaps, VkQueryType queryType, uint dataSize, void* pData, uint stride);
+		private static vkWriteMicromapsPropertiesEXTFunction vkWriteMicromapsPropertiesEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static VkResult vkWriteMicromapsPropertiesEXT(VkDevice device, uint32 micromapCount, VkMicromapEXT* pMicromaps, VkQueryType queryType, uint dataSize, void* pData, uint stride)
+			=> vkWriteMicromapsPropertiesEXT_ptr(device, micromapCount, pMicromaps, queryType, dataSize, pData, stride);
+
+		public typealias vkCmdCopyMicromapEXTFunction = function void(VkCommandBuffer commandBuffer, VkCopyMicromapInfoEXT* pInfo);
+		private static vkCmdCopyMicromapEXTFunction vkCmdCopyMicromapEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdCopyMicromapEXT(VkCommandBuffer commandBuffer, VkCopyMicromapInfoEXT* pInfo)
+			=> vkCmdCopyMicromapEXT_ptr(commandBuffer, pInfo);
+
+		public typealias vkCmdCopyMicromapToMemoryEXTFunction = function void(VkCommandBuffer commandBuffer, VkCopyMicromapToMemoryInfoEXT* pInfo);
+		private static vkCmdCopyMicromapToMemoryEXTFunction vkCmdCopyMicromapToMemoryEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdCopyMicromapToMemoryEXT(VkCommandBuffer commandBuffer, VkCopyMicromapToMemoryInfoEXT* pInfo)
+			=> vkCmdCopyMicromapToMemoryEXT_ptr(commandBuffer, pInfo);
+
+		public typealias vkCmdCopyMemoryToMicromapEXTFunction = function void(VkCommandBuffer commandBuffer, VkCopyMemoryToMicromapInfoEXT* pInfo);
+		private static vkCmdCopyMemoryToMicromapEXTFunction vkCmdCopyMemoryToMicromapEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdCopyMemoryToMicromapEXT(VkCommandBuffer commandBuffer, VkCopyMemoryToMicromapInfoEXT* pInfo)
+			=> vkCmdCopyMemoryToMicromapEXT_ptr(commandBuffer, pInfo);
+
+		public typealias vkCmdWriteMicromapsPropertiesEXTFunction = function void(VkCommandBuffer commandBuffer, uint32 micromapCount, VkMicromapEXT* pMicromaps, VkQueryType queryType, VkQueryPool queryPool, uint32 firstQuery);
+		private static vkCmdWriteMicromapsPropertiesEXTFunction vkCmdWriteMicromapsPropertiesEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdWriteMicromapsPropertiesEXT(VkCommandBuffer commandBuffer, uint32 micromapCount, VkMicromapEXT* pMicromaps, VkQueryType queryType, VkQueryPool queryPool, uint32 firstQuery)
+			=> vkCmdWriteMicromapsPropertiesEXT_ptr(commandBuffer, micromapCount, pMicromaps, queryType, queryPool, firstQuery);
+
+		public typealias vkGetDeviceMicromapCompatibilityEXTFunction = function void(VkDevice device, VkMicromapVersionInfoEXT* pVersionInfo, VkAccelerationStructureCompatibilityKHR* pCompatibility);
+		private static vkGetDeviceMicromapCompatibilityEXTFunction vkGetDeviceMicromapCompatibilityEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkGetDeviceMicromapCompatibilityEXT(VkDevice device, VkMicromapVersionInfoEXT* pVersionInfo, VkAccelerationStructureCompatibilityKHR* pCompatibility)
+			=> vkGetDeviceMicromapCompatibilityEXT_ptr(device, pVersionInfo, pCompatibility);
+
+		public typealias vkGetMicromapBuildSizesEXTFunction = function void(VkDevice device, VkAccelerationStructureBuildTypeKHR buildType, VkMicromapBuildInfoEXT* pBuildInfo, VkMicromapBuildSizesInfoEXT* pSizeInfo);
+		private static vkGetMicromapBuildSizesEXTFunction vkGetMicromapBuildSizesEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkGetMicromapBuildSizesEXT(VkDevice device, VkAccelerationStructureBuildTypeKHR buildType, VkMicromapBuildInfoEXT* pBuildInfo, VkMicromapBuildSizesInfoEXT* pSizeInfo)
+			=> vkGetMicromapBuildSizesEXT_ptr(device, buildType, pBuildInfo, pSizeInfo);
+
+		public typealias vkCmdDrawClusterHUAWEIFunction = function void(VkCommandBuffer commandBuffer, uint32 groupCountX, uint32 groupCountY, uint32 groupCountZ);
+		private static vkCmdDrawClusterHUAWEIFunction vkCmdDrawClusterHUAWEI_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdDrawClusterHUAWEI(VkCommandBuffer commandBuffer, uint32 groupCountX, uint32 groupCountY, uint32 groupCountZ)
+			=> vkCmdDrawClusterHUAWEI_ptr(commandBuffer, groupCountX, groupCountY, groupCountZ);
+
+		public typealias vkCmdDrawClusterIndirectHUAWEIFunction = function void(VkCommandBuffer commandBuffer, VkBuffer buffer, uint64 offset);
+		private static vkCmdDrawClusterIndirectHUAWEIFunction vkCmdDrawClusterIndirectHUAWEI_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdDrawClusterIndirectHUAWEI(VkCommandBuffer commandBuffer, VkBuffer buffer, uint64 offset)
+			=> vkCmdDrawClusterIndirectHUAWEI_ptr(commandBuffer, buffer, offset);
+
 		public typealias vkSetDeviceMemoryPriorityEXTFunction = function void(VkDevice device, VkDeviceMemory memory, float priority);
 		private static vkSetDeviceMemoryPriorityEXTFunction vkSetDeviceMemoryPriorityEXT_ptr;
 		[CallingConvention(VulkanNative.CallConv)]
@@ -2765,6 +3053,216 @@ namespace Bulkan
 		public static void vkGetDescriptorSetHostMappingVALVE(VkDevice device, VkDescriptorSet descriptorSet, void** ppData)
 			=> vkGetDescriptorSetHostMappingVALVE_ptr(device, descriptorSet, ppData);
 
+		public typealias vkCmdCopyMemoryIndirectNVFunction = function void(VkCommandBuffer commandBuffer, uint64 copyBufferAddress, uint32 copyCount, uint32 stride);
+		private static vkCmdCopyMemoryIndirectNVFunction vkCmdCopyMemoryIndirectNV_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdCopyMemoryIndirectNV(VkCommandBuffer commandBuffer, uint64 copyBufferAddress, uint32 copyCount, uint32 stride)
+			=> vkCmdCopyMemoryIndirectNV_ptr(commandBuffer, copyBufferAddress, copyCount, stride);
+
+		public typealias vkCmdCopyMemoryToImageIndirectNVFunction = function void(VkCommandBuffer commandBuffer, uint64 copyBufferAddress, uint32 copyCount, uint32 stride, VkImage dstImage, VkImageLayout dstImageLayout, VkImageSubresourceLayers* pImageSubresources);
+		private static vkCmdCopyMemoryToImageIndirectNVFunction vkCmdCopyMemoryToImageIndirectNV_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdCopyMemoryToImageIndirectNV(VkCommandBuffer commandBuffer, uint64 copyBufferAddress, uint32 copyCount, uint32 stride, VkImage dstImage, VkImageLayout dstImageLayout, VkImageSubresourceLayers* pImageSubresources)
+			=> vkCmdCopyMemoryToImageIndirectNV_ptr(commandBuffer, copyBufferAddress, copyCount, stride, dstImage, dstImageLayout, pImageSubresources);
+
+		public typealias vkCmdDecompressMemoryNVFunction = function void(VkCommandBuffer commandBuffer, uint32 decompressRegionCount, VkDecompressMemoryRegionNV* pDecompressMemoryRegions);
+		private static vkCmdDecompressMemoryNVFunction vkCmdDecompressMemoryNV_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdDecompressMemoryNV(VkCommandBuffer commandBuffer, uint32 decompressRegionCount, VkDecompressMemoryRegionNV* pDecompressMemoryRegions)
+			=> vkCmdDecompressMemoryNV_ptr(commandBuffer, decompressRegionCount, pDecompressMemoryRegions);
+
+		public typealias vkCmdDecompressMemoryIndirectCountNVFunction = function void(VkCommandBuffer commandBuffer, uint64 indirectCommandsAddress, uint64 indirectCommandsCountAddress, uint32 stride);
+		private static vkCmdDecompressMemoryIndirectCountNVFunction vkCmdDecompressMemoryIndirectCountNV_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdDecompressMemoryIndirectCountNV(VkCommandBuffer commandBuffer, uint64 indirectCommandsAddress, uint64 indirectCommandsCountAddress, uint32 stride)
+			=> vkCmdDecompressMemoryIndirectCountNV_ptr(commandBuffer, indirectCommandsAddress, indirectCommandsCountAddress, stride);
+
+		public typealias vkCmdSetTessellationDomainOriginEXTFunction = function void(VkCommandBuffer commandBuffer, VkTessellationDomainOrigin domainOrigin);
+		private static vkCmdSetTessellationDomainOriginEXTFunction vkCmdSetTessellationDomainOriginEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdSetTessellationDomainOriginEXT(VkCommandBuffer commandBuffer, VkTessellationDomainOrigin domainOrigin)
+			=> vkCmdSetTessellationDomainOriginEXT_ptr(commandBuffer, domainOrigin);
+
+		public typealias vkCmdSetDepthClampEnableEXTFunction = function void(VkCommandBuffer commandBuffer, VkBool32 depthClampEnable);
+		private static vkCmdSetDepthClampEnableEXTFunction vkCmdSetDepthClampEnableEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdSetDepthClampEnableEXT(VkCommandBuffer commandBuffer, VkBool32 depthClampEnable)
+			=> vkCmdSetDepthClampEnableEXT_ptr(commandBuffer, depthClampEnable);
+
+		public typealias vkCmdSetPolygonModeEXTFunction = function void(VkCommandBuffer commandBuffer, VkPolygonMode polygonMode);
+		private static vkCmdSetPolygonModeEXTFunction vkCmdSetPolygonModeEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdSetPolygonModeEXT(VkCommandBuffer commandBuffer, VkPolygonMode polygonMode)
+			=> vkCmdSetPolygonModeEXT_ptr(commandBuffer, polygonMode);
+
+		public typealias vkCmdSetRasterizationSamplesEXTFunction = function void(VkCommandBuffer commandBuffer, VkSampleCountFlags rasterizationSamples);
+		private static vkCmdSetRasterizationSamplesEXTFunction vkCmdSetRasterizationSamplesEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdSetRasterizationSamplesEXT(VkCommandBuffer commandBuffer, VkSampleCountFlags rasterizationSamples)
+			=> vkCmdSetRasterizationSamplesEXT_ptr(commandBuffer, rasterizationSamples);
+
+		public typealias vkCmdSetSampleMaskEXTFunction = function void(VkCommandBuffer commandBuffer, VkSampleCountFlags samples, uint32* pSampleMask);
+		private static vkCmdSetSampleMaskEXTFunction vkCmdSetSampleMaskEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdSetSampleMaskEXT(VkCommandBuffer commandBuffer, VkSampleCountFlags samples, uint32* pSampleMask)
+			=> vkCmdSetSampleMaskEXT_ptr(commandBuffer, samples, pSampleMask);
+
+		public typealias vkCmdSetAlphaToCoverageEnableEXTFunction = function void(VkCommandBuffer commandBuffer, VkBool32 alphaToCoverageEnable);
+		private static vkCmdSetAlphaToCoverageEnableEXTFunction vkCmdSetAlphaToCoverageEnableEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdSetAlphaToCoverageEnableEXT(VkCommandBuffer commandBuffer, VkBool32 alphaToCoverageEnable)
+			=> vkCmdSetAlphaToCoverageEnableEXT_ptr(commandBuffer, alphaToCoverageEnable);
+
+		public typealias vkCmdSetAlphaToOneEnableEXTFunction = function void(VkCommandBuffer commandBuffer, VkBool32 alphaToOneEnable);
+		private static vkCmdSetAlphaToOneEnableEXTFunction vkCmdSetAlphaToOneEnableEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdSetAlphaToOneEnableEXT(VkCommandBuffer commandBuffer, VkBool32 alphaToOneEnable)
+			=> vkCmdSetAlphaToOneEnableEXT_ptr(commandBuffer, alphaToOneEnable);
+
+		public typealias vkCmdSetLogicOpEnableEXTFunction = function void(VkCommandBuffer commandBuffer, VkBool32 logicOpEnable);
+		private static vkCmdSetLogicOpEnableEXTFunction vkCmdSetLogicOpEnableEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdSetLogicOpEnableEXT(VkCommandBuffer commandBuffer, VkBool32 logicOpEnable)
+			=> vkCmdSetLogicOpEnableEXT_ptr(commandBuffer, logicOpEnable);
+
+		public typealias vkCmdSetColorBlendEnableEXTFunction = function void(VkCommandBuffer commandBuffer, uint32 firstAttachment, uint32 attachmentCount, VkBool32* pColorBlendEnables);
+		private static vkCmdSetColorBlendEnableEXTFunction vkCmdSetColorBlendEnableEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdSetColorBlendEnableEXT(VkCommandBuffer commandBuffer, uint32 firstAttachment, uint32 attachmentCount, VkBool32* pColorBlendEnables)
+			=> vkCmdSetColorBlendEnableEXT_ptr(commandBuffer, firstAttachment, attachmentCount, pColorBlendEnables);
+
+		public typealias vkCmdSetColorBlendEquationEXTFunction = function void(VkCommandBuffer commandBuffer, uint32 firstAttachment, uint32 attachmentCount, VkColorBlendEquationEXT* pColorBlendEquations);
+		private static vkCmdSetColorBlendEquationEXTFunction vkCmdSetColorBlendEquationEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdSetColorBlendEquationEXT(VkCommandBuffer commandBuffer, uint32 firstAttachment, uint32 attachmentCount, VkColorBlendEquationEXT* pColorBlendEquations)
+			=> vkCmdSetColorBlendEquationEXT_ptr(commandBuffer, firstAttachment, attachmentCount, pColorBlendEquations);
+
+		public typealias vkCmdSetColorWriteMaskEXTFunction = function void(VkCommandBuffer commandBuffer, uint32 firstAttachment, uint32 attachmentCount, VkColorComponentFlags* pColorWriteMasks);
+		private static vkCmdSetColorWriteMaskEXTFunction vkCmdSetColorWriteMaskEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdSetColorWriteMaskEXT(VkCommandBuffer commandBuffer, uint32 firstAttachment, uint32 attachmentCount, VkColorComponentFlags* pColorWriteMasks)
+			=> vkCmdSetColorWriteMaskEXT_ptr(commandBuffer, firstAttachment, attachmentCount, pColorWriteMasks);
+
+		public typealias vkCmdSetRasterizationStreamEXTFunction = function void(VkCommandBuffer commandBuffer, uint32 rasterizationStream);
+		private static vkCmdSetRasterizationStreamEXTFunction vkCmdSetRasterizationStreamEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdSetRasterizationStreamEXT(VkCommandBuffer commandBuffer, uint32 rasterizationStream)
+			=> vkCmdSetRasterizationStreamEXT_ptr(commandBuffer, rasterizationStream);
+
+		public typealias vkCmdSetConservativeRasterizationModeEXTFunction = function void(VkCommandBuffer commandBuffer, VkConservativeRasterizationModeEXT conservativeRasterizationMode);
+		private static vkCmdSetConservativeRasterizationModeEXTFunction vkCmdSetConservativeRasterizationModeEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdSetConservativeRasterizationModeEXT(VkCommandBuffer commandBuffer, VkConservativeRasterizationModeEXT conservativeRasterizationMode)
+			=> vkCmdSetConservativeRasterizationModeEXT_ptr(commandBuffer, conservativeRasterizationMode);
+
+		public typealias vkCmdSetExtraPrimitiveOverestimationSizeEXTFunction = function void(VkCommandBuffer commandBuffer, float extraPrimitiveOverestimationSize);
+		private static vkCmdSetExtraPrimitiveOverestimationSizeEXTFunction vkCmdSetExtraPrimitiveOverestimationSizeEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdSetExtraPrimitiveOverestimationSizeEXT(VkCommandBuffer commandBuffer, float extraPrimitiveOverestimationSize)
+			=> vkCmdSetExtraPrimitiveOverestimationSizeEXT_ptr(commandBuffer, extraPrimitiveOverestimationSize);
+
+		public typealias vkCmdSetDepthClipEnableEXTFunction = function void(VkCommandBuffer commandBuffer, VkBool32 depthClipEnable);
+		private static vkCmdSetDepthClipEnableEXTFunction vkCmdSetDepthClipEnableEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdSetDepthClipEnableEXT(VkCommandBuffer commandBuffer, VkBool32 depthClipEnable)
+			=> vkCmdSetDepthClipEnableEXT_ptr(commandBuffer, depthClipEnable);
+
+		public typealias vkCmdSetSampleLocationsEnableEXTFunction = function void(VkCommandBuffer commandBuffer, VkBool32 sampleLocationsEnable);
+		private static vkCmdSetSampleLocationsEnableEXTFunction vkCmdSetSampleLocationsEnableEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdSetSampleLocationsEnableEXT(VkCommandBuffer commandBuffer, VkBool32 sampleLocationsEnable)
+			=> vkCmdSetSampleLocationsEnableEXT_ptr(commandBuffer, sampleLocationsEnable);
+
+		public typealias vkCmdSetColorBlendAdvancedEXTFunction = function void(VkCommandBuffer commandBuffer, uint32 firstAttachment, uint32 attachmentCount, VkColorBlendAdvancedEXT* pColorBlendAdvanced);
+		private static vkCmdSetColorBlendAdvancedEXTFunction vkCmdSetColorBlendAdvancedEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdSetColorBlendAdvancedEXT(VkCommandBuffer commandBuffer, uint32 firstAttachment, uint32 attachmentCount, VkColorBlendAdvancedEXT* pColorBlendAdvanced)
+			=> vkCmdSetColorBlendAdvancedEXT_ptr(commandBuffer, firstAttachment, attachmentCount, pColorBlendAdvanced);
+
+		public typealias vkCmdSetProvokingVertexModeEXTFunction = function void(VkCommandBuffer commandBuffer, VkProvokingVertexModeEXT provokingVertexMode);
+		private static vkCmdSetProvokingVertexModeEXTFunction vkCmdSetProvokingVertexModeEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdSetProvokingVertexModeEXT(VkCommandBuffer commandBuffer, VkProvokingVertexModeEXT provokingVertexMode)
+			=> vkCmdSetProvokingVertexModeEXT_ptr(commandBuffer, provokingVertexMode);
+
+		public typealias vkCmdSetLineRasterizationModeEXTFunction = function void(VkCommandBuffer commandBuffer, VkLineRasterizationModeEXT lineRasterizationMode);
+		private static vkCmdSetLineRasterizationModeEXTFunction vkCmdSetLineRasterizationModeEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdSetLineRasterizationModeEXT(VkCommandBuffer commandBuffer, VkLineRasterizationModeEXT lineRasterizationMode)
+			=> vkCmdSetLineRasterizationModeEXT_ptr(commandBuffer, lineRasterizationMode);
+
+		public typealias vkCmdSetLineStippleEnableEXTFunction = function void(VkCommandBuffer commandBuffer, VkBool32 stippledLineEnable);
+		private static vkCmdSetLineStippleEnableEXTFunction vkCmdSetLineStippleEnableEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdSetLineStippleEnableEXT(VkCommandBuffer commandBuffer, VkBool32 stippledLineEnable)
+			=> vkCmdSetLineStippleEnableEXT_ptr(commandBuffer, stippledLineEnable);
+
+		public typealias vkCmdSetDepthClipNegativeOneToOneEXTFunction = function void(VkCommandBuffer commandBuffer, VkBool32 negativeOneToOne);
+		private static vkCmdSetDepthClipNegativeOneToOneEXTFunction vkCmdSetDepthClipNegativeOneToOneEXT_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdSetDepthClipNegativeOneToOneEXT(VkCommandBuffer commandBuffer, VkBool32 negativeOneToOne)
+			=> vkCmdSetDepthClipNegativeOneToOneEXT_ptr(commandBuffer, negativeOneToOne);
+
+		public typealias vkCmdSetViewportWScalingEnableNVFunction = function void(VkCommandBuffer commandBuffer, VkBool32 viewportWScalingEnable);
+		private static vkCmdSetViewportWScalingEnableNVFunction vkCmdSetViewportWScalingEnableNV_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdSetViewportWScalingEnableNV(VkCommandBuffer commandBuffer, VkBool32 viewportWScalingEnable)
+			=> vkCmdSetViewportWScalingEnableNV_ptr(commandBuffer, viewportWScalingEnable);
+
+		public typealias vkCmdSetViewportSwizzleNVFunction = function void(VkCommandBuffer commandBuffer, uint32 firstViewport, uint32 viewportCount, VkViewportSwizzleNV* pViewportSwizzles);
+		private static vkCmdSetViewportSwizzleNVFunction vkCmdSetViewportSwizzleNV_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdSetViewportSwizzleNV(VkCommandBuffer commandBuffer, uint32 firstViewport, uint32 viewportCount, VkViewportSwizzleNV* pViewportSwizzles)
+			=> vkCmdSetViewportSwizzleNV_ptr(commandBuffer, firstViewport, viewportCount, pViewportSwizzles);
+
+		public typealias vkCmdSetCoverageToColorEnableNVFunction = function void(VkCommandBuffer commandBuffer, VkBool32 coverageToColorEnable);
+		private static vkCmdSetCoverageToColorEnableNVFunction vkCmdSetCoverageToColorEnableNV_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdSetCoverageToColorEnableNV(VkCommandBuffer commandBuffer, VkBool32 coverageToColorEnable)
+			=> vkCmdSetCoverageToColorEnableNV_ptr(commandBuffer, coverageToColorEnable);
+
+		public typealias vkCmdSetCoverageToColorLocationNVFunction = function void(VkCommandBuffer commandBuffer, uint32 coverageToColorLocation);
+		private static vkCmdSetCoverageToColorLocationNVFunction vkCmdSetCoverageToColorLocationNV_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdSetCoverageToColorLocationNV(VkCommandBuffer commandBuffer, uint32 coverageToColorLocation)
+			=> vkCmdSetCoverageToColorLocationNV_ptr(commandBuffer, coverageToColorLocation);
+
+		public typealias vkCmdSetCoverageModulationModeNVFunction = function void(VkCommandBuffer commandBuffer, VkCoverageModulationModeNV coverageModulationMode);
+		private static vkCmdSetCoverageModulationModeNVFunction vkCmdSetCoverageModulationModeNV_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdSetCoverageModulationModeNV(VkCommandBuffer commandBuffer, VkCoverageModulationModeNV coverageModulationMode)
+			=> vkCmdSetCoverageModulationModeNV_ptr(commandBuffer, coverageModulationMode);
+
+		public typealias vkCmdSetCoverageModulationTableEnableNVFunction = function void(VkCommandBuffer commandBuffer, VkBool32 coverageModulationTableEnable);
+		private static vkCmdSetCoverageModulationTableEnableNVFunction vkCmdSetCoverageModulationTableEnableNV_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdSetCoverageModulationTableEnableNV(VkCommandBuffer commandBuffer, VkBool32 coverageModulationTableEnable)
+			=> vkCmdSetCoverageModulationTableEnableNV_ptr(commandBuffer, coverageModulationTableEnable);
+
+		public typealias vkCmdSetCoverageModulationTableNVFunction = function void(VkCommandBuffer commandBuffer, uint32 coverageModulationTableCount, float* pCoverageModulationTable);
+		private static vkCmdSetCoverageModulationTableNVFunction vkCmdSetCoverageModulationTableNV_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdSetCoverageModulationTableNV(VkCommandBuffer commandBuffer, uint32 coverageModulationTableCount, float* pCoverageModulationTable)
+			=> vkCmdSetCoverageModulationTableNV_ptr(commandBuffer, coverageModulationTableCount, pCoverageModulationTable);
+
+		public typealias vkCmdSetShadingRateImageEnableNVFunction = function void(VkCommandBuffer commandBuffer, VkBool32 shadingRateImageEnable);
+		private static vkCmdSetShadingRateImageEnableNVFunction vkCmdSetShadingRateImageEnableNV_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdSetShadingRateImageEnableNV(VkCommandBuffer commandBuffer, VkBool32 shadingRateImageEnable)
+			=> vkCmdSetShadingRateImageEnableNV_ptr(commandBuffer, shadingRateImageEnable);
+
+		public typealias vkCmdSetRepresentativeFragmentTestEnableNVFunction = function void(VkCommandBuffer commandBuffer, VkBool32 representativeFragmentTestEnable);
+		private static vkCmdSetRepresentativeFragmentTestEnableNVFunction vkCmdSetRepresentativeFragmentTestEnableNV_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdSetRepresentativeFragmentTestEnableNV(VkCommandBuffer commandBuffer, VkBool32 representativeFragmentTestEnable)
+			=> vkCmdSetRepresentativeFragmentTestEnableNV_ptr(commandBuffer, representativeFragmentTestEnable);
+
+		public typealias vkCmdSetCoverageReductionModeNVFunction = function void(VkCommandBuffer commandBuffer, VkCoverageReductionModeNV coverageReductionMode);
+		private static vkCmdSetCoverageReductionModeNVFunction vkCmdSetCoverageReductionModeNV_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdSetCoverageReductionModeNV(VkCommandBuffer commandBuffer, VkCoverageReductionModeNV coverageReductionMode)
+			=> vkCmdSetCoverageReductionModeNV_ptr(commandBuffer, coverageReductionMode);
+
 		public typealias vkGetShaderModuleIdentifierEXTFunction = function void(VkDevice device, VkShaderModule shaderModule, VkShaderModuleIdentifierEXT* pIdentifier);
 		private static vkGetShaderModuleIdentifierEXTFunction vkGetShaderModuleIdentifierEXT_ptr;
 		[CallingConvention(VulkanNative.CallConv)]
@@ -2777,6 +3275,36 @@ namespace Bulkan
 		public static void vkGetShaderModuleCreateInfoIdentifierEXT(VkDevice device, VkShaderModuleCreateInfo* pCreateInfo, VkShaderModuleIdentifierEXT* pIdentifier)
 			=> vkGetShaderModuleCreateInfoIdentifierEXT_ptr(device, pCreateInfo, pIdentifier);
 
+		public typealias vkGetPhysicalDeviceOpticalFlowImageFormatsNVFunction = function VkResult(VkPhysicalDevice physicalDevice, VkOpticalFlowImageFormatInfoNV* pOpticalFlowImageFormatInfo, uint32* pFormatCount, VkOpticalFlowImageFormatPropertiesNV* pImageFormatProperties);
+		private static vkGetPhysicalDeviceOpticalFlowImageFormatsNVFunction vkGetPhysicalDeviceOpticalFlowImageFormatsNV_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static VkResult vkGetPhysicalDeviceOpticalFlowImageFormatsNV(VkPhysicalDevice physicalDevice, VkOpticalFlowImageFormatInfoNV* pOpticalFlowImageFormatInfo, uint32* pFormatCount, VkOpticalFlowImageFormatPropertiesNV* pImageFormatProperties)
+			=> vkGetPhysicalDeviceOpticalFlowImageFormatsNV_ptr(physicalDevice, pOpticalFlowImageFormatInfo, pFormatCount, pImageFormatProperties);
+
+		public typealias vkCreateOpticalFlowSessionNVFunction = function VkResult(VkDevice device, VkOpticalFlowSessionCreateInfoNV* pCreateInfo, VkAllocationCallbacks* pAllocator, VkOpticalFlowSessionNV* pSession);
+		private static vkCreateOpticalFlowSessionNVFunction vkCreateOpticalFlowSessionNV_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static VkResult vkCreateOpticalFlowSessionNV(VkDevice device, VkOpticalFlowSessionCreateInfoNV* pCreateInfo, VkAllocationCallbacks* pAllocator, VkOpticalFlowSessionNV* pSession)
+			=> vkCreateOpticalFlowSessionNV_ptr(device, pCreateInfo, pAllocator, pSession);
+
+		public typealias vkDestroyOpticalFlowSessionNVFunction = function void(VkDevice device, VkOpticalFlowSessionNV session, VkAllocationCallbacks* pAllocator);
+		private static vkDestroyOpticalFlowSessionNVFunction vkDestroyOpticalFlowSessionNV_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkDestroyOpticalFlowSessionNV(VkDevice device, VkOpticalFlowSessionNV session, VkAllocationCallbacks* pAllocator)
+			=> vkDestroyOpticalFlowSessionNV_ptr(device, session, pAllocator);
+
+		public typealias vkBindOpticalFlowSessionImageNVFunction = function VkResult(VkDevice device, VkOpticalFlowSessionNV session, VkOpticalFlowSessionBindingPointNV bindingPoint, VkImageView view, VkImageLayout layout);
+		private static vkBindOpticalFlowSessionImageNVFunction vkBindOpticalFlowSessionImageNV_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static VkResult vkBindOpticalFlowSessionImageNV(VkDevice device, VkOpticalFlowSessionNV session, VkOpticalFlowSessionBindingPointNV bindingPoint, VkImageView view, VkImageLayout layout)
+			=> vkBindOpticalFlowSessionImageNV_ptr(device, session, bindingPoint, view, layout);
+
+		public typealias vkCmdOpticalFlowExecuteNVFunction = function void(VkCommandBuffer commandBuffer, VkOpticalFlowSessionNV session, VkOpticalFlowExecuteInfoNV* pExecuteInfo);
+		private static vkCmdOpticalFlowExecuteNVFunction vkCmdOpticalFlowExecuteNV_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkCmdOpticalFlowExecuteNV(VkCommandBuffer commandBuffer, VkOpticalFlowSessionNV session, VkOpticalFlowExecuteInfoNV* pExecuteInfo)
+			=> vkCmdOpticalFlowExecuteNV_ptr(commandBuffer, session, pExecuteInfo);
+
 		public typealias vkGetFramebufferTilePropertiesQCOMFunction = function VkResult(VkDevice device, VkFramebuffer framebuffer, uint32* pPropertiesCount, VkTilePropertiesQCOM* pProperties);
 		private static vkGetFramebufferTilePropertiesQCOMFunction vkGetFramebufferTilePropertiesQCOM_ptr;
 		[CallingConvention(VulkanNative.CallConv)]
@@ -2788,6 +3316,18 @@ namespace Bulkan
 		[CallingConvention(VulkanNative.CallConv)]
 		public static VkResult vkGetDynamicRenderingTilePropertiesQCOM(VkDevice device, VkRenderingInfo* pRenderingInfo, VkTilePropertiesQCOM* pProperties)
 			=> vkGetDynamicRenderingTilePropertiesQCOM_ptr(device, pRenderingInfo, pProperties);
+
+		public typealias vkCreateSemaphoreSciSyncPoolNVFunction = function VkResult(VkDevice device, VkSemaphoreSciSyncPoolCreateInfoNV* pCreateInfo, VkAllocationCallbacks* pAllocator, VkSemaphoreSciSyncPoolNV* pSemaphorePool);
+		private static vkCreateSemaphoreSciSyncPoolNVFunction vkCreateSemaphoreSciSyncPoolNV_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static VkResult vkCreateSemaphoreSciSyncPoolNV(VkDevice device, VkSemaphoreSciSyncPoolCreateInfoNV* pCreateInfo, VkAllocationCallbacks* pAllocator, VkSemaphoreSciSyncPoolNV* pSemaphorePool)
+			=> vkCreateSemaphoreSciSyncPoolNV_ptr(device, pCreateInfo, pAllocator, pSemaphorePool);
+
+		public typealias vkDestroySemaphoreSciSyncPoolNVFunction = function void(VkDevice device, VkSemaphoreSciSyncPoolNV semaphorePool, VkAllocationCallbacks* pAllocator);
+		private static vkDestroySemaphoreSciSyncPoolNVFunction vkDestroySemaphoreSciSyncPoolNV_ptr;
+		[CallingConvention(VulkanNative.CallConv)]
+		public static void vkDestroySemaphoreSciSyncPoolNV(VkDevice device, VkSemaphoreSciSyncPoolNV semaphorePool, VkAllocationCallbacks* pAllocator)
+			=> vkDestroySemaphoreSciSyncPoolNV_ptr(device, semaphorePool, pAllocator);
 
 		public static void SetInstance(VkInstance instance)
 		{
@@ -3657,6 +4197,14 @@ namespace Bulkan
 				mNativeLib.LoadFunction("vkGetDeviceImageSparseMemoryRequirements", out vkGetDeviceImageSparseMemoryRequirements_ptr);
 				break;
 
+			case "vkGetCommandPoolMemoryConsumption":
+				mNativeLib.LoadFunction("vkGetCommandPoolMemoryConsumption", out vkGetCommandPoolMemoryConsumption_ptr);
+				break;
+
+			case "vkGetFaultData":
+				mNativeLib.LoadFunction("vkGetFaultData", out vkGetFaultData_ptr);
+				break;
+
 			case "vkDestroySurfaceKHR":
 				mNativeLib.LoadFunction("vkDestroySurfaceKHR", out vkDestroySurfaceKHR_ptr);
 				break;
@@ -4013,6 +4561,14 @@ namespace Bulkan
 				mNativeLib.LoadFunction("vkCmdSetDiscardRectangleEXT", out vkCmdSetDiscardRectangleEXT_ptr);
 				break;
 
+			case "vkCmdSetDiscardRectangleEnableEXT":
+				mNativeLib.LoadFunction("vkCmdSetDiscardRectangleEnableEXT", out vkCmdSetDiscardRectangleEnableEXT_ptr);
+				break;
+
+			case "vkCmdSetDiscardRectangleModeEXT":
+				mNativeLib.LoadFunction("vkCmdSetDiscardRectangleModeEXT", out vkCmdSetDiscardRectangleModeEXT_ptr);
+				break;
+
 			case "vkSetHdrMetadataEXT":
 				mNativeLib.LoadFunction("vkSetHdrMetadataEXT", out vkSetHdrMetadataEXT_ptr);
 				break;
@@ -4341,6 +4897,10 @@ namespace Bulkan
 				mNativeLib.LoadFunction("vkCmdDrawMeshTasksIndirectCountNV", out vkCmdDrawMeshTasksIndirectCountNV_ptr);
 				break;
 
+			case "vkCmdSetExclusiveScissorEnableNV":
+				mNativeLib.LoadFunction("vkCmdSetExclusiveScissorEnableNV", out vkCmdSetExclusiveScissorEnableNV_ptr);
+				break;
+
 			case "vkCmdSetExclusiveScissorNV":
 				mNativeLib.LoadFunction("vkCmdSetExclusiveScissorNV", out vkCmdSetExclusiveScissorNV_ptr);
 				break;
@@ -4473,6 +5033,10 @@ namespace Bulkan
 				mNativeLib.LoadFunction("vkGetPipelineExecutableInternalRepresentationsKHR", out vkGetPipelineExecutableInternalRepresentationsKHR_ptr);
 				break;
 
+			case "vkReleaseSwapchainImagesEXT":
+				mNativeLib.LoadFunction("vkReleaseSwapchainImagesEXT", out vkReleaseSwapchainImagesEXT_ptr);
+				break;
+
 			case "vkGetGeneratedCommandsMemoryRequirementsNV":
 				mNativeLib.LoadFunction("vkGetGeneratedCommandsMemoryRequirementsNV", out vkGetGeneratedCommandsMemoryRequirementsNV_ptr);
 				break;
@@ -4509,16 +5073,80 @@ namespace Bulkan
 				mNativeLib.LoadFunction("vkCmdEncodeVideoKHR", out vkCmdEncodeVideoKHR_ptr);
 				break;
 
+			case "vkCmdRefreshObjectsKHR":
+				mNativeLib.LoadFunction("vkCmdRefreshObjectsKHR", out vkCmdRefreshObjectsKHR_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceRefreshableObjectTypesKHR":
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceRefreshableObjectTypesKHR", out vkGetPhysicalDeviceRefreshableObjectTypesKHR_ptr);
+				break;
+
 			case "vkExportMetalObjectsEXT":
 				mNativeLib.LoadFunction("vkExportMetalObjectsEXT", out vkExportMetalObjectsEXT_ptr);
+				break;
+
+			case "vkGetDescriptorSetLayoutSizeEXT":
+				mNativeLib.LoadFunction("vkGetDescriptorSetLayoutSizeEXT", out vkGetDescriptorSetLayoutSizeEXT_ptr);
+				break;
+
+			case "vkGetDescriptorSetLayoutBindingOffsetEXT":
+				mNativeLib.LoadFunction("vkGetDescriptorSetLayoutBindingOffsetEXT", out vkGetDescriptorSetLayoutBindingOffsetEXT_ptr);
+				break;
+
+			case "vkGetDescriptorEXT":
+				mNativeLib.LoadFunction("vkGetDescriptorEXT", out vkGetDescriptorEXT_ptr);
+				break;
+
+			case "vkCmdBindDescriptorBuffersEXT":
+				mNativeLib.LoadFunction("vkCmdBindDescriptorBuffersEXT", out vkCmdBindDescriptorBuffersEXT_ptr);
+				break;
+
+			case "vkCmdSetDescriptorBufferOffsetsEXT":
+				mNativeLib.LoadFunction("vkCmdSetDescriptorBufferOffsetsEXT", out vkCmdSetDescriptorBufferOffsetsEXT_ptr);
+				break;
+
+			case "vkCmdBindDescriptorBufferEmbeddedSamplersEXT":
+				mNativeLib.LoadFunction("vkCmdBindDescriptorBufferEmbeddedSamplersEXT", out vkCmdBindDescriptorBufferEmbeddedSamplersEXT_ptr);
+				break;
+
+			case "vkGetBufferOpaqueCaptureDescriptorDataEXT":
+				mNativeLib.LoadFunction("vkGetBufferOpaqueCaptureDescriptorDataEXT", out vkGetBufferOpaqueCaptureDescriptorDataEXT_ptr);
+				break;
+
+			case "vkGetImageOpaqueCaptureDescriptorDataEXT":
+				mNativeLib.LoadFunction("vkGetImageOpaqueCaptureDescriptorDataEXT", out vkGetImageOpaqueCaptureDescriptorDataEXT_ptr);
+				break;
+
+			case "vkGetImageViewOpaqueCaptureDescriptorDataEXT":
+				mNativeLib.LoadFunction("vkGetImageViewOpaqueCaptureDescriptorDataEXT", out vkGetImageViewOpaqueCaptureDescriptorDataEXT_ptr);
+				break;
+
+			case "vkGetSamplerOpaqueCaptureDescriptorDataEXT":
+				mNativeLib.LoadFunction("vkGetSamplerOpaqueCaptureDescriptorDataEXT", out vkGetSamplerOpaqueCaptureDescriptorDataEXT_ptr);
 				break;
 
 			case "vkCmdSetFragmentShadingRateEnumNV":
 				mNativeLib.LoadFunction("vkCmdSetFragmentShadingRateEnumNV", out vkCmdSetFragmentShadingRateEnumNV_ptr);
 				break;
 
+			case "vkCmdDrawMeshTasksEXT":
+				mNativeLib.LoadFunction("vkCmdDrawMeshTasksEXT", out vkCmdDrawMeshTasksEXT_ptr);
+				break;
+
+			case "vkCmdDrawMeshTasksIndirectEXT":
+				mNativeLib.LoadFunction("vkCmdDrawMeshTasksIndirectEXT", out vkCmdDrawMeshTasksIndirectEXT_ptr);
+				break;
+
+			case "vkCmdDrawMeshTasksIndirectCountEXT":
+				mNativeLib.LoadFunction("vkCmdDrawMeshTasksIndirectCountEXT", out vkCmdDrawMeshTasksIndirectCountEXT_ptr);
+				break;
+
 			case "vkGetImageSubresourceLayout2EXT":
 				mNativeLib.LoadFunction("vkGetImageSubresourceLayout2EXT", out vkGetImageSubresourceLayout2EXT_ptr);
+				break;
+
+			case "vkGetDeviceFaultInfoEXT":
+				mNativeLib.LoadFunction("vkGetDeviceFaultInfoEXT", out vkGetDeviceFaultInfoEXT_ptr);
 				break;
 
 			case "vkAcquireWinrtDisplayNV":
@@ -4597,6 +5225,46 @@ namespace Bulkan
 				mNativeLib.LoadFunction("vkGetPipelinePropertiesEXT", out vkGetPipelinePropertiesEXT_ptr);
 				break;
 
+			case "vkGetFenceSciSyncFenceNV":
+				mNativeLib.LoadFunction("vkGetFenceSciSyncFenceNV", out vkGetFenceSciSyncFenceNV_ptr);
+				break;
+
+			case "vkGetFenceSciSyncObjNV":
+				mNativeLib.LoadFunction("vkGetFenceSciSyncObjNV", out vkGetFenceSciSyncObjNV_ptr);
+				break;
+
+			case "vkImportFenceSciSyncFenceNV":
+				mNativeLib.LoadFunction("vkImportFenceSciSyncFenceNV", out vkImportFenceSciSyncFenceNV_ptr);
+				break;
+
+			case "vkImportFenceSciSyncObjNV":
+				mNativeLib.LoadFunction("vkImportFenceSciSyncObjNV", out vkImportFenceSciSyncObjNV_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceSciSyncAttributesNV":
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceSciSyncAttributesNV", out vkGetPhysicalDeviceSciSyncAttributesNV_ptr);
+				break;
+
+			case "vkGetSemaphoreSciSyncObjNV":
+				mNativeLib.LoadFunction("vkGetSemaphoreSciSyncObjNV", out vkGetSemaphoreSciSyncObjNV_ptr);
+				break;
+
+			case "vkImportSemaphoreSciSyncObjNV":
+				mNativeLib.LoadFunction("vkImportSemaphoreSciSyncObjNV", out vkImportSemaphoreSciSyncObjNV_ptr);
+				break;
+
+			case "vkGetMemorySciBufNV":
+				mNativeLib.LoadFunction("vkGetMemorySciBufNV", out vkGetMemorySciBufNV_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV":
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV", out vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV_ptr);
+				break;
+
+			case "vkGetPhysicalDeviceSciBufAttributesNV":
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceSciBufAttributesNV", out vkGetPhysicalDeviceSciBufAttributesNV_ptr);
+				break;
+
 			case "vkCmdSetPatchControlPointsEXT":
 				mNativeLib.LoadFunction("vkCmdSetPatchControlPointsEXT", out vkCmdSetPatchControlPointsEXT_ptr);
 				break;
@@ -4625,6 +5293,70 @@ namespace Bulkan
 				mNativeLib.LoadFunction("vkCmdDrawMultiIndexedEXT", out vkCmdDrawMultiIndexedEXT_ptr);
 				break;
 
+			case "vkCreateMicromapEXT":
+				mNativeLib.LoadFunction("vkCreateMicromapEXT", out vkCreateMicromapEXT_ptr);
+				break;
+
+			case "vkDestroyMicromapEXT":
+				mNativeLib.LoadFunction("vkDestroyMicromapEXT", out vkDestroyMicromapEXT_ptr);
+				break;
+
+			case "vkCmdBuildMicromapsEXT":
+				mNativeLib.LoadFunction("vkCmdBuildMicromapsEXT", out vkCmdBuildMicromapsEXT_ptr);
+				break;
+
+			case "vkBuildMicromapsEXT":
+				mNativeLib.LoadFunction("vkBuildMicromapsEXT", out vkBuildMicromapsEXT_ptr);
+				break;
+
+			case "vkCopyMicromapEXT":
+				mNativeLib.LoadFunction("vkCopyMicromapEXT", out vkCopyMicromapEXT_ptr);
+				break;
+
+			case "vkCopyMicromapToMemoryEXT":
+				mNativeLib.LoadFunction("vkCopyMicromapToMemoryEXT", out vkCopyMicromapToMemoryEXT_ptr);
+				break;
+
+			case "vkCopyMemoryToMicromapEXT":
+				mNativeLib.LoadFunction("vkCopyMemoryToMicromapEXT", out vkCopyMemoryToMicromapEXT_ptr);
+				break;
+
+			case "vkWriteMicromapsPropertiesEXT":
+				mNativeLib.LoadFunction("vkWriteMicromapsPropertiesEXT", out vkWriteMicromapsPropertiesEXT_ptr);
+				break;
+
+			case "vkCmdCopyMicromapEXT":
+				mNativeLib.LoadFunction("vkCmdCopyMicromapEXT", out vkCmdCopyMicromapEXT_ptr);
+				break;
+
+			case "vkCmdCopyMicromapToMemoryEXT":
+				mNativeLib.LoadFunction("vkCmdCopyMicromapToMemoryEXT", out vkCmdCopyMicromapToMemoryEXT_ptr);
+				break;
+
+			case "vkCmdCopyMemoryToMicromapEXT":
+				mNativeLib.LoadFunction("vkCmdCopyMemoryToMicromapEXT", out vkCmdCopyMemoryToMicromapEXT_ptr);
+				break;
+
+			case "vkCmdWriteMicromapsPropertiesEXT":
+				mNativeLib.LoadFunction("vkCmdWriteMicromapsPropertiesEXT", out vkCmdWriteMicromapsPropertiesEXT_ptr);
+				break;
+
+			case "vkGetDeviceMicromapCompatibilityEXT":
+				mNativeLib.LoadFunction("vkGetDeviceMicromapCompatibilityEXT", out vkGetDeviceMicromapCompatibilityEXT_ptr);
+				break;
+
+			case "vkGetMicromapBuildSizesEXT":
+				mNativeLib.LoadFunction("vkGetMicromapBuildSizesEXT", out vkGetMicromapBuildSizesEXT_ptr);
+				break;
+
+			case "vkCmdDrawClusterHUAWEI":
+				mNativeLib.LoadFunction("vkCmdDrawClusterHUAWEI", out vkCmdDrawClusterHUAWEI_ptr);
+				break;
+
+			case "vkCmdDrawClusterIndirectHUAWEI":
+				mNativeLib.LoadFunction("vkCmdDrawClusterIndirectHUAWEI", out vkCmdDrawClusterIndirectHUAWEI_ptr);
+				break;
+
 			case "vkSetDeviceMemoryPriorityEXT":
 				mNativeLib.LoadFunction("vkSetDeviceMemoryPriorityEXT", out vkSetDeviceMemoryPriorityEXT_ptr);
 				break;
@@ -4637,6 +5369,146 @@ namespace Bulkan
 				mNativeLib.LoadFunction("vkGetDescriptorSetHostMappingVALVE", out vkGetDescriptorSetHostMappingVALVE_ptr);
 				break;
 
+			case "vkCmdCopyMemoryIndirectNV":
+				mNativeLib.LoadFunction("vkCmdCopyMemoryIndirectNV", out vkCmdCopyMemoryIndirectNV_ptr);
+				break;
+
+			case "vkCmdCopyMemoryToImageIndirectNV":
+				mNativeLib.LoadFunction("vkCmdCopyMemoryToImageIndirectNV", out vkCmdCopyMemoryToImageIndirectNV_ptr);
+				break;
+
+			case "vkCmdDecompressMemoryNV":
+				mNativeLib.LoadFunction("vkCmdDecompressMemoryNV", out vkCmdDecompressMemoryNV_ptr);
+				break;
+
+			case "vkCmdDecompressMemoryIndirectCountNV":
+				mNativeLib.LoadFunction("vkCmdDecompressMemoryIndirectCountNV", out vkCmdDecompressMemoryIndirectCountNV_ptr);
+				break;
+
+			case "vkCmdSetTessellationDomainOriginEXT":
+				mNativeLib.LoadFunction("vkCmdSetTessellationDomainOriginEXT", out vkCmdSetTessellationDomainOriginEXT_ptr);
+				break;
+
+			case "vkCmdSetDepthClampEnableEXT":
+				mNativeLib.LoadFunction("vkCmdSetDepthClampEnableEXT", out vkCmdSetDepthClampEnableEXT_ptr);
+				break;
+
+			case "vkCmdSetPolygonModeEXT":
+				mNativeLib.LoadFunction("vkCmdSetPolygonModeEXT", out vkCmdSetPolygonModeEXT_ptr);
+				break;
+
+			case "vkCmdSetRasterizationSamplesEXT":
+				mNativeLib.LoadFunction("vkCmdSetRasterizationSamplesEXT", out vkCmdSetRasterizationSamplesEXT_ptr);
+				break;
+
+			case "vkCmdSetSampleMaskEXT":
+				mNativeLib.LoadFunction("vkCmdSetSampleMaskEXT", out vkCmdSetSampleMaskEXT_ptr);
+				break;
+
+			case "vkCmdSetAlphaToCoverageEnableEXT":
+				mNativeLib.LoadFunction("vkCmdSetAlphaToCoverageEnableEXT", out vkCmdSetAlphaToCoverageEnableEXT_ptr);
+				break;
+
+			case "vkCmdSetAlphaToOneEnableEXT":
+				mNativeLib.LoadFunction("vkCmdSetAlphaToOneEnableEXT", out vkCmdSetAlphaToOneEnableEXT_ptr);
+				break;
+
+			case "vkCmdSetLogicOpEnableEXT":
+				mNativeLib.LoadFunction("vkCmdSetLogicOpEnableEXT", out vkCmdSetLogicOpEnableEXT_ptr);
+				break;
+
+			case "vkCmdSetColorBlendEnableEXT":
+				mNativeLib.LoadFunction("vkCmdSetColorBlendEnableEXT", out vkCmdSetColorBlendEnableEXT_ptr);
+				break;
+
+			case "vkCmdSetColorBlendEquationEXT":
+				mNativeLib.LoadFunction("vkCmdSetColorBlendEquationEXT", out vkCmdSetColorBlendEquationEXT_ptr);
+				break;
+
+			case "vkCmdSetColorWriteMaskEXT":
+				mNativeLib.LoadFunction("vkCmdSetColorWriteMaskEXT", out vkCmdSetColorWriteMaskEXT_ptr);
+				break;
+
+			case "vkCmdSetRasterizationStreamEXT":
+				mNativeLib.LoadFunction("vkCmdSetRasterizationStreamEXT", out vkCmdSetRasterizationStreamEXT_ptr);
+				break;
+
+			case "vkCmdSetConservativeRasterizationModeEXT":
+				mNativeLib.LoadFunction("vkCmdSetConservativeRasterizationModeEXT", out vkCmdSetConservativeRasterizationModeEXT_ptr);
+				break;
+
+			case "vkCmdSetExtraPrimitiveOverestimationSizeEXT":
+				mNativeLib.LoadFunction("vkCmdSetExtraPrimitiveOverestimationSizeEXT", out vkCmdSetExtraPrimitiveOverestimationSizeEXT_ptr);
+				break;
+
+			case "vkCmdSetDepthClipEnableEXT":
+				mNativeLib.LoadFunction("vkCmdSetDepthClipEnableEXT", out vkCmdSetDepthClipEnableEXT_ptr);
+				break;
+
+			case "vkCmdSetSampleLocationsEnableEXT":
+				mNativeLib.LoadFunction("vkCmdSetSampleLocationsEnableEXT", out vkCmdSetSampleLocationsEnableEXT_ptr);
+				break;
+
+			case "vkCmdSetColorBlendAdvancedEXT":
+				mNativeLib.LoadFunction("vkCmdSetColorBlendAdvancedEXT", out vkCmdSetColorBlendAdvancedEXT_ptr);
+				break;
+
+			case "vkCmdSetProvokingVertexModeEXT":
+				mNativeLib.LoadFunction("vkCmdSetProvokingVertexModeEXT", out vkCmdSetProvokingVertexModeEXT_ptr);
+				break;
+
+			case "vkCmdSetLineRasterizationModeEXT":
+				mNativeLib.LoadFunction("vkCmdSetLineRasterizationModeEXT", out vkCmdSetLineRasterizationModeEXT_ptr);
+				break;
+
+			case "vkCmdSetLineStippleEnableEXT":
+				mNativeLib.LoadFunction("vkCmdSetLineStippleEnableEXT", out vkCmdSetLineStippleEnableEXT_ptr);
+				break;
+
+			case "vkCmdSetDepthClipNegativeOneToOneEXT":
+				mNativeLib.LoadFunction("vkCmdSetDepthClipNegativeOneToOneEXT", out vkCmdSetDepthClipNegativeOneToOneEXT_ptr);
+				break;
+
+			case "vkCmdSetViewportWScalingEnableNV":
+				mNativeLib.LoadFunction("vkCmdSetViewportWScalingEnableNV", out vkCmdSetViewportWScalingEnableNV_ptr);
+				break;
+
+			case "vkCmdSetViewportSwizzleNV":
+				mNativeLib.LoadFunction("vkCmdSetViewportSwizzleNV", out vkCmdSetViewportSwizzleNV_ptr);
+				break;
+
+			case "vkCmdSetCoverageToColorEnableNV":
+				mNativeLib.LoadFunction("vkCmdSetCoverageToColorEnableNV", out vkCmdSetCoverageToColorEnableNV_ptr);
+				break;
+
+			case "vkCmdSetCoverageToColorLocationNV":
+				mNativeLib.LoadFunction("vkCmdSetCoverageToColorLocationNV", out vkCmdSetCoverageToColorLocationNV_ptr);
+				break;
+
+			case "vkCmdSetCoverageModulationModeNV":
+				mNativeLib.LoadFunction("vkCmdSetCoverageModulationModeNV", out vkCmdSetCoverageModulationModeNV_ptr);
+				break;
+
+			case "vkCmdSetCoverageModulationTableEnableNV":
+				mNativeLib.LoadFunction("vkCmdSetCoverageModulationTableEnableNV", out vkCmdSetCoverageModulationTableEnableNV_ptr);
+				break;
+
+			case "vkCmdSetCoverageModulationTableNV":
+				mNativeLib.LoadFunction("vkCmdSetCoverageModulationTableNV", out vkCmdSetCoverageModulationTableNV_ptr);
+				break;
+
+			case "vkCmdSetShadingRateImageEnableNV":
+				mNativeLib.LoadFunction("vkCmdSetShadingRateImageEnableNV", out vkCmdSetShadingRateImageEnableNV_ptr);
+				break;
+
+			case "vkCmdSetRepresentativeFragmentTestEnableNV":
+				mNativeLib.LoadFunction("vkCmdSetRepresentativeFragmentTestEnableNV", out vkCmdSetRepresentativeFragmentTestEnableNV_ptr);
+				break;
+
+			case "vkCmdSetCoverageReductionModeNV":
+				mNativeLib.LoadFunction("vkCmdSetCoverageReductionModeNV", out vkCmdSetCoverageReductionModeNV_ptr);
+				break;
+
 			case "vkGetShaderModuleIdentifierEXT":
 				mNativeLib.LoadFunction("vkGetShaderModuleIdentifierEXT", out vkGetShaderModuleIdentifierEXT_ptr);
 				break;
@@ -4645,12 +5517,40 @@ namespace Bulkan
 				mNativeLib.LoadFunction("vkGetShaderModuleCreateInfoIdentifierEXT", out vkGetShaderModuleCreateInfoIdentifierEXT_ptr);
 				break;
 
+			case "vkGetPhysicalDeviceOpticalFlowImageFormatsNV":
+				mNativeLib.LoadFunction("vkGetPhysicalDeviceOpticalFlowImageFormatsNV", out vkGetPhysicalDeviceOpticalFlowImageFormatsNV_ptr);
+				break;
+
+			case "vkCreateOpticalFlowSessionNV":
+				mNativeLib.LoadFunction("vkCreateOpticalFlowSessionNV", out vkCreateOpticalFlowSessionNV_ptr);
+				break;
+
+			case "vkDestroyOpticalFlowSessionNV":
+				mNativeLib.LoadFunction("vkDestroyOpticalFlowSessionNV", out vkDestroyOpticalFlowSessionNV_ptr);
+				break;
+
+			case "vkBindOpticalFlowSessionImageNV":
+				mNativeLib.LoadFunction("vkBindOpticalFlowSessionImageNV", out vkBindOpticalFlowSessionImageNV_ptr);
+				break;
+
+			case "vkCmdOpticalFlowExecuteNV":
+				mNativeLib.LoadFunction("vkCmdOpticalFlowExecuteNV", out vkCmdOpticalFlowExecuteNV_ptr);
+				break;
+
 			case "vkGetFramebufferTilePropertiesQCOM":
 				mNativeLib.LoadFunction("vkGetFramebufferTilePropertiesQCOM", out vkGetFramebufferTilePropertiesQCOM_ptr);
 				break;
 
 			case "vkGetDynamicRenderingTilePropertiesQCOM":
 				mNativeLib.LoadFunction("vkGetDynamicRenderingTilePropertiesQCOM", out vkGetDynamicRenderingTilePropertiesQCOM_ptr);
+				break;
+
+			case "vkCreateSemaphoreSciSyncPoolNV":
+				mNativeLib.LoadFunction("vkCreateSemaphoreSciSyncPoolNV", out vkCreateSemaphoreSciSyncPoolNV_ptr);
+				break;
+
+			case "vkDestroySemaphoreSciSyncPoolNV":
+				mNativeLib.LoadFunction("vkDestroySemaphoreSciSyncPoolNV", out vkDestroySemaphoreSciSyncPoolNV_ptr);
 				break;
 
 			default:
@@ -5319,6 +6219,12 @@ namespace Bulkan
 			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDeviceImageSparseMemoryRequirements"))
 				LoadFunction("vkGetDeviceImageSparseMemoryRequirements");
 
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetCommandPoolMemoryConsumption"))
+				LoadFunction("vkGetCommandPoolMemoryConsumption");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetFaultData"))
+				LoadFunction("vkGetFaultData");
+
 			if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroySurfaceKHR"))
 				LoadFunction("vkDestroySurfaceKHR");
 
@@ -5586,6 +6492,12 @@ namespace Bulkan
 			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetDiscardRectangleEXT"))
 				LoadFunction("vkCmdSetDiscardRectangleEXT");
 
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetDiscardRectangleEnableEXT"))
+				LoadFunction("vkCmdSetDiscardRectangleEnableEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetDiscardRectangleModeEXT"))
+				LoadFunction("vkCmdSetDiscardRectangleModeEXT");
+
 			if(excludeFunctions == null || !excludeFunctions.Contains("vkSetHdrMetadataEXT"))
 				LoadFunction("vkSetHdrMetadataEXT");
 
@@ -5832,6 +6744,9 @@ namespace Bulkan
 			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDrawMeshTasksIndirectCountNV"))
 				LoadFunction("vkCmdDrawMeshTasksIndirectCountNV");
 
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetExclusiveScissorEnableNV"))
+				LoadFunction("vkCmdSetExclusiveScissorEnableNV");
+
 			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetExclusiveScissorNV"))
 				LoadFunction("vkCmdSetExclusiveScissorNV");
 
@@ -5931,6 +6846,9 @@ namespace Bulkan
 			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPipelineExecutableInternalRepresentationsKHR"))
 				LoadFunction("vkGetPipelineExecutableInternalRepresentationsKHR");
 
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkReleaseSwapchainImagesEXT"))
+				LoadFunction("vkReleaseSwapchainImagesEXT");
+
 			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetGeneratedCommandsMemoryRequirementsNV"))
 				LoadFunction("vkGetGeneratedCommandsMemoryRequirementsNV");
 
@@ -5958,14 +6876,62 @@ namespace Bulkan
 			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdEncodeVideoKHR"))
 				LoadFunction("vkCmdEncodeVideoKHR");
 
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdRefreshObjectsKHR"))
+				LoadFunction("vkCmdRefreshObjectsKHR");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceRefreshableObjectTypesKHR"))
+				LoadFunction("vkGetPhysicalDeviceRefreshableObjectTypesKHR");
+
 			if(excludeFunctions == null || !excludeFunctions.Contains("vkExportMetalObjectsEXT"))
 				LoadFunction("vkExportMetalObjectsEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDescriptorSetLayoutSizeEXT"))
+				LoadFunction("vkGetDescriptorSetLayoutSizeEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDescriptorSetLayoutBindingOffsetEXT"))
+				LoadFunction("vkGetDescriptorSetLayoutBindingOffsetEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDescriptorEXT"))
+				LoadFunction("vkGetDescriptorEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBindDescriptorBuffersEXT"))
+				LoadFunction("vkCmdBindDescriptorBuffersEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetDescriptorBufferOffsetsEXT"))
+				LoadFunction("vkCmdSetDescriptorBufferOffsetsEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBindDescriptorBufferEmbeddedSamplersEXT"))
+				LoadFunction("vkCmdBindDescriptorBufferEmbeddedSamplersEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetBufferOpaqueCaptureDescriptorDataEXT"))
+				LoadFunction("vkGetBufferOpaqueCaptureDescriptorDataEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetImageOpaqueCaptureDescriptorDataEXT"))
+				LoadFunction("vkGetImageOpaqueCaptureDescriptorDataEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetImageViewOpaqueCaptureDescriptorDataEXT"))
+				LoadFunction("vkGetImageViewOpaqueCaptureDescriptorDataEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetSamplerOpaqueCaptureDescriptorDataEXT"))
+				LoadFunction("vkGetSamplerOpaqueCaptureDescriptorDataEXT");
 
 			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetFragmentShadingRateEnumNV"))
 				LoadFunction("vkCmdSetFragmentShadingRateEnumNV");
 
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDrawMeshTasksEXT"))
+				LoadFunction("vkCmdDrawMeshTasksEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDrawMeshTasksIndirectEXT"))
+				LoadFunction("vkCmdDrawMeshTasksIndirectEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDrawMeshTasksIndirectCountEXT"))
+				LoadFunction("vkCmdDrawMeshTasksIndirectCountEXT");
+
 			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetImageSubresourceLayout2EXT"))
 				LoadFunction("vkGetImageSubresourceLayout2EXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDeviceFaultInfoEXT"))
+				LoadFunction("vkGetDeviceFaultInfoEXT");
 
 			if(excludeFunctions == null || !excludeFunctions.Contains("vkAcquireWinrtDisplayNV"))
 				LoadFunction("vkAcquireWinrtDisplayNV");
@@ -6024,6 +6990,36 @@ namespace Bulkan
 			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPipelinePropertiesEXT"))
 				LoadFunction("vkGetPipelinePropertiesEXT");
 
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetFenceSciSyncFenceNV"))
+				LoadFunction("vkGetFenceSciSyncFenceNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetFenceSciSyncObjNV"))
+				LoadFunction("vkGetFenceSciSyncObjNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkImportFenceSciSyncFenceNV"))
+				LoadFunction("vkImportFenceSciSyncFenceNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkImportFenceSciSyncObjNV"))
+				LoadFunction("vkImportFenceSciSyncObjNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceSciSyncAttributesNV"))
+				LoadFunction("vkGetPhysicalDeviceSciSyncAttributesNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetSemaphoreSciSyncObjNV"))
+				LoadFunction("vkGetSemaphoreSciSyncObjNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkImportSemaphoreSciSyncObjNV"))
+				LoadFunction("vkImportSemaphoreSciSyncObjNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetMemorySciBufNV"))
+				LoadFunction("vkGetMemorySciBufNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV"))
+				LoadFunction("vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceSciBufAttributesNV"))
+				LoadFunction("vkGetPhysicalDeviceSciBufAttributesNV");
+
 			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetPatchControlPointsEXT"))
 				LoadFunction("vkCmdSetPatchControlPointsEXT");
 
@@ -6045,6 +7041,54 @@ namespace Bulkan
 			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDrawMultiIndexedEXT"))
 				LoadFunction("vkCmdDrawMultiIndexedEXT");
 
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateMicromapEXT"))
+				LoadFunction("vkCreateMicromapEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyMicromapEXT"))
+				LoadFunction("vkDestroyMicromapEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBuildMicromapsEXT"))
+				LoadFunction("vkCmdBuildMicromapsEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkBuildMicromapsEXT"))
+				LoadFunction("vkBuildMicromapsEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCopyMicromapEXT"))
+				LoadFunction("vkCopyMicromapEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCopyMicromapToMemoryEXT"))
+				LoadFunction("vkCopyMicromapToMemoryEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCopyMemoryToMicromapEXT"))
+				LoadFunction("vkCopyMemoryToMicromapEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkWriteMicromapsPropertiesEXT"))
+				LoadFunction("vkWriteMicromapsPropertiesEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdCopyMicromapEXT"))
+				LoadFunction("vkCmdCopyMicromapEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdCopyMicromapToMemoryEXT"))
+				LoadFunction("vkCmdCopyMicromapToMemoryEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdCopyMemoryToMicromapEXT"))
+				LoadFunction("vkCmdCopyMemoryToMicromapEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdWriteMicromapsPropertiesEXT"))
+				LoadFunction("vkCmdWriteMicromapsPropertiesEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDeviceMicromapCompatibilityEXT"))
+				LoadFunction("vkGetDeviceMicromapCompatibilityEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetMicromapBuildSizesEXT"))
+				LoadFunction("vkGetMicromapBuildSizesEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDrawClusterHUAWEI"))
+				LoadFunction("vkCmdDrawClusterHUAWEI");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDrawClusterIndirectHUAWEI"))
+				LoadFunction("vkCmdDrawClusterIndirectHUAWEI");
+
 			if(excludeFunctions == null || !excludeFunctions.Contains("vkSetDeviceMemoryPriorityEXT"))
 				LoadFunction("vkSetDeviceMemoryPriorityEXT");
 
@@ -6054,17 +7098,143 @@ namespace Bulkan
 			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDescriptorSetHostMappingVALVE"))
 				LoadFunction("vkGetDescriptorSetHostMappingVALVE");
 
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdCopyMemoryIndirectNV"))
+				LoadFunction("vkCmdCopyMemoryIndirectNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdCopyMemoryToImageIndirectNV"))
+				LoadFunction("vkCmdCopyMemoryToImageIndirectNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDecompressMemoryNV"))
+				LoadFunction("vkCmdDecompressMemoryNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDecompressMemoryIndirectCountNV"))
+				LoadFunction("vkCmdDecompressMemoryIndirectCountNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetTessellationDomainOriginEXT"))
+				LoadFunction("vkCmdSetTessellationDomainOriginEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetDepthClampEnableEXT"))
+				LoadFunction("vkCmdSetDepthClampEnableEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetPolygonModeEXT"))
+				LoadFunction("vkCmdSetPolygonModeEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetRasterizationSamplesEXT"))
+				LoadFunction("vkCmdSetRasterizationSamplesEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetSampleMaskEXT"))
+				LoadFunction("vkCmdSetSampleMaskEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetAlphaToCoverageEnableEXT"))
+				LoadFunction("vkCmdSetAlphaToCoverageEnableEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetAlphaToOneEnableEXT"))
+				LoadFunction("vkCmdSetAlphaToOneEnableEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetLogicOpEnableEXT"))
+				LoadFunction("vkCmdSetLogicOpEnableEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetColorBlendEnableEXT"))
+				LoadFunction("vkCmdSetColorBlendEnableEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetColorBlendEquationEXT"))
+				LoadFunction("vkCmdSetColorBlendEquationEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetColorWriteMaskEXT"))
+				LoadFunction("vkCmdSetColorWriteMaskEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetRasterizationStreamEXT"))
+				LoadFunction("vkCmdSetRasterizationStreamEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetConservativeRasterizationModeEXT"))
+				LoadFunction("vkCmdSetConservativeRasterizationModeEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetExtraPrimitiveOverestimationSizeEXT"))
+				LoadFunction("vkCmdSetExtraPrimitiveOverestimationSizeEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetDepthClipEnableEXT"))
+				LoadFunction("vkCmdSetDepthClipEnableEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetSampleLocationsEnableEXT"))
+				LoadFunction("vkCmdSetSampleLocationsEnableEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetColorBlendAdvancedEXT"))
+				LoadFunction("vkCmdSetColorBlendAdvancedEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetProvokingVertexModeEXT"))
+				LoadFunction("vkCmdSetProvokingVertexModeEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetLineRasterizationModeEXT"))
+				LoadFunction("vkCmdSetLineRasterizationModeEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetLineStippleEnableEXT"))
+				LoadFunction("vkCmdSetLineStippleEnableEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetDepthClipNegativeOneToOneEXT"))
+				LoadFunction("vkCmdSetDepthClipNegativeOneToOneEXT");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetViewportWScalingEnableNV"))
+				LoadFunction("vkCmdSetViewportWScalingEnableNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetViewportSwizzleNV"))
+				LoadFunction("vkCmdSetViewportSwizzleNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetCoverageToColorEnableNV"))
+				LoadFunction("vkCmdSetCoverageToColorEnableNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetCoverageToColorLocationNV"))
+				LoadFunction("vkCmdSetCoverageToColorLocationNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetCoverageModulationModeNV"))
+				LoadFunction("vkCmdSetCoverageModulationModeNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetCoverageModulationTableEnableNV"))
+				LoadFunction("vkCmdSetCoverageModulationTableEnableNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetCoverageModulationTableNV"))
+				LoadFunction("vkCmdSetCoverageModulationTableNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetShadingRateImageEnableNV"))
+				LoadFunction("vkCmdSetShadingRateImageEnableNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetRepresentativeFragmentTestEnableNV"))
+				LoadFunction("vkCmdSetRepresentativeFragmentTestEnableNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetCoverageReductionModeNV"))
+				LoadFunction("vkCmdSetCoverageReductionModeNV");
+
 			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetShaderModuleIdentifierEXT"))
 				LoadFunction("vkGetShaderModuleIdentifierEXT");
 
 			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetShaderModuleCreateInfoIdentifierEXT"))
 				LoadFunction("vkGetShaderModuleCreateInfoIdentifierEXT");
 
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceOpticalFlowImageFormatsNV"))
+				LoadFunction("vkGetPhysicalDeviceOpticalFlowImageFormatsNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateOpticalFlowSessionNV"))
+				LoadFunction("vkCreateOpticalFlowSessionNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyOpticalFlowSessionNV"))
+				LoadFunction("vkDestroyOpticalFlowSessionNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkBindOpticalFlowSessionImageNV"))
+				LoadFunction("vkBindOpticalFlowSessionImageNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdOpticalFlowExecuteNV"))
+				LoadFunction("vkCmdOpticalFlowExecuteNV");
+
 			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetFramebufferTilePropertiesQCOM"))
 				LoadFunction("vkGetFramebufferTilePropertiesQCOM");
 
 			if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDynamicRenderingTilePropertiesQCOM"))
 				LoadFunction("vkGetDynamicRenderingTilePropertiesQCOM");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateSemaphoreSciSyncPoolNV"))
+				LoadFunction("vkCreateSemaphoreSciSyncPoolNV");
+
+			if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroySemaphoreSciSyncPoolNV"))
+				LoadFunction("vkDestroySemaphoreSciSyncPoolNV");
 
 		}
 

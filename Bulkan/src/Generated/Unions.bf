@@ -69,6 +69,21 @@ namespace Bulkan
 	}
 
 	[CRepr, Union]
+	public struct VkDescriptorDataEXT
+	{
+		public VkSampler* pSampler;
+		public VkDescriptorImageInfo* pCombinedImageSampler;
+		public VkDescriptorImageInfo* pInputAttachmentImage;
+		public VkDescriptorImageInfo* pSampledImage;
+		public VkDescriptorImageInfo* pStorageImage;
+		public VkDescriptorAddressInfoEXT* pUniformTexelBuffer;
+		public VkDescriptorAddressInfoEXT* pStorageTexelBuffer;
+		public VkDescriptorAddressInfoEXT* pUniformBuffer;
+		public VkDescriptorAddressInfoEXT* pStorageBuffer;
+		public uint64 accelerationStructure;
+	}
+
+	[CRepr, Union]
 	public struct VkAccelerationStructureMotionInstanceDataNV
 	{
 		public VkAccelerationStructureInstanceKHR staticInstance;

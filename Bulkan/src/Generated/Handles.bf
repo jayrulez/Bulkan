@@ -683,6 +683,40 @@ namespace Bulkan
 	}
 
 	[CRepr]
+	public struct VkOpticalFlowSessionNV : IEquatable<VkOpticalFlowSessionNV>, IHashable
+	{
+		public readonly uint64 Handle;
+		public this(uint64 existingHandle) { Handle = existingHandle; }
+		public static VkOpticalFlowSessionNV Null => VkOpticalFlowSessionNV(0);
+		public static implicit operator VkOpticalFlowSessionNV(uint64 handle) => VkOpticalFlowSessionNV(handle);
+		public static implicit operator uint64(Self self) => self.Handle;
+		public static bool operator ==(VkOpticalFlowSessionNV left, VkOpticalFlowSessionNV right) => left.Handle == right.Handle;
+		public static bool operator !=(VkOpticalFlowSessionNV left, VkOpticalFlowSessionNV right) => left.Handle != right.Handle;
+		public static bool operator ==(VkOpticalFlowSessionNV left, uint64 right) => left.Handle == right;
+		public static bool operator !=(VkOpticalFlowSessionNV left, uint64 right) => left.Handle != right;
+		public bool Equals(VkOpticalFlowSessionNV h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
+	}
+
+	[CRepr]
+	public struct VkMicromapEXT : IEquatable<VkMicromapEXT>, IHashable
+	{
+		public readonly uint64 Handle;
+		public this(uint64 existingHandle) { Handle = existingHandle; }
+		public static VkMicromapEXT Null => VkMicromapEXT(0);
+		public static implicit operator VkMicromapEXT(uint64 handle) => VkMicromapEXT(handle);
+		public static implicit operator uint64(Self self) => self.Handle;
+		public static bool operator ==(VkMicromapEXT left, VkMicromapEXT right) => left.Handle == right.Handle;
+		public static bool operator !=(VkMicromapEXT left, VkMicromapEXT right) => left.Handle != right.Handle;
+		public static bool operator ==(VkMicromapEXT left, uint64 right) => left.Handle == right;
+		public static bool operator !=(VkMicromapEXT left, uint64 right) => left.Handle != right;
+		public bool Equals(VkMicromapEXT h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
+	}
+
+	[CRepr]
 	public struct VkDisplayKHR : IEquatable<VkDisplayKHR>, IHashable
 	{
 		public readonly uint64 Handle;
@@ -814,6 +848,23 @@ namespace Bulkan
 		public static bool operator ==(VkVideoSessionParametersKHR left, uint64 right) => left.Handle == right;
 		public static bool operator !=(VkVideoSessionParametersKHR left, uint64 right) => left.Handle != right;
 		public bool Equals(VkVideoSessionParametersKHR h) => Handle == h.Handle;
+
+		public int GetHashCode() { return (.)Handle; }
+	}
+
+	[CRepr]
+	public struct VkSemaphoreSciSyncPoolNV : IEquatable<VkSemaphoreSciSyncPoolNV>, IHashable
+	{
+		public readonly uint64 Handle;
+		public this(uint64 existingHandle) { Handle = existingHandle; }
+		public static VkSemaphoreSciSyncPoolNV Null => VkSemaphoreSciSyncPoolNV(0);
+		public static implicit operator VkSemaphoreSciSyncPoolNV(uint64 handle) => VkSemaphoreSciSyncPoolNV(handle);
+		public static implicit operator uint64(Self self) => self.Handle;
+		public static bool operator ==(VkSemaphoreSciSyncPoolNV left, VkSemaphoreSciSyncPoolNV right) => left.Handle == right.Handle;
+		public static bool operator !=(VkSemaphoreSciSyncPoolNV left, VkSemaphoreSciSyncPoolNV right) => left.Handle != right.Handle;
+		public static bool operator ==(VkSemaphoreSciSyncPoolNV left, uint64 right) => left.Handle == right;
+		public static bool operator !=(VkSemaphoreSciSyncPoolNV left, uint64 right) => left.Handle != right;
+		public bool Equals(VkSemaphoreSciSyncPoolNV h) => Handle == h.Handle;
 
 		public int GetHashCode() { return (.)Handle; }
 	}

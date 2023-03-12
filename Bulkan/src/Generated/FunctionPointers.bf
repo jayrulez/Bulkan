@@ -49,8 +49,17 @@ namespace Bulkan
 		VkDebugUtilsMessengerCallbackDataEXT* pCallbackData,
 		void* pUserData);
 
+	public typealias PFN_vkFaultCallbackFunction = function void(
+		VkBool32 unrecordedFaults,
+		uint32 faultCount,
+		VkFaultData* pFaults);
+
 	public typealias PFN_vkDeviceMemoryReportCallbackEXT = function void(
 		VkDeviceMemoryReportCallbackDataEXT* pCallbackData,
 		void* pUserData);
+
+	public typealias PFN_vkGetInstanceProcAddrLUNARG = function PFN_vkVoidFunction(
+		VkInstance instance,
+		char8* pName);
 
 }
