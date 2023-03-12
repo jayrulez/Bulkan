@@ -22,19 +22,19 @@ namespace Bulkan
 
 		private static bool mInitialized = false;
 
-		private static List<StringView> mLoadedFunctions = new .() ~ delete _;
+		private static List<String> mLoadedFunctions = new .() ~ delete _;
 
-		public static readonly Span<StringView> LoadedFunctions { get => mLoadedFunctions; }
+		public static readonly Span<String> LoadedFunctions { get => mLoadedFunctions; }
 
-		private static List<StringView> mPreInstanceFunctions = new .()
+		private static List<String> mPreInstanceFunctions = new .()
 			{
+				"vkGetInstanceProcAddr",
 				"vkCreateInstance",
 				"vkEnumerateInstanceExtensionProperties",
-				"vkEnumerateInstanceLayerProperties",
-				"vkGetInstanceProcAddr"
+				"vkEnumerateInstanceLayerProperties"
 			} ~ delete _;
 
-		private static List<StringView> mInstanceFunctions = new .()
+		private static List<String> mInstanceFunctions = new .()
 			{
 				"vkGetPhysicalDeviceSurfaceFormatsKHR",
 				"vkGetPhysicalDeviceSurfaceSupportKHR",
@@ -54,8 +54,8 @@ namespace Bulkan
 				"vkGetPhysicalDeviceFeatures",
 				"vkGetPhysicalDeviceFeatures2",
 				"vkGetPhysicalDeviceQueueFamilyProperties",
-				"vkEnumerateDeviceExtensionProperties",
-				"vkCreateDebugReportCallbackEXT"
+				"vkEnumerateDeviceExtensionProperties"
+				//"vkCreateDebugReportCallbackEXT"
 #if BF_PLATFORM_WINDOWS
 				"vkCreateWin32SurfaceKHR",
 #endif
@@ -111,7 +111,7 @@ namespace Bulkan
 			return .Ok;
 		}
 
-		public static Result<void> LoadInstanceFunctions(VkInstance instance, List<String> additionalFunctions = null)
+		public static Result<void> LoadInstanceFunctions(VkInstance instance, List<String> additionalFunctions = null, delegate void(String) onError = null)
 		{
 			if (additionalFunctions != null)
 			{
@@ -126,7 +126,12 @@ namespace Bulkan
 
 			SetInstance(instance);
 
-			LoadFunctions(mInstanceFunctions);
+			if (LoadFunctions(mInstanceFunctions) case .Err(let func))
+			{
+				if(onError != null)
+					onError(func);
+				return .Err;
+			}
 
 			mLoadedFunctions.AddRange(mInstanceFunctions);
 
