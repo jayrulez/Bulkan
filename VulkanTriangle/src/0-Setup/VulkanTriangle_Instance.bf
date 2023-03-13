@@ -17,7 +17,8 @@ namespace VulkanTriangle
 #if BF_PLATFORM_LINUX 
 			"VK_KHR_xlib_surface",
 #endif
-			"VK_EXT_debug_utils"
+			"VK_EXT_debug_utils",
+			VulkanNative.VK_EXT_DEBUG_REPORT_EXTENSION_NAME 
 			);
 
 		private void CreateInstance()

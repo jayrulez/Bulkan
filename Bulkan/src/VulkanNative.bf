@@ -54,8 +54,9 @@ namespace Bulkan
 				"vkGetPhysicalDeviceFeatures",
 				"vkGetPhysicalDeviceFeatures2",
 				"vkGetPhysicalDeviceQueueFamilyProperties",
-				"vkEnumerateDeviceExtensionProperties"
-				//"vkCreateDebugReportCallbackEXT"
+				"vkEnumerateDeviceExtensionProperties",
+				//"vkCreateDebugReportCallbackEXT",
+				//"vkDestroyDebugReportCallbackEXT",
 #if BF_PLATFORM_WINDOWS
 				"vkCreateWin32SurfaceKHR",
 #endif
