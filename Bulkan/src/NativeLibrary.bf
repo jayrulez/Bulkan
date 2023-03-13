@@ -78,7 +78,7 @@ namespace Bulkan
 			} else
 			{
 				field = default;
-				if (LoanFunctionErrorCallBack != null && !invokeErrorCallback)
+				if (LoanFunctionErrorCallBack != null && invokeErrorCallback)
 				{
 					LoanFunctionErrorCallBack.Invoke(name);
 				}
