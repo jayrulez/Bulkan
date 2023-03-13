@@ -1,13 +1,12 @@
 using System;
-namespace VulkanTriangle
+namespace VulkanTriangle;
+
+class Program
 {
-	class Program
+	public static void Main()
 	{
-		public static void Main(){
+		var app = scope VulkanTriangle();
 
-			var app = scope VulkanTriangle();
-
-			app.Run();
-		}
+		app.Run();
 	}
 }
