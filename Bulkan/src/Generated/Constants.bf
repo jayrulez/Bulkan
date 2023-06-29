@@ -92,9 +92,9 @@ public extension VulkanNative
 	public const char8* VK_AMD_GPU_SHADER_HALF_FLOAT_EXTENSION_NAME = "VK_AMD_gpu_shader_half_float";
 	public const uint32 VK_AMD_SHADER_BALLOT_SPEC_VERSION = 1;
 	public const char8* VK_AMD_SHADER_BALLOT_EXTENSION_NAME = "VK_AMD_shader_ballot";
-	public const uint32 VK_EXT_VIDEO_ENCODE_H264_SPEC_VERSION = 9;
+	public const uint32 VK_EXT_VIDEO_ENCODE_H264_SPEC_VERSION = 10;
 	public const char8* VK_EXT_VIDEO_ENCODE_H264_EXTENSION_NAME = "VK_EXT_video_encode_h264";
-	public const uint32 VK_EXT_VIDEO_ENCODE_H265_SPEC_VERSION = 9;
+	public const uint32 VK_EXT_VIDEO_ENCODE_H265_SPEC_VERSION = 10;
 	public const char8* VK_EXT_VIDEO_ENCODE_H265_EXTENSION_NAME = "VK_EXT_video_encode_h265";
 	public const uint32 VK_KHR_VIDEO_DECODE_H264_SPEC_VERSION = 8;
 	public const char8* VK_KHR_VIDEO_DECODE_H264_EXTENSION_NAME = "VK_KHR_video_decode_h264";
@@ -470,6 +470,8 @@ public extension VulkanNative
 	public const char8* VK_KHR_DEFERRED_HOST_OPERATIONS_EXTENSION_NAME = "VK_KHR_deferred_host_operations";
 	public const uint32 VK_KHR_PIPELINE_EXECUTABLE_PROPERTIES_SPEC_VERSION = 1;
 	public const char8* VK_KHR_PIPELINE_EXECUTABLE_PROPERTIES_EXTENSION_NAME = "VK_KHR_pipeline_executable_properties";
+	public const uint32 VK_KHR_MAP_MEMORY_2_SPEC_VERSION = 1;
+	public const char8* VK_KHR_MAP_MEMORY_2_EXTENSION_NAME = "VK_KHR_map_memory2";
 	public const uint32 VK_EXT_SHADER_ATOMIC_FLOAT_2_SPEC_VERSION = 1;
 	public const char8* VK_EXT_SHADER_ATOMIC_FLOAT_2_EXTENSION_NAME = "VK_EXT_shader_atomic_float2";
 	public const uint32 VK_EXT_SURFACE_MAINTENANCE_1_SPEC_VERSION = 1;
@@ -510,7 +512,7 @@ public extension VulkanNative
 	public const char8* VK_EXT_PRIVATE_DATA_EXTENSION_NAME = "VK_EXT_private_data";
 	public const uint32 VK_EXT_PIPELINE_CREATION_CACHE_CONTROL_SPEC_VERSION = 3;
 	public const char8* VK_EXT_PIPELINE_CREATION_CACHE_CONTROL_EXTENSION_NAME = "VK_EXT_pipeline_creation_cache_control";
-	public const uint32 VK_KHR_VIDEO_ENCODE_QUEUE_SPEC_VERSION = 7;
+	public const uint32 VK_KHR_VIDEO_ENCODE_QUEUE_SPEC_VERSION = 8;
 	public const char8* VK_KHR_VIDEO_ENCODE_QUEUE_EXTENSION_NAME = "VK_KHR_video_encode_queue";
 	public const uint32 VK_NV_DEVICE_DIAGNOSTICS_CONFIG_SPEC_VERSION = 2;
 	public const char8* VK_NV_DEVICE_DIAGNOSTICS_CONFIG_EXTENSION_NAME = "VK_NV_device_diagnostics_config";
@@ -560,7 +562,7 @@ public extension VulkanNative
 	public const char8* VK_EXT_ATTACHMENT_FEEDBACK_LOOP_LAYOUT_EXTENSION_NAME = "VK_EXT_attachment_feedback_loop_layout";
 	public const uint32 VK_EXT_4444_FORMATS_SPEC_VERSION = 1;
 	public const char8* VK_EXT_4444_FORMATS_EXTENSION_NAME = "VK_EXT_4444_formats";
-	public const uint32 VK_EXT_DEVICE_FAULT_SPEC_VERSION = 1;
+	public const uint32 VK_EXT_DEVICE_FAULT_SPEC_VERSION = 2;
 	public const char8* VK_EXT_DEVICE_FAULT_EXTENSION_NAME = "VK_EXT_device_fault";
 	public const uint32 VK_ARM_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_SPEC_VERSION = 1;
 	public const char8* VK_ARM_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_EXTENSION_NAME = "VK_ARM_rasterization_order_attachment_access";
@@ -624,11 +626,15 @@ public extension VulkanNative
 	public const char8* VK_EXT_IMAGE_2D_VIEW_OF_3D_EXTENSION_NAME = "VK_EXT_image_2d_view_of_3d";
 	public const uint32 VK_KHR_PORTABILITY_ENUMERATION_SPEC_VERSION = 1;
 	public const char8* VK_KHR_PORTABILITY_ENUMERATION_EXTENSION_NAME = "VK_KHR_portability_enumeration";
+	public const uint32 VK_EXT_SHADER_TILE_IMAGE_SPEC_VERSION = 1;
+	public const char8* VK_EXT_SHADER_TILE_IMAGE_EXTENSION_NAME = "VK_EXT_shader_tile_image";
 	public const uint32 VK_EXT_OPACITY_MICROMAP_SPEC_VERSION = 2;
 	public const char8* VK_EXT_OPACITY_MICROMAP_EXTENSION_NAME = "VK_EXT_opacity_micromap";
+	public const uint32 VK_NV_DISPLACEMENT_MICROMAP_SPEC_VERSION = 1;
+	public const char8* VK_NV_DISPLACEMENT_MICROMAP_EXTENSION_NAME = "VK_NV_displacement_micromap";
 	public const uint32 VK_EXT_LOAD_STORE_OP_NONE_SPEC_VERSION = 1;
 	public const char8* VK_EXT_LOAD_STORE_OP_NONE_EXTENSION_NAME = "VK_EXT_load_store_op_none";
-	public const uint32 VK_HUAWEI_CLUSTER_CULLING_SHADER_SPEC_VERSION = 1;
+	public const uint32 VK_HUAWEI_CLUSTER_CULLING_SHADER_SPEC_VERSION = 2;
 	public const char8* VK_HUAWEI_CLUSTER_CULLING_SHADER_EXTENSION_NAME = "VK_HUAWEI_cluster_culling_shader";
 	public const uint32 VK_EXT_BORDER_COLOR_SWIZZLE_SPEC_VERSION = 1;
 	public const char8* VK_EXT_BORDER_COLOR_SWIZZLE_EXTENSION_NAME = "VK_EXT_border_color_swizzle";
@@ -678,6 +684,10 @@ public extension VulkanNative
 	public const char8* VK_EXT_LEGACY_DITHERING_EXTENSION_NAME = "VK_EXT_legacy_dithering";
 	public const uint32 VK_EXT_PIPELINE_PROTECTED_ACCESS_SPEC_VERSION = 1;
 	public const char8* VK_EXT_PIPELINE_PROTECTED_ACCESS_EXTENSION_NAME = "VK_EXT_pipeline_protected_access";
+	public const uint32 VK_KHR_RAY_TRACING_POSITION_FETCH_SPEC_VERSION = 1;
+	public const char8* VK_KHR_RAY_TRACING_POSITION_FETCH_EXTENSION_NAME = "VK_KHR_ray_tracing_position_fetch";
+	public const uint32 VK_EXT_SHADER_OBJECT_SPEC_VERSION = 1;
+	public const char8* VK_EXT_SHADER_OBJECT_EXTENSION_NAME = "VK_EXT_shader_object";
 	public const uint32 VK_QCOM_TILE_PROPERTIES_SPEC_VERSION = 1;
 	public const char8* VK_QCOM_TILE_PROPERTIES_EXTENSION_NAME = "VK_QCOM_tile_properties";
 	public const uint32 VK_SEC_AMIGO_PROFILING_SPEC_VERSION = 1;
@@ -694,7 +704,11 @@ public extension VulkanNative
 	public const char8* VK_ARM_SHADER_CORE_BUILTINS_EXTENSION_NAME = "VK_ARM_shader_core_builtins";
 	public const uint32 VK_EXT_PIPELINE_LIBRARY_GROUP_HANDLES_SPEC_VERSION = 1;
 	public const char8* VK_EXT_PIPELINE_LIBRARY_GROUP_HANDLES_EXTENSION_NAME = "VK_EXT_pipeline_library_group_handles";
+	public const uint32 VK_EXT_DYNAMIC_RENDERING_UNUSED_ATTACHMENTS_SPEC_VERSION = 1;
+	public const char8* VK_EXT_DYNAMIC_RENDERING_UNUSED_ATTACHMENTS_EXTENSION_NAME = "VK_EXT_dynamic_rendering_unused_attachments";
 	public const uint32 VK_QCOM_MULTIVIEW_PER_VIEW_RENDER_AREAS_SPEC_VERSION = 1;
 	public const char8* VK_QCOM_MULTIVIEW_PER_VIEW_RENDER_AREAS_EXTENSION_NAME = "VK_QCOM_multiview_per_view_render_areas";
+	public const uint32 VK_EXT_ATTACHMENT_FEEDBACK_LOOP_DYNAMIC_STATE_SPEC_VERSION = 1;
+	public const char8* VK_EXT_ATTACHMENT_FEEDBACK_LOOP_DYNAMIC_STATE_EXTENSION_NAME = "VK_EXT_attachment_feedback_loop_dynamic_state";
 }
 

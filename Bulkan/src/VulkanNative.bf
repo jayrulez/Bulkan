@@ -54,7 +54,7 @@ public static class VulkanNative
 			"vkGetPhysicalDeviceFeatures",
 			"vkGetPhysicalDeviceFeatures2",
 			"vkGetPhysicalDeviceQueueFamilyProperties",
-			"vkEnumerateDeviceExtensionProperties"
+			"vkEnumerateDeviceExtensionProperties",
 			//"vkCreateDebugReportCallbackEXT",
 			//"vkDestroyDebugReportCallbackEXT",
 #if BF_PLATFORM_WINDOWS

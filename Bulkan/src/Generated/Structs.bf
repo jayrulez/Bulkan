@@ -9385,12 +9385,14 @@ public struct VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI
 	public uint32[3] maxWorkGroupCount;
 	public uint32[3] maxWorkGroupSize;
 	public uint32 maxOutputClusterCount;
+	public uint64 indirectBufferOffsetAlignment;
 
 	public ref Self setSType(VkStructureType @sType) mut { sType = @sType;  return ref this; }
 	public ref Self setPNext(void* @pNext) mut { pNext = @pNext;  return ref this; }
 	public ref Self setMaxWorkGroupCount(uint32[3] @maxWorkGroupCount) mut { maxWorkGroupCount = @maxWorkGroupCount;  return ref this; }
 	public ref Self setMaxWorkGroupSize(uint32[3] @maxWorkGroupSize) mut { maxWorkGroupSize = @maxWorkGroupSize;  return ref this; }
 	public ref Self setMaxOutputClusterCount(uint32 @maxOutputClusterCount) mut { maxOutputClusterCount = @maxOutputClusterCount;  return ref this; }
+	public ref Self setIndirectBufferOffsetAlignment(uint64 @indirectBufferOffsetAlignment) mut { indirectBufferOffsetAlignment = @indirectBufferOffsetAlignment;  return ref this; }
 }
 
 [CRepr]
@@ -11194,6 +11196,18 @@ public struct VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT
 }
 
 [CRepr]
+public struct VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT
+{
+	public VkStructureType sType = .VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ATTACHMENT_FEEDBACK_LOOP_DYNAMIC_STATE_FEATURES_EXT;
+	public void* pNext = null;
+	public VkBool32 attachmentFeedbackLoopDynamicState;
+
+	public ref Self setSType(VkStructureType @sType) mut { sType = @sType;  return ref this; }
+	public ref Self setPNext(void* @pNext) mut { pNext = @pNext;  return ref this; }
+	public ref Self setAttachmentFeedbackLoopDynamicState(VkBool32 @attachmentFeedbackLoopDynamicState) mut { attachmentFeedbackLoopDynamicState = @attachmentFeedbackLoopDynamicState;  return ref this; }
+}
+
+[CRepr]
 public struct VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT
 {
 	public VkStructureType sType = .VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_EXT;
@@ -12342,9 +12356,9 @@ public struct VkVideoEncodeInfoKHR
 	public void* pNext = null;
 	public uint32 flags;
 	public uint32 qualityLevel;
-	public VkBuffer dstBitstreamBuffer;
-	public uint64 dstBitstreamBufferOffset;
-	public uint64 dstBitstreamBufferMaxRange;
+	public VkBuffer dstBuffer;
+	public uint64 dstBufferOffset;
+	public uint64 dstBufferRange;
 	public VkVideoPictureResourceInfoKHR srcPictureResource;
 	public VkVideoReferenceSlotInfoKHR* pSetupReferenceSlot;
 	public uint32 referenceSlotCount;
@@ -12355,14 +12369,26 @@ public struct VkVideoEncodeInfoKHR
 	public ref Self setPNext(void* @pNext) mut { pNext = @pNext;  return ref this; }
 	public ref Self setFlags(uint32 @flags) mut { flags = @flags;  return ref this; }
 	public ref Self setQualityLevel(uint32 @qualityLevel) mut { qualityLevel = @qualityLevel;  return ref this; }
-	public ref Self setDstBitstreamBuffer(VkBuffer @dstBitstreamBuffer) mut { dstBitstreamBuffer = @dstBitstreamBuffer;  return ref this; }
-	public ref Self setDstBitstreamBufferOffset(uint64 @dstBitstreamBufferOffset) mut { dstBitstreamBufferOffset = @dstBitstreamBufferOffset;  return ref this; }
-	public ref Self setDstBitstreamBufferMaxRange(uint64 @dstBitstreamBufferMaxRange) mut { dstBitstreamBufferMaxRange = @dstBitstreamBufferMaxRange;  return ref this; }
+	public ref Self setDstBuffer(VkBuffer @dstBuffer) mut { dstBuffer = @dstBuffer;  return ref this; }
+	public ref Self setDstBufferOffset(uint64 @dstBufferOffset) mut { dstBufferOffset = @dstBufferOffset;  return ref this; }
+	public ref Self setDstBufferRange(uint64 @dstBufferRange) mut { dstBufferRange = @dstBufferRange;  return ref this; }
 	public ref Self setSrcPictureResource(VkVideoPictureResourceInfoKHR @srcPictureResource) mut { srcPictureResource = @srcPictureResource;  return ref this; }
 	public ref Self setPSetupReferenceSlot(VkVideoReferenceSlotInfoKHR* @pSetupReferenceSlot) mut { pSetupReferenceSlot = @pSetupReferenceSlot;  return ref this; }
 	public ref Self setReferenceSlotCount(uint32 @referenceSlotCount) mut { referenceSlotCount = @referenceSlotCount;  return ref this; }
 	public ref Self setPReferenceSlots(VkVideoReferenceSlotInfoKHR* @pReferenceSlots) mut { pReferenceSlots = @pReferenceSlots;  return ref this; }
 	public ref Self setPrecedingExternallyEncodedBytes(uint32 @precedingExternallyEncodedBytes) mut { precedingExternallyEncodedBytes = @precedingExternallyEncodedBytes;  return ref this; }
+}
+
+[CRepr]
+public struct VkQueryPoolVideoEncodeFeedbackCreateInfoKHR
+{
+	public VkStructureType sType = .VK_STRUCTURE_TYPE_QUERY_POOL_VIDEO_ENCODE_FEEDBACK_CREATE_INFO_KHR;
+	public void* pNext = null;
+	public VkVideoEncodeFeedbackFlagsKHR encodeFeedbackFlags;
+
+	public ref Self setSType(VkStructureType @sType) mut { sType = @sType;  return ref this; }
+	public ref Self setPNext(void* @pNext) mut { pNext = @pNext;  return ref this; }
+	public ref Self setEncodeFeedbackFlags(VkVideoEncodeFeedbackFlagsKHR @encodeFeedbackFlags) mut { encodeFeedbackFlags = @encodeFeedbackFlags;  return ref this; }
 }
 
 [CRepr]
@@ -12372,15 +12398,15 @@ public struct VkVideoEncodeRateControlInfoKHR
 	public void* pNext = null;
 	public uint32 flags;
 	public VkVideoEncodeRateControlModeFlagsKHR rateControlMode;
-	public uint8 layerCount;
-	public VkVideoEncodeRateControlLayerInfoKHR* pLayerConfigs;
+	public uint32 layerCount;
+	public VkVideoEncodeRateControlLayerInfoKHR* pLayers;
 
 	public ref Self setSType(VkStructureType @sType) mut { sType = @sType;  return ref this; }
 	public ref Self setPNext(void* @pNext) mut { pNext = @pNext;  return ref this; }
 	public ref Self setFlags(uint32 @flags) mut { flags = @flags;  return ref this; }
 	public ref Self setRateControlMode(VkVideoEncodeRateControlModeFlagsKHR @rateControlMode) mut { rateControlMode = @rateControlMode;  return ref this; }
-	public ref Self setLayerCount(uint8 @layerCount) mut { layerCount = @layerCount;  return ref this; }
-	public ref Self setPLayerConfigs(VkVideoEncodeRateControlLayerInfoKHR* @pLayerConfigs) mut { pLayerConfigs = @pLayerConfigs;  return ref this; }
+	public ref Self setLayerCount(uint32 @layerCount) mut { layerCount = @layerCount;  return ref this; }
+	public ref Self setPLayers(VkVideoEncodeRateControlLayerInfoKHR* @pLayers) mut { pLayers = @pLayers;  return ref this; }
 }
 
 [CRepr]
@@ -12388,8 +12414,8 @@ public struct VkVideoEncodeRateControlLayerInfoKHR
 {
 	public VkStructureType sType = .VK_STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_LAYER_INFO_KHR;
 	public void* pNext = null;
-	public uint32 averageBitrate;
-	public uint32 maxBitrate;
+	public uint64 averageBitrate;
+	public uint64 maxBitrate;
 	public uint32 frameRateNumerator;
 	public uint32 frameRateDenominator;
 	public uint32 virtualBufferSizeInMs;
@@ -12397,8 +12423,8 @@ public struct VkVideoEncodeRateControlLayerInfoKHR
 
 	public ref Self setSType(VkStructureType @sType) mut { sType = @sType;  return ref this; }
 	public ref Self setPNext(void* @pNext) mut { pNext = @pNext;  return ref this; }
-	public ref Self setAverageBitrate(uint32 @averageBitrate) mut { averageBitrate = @averageBitrate;  return ref this; }
-	public ref Self setMaxBitrate(uint32 @maxBitrate) mut { maxBitrate = @maxBitrate;  return ref this; }
+	public ref Self setAverageBitrate(uint64 @averageBitrate) mut { averageBitrate = @averageBitrate;  return ref this; }
+	public ref Self setMaxBitrate(uint64 @maxBitrate) mut { maxBitrate = @maxBitrate;  return ref this; }
 	public ref Self setFrameRateNumerator(uint32 @frameRateNumerator) mut { frameRateNumerator = @frameRateNumerator;  return ref this; }
 	public ref Self setFrameRateDenominator(uint32 @frameRateDenominator) mut { frameRateDenominator = @frameRateDenominator;  return ref this; }
 	public ref Self setVirtualBufferSizeInMs(uint32 @virtualBufferSizeInMs) mut { virtualBufferSizeInMs = @virtualBufferSizeInMs;  return ref this; }
@@ -12412,17 +12438,19 @@ public struct VkVideoEncodeCapabilitiesKHR
 	public void* pNext = null;
 	public VkVideoEncodeCapabilityFlagsKHR flags;
 	public VkVideoEncodeRateControlModeFlagsKHR rateControlModes;
-	public uint8 rateControlLayerCount;
-	public uint8 qualityLevelCount;
+	public uint32 maxRateControlLayers;
+	public uint32 maxQualityLevels;
 	public VkExtent2D inputImageDataFillAlignment;
+	public VkVideoEncodeFeedbackFlagsKHR supportedEncodeFeedbackFlags;
 
 	public ref Self setSType(VkStructureType @sType) mut { sType = @sType;  return ref this; }
 	public ref Self setPNext(void* @pNext) mut { pNext = @pNext;  return ref this; }
 	public ref Self setFlags(VkVideoEncodeCapabilityFlagsKHR @flags) mut { flags = @flags;  return ref this; }
 	public ref Self setRateControlModes(VkVideoEncodeRateControlModeFlagsKHR @rateControlModes) mut { rateControlModes = @rateControlModes;  return ref this; }
-	public ref Self setRateControlLayerCount(uint8 @rateControlLayerCount) mut { rateControlLayerCount = @rateControlLayerCount;  return ref this; }
-	public ref Self setQualityLevelCount(uint8 @qualityLevelCount) mut { qualityLevelCount = @qualityLevelCount;  return ref this; }
+	public ref Self setMaxRateControlLayers(uint32 @maxRateControlLayers) mut { maxRateControlLayers = @maxRateControlLayers;  return ref this; }
+	public ref Self setMaxQualityLevels(uint32 @maxQualityLevels) mut { maxQualityLevels = @maxQualityLevels;  return ref this; }
 	public ref Self setInputImageDataFillAlignment(VkExtent2D @inputImageDataFillAlignment) mut { inputImageDataFillAlignment = @inputImageDataFillAlignment;  return ref this; }
+	public ref Self setSupportedEncodeFeedbackFlags(VkVideoEncodeFeedbackFlagsKHR @supportedEncodeFeedbackFlags) mut { supportedEncodeFeedbackFlags = @supportedEncodeFeedbackFlags;  return ref this; }
 }
 
 [CRepr]
@@ -12431,11 +12459,9 @@ public struct VkVideoEncodeH264CapabilitiesEXT
 	public VkStructureType sType = .VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_CAPABILITIES_EXT;
 	public void* pNext = null;
 	public VkVideoEncodeH264CapabilityFlagsEXT flags;
-	public VkVideoEncodeH264InputModeFlagsEXT inputModeFlags;
-	public VkVideoEncodeH264OutputModeFlagsEXT outputModeFlags;
-	public uint8 maxPPictureL0ReferenceCount;
-	public uint8 maxBPictureL0ReferenceCount;
-	public uint8 maxL1ReferenceCount;
+	public uint32 maxPPictureL0ReferenceCount;
+	public uint32 maxBPictureL0ReferenceCount;
+	public uint32 maxL1ReferenceCount;
 	public VkBool32 motionVectorsOverPicBoundariesFlag;
 	public uint32 maxBytesPerPicDenom;
 	public uint32 maxBitsPerMbDenom;
@@ -12445,11 +12471,9 @@ public struct VkVideoEncodeH264CapabilitiesEXT
 	public ref Self setSType(VkStructureType @sType) mut { sType = @sType;  return ref this; }
 	public ref Self setPNext(void* @pNext) mut { pNext = @pNext;  return ref this; }
 	public ref Self setFlags(VkVideoEncodeH264CapabilityFlagsEXT @flags) mut { flags = @flags;  return ref this; }
-	public ref Self setInputModeFlags(VkVideoEncodeH264InputModeFlagsEXT @inputModeFlags) mut { inputModeFlags = @inputModeFlags;  return ref this; }
-	public ref Self setOutputModeFlags(VkVideoEncodeH264OutputModeFlagsEXT @outputModeFlags) mut { outputModeFlags = @outputModeFlags;  return ref this; }
-	public ref Self setMaxPPictureL0ReferenceCount(uint8 @maxPPictureL0ReferenceCount) mut { maxPPictureL0ReferenceCount = @maxPPictureL0ReferenceCount;  return ref this; }
-	public ref Self setMaxBPictureL0ReferenceCount(uint8 @maxBPictureL0ReferenceCount) mut { maxBPictureL0ReferenceCount = @maxBPictureL0ReferenceCount;  return ref this; }
-	public ref Self setMaxL1ReferenceCount(uint8 @maxL1ReferenceCount) mut { maxL1ReferenceCount = @maxL1ReferenceCount;  return ref this; }
+	public ref Self setMaxPPictureL0ReferenceCount(uint32 @maxPPictureL0ReferenceCount) mut { maxPPictureL0ReferenceCount = @maxPPictureL0ReferenceCount;  return ref this; }
+	public ref Self setMaxBPictureL0ReferenceCount(uint32 @maxBPictureL0ReferenceCount) mut { maxBPictureL0ReferenceCount = @maxBPictureL0ReferenceCount;  return ref this; }
+	public ref Self setMaxL1ReferenceCount(uint32 @maxL1ReferenceCount) mut { maxL1ReferenceCount = @maxL1ReferenceCount;  return ref this; }
 	public ref Self setMotionVectorsOverPicBoundariesFlag(VkBool32 @motionVectorsOverPicBoundariesFlag) mut { motionVectorsOverPicBoundariesFlag = @motionVectorsOverPicBoundariesFlag;  return ref this; }
 	public ref Self setMaxBytesPerPicDenom(uint32 @maxBytesPerPicDenom) mut { maxBytesPerPicDenom = @maxBytesPerPicDenom;  return ref this; }
 	public ref Self setMaxBitsPerMbDenom(uint32 @maxBitsPerMbDenom) mut { maxBitsPerMbDenom = @maxBitsPerMbDenom;  return ref this; }
@@ -12496,12 +12520,10 @@ public struct VkVideoEncodeH264DpbSlotInfoEXT
 {
 	public VkStructureType sType = .VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_DPB_SLOT_INFO_EXT;
 	public void* pNext = null;
-	public int8 slotIndex;
 	public void* pStdReferenceInfo;
 
 	public ref Self setSType(VkStructureType @sType) mut { sType = @sType;  return ref this; }
 	public ref Self setPNext(void* @pNext) mut { pNext = @pNext;  return ref this; }
-	public ref Self setSlotIndex(int8 @slotIndex) mut { slotIndex = @slotIndex;  return ref this; }
 	public ref Self setPStdReferenceInfo(void* @pStdReferenceInfo) mut { pStdReferenceInfo = @pStdReferenceInfo;  return ref this; }
 }
 
@@ -12510,55 +12532,17 @@ public struct VkVideoEncodeH264VclFrameInfoEXT
 {
 	public VkStructureType sType = .VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_VCL_FRAME_INFO_EXT;
 	public void* pNext = null;
-	public VkVideoEncodeH264ReferenceListsInfoEXT* pReferenceFinalLists;
+	public void* pStdReferenceFinalLists;
 	public uint32 naluSliceEntryCount;
 	public VkVideoEncodeH264NaluSliceInfoEXT* pNaluSliceEntries;
-	public void* pCurrentPictureInfo;
+	public void* pStdPictureInfo;
 
 	public ref Self setSType(VkStructureType @sType) mut { sType = @sType;  return ref this; }
 	public ref Self setPNext(void* @pNext) mut { pNext = @pNext;  return ref this; }
-	public ref Self setPReferenceFinalLists(VkVideoEncodeH264ReferenceListsInfoEXT* @pReferenceFinalLists) mut { pReferenceFinalLists = @pReferenceFinalLists;  return ref this; }
+	public ref Self setPStdReferenceFinalLists(void* @pStdReferenceFinalLists) mut { pStdReferenceFinalLists = @pStdReferenceFinalLists;  return ref this; }
 	public ref Self setNaluSliceEntryCount(uint32 @naluSliceEntryCount) mut { naluSliceEntryCount = @naluSliceEntryCount;  return ref this; }
 	public ref Self setPNaluSliceEntries(VkVideoEncodeH264NaluSliceInfoEXT* @pNaluSliceEntries) mut { pNaluSliceEntries = @pNaluSliceEntries;  return ref this; }
-	public ref Self setPCurrentPictureInfo(void* @pCurrentPictureInfo) mut { pCurrentPictureInfo = @pCurrentPictureInfo;  return ref this; }
-}
-
-[CRepr]
-public struct VkVideoEncodeH264ReferenceListsInfoEXT
-{
-	public VkStructureType sType = .VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_REFERENCE_LISTS_INFO_EXT;
-	public void* pNext = null;
-	public uint8 referenceList0EntryCount;
-	public VkVideoEncodeH264DpbSlotInfoEXT* pReferenceList0Entries;
-	public uint8 referenceList1EntryCount;
-	public VkVideoEncodeH264DpbSlotInfoEXT* pReferenceList1Entries;
-	public void* pMemMgmtCtrlOperations;
-
-	public ref Self setSType(VkStructureType @sType) mut { sType = @sType;  return ref this; }
-	public ref Self setPNext(void* @pNext) mut { pNext = @pNext;  return ref this; }
-	public ref Self setReferenceList0EntryCount(uint8 @referenceList0EntryCount) mut { referenceList0EntryCount = @referenceList0EntryCount;  return ref this; }
-	public ref Self setPReferenceList0Entries(VkVideoEncodeH264DpbSlotInfoEXT* @pReferenceList0Entries) mut { pReferenceList0Entries = @pReferenceList0Entries;  return ref this; }
-	public ref Self setReferenceList1EntryCount(uint8 @referenceList1EntryCount) mut { referenceList1EntryCount = @referenceList1EntryCount;  return ref this; }
-	public ref Self setPReferenceList1Entries(VkVideoEncodeH264DpbSlotInfoEXT* @pReferenceList1Entries) mut { pReferenceList1Entries = @pReferenceList1Entries;  return ref this; }
-	public ref Self setPMemMgmtCtrlOperations(void* @pMemMgmtCtrlOperations) mut { pMemMgmtCtrlOperations = @pMemMgmtCtrlOperations;  return ref this; }
-}
-
-[CRepr]
-public struct VkVideoEncodeH264EmitPictureParametersInfoEXT
-{
-	public VkStructureType sType = .VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_EMIT_PICTURE_PARAMETERS_INFO_EXT;
-	public void* pNext = null;
-	public uint8 spsId;
-	public VkBool32 emitSpsEnable;
-	public uint32 ppsIdEntryCount;
-	public uint8* ppsIdEntries;
-
-	public ref Self setSType(VkStructureType @sType) mut { sType = @sType;  return ref this; }
-	public ref Self setPNext(void* @pNext) mut { pNext = @pNext;  return ref this; }
-	public ref Self setSpsId(uint8 @spsId) mut { spsId = @spsId;  return ref this; }
-	public ref Self setEmitSpsEnable(VkBool32 @emitSpsEnable) mut { emitSpsEnable = @emitSpsEnable;  return ref this; }
-	public ref Self setPpsIdEntryCount(uint32 @ppsIdEntryCount) mut { ppsIdEntryCount = @ppsIdEntryCount;  return ref this; }
-	public ref Self setPpsIdEntries(uint8* @ppsIdEntries) mut { ppsIdEntries = @ppsIdEntries;  return ref this; }
+	public ref Self setPStdPictureInfo(void* @pStdPictureInfo) mut { pStdPictureInfo = @pStdPictureInfo;  return ref this; }
 }
 
 [CRepr]
@@ -12579,14 +12563,14 @@ public struct VkVideoEncodeH264NaluSliceInfoEXT
 	public VkStructureType sType = .VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_NALU_SLICE_INFO_EXT;
 	public void* pNext = null;
 	public uint32 mbCount;
-	public VkVideoEncodeH264ReferenceListsInfoEXT* pReferenceFinalLists;
-	public void* pSliceHeaderStd;
+	public void* pStdReferenceFinalLists;
+	public void* pStdSliceHeader;
 
 	public ref Self setSType(VkStructureType @sType) mut { sType = @sType;  return ref this; }
 	public ref Self setPNext(void* @pNext) mut { pNext = @pNext;  return ref this; }
 	public ref Self setMbCount(uint32 @mbCount) mut { mbCount = @mbCount;  return ref this; }
-	public ref Self setPReferenceFinalLists(VkVideoEncodeH264ReferenceListsInfoEXT* @pReferenceFinalLists) mut { pReferenceFinalLists = @pReferenceFinalLists;  return ref this; }
-	public ref Self setPSliceHeaderStd(void* @pSliceHeaderStd) mut { pSliceHeaderStd = @pSliceHeaderStd;  return ref this; }
+	public ref Self setPStdReferenceFinalLists(void* @pStdReferenceFinalLists) mut { pStdReferenceFinalLists = @pStdReferenceFinalLists;  return ref this; }
+	public ref Self setPStdSliceHeader(void* @pStdSliceHeader) mut { pStdSliceHeader = @pStdSliceHeader;  return ref this; }
 }
 
 [CRepr]
@@ -12598,7 +12582,7 @@ public struct VkVideoEncodeH264RateControlInfoEXT
 	public uint32 idrPeriod;
 	public uint32 consecutiveBFrameCount;
 	public VkVideoEncodeH264RateControlStructureEXT rateControlStructure;
-	public uint8 temporalLayerCount;
+	public uint32 temporalLayerCount;
 
 	public ref Self setSType(VkStructureType @sType) mut { sType = @sType;  return ref this; }
 	public ref Self setPNext(void* @pNext) mut { pNext = @pNext;  return ref this; }
@@ -12606,7 +12590,7 @@ public struct VkVideoEncodeH264RateControlInfoEXT
 	public ref Self setIdrPeriod(uint32 @idrPeriod) mut { idrPeriod = @idrPeriod;  return ref this; }
 	public ref Self setConsecutiveBFrameCount(uint32 @consecutiveBFrameCount) mut { consecutiveBFrameCount = @consecutiveBFrameCount;  return ref this; }
 	public ref Self setRateControlStructure(VkVideoEncodeH264RateControlStructureEXT @rateControlStructure) mut { rateControlStructure = @rateControlStructure;  return ref this; }
-	public ref Self setTemporalLayerCount(uint8 @temporalLayerCount) mut { temporalLayerCount = @temporalLayerCount;  return ref this; }
+	public ref Self setTemporalLayerCount(uint32 @temporalLayerCount) mut { temporalLayerCount = @temporalLayerCount;  return ref this; }
 }
 
 [CRepr]
@@ -12638,7 +12622,7 @@ public struct VkVideoEncodeH264RateControlLayerInfoEXT
 {
 	public VkStructureType sType = .VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_LAYER_INFO_EXT;
 	public void* pNext = null;
-	public uint8 temporalLayerId;
+	public uint32 temporalLayerId;
 	public VkBool32 useInitialRcQp;
 	public VkVideoEncodeH264QpEXT initialRcQp;
 	public VkBool32 useMinQp;
@@ -12650,7 +12634,7 @@ public struct VkVideoEncodeH264RateControlLayerInfoEXT
 
 	public ref Self setSType(VkStructureType @sType) mut { sType = @sType;  return ref this; }
 	public ref Self setPNext(void* @pNext) mut { pNext = @pNext;  return ref this; }
-	public ref Self setTemporalLayerId(uint8 @temporalLayerId) mut { temporalLayerId = @temporalLayerId;  return ref this; }
+	public ref Self setTemporalLayerId(uint32 @temporalLayerId) mut { temporalLayerId = @temporalLayerId;  return ref this; }
 	public ref Self setUseInitialRcQp(VkBool32 @useInitialRcQp) mut { useInitialRcQp = @useInitialRcQp;  return ref this; }
 	public ref Self setInitialRcQp(VkVideoEncodeH264QpEXT @initialRcQp) mut { initialRcQp = @initialRcQp;  return ref this; }
 	public ref Self setUseMinQp(VkBool32 @useMinQp) mut { useMinQp = @useMinQp;  return ref this; }
@@ -12667,48 +12651,44 @@ public struct VkVideoEncodeH265CapabilitiesEXT
 	public VkStructureType sType = .VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_CAPABILITIES_EXT;
 	public void* pNext = null;
 	public VkVideoEncodeH265CapabilityFlagsEXT flags;
-	public VkVideoEncodeH265InputModeFlagsEXT inputModeFlags;
-	public VkVideoEncodeH265OutputModeFlagsEXT outputModeFlags;
 	public VkVideoEncodeH265CtbSizeFlagsEXT ctbSizes;
 	public VkVideoEncodeH265TransformBlockSizeFlagsEXT transformBlockSizes;
-	public uint8 maxPPictureL0ReferenceCount;
-	public uint8 maxBPictureL0ReferenceCount;
-	public uint8 maxL1ReferenceCount;
-	public uint8 maxSubLayersCount;
-	public uint8 minLog2MinLumaCodingBlockSizeMinus3;
-	public uint8 maxLog2MinLumaCodingBlockSizeMinus3;
-	public uint8 minLog2MinLumaTransformBlockSizeMinus2;
-	public uint8 maxLog2MinLumaTransformBlockSizeMinus2;
-	public uint8 minMaxTransformHierarchyDepthInter;
-	public uint8 maxMaxTransformHierarchyDepthInter;
-	public uint8 minMaxTransformHierarchyDepthIntra;
-	public uint8 maxMaxTransformHierarchyDepthIntra;
-	public uint8 maxDiffCuQpDeltaDepth;
-	public uint8 minMaxNumMergeCand;
-	public uint8 maxMaxNumMergeCand;
+	public uint32 maxPPictureL0ReferenceCount;
+	public uint32 maxBPictureL0ReferenceCount;
+	public uint32 maxL1ReferenceCount;
+	public uint32 maxSubLayersCount;
+	public uint32 minLog2MinLumaCodingBlockSizeMinus3;
+	public uint32 maxLog2MinLumaCodingBlockSizeMinus3;
+	public uint32 minLog2MinLumaTransformBlockSizeMinus2;
+	public uint32 maxLog2MinLumaTransformBlockSizeMinus2;
+	public uint32 minMaxTransformHierarchyDepthInter;
+	public uint32 maxMaxTransformHierarchyDepthInter;
+	public uint32 minMaxTransformHierarchyDepthIntra;
+	public uint32 maxMaxTransformHierarchyDepthIntra;
+	public uint32 maxDiffCuQpDeltaDepth;
+	public uint32 minMaxNumMergeCand;
+	public uint32 maxMaxNumMergeCand;
 
 	public ref Self setSType(VkStructureType @sType) mut { sType = @sType;  return ref this; }
 	public ref Self setPNext(void* @pNext) mut { pNext = @pNext;  return ref this; }
 	public ref Self setFlags(VkVideoEncodeH265CapabilityFlagsEXT @flags) mut { flags = @flags;  return ref this; }
-	public ref Self setInputModeFlags(VkVideoEncodeH265InputModeFlagsEXT @inputModeFlags) mut { inputModeFlags = @inputModeFlags;  return ref this; }
-	public ref Self setOutputModeFlags(VkVideoEncodeH265OutputModeFlagsEXT @outputModeFlags) mut { outputModeFlags = @outputModeFlags;  return ref this; }
 	public ref Self setCtbSizes(VkVideoEncodeH265CtbSizeFlagsEXT @ctbSizes) mut { ctbSizes = @ctbSizes;  return ref this; }
 	public ref Self setTransformBlockSizes(VkVideoEncodeH265TransformBlockSizeFlagsEXT @transformBlockSizes) mut { transformBlockSizes = @transformBlockSizes;  return ref this; }
-	public ref Self setMaxPPictureL0ReferenceCount(uint8 @maxPPictureL0ReferenceCount) mut { maxPPictureL0ReferenceCount = @maxPPictureL0ReferenceCount;  return ref this; }
-	public ref Self setMaxBPictureL0ReferenceCount(uint8 @maxBPictureL0ReferenceCount) mut { maxBPictureL0ReferenceCount = @maxBPictureL0ReferenceCount;  return ref this; }
-	public ref Self setMaxL1ReferenceCount(uint8 @maxL1ReferenceCount) mut { maxL1ReferenceCount = @maxL1ReferenceCount;  return ref this; }
-	public ref Self setMaxSubLayersCount(uint8 @maxSubLayersCount) mut { maxSubLayersCount = @maxSubLayersCount;  return ref this; }
-	public ref Self setMinLog2MinLumaCodingBlockSizeMinus3(uint8 @minLog2MinLumaCodingBlockSizeMinus3) mut { minLog2MinLumaCodingBlockSizeMinus3 = @minLog2MinLumaCodingBlockSizeMinus3;  return ref this; }
-	public ref Self setMaxLog2MinLumaCodingBlockSizeMinus3(uint8 @maxLog2MinLumaCodingBlockSizeMinus3) mut { maxLog2MinLumaCodingBlockSizeMinus3 = @maxLog2MinLumaCodingBlockSizeMinus3;  return ref this; }
-	public ref Self setMinLog2MinLumaTransformBlockSizeMinus2(uint8 @minLog2MinLumaTransformBlockSizeMinus2) mut { minLog2MinLumaTransformBlockSizeMinus2 = @minLog2MinLumaTransformBlockSizeMinus2;  return ref this; }
-	public ref Self setMaxLog2MinLumaTransformBlockSizeMinus2(uint8 @maxLog2MinLumaTransformBlockSizeMinus2) mut { maxLog2MinLumaTransformBlockSizeMinus2 = @maxLog2MinLumaTransformBlockSizeMinus2;  return ref this; }
-	public ref Self setMinMaxTransformHierarchyDepthInter(uint8 @minMaxTransformHierarchyDepthInter) mut { minMaxTransformHierarchyDepthInter = @minMaxTransformHierarchyDepthInter;  return ref this; }
-	public ref Self setMaxMaxTransformHierarchyDepthInter(uint8 @maxMaxTransformHierarchyDepthInter) mut { maxMaxTransformHierarchyDepthInter = @maxMaxTransformHierarchyDepthInter;  return ref this; }
-	public ref Self setMinMaxTransformHierarchyDepthIntra(uint8 @minMaxTransformHierarchyDepthIntra) mut { minMaxTransformHierarchyDepthIntra = @minMaxTransformHierarchyDepthIntra;  return ref this; }
-	public ref Self setMaxMaxTransformHierarchyDepthIntra(uint8 @maxMaxTransformHierarchyDepthIntra) mut { maxMaxTransformHierarchyDepthIntra = @maxMaxTransformHierarchyDepthIntra;  return ref this; }
-	public ref Self setMaxDiffCuQpDeltaDepth(uint8 @maxDiffCuQpDeltaDepth) mut { maxDiffCuQpDeltaDepth = @maxDiffCuQpDeltaDepth;  return ref this; }
-	public ref Self setMinMaxNumMergeCand(uint8 @minMaxNumMergeCand) mut { minMaxNumMergeCand = @minMaxNumMergeCand;  return ref this; }
-	public ref Self setMaxMaxNumMergeCand(uint8 @maxMaxNumMergeCand) mut { maxMaxNumMergeCand = @maxMaxNumMergeCand;  return ref this; }
+	public ref Self setMaxPPictureL0ReferenceCount(uint32 @maxPPictureL0ReferenceCount) mut { maxPPictureL0ReferenceCount = @maxPPictureL0ReferenceCount;  return ref this; }
+	public ref Self setMaxBPictureL0ReferenceCount(uint32 @maxBPictureL0ReferenceCount) mut { maxBPictureL0ReferenceCount = @maxBPictureL0ReferenceCount;  return ref this; }
+	public ref Self setMaxL1ReferenceCount(uint32 @maxL1ReferenceCount) mut { maxL1ReferenceCount = @maxL1ReferenceCount;  return ref this; }
+	public ref Self setMaxSubLayersCount(uint32 @maxSubLayersCount) mut { maxSubLayersCount = @maxSubLayersCount;  return ref this; }
+	public ref Self setMinLog2MinLumaCodingBlockSizeMinus3(uint32 @minLog2MinLumaCodingBlockSizeMinus3) mut { minLog2MinLumaCodingBlockSizeMinus3 = @minLog2MinLumaCodingBlockSizeMinus3;  return ref this; }
+	public ref Self setMaxLog2MinLumaCodingBlockSizeMinus3(uint32 @maxLog2MinLumaCodingBlockSizeMinus3) mut { maxLog2MinLumaCodingBlockSizeMinus3 = @maxLog2MinLumaCodingBlockSizeMinus3;  return ref this; }
+	public ref Self setMinLog2MinLumaTransformBlockSizeMinus2(uint32 @minLog2MinLumaTransformBlockSizeMinus2) mut { minLog2MinLumaTransformBlockSizeMinus2 = @minLog2MinLumaTransformBlockSizeMinus2;  return ref this; }
+	public ref Self setMaxLog2MinLumaTransformBlockSizeMinus2(uint32 @maxLog2MinLumaTransformBlockSizeMinus2) mut { maxLog2MinLumaTransformBlockSizeMinus2 = @maxLog2MinLumaTransformBlockSizeMinus2;  return ref this; }
+	public ref Self setMinMaxTransformHierarchyDepthInter(uint32 @minMaxTransformHierarchyDepthInter) mut { minMaxTransformHierarchyDepthInter = @minMaxTransformHierarchyDepthInter;  return ref this; }
+	public ref Self setMaxMaxTransformHierarchyDepthInter(uint32 @maxMaxTransformHierarchyDepthInter) mut { maxMaxTransformHierarchyDepthInter = @maxMaxTransformHierarchyDepthInter;  return ref this; }
+	public ref Self setMinMaxTransformHierarchyDepthIntra(uint32 @minMaxTransformHierarchyDepthIntra) mut { minMaxTransformHierarchyDepthIntra = @minMaxTransformHierarchyDepthIntra;  return ref this; }
+	public ref Self setMaxMaxTransformHierarchyDepthIntra(uint32 @maxMaxTransformHierarchyDepthIntra) mut { maxMaxTransformHierarchyDepthIntra = @maxMaxTransformHierarchyDepthIntra;  return ref this; }
+	public ref Self setMaxDiffCuQpDeltaDepth(uint32 @maxDiffCuQpDeltaDepth) mut { maxDiffCuQpDeltaDepth = @maxDiffCuQpDeltaDepth;  return ref this; }
+	public ref Self setMinMaxNumMergeCand(uint32 @minMaxNumMergeCand) mut { minMaxNumMergeCand = @minMaxNumMergeCand;  return ref this; }
+	public ref Self setMaxMaxNumMergeCand(uint32 @maxMaxNumMergeCand) mut { maxMaxNumMergeCand = @maxMaxNumMergeCand;  return ref this; }
 }
 
 [CRepr]
@@ -12756,39 +12736,17 @@ public struct VkVideoEncodeH265VclFrameInfoEXT
 {
 	public VkStructureType sType = .VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_VCL_FRAME_INFO_EXT;
 	public void* pNext = null;
-	public VkVideoEncodeH265ReferenceListsInfoEXT* pReferenceFinalLists;
+	public void* pStdReferenceFinalLists;
 	public uint32 naluSliceSegmentEntryCount;
 	public VkVideoEncodeH265NaluSliceSegmentInfoEXT* pNaluSliceSegmentEntries;
-	public void* pCurrentPictureInfo;
+	public void* pStdPictureInfo;
 
 	public ref Self setSType(VkStructureType @sType) mut { sType = @sType;  return ref this; }
 	public ref Self setPNext(void* @pNext) mut { pNext = @pNext;  return ref this; }
-	public ref Self setPReferenceFinalLists(VkVideoEncodeH265ReferenceListsInfoEXT* @pReferenceFinalLists) mut { pReferenceFinalLists = @pReferenceFinalLists;  return ref this; }
+	public ref Self setPStdReferenceFinalLists(void* @pStdReferenceFinalLists) mut { pStdReferenceFinalLists = @pStdReferenceFinalLists;  return ref this; }
 	public ref Self setNaluSliceSegmentEntryCount(uint32 @naluSliceSegmentEntryCount) mut { naluSliceSegmentEntryCount = @naluSliceSegmentEntryCount;  return ref this; }
 	public ref Self setPNaluSliceSegmentEntries(VkVideoEncodeH265NaluSliceSegmentInfoEXT* @pNaluSliceSegmentEntries) mut { pNaluSliceSegmentEntries = @pNaluSliceSegmentEntries;  return ref this; }
-	public ref Self setPCurrentPictureInfo(void* @pCurrentPictureInfo) mut { pCurrentPictureInfo = @pCurrentPictureInfo;  return ref this; }
-}
-
-[CRepr]
-public struct VkVideoEncodeH265EmitPictureParametersInfoEXT
-{
-	public VkStructureType sType = .VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_EMIT_PICTURE_PARAMETERS_INFO_EXT;
-	public void* pNext = null;
-	public uint8 vpsId;
-	public uint8 spsId;
-	public VkBool32 emitVpsEnable;
-	public VkBool32 emitSpsEnable;
-	public uint32 ppsIdEntryCount;
-	public uint8* ppsIdEntries;
-
-	public ref Self setSType(VkStructureType @sType) mut { sType = @sType;  return ref this; }
-	public ref Self setPNext(void* @pNext) mut { pNext = @pNext;  return ref this; }
-	public ref Self setVpsId(uint8 @vpsId) mut { vpsId = @vpsId;  return ref this; }
-	public ref Self setSpsId(uint8 @spsId) mut { spsId = @spsId;  return ref this; }
-	public ref Self setEmitVpsEnable(VkBool32 @emitVpsEnable) mut { emitVpsEnable = @emitVpsEnable;  return ref this; }
-	public ref Self setEmitSpsEnable(VkBool32 @emitSpsEnable) mut { emitSpsEnable = @emitSpsEnable;  return ref this; }
-	public ref Self setPpsIdEntryCount(uint32 @ppsIdEntryCount) mut { ppsIdEntryCount = @ppsIdEntryCount;  return ref this; }
-	public ref Self setPpsIdEntries(uint8* @ppsIdEntries) mut { ppsIdEntries = @ppsIdEntries;  return ref this; }
+	public ref Self setPStdPictureInfo(void* @pStdPictureInfo) mut { pStdPictureInfo = @pStdPictureInfo;  return ref this; }
 }
 
 [CRepr]
@@ -12797,14 +12755,14 @@ public struct VkVideoEncodeH265NaluSliceSegmentInfoEXT
 	public VkStructureType sType = .VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_NALU_SLICE_SEGMENT_INFO_EXT;
 	public void* pNext = null;
 	public uint32 ctbCount;
-	public VkVideoEncodeH265ReferenceListsInfoEXT* pReferenceFinalLists;
-	public void* pSliceSegmentHeaderStd;
+	public void* pStdReferenceFinalLists;
+	public void* pStdSliceSegmentHeader;
 
 	public ref Self setSType(VkStructureType @sType) mut { sType = @sType;  return ref this; }
 	public ref Self setPNext(void* @pNext) mut { pNext = @pNext;  return ref this; }
 	public ref Self setCtbCount(uint32 @ctbCount) mut { ctbCount = @ctbCount;  return ref this; }
-	public ref Self setPReferenceFinalLists(VkVideoEncodeH265ReferenceListsInfoEXT* @pReferenceFinalLists) mut { pReferenceFinalLists = @pReferenceFinalLists;  return ref this; }
-	public ref Self setPSliceSegmentHeaderStd(void* @pSliceSegmentHeaderStd) mut { pSliceSegmentHeaderStd = @pSliceSegmentHeaderStd;  return ref this; }
+	public ref Self setPStdReferenceFinalLists(void* @pStdReferenceFinalLists) mut { pStdReferenceFinalLists = @pStdReferenceFinalLists;  return ref this; }
+	public ref Self setPStdSliceSegmentHeader(void* @pStdSliceSegmentHeader) mut { pStdSliceSegmentHeader = @pStdSliceSegmentHeader;  return ref this; }
 }
 
 [CRepr]
@@ -12816,7 +12774,7 @@ public struct VkVideoEncodeH265RateControlInfoEXT
 	public uint32 idrPeriod;
 	public uint32 consecutiveBFrameCount;
 	public VkVideoEncodeH265RateControlStructureEXT rateControlStructure;
-	public uint8 subLayerCount;
+	public uint32 subLayerCount;
 
 	public ref Self setSType(VkStructureType @sType) mut { sType = @sType;  return ref this; }
 	public ref Self setPNext(void* @pNext) mut { pNext = @pNext;  return ref this; }
@@ -12824,7 +12782,7 @@ public struct VkVideoEncodeH265RateControlInfoEXT
 	public ref Self setIdrPeriod(uint32 @idrPeriod) mut { idrPeriod = @idrPeriod;  return ref this; }
 	public ref Self setConsecutiveBFrameCount(uint32 @consecutiveBFrameCount) mut { consecutiveBFrameCount = @consecutiveBFrameCount;  return ref this; }
 	public ref Self setRateControlStructure(VkVideoEncodeH265RateControlStructureEXT @rateControlStructure) mut { rateControlStructure = @rateControlStructure;  return ref this; }
-	public ref Self setSubLayerCount(uint8 @subLayerCount) mut { subLayerCount = @subLayerCount;  return ref this; }
+	public ref Self setSubLayerCount(uint32 @subLayerCount) mut { subLayerCount = @subLayerCount;  return ref this; }
 }
 
 [CRepr]
@@ -12856,7 +12814,7 @@ public struct VkVideoEncodeH265RateControlLayerInfoEXT
 {
 	public VkStructureType sType = .VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_RATE_CONTROL_LAYER_INFO_EXT;
 	public void* pNext = null;
-	public uint8 temporalId;
+	public uint32 temporalId;
 	public VkBool32 useInitialRcQp;
 	public VkVideoEncodeH265QpEXT initialRcQp;
 	public VkBool32 useMinQp;
@@ -12868,7 +12826,7 @@ public struct VkVideoEncodeH265RateControlLayerInfoEXT
 
 	public ref Self setSType(VkStructureType @sType) mut { sType = @sType;  return ref this; }
 	public ref Self setPNext(void* @pNext) mut { pNext = @pNext;  return ref this; }
-	public ref Self setTemporalId(uint8 @temporalId) mut { temporalId = @temporalId;  return ref this; }
+	public ref Self setTemporalId(uint32 @temporalId) mut { temporalId = @temporalId;  return ref this; }
 	public ref Self setUseInitialRcQp(VkBool32 @useInitialRcQp) mut { useInitialRcQp = @useInitialRcQp;  return ref this; }
 	public ref Self setInitialRcQp(VkVideoEncodeH265QpEXT @initialRcQp) mut { initialRcQp = @initialRcQp;  return ref this; }
 	public ref Self setUseMinQp(VkBool32 @useMinQp) mut { useMinQp = @useMinQp;  return ref this; }
@@ -12896,33 +12854,11 @@ public struct VkVideoEncodeH265DpbSlotInfoEXT
 {
 	public VkStructureType sType = .VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_DPB_SLOT_INFO_EXT;
 	public void* pNext = null;
-	public int8 slotIndex;
 	public void* pStdReferenceInfo;
 
 	public ref Self setSType(VkStructureType @sType) mut { sType = @sType;  return ref this; }
 	public ref Self setPNext(void* @pNext) mut { pNext = @pNext;  return ref this; }
-	public ref Self setSlotIndex(int8 @slotIndex) mut { slotIndex = @slotIndex;  return ref this; }
 	public ref Self setPStdReferenceInfo(void* @pStdReferenceInfo) mut { pStdReferenceInfo = @pStdReferenceInfo;  return ref this; }
-}
-
-[CRepr]
-public struct VkVideoEncodeH265ReferenceListsInfoEXT
-{
-	public VkStructureType sType = .VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_REFERENCE_LISTS_INFO_EXT;
-	public void* pNext = null;
-	public uint8 referenceList0EntryCount;
-	public VkVideoEncodeH265DpbSlotInfoEXT* pReferenceList0Entries;
-	public uint8 referenceList1EntryCount;
-	public VkVideoEncodeH265DpbSlotInfoEXT* pReferenceList1Entries;
-	public void* pReferenceModifications;
-
-	public ref Self setSType(VkStructureType @sType) mut { sType = @sType;  return ref this; }
-	public ref Self setPNext(void* @pNext) mut { pNext = @pNext;  return ref this; }
-	public ref Self setReferenceList0EntryCount(uint8 @referenceList0EntryCount) mut { referenceList0EntryCount = @referenceList0EntryCount;  return ref this; }
-	public ref Self setPReferenceList0Entries(VkVideoEncodeH265DpbSlotInfoEXT* @pReferenceList0Entries) mut { pReferenceList0Entries = @pReferenceList0Entries;  return ref this; }
-	public ref Self setReferenceList1EntryCount(uint8 @referenceList1EntryCount) mut { referenceList1EntryCount = @referenceList1EntryCount;  return ref this; }
-	public ref Self setPReferenceList1Entries(VkVideoEncodeH265DpbSlotInfoEXT* @pReferenceList1Entries) mut { pReferenceList1Entries = @pReferenceList1Entries;  return ref this; }
-	public ref Self setPReferenceModifications(void* @pReferenceModifications) mut { pReferenceModifications = @pReferenceModifications;  return ref this; }
 }
 
 [CRepr]
@@ -14536,6 +14472,72 @@ public struct VkAccelerationStructureTrianglesOpacityMicromapEXT
 }
 
 [CRepr]
+public struct VkPhysicalDeviceDisplacementMicromapFeaturesNV
+{
+	public VkStructureType sType = .VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISPLACEMENT_MICROMAP_FEATURES_NV;
+	public void* pNext = null;
+	public VkBool32 displacementMicromap;
+
+	public ref Self setSType(VkStructureType @sType) mut { sType = @sType;  return ref this; }
+	public ref Self setPNext(void* @pNext) mut { pNext = @pNext;  return ref this; }
+	public ref Self setDisplacementMicromap(VkBool32 @displacementMicromap) mut { displacementMicromap = @displacementMicromap;  return ref this; }
+}
+
+[CRepr]
+public struct VkPhysicalDeviceDisplacementMicromapPropertiesNV
+{
+	public VkStructureType sType = .VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISPLACEMENT_MICROMAP_PROPERTIES_NV;
+	public void* pNext = null;
+	public uint32 maxDisplacementMicromapSubdivisionLevel;
+
+	public ref Self setSType(VkStructureType @sType) mut { sType = @sType;  return ref this; }
+	public ref Self setPNext(void* @pNext) mut { pNext = @pNext;  return ref this; }
+	public ref Self setMaxDisplacementMicromapSubdivisionLevel(uint32 @maxDisplacementMicromapSubdivisionLevel) mut { maxDisplacementMicromapSubdivisionLevel = @maxDisplacementMicromapSubdivisionLevel;  return ref this; }
+}
+
+[CRepr]
+public struct VkAccelerationStructureTrianglesDisplacementMicromapNV
+{
+	public VkStructureType sType = .VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_TRIANGLES_DISPLACEMENT_MICROMAP_NV;
+	public void* pNext = null;
+	public VkFormat displacementBiasAndScaleFormat;
+	public VkFormat displacementVectorFormat;
+	public VkDeviceOrHostAddressConstKHR displacementBiasAndScaleBuffer;
+	public uint64 displacementBiasAndScaleStride;
+	public VkDeviceOrHostAddressConstKHR displacementVectorBuffer;
+	public uint64 displacementVectorStride;
+	public VkDeviceOrHostAddressConstKHR displacedMicromapPrimitiveFlags;
+	public uint64 displacedMicromapPrimitiveFlagsStride;
+	public VkIndexType indexType;
+	public VkDeviceOrHostAddressConstKHR indexBuffer;
+	public uint64 indexStride;
+	public uint32 baseTriangle;
+	public uint32 usageCountsCount;
+	public VkMicromapUsageEXT* pUsageCounts;
+	public VkMicromapUsageEXT** ppUsageCounts;
+	public VkMicromapEXT micromap;
+
+	public ref Self setSType(VkStructureType @sType) mut { sType = @sType;  return ref this; }
+	public ref Self setPNext(void* @pNext) mut { pNext = @pNext;  return ref this; }
+	public ref Self setDisplacementBiasAndScaleFormat(VkFormat @displacementBiasAndScaleFormat) mut { displacementBiasAndScaleFormat = @displacementBiasAndScaleFormat;  return ref this; }
+	public ref Self setDisplacementVectorFormat(VkFormat @displacementVectorFormat) mut { displacementVectorFormat = @displacementVectorFormat;  return ref this; }
+	public ref Self setDisplacementBiasAndScaleBuffer(VkDeviceOrHostAddressConstKHR @displacementBiasAndScaleBuffer) mut { displacementBiasAndScaleBuffer = @displacementBiasAndScaleBuffer;  return ref this; }
+	public ref Self setDisplacementBiasAndScaleStride(uint64 @displacementBiasAndScaleStride) mut { displacementBiasAndScaleStride = @displacementBiasAndScaleStride;  return ref this; }
+	public ref Self setDisplacementVectorBuffer(VkDeviceOrHostAddressConstKHR @displacementVectorBuffer) mut { displacementVectorBuffer = @displacementVectorBuffer;  return ref this; }
+	public ref Self setDisplacementVectorStride(uint64 @displacementVectorStride) mut { displacementVectorStride = @displacementVectorStride;  return ref this; }
+	public ref Self setDisplacedMicromapPrimitiveFlags(VkDeviceOrHostAddressConstKHR @displacedMicromapPrimitiveFlags) mut { displacedMicromapPrimitiveFlags = @displacedMicromapPrimitiveFlags;  return ref this; }
+	public ref Self setDisplacedMicromapPrimitiveFlagsStride(uint64 @displacedMicromapPrimitiveFlagsStride) mut { displacedMicromapPrimitiveFlagsStride = @displacedMicromapPrimitiveFlagsStride;  return ref this; }
+	public ref Self setIndexType(VkIndexType @indexType) mut { indexType = @indexType;  return ref this; }
+	public ref Self setIndexBuffer(VkDeviceOrHostAddressConstKHR @indexBuffer) mut { indexBuffer = @indexBuffer;  return ref this; }
+	public ref Self setIndexStride(uint64 @indexStride) mut { indexStride = @indexStride;  return ref this; }
+	public ref Self setBaseTriangle(uint32 @baseTriangle) mut { baseTriangle = @baseTriangle;  return ref this; }
+	public ref Self setUsageCountsCount(uint32 @usageCountsCount) mut { usageCountsCount = @usageCountsCount;  return ref this; }
+	public ref Self setPUsageCounts(VkMicromapUsageEXT* @pUsageCounts) mut { pUsageCounts = @pUsageCounts;  return ref this; }
+	public ref Self setPpUsageCounts(VkMicromapUsageEXT** @ppUsageCounts) mut { ppUsageCounts = @ppUsageCounts;  return ref this; }
+	public ref Self setMicromap(VkMicromapEXT @micromap) mut { micromap = @micromap;  return ref this; }
+}
+
+[CRepr]
 public struct VkPipelinePropertiesIdentifierEXT
 {
 	public VkStructureType sType = .VK_STRUCTURE_TYPE_PIPELINE_PROPERTIES_IDENTIFIER_EXT;
@@ -15163,6 +15165,8 @@ public struct VkDeviceFaultVendorBinaryHeaderVersionOneEXT
 	public uint32 applicationNameOffset;
 	public uint32 applicationVersion;
 	public uint32 engineNameOffset;
+	public uint32 engineVersion;
+	public uint32 apiVersion;
 
 	public ref Self setHeaderSize(uint32 @headerSize) mut { headerSize = @headerSize;  return ref this; }
 	public ref Self setHeaderVersion(VkDeviceFaultVendorBinaryHeaderVersionEXT @headerVersion) mut { headerVersion = @headerVersion;  return ref this; }
@@ -15173,6 +15177,8 @@ public struct VkDeviceFaultVendorBinaryHeaderVersionOneEXT
 	public ref Self setApplicationNameOffset(uint32 @applicationNameOffset) mut { applicationNameOffset = @applicationNameOffset;  return ref this; }
 	public ref Self setApplicationVersion(uint32 @applicationVersion) mut { applicationVersion = @applicationVersion;  return ref this; }
 	public ref Self setEngineNameOffset(uint32 @engineNameOffset) mut { engineNameOffset = @engineNameOffset;  return ref this; }
+	public ref Self setEngineVersion(uint32 @engineVersion) mut { engineVersion = @engineVersion;  return ref this; }
+	public ref Self setApiVersion(uint32 @apiVersion) mut { apiVersion = @apiVersion;  return ref this; }
 }
 
 [CRepr]
@@ -15229,6 +15235,18 @@ public struct VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM
 	public ref Self setSType(VkStructureType @sType) mut { sType = @sType;  return ref this; }
 	public ref Self setPNext(void* @pNext) mut { pNext = @pNext;  return ref this; }
 	public ref Self setShaderCoreBuiltins(VkBool32 @shaderCoreBuiltins) mut { shaderCoreBuiltins = @shaderCoreBuiltins;  return ref this; }
+}
+
+[CRepr]
+public struct VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT
+{
+	public VkStructureType sType = .VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_UNUSED_ATTACHMENTS_FEATURES_EXT;
+	public void* pNext = null;
+	public VkBool32 dynamicRenderingUnusedAttachments;
+
+	public ref Self setSType(VkStructureType @sType) mut { sType = @sType;  return ref this; }
+	public ref Self setPNext(void* @pNext) mut { pNext = @pNext;  return ref this; }
+	public ref Self setDynamicRenderingUnusedAttachments(VkBool32 @dynamicRenderingUnusedAttachments) mut { dynamicRenderingUnusedAttachments = @dynamicRenderingUnusedAttachments;  return ref this; }
 }
 
 [CRepr]
@@ -15430,6 +15448,18 @@ public struct VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM
 }
 
 [CRepr]
+public struct VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR
+{
+	public VkStructureType sType = .VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_POSITION_FETCH_FEATURES_KHR;
+	public void* pNext = null;
+	public VkBool32 rayTracingPositionFetch;
+
+	public ref Self setSType(VkStructureType @sType) mut { sType = @sType;  return ref this; }
+	public ref Self setPNext(void* @pNext) mut { pNext = @pNext;  return ref this; }
+	public ref Self setRayTracingPositionFetch(VkBool32 @rayTracingPositionFetch) mut { rayTracingPositionFetch = @rayTracingPositionFetch;  return ref this; }
+}
+
+[CRepr]
 public struct VkPhysicalDeviceShaderCorePropertiesARM
 {
 	public VkStructureType sType = .VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_ARM;
@@ -15481,6 +15511,130 @@ public struct VkQueryLowLatencySupportNV
 	public ref Self setSType(VkStructureType @sType) mut { sType = @sType;  return ref this; }
 	public ref Self setPNext(void* @pNext) mut { pNext = @pNext;  return ref this; }
 	public ref Self setPQueriedLowLatencyData(void* @pQueriedLowLatencyData) mut { pQueriedLowLatencyData = @pQueriedLowLatencyData;  return ref this; }
+}
+
+[CRepr]
+public struct VkMemoryMapInfoKHR
+{
+	public VkStructureType sType = .VK_STRUCTURE_TYPE_MEMORY_MAP_INFO_KHR;
+	public void* pNext = null;
+	public uint32 flags;
+	public VkDeviceMemory memory;
+	public uint64 offset;
+	public uint64 size;
+
+	public ref Self setSType(VkStructureType @sType) mut { sType = @sType;  return ref this; }
+	public ref Self setPNext(void* @pNext) mut { pNext = @pNext;  return ref this; }
+	public ref Self setFlags(uint32 @flags) mut { flags = @flags;  return ref this; }
+	public ref Self setMemory(VkDeviceMemory @memory) mut { memory = @memory;  return ref this; }
+	public ref Self setOffset(uint64 @offset) mut { offset = @offset;  return ref this; }
+	public ref Self setSize(uint64 @size) mut { size = @size;  return ref this; }
+}
+
+[CRepr]
+public struct VkMemoryUnmapInfoKHR
+{
+	public VkStructureType sType = .VK_STRUCTURE_TYPE_MEMORY_UNMAP_INFO_KHR;
+	public void* pNext = null;
+	public uint32 flags;
+	public VkDeviceMemory memory;
+
+	public ref Self setSType(VkStructureType @sType) mut { sType = @sType;  return ref this; }
+	public ref Self setPNext(void* @pNext) mut { pNext = @pNext;  return ref this; }
+	public ref Self setFlags(uint32 @flags) mut { flags = @flags;  return ref this; }
+	public ref Self setMemory(VkDeviceMemory @memory) mut { memory = @memory;  return ref this; }
+}
+
+[CRepr]
+public struct VkPhysicalDeviceShaderObjectFeaturesEXT
+{
+	public VkStructureType sType = .VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_OBJECT_FEATURES_EXT;
+	public void* pNext = null;
+	public VkBool32 shaderObject;
+
+	public ref Self setSType(VkStructureType @sType) mut { sType = @sType;  return ref this; }
+	public ref Self setPNext(void* @pNext) mut { pNext = @pNext;  return ref this; }
+	public ref Self setShaderObject(VkBool32 @shaderObject) mut { shaderObject = @shaderObject;  return ref this; }
+}
+
+[CRepr]
+public struct VkPhysicalDeviceShaderObjectPropertiesEXT
+{
+	public VkStructureType sType = .VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_OBJECT_PROPERTIES_EXT;
+	public void* pNext = null;
+	public uint8[(int)VulkanNative.VK_UUID_SIZE] shaderBinaryUUID;
+	public uint32 shaderBinaryVersion;
+
+	public ref Self setSType(VkStructureType @sType) mut { sType = @sType;  return ref this; }
+	public ref Self setPNext(void* @pNext) mut { pNext = @pNext;  return ref this; }
+	public ref Self setShaderBinaryUUID(uint8[(int)VulkanNative.VK_UUID_SIZE] @shaderBinaryUUID) mut { shaderBinaryUUID = @shaderBinaryUUID;  return ref this; }
+	public ref Self setShaderBinaryVersion(uint32 @shaderBinaryVersion) mut { shaderBinaryVersion = @shaderBinaryVersion;  return ref this; }
+}
+
+[CRepr]
+public struct VkShaderCreateInfoEXT
+{
+	public VkStructureType sType = .VK_STRUCTURE_TYPE_SHADER_CREATE_INFO_EXT;
+	public void* pNext = null;
+	public VkShaderCreateFlagsEXT flags;
+	public VkShaderStageFlags stage;
+	public VkShaderStageFlags nextStage;
+	public VkShaderCodeTypeEXT codeType;
+	public uint codeSize;
+	public void* pCode;
+	public char8* pName;
+	public uint32 setLayoutCount;
+	public VkDescriptorSetLayout* pSetLayouts;
+	public uint32 pushConstantRangeCount;
+	public VkPushConstantRange* pPushConstantRanges;
+	public VkSpecializationInfo* pSpecializationInfo;
+
+	public ref Self setSType(VkStructureType @sType) mut { sType = @sType;  return ref this; }
+	public ref Self setPNext(void* @pNext) mut { pNext = @pNext;  return ref this; }
+	public ref Self setFlags(VkShaderCreateFlagsEXT @flags) mut { flags = @flags;  return ref this; }
+	public ref Self setStage(VkShaderStageFlags @stage) mut { stage = @stage;  return ref this; }
+	public ref Self setNextStage(VkShaderStageFlags @nextStage) mut { nextStage = @nextStage;  return ref this; }
+	public ref Self setCodeType(VkShaderCodeTypeEXT @codeType) mut { codeType = @codeType;  return ref this; }
+	public ref Self setCodeSize(uint @codeSize) mut { codeSize = @codeSize;  return ref this; }
+	public ref Self setPCode(void* @pCode) mut { pCode = @pCode;  return ref this; }
+	public ref Self setPName(char8* @pName) mut { pName = @pName;  return ref this; }
+	public ref Self setSetLayoutCount(uint32 @setLayoutCount) mut { setLayoutCount = @setLayoutCount;  return ref this; }
+	public ref Self setPSetLayouts(VkDescriptorSetLayout* @pSetLayouts) mut { pSetLayouts = @pSetLayouts;  return ref this; }
+	public ref Self setPushConstantRangeCount(uint32 @pushConstantRangeCount) mut { pushConstantRangeCount = @pushConstantRangeCount;  return ref this; }
+	public ref Self setPPushConstantRanges(VkPushConstantRange* @pPushConstantRanges) mut { pPushConstantRanges = @pPushConstantRanges;  return ref this; }
+	public ref Self setPSpecializationInfo(VkSpecializationInfo* @pSpecializationInfo) mut { pSpecializationInfo = @pSpecializationInfo;  return ref this; }
+}
+
+[CRepr]
+public struct VkPhysicalDeviceShaderTileImageFeaturesEXT
+{
+	public VkStructureType sType = .VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_TILE_IMAGE_FEATURES_EXT;
+	public void* pNext = null;
+	public VkBool32 shaderTileImageColorReadAccess;
+	public VkBool32 shaderTileImageDepthReadAccess;
+	public VkBool32 shaderTileImageStencilReadAccess;
+
+	public ref Self setSType(VkStructureType @sType) mut { sType = @sType;  return ref this; }
+	public ref Self setPNext(void* @pNext) mut { pNext = @pNext;  return ref this; }
+	public ref Self setShaderTileImageColorReadAccess(VkBool32 @shaderTileImageColorReadAccess) mut { shaderTileImageColorReadAccess = @shaderTileImageColorReadAccess;  return ref this; }
+	public ref Self setShaderTileImageDepthReadAccess(VkBool32 @shaderTileImageDepthReadAccess) mut { shaderTileImageDepthReadAccess = @shaderTileImageDepthReadAccess;  return ref this; }
+	public ref Self setShaderTileImageStencilReadAccess(VkBool32 @shaderTileImageStencilReadAccess) mut { shaderTileImageStencilReadAccess = @shaderTileImageStencilReadAccess;  return ref this; }
+}
+
+[CRepr]
+public struct VkPhysicalDeviceShaderTileImagePropertiesEXT
+{
+	public VkStructureType sType = .VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_TILE_IMAGE_PROPERTIES_EXT;
+	public void* pNext = null;
+	public VkBool32 shaderTileImageCoherentReadAccelerated;
+	public VkBool32 shaderTileImageReadSampleFromPixelRateInvocation;
+	public VkBool32 shaderTileImageReadFromHelperInvocation;
+
+	public ref Self setSType(VkStructureType @sType) mut { sType = @sType;  return ref this; }
+	public ref Self setPNext(void* @pNext) mut { pNext = @pNext;  return ref this; }
+	public ref Self setShaderTileImageCoherentReadAccelerated(VkBool32 @shaderTileImageCoherentReadAccelerated) mut { shaderTileImageCoherentReadAccelerated = @shaderTileImageCoherentReadAccelerated;  return ref this; }
+	public ref Self setShaderTileImageReadSampleFromPixelRateInvocation(VkBool32 @shaderTileImageReadSampleFromPixelRateInvocation) mut { shaderTileImageReadSampleFromPixelRateInvocation = @shaderTileImageReadSampleFromPixelRateInvocation;  return ref this; }
+	public ref Self setShaderTileImageReadFromHelperInvocation(VkBool32 @shaderTileImageReadFromHelperInvocation) mut { shaderTileImageReadFromHelperInvocation = @shaderTileImageReadFromHelperInvocation;  return ref this; }
 }
 
 

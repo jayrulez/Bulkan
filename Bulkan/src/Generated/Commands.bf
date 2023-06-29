@@ -2549,6 +2549,18 @@ public extension VulkanNative
 	public static VkResult vkGetPipelineExecutableInternalRepresentationsKHR(VkDevice device, VkPipelineExecutableInfoKHR* pExecutableInfo, uint32* pInternalRepresentationCount, VkPipelineExecutableInternalRepresentationKHR* pInternalRepresentations)
 		=> vkGetPipelineExecutableInternalRepresentationsKHR_ptr(device, pExecutableInfo, pInternalRepresentationCount, pInternalRepresentations);
 
+	public typealias vkMapMemory2KHRFunction = function VkResult(VkDevice device, VkMemoryMapInfoKHR* pMemoryMapInfo, void** ppData);
+	private static vkMapMemory2KHRFunction vkMapMemory2KHR_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static VkResult vkMapMemory2KHR(VkDevice device, VkMemoryMapInfoKHR* pMemoryMapInfo, void** ppData)
+		=> vkMapMemory2KHR_ptr(device, pMemoryMapInfo, ppData);
+
+	public typealias vkUnmapMemory2KHRFunction = function VkResult(VkDevice device, VkMemoryUnmapInfoKHR* pMemoryUnmapInfo);
+	private static vkUnmapMemory2KHRFunction vkUnmapMemory2KHR_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static VkResult vkUnmapMemory2KHR(VkDevice device, VkMemoryUnmapInfoKHR* pMemoryUnmapInfo)
+		=> vkUnmapMemory2KHR_ptr(device, pMemoryUnmapInfo);
+
 	public typealias vkReleaseSwapchainImagesEXTFunction = function VkResult(VkDevice device, VkReleaseSwapchainImagesInfoEXT* pReleaseInfo);
 	private static vkReleaseSwapchainImagesEXTFunction vkReleaseSwapchainImagesEXT_ptr;
 	[CallingConvention(VulkanNative.CallConv)]
@@ -3305,6 +3317,30 @@ public extension VulkanNative
 	public static void vkCmdOpticalFlowExecuteNV(VkCommandBuffer commandBuffer, VkOpticalFlowSessionNV session, VkOpticalFlowExecuteInfoNV* pExecuteInfo)
 		=> vkCmdOpticalFlowExecuteNV_ptr(commandBuffer, session, pExecuteInfo);
 
+	public typealias vkCreateShadersEXTFunction = function VkResult(VkDevice device, uint32 createInfoCount, VkShaderCreateInfoEXT* pCreateInfos, VkAllocationCallbacks* pAllocator, VkShaderEXT* pShaders);
+	private static vkCreateShadersEXTFunction vkCreateShadersEXT_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static VkResult vkCreateShadersEXT(VkDevice device, uint32 createInfoCount, VkShaderCreateInfoEXT* pCreateInfos, VkAllocationCallbacks* pAllocator, VkShaderEXT* pShaders)
+		=> vkCreateShadersEXT_ptr(device, createInfoCount, pCreateInfos, pAllocator, pShaders);
+
+	public typealias vkDestroyShaderEXTFunction = function void(VkDevice device, VkShaderEXT shader, VkAllocationCallbacks* pAllocator);
+	private static vkDestroyShaderEXTFunction vkDestroyShaderEXT_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkDestroyShaderEXT(VkDevice device, VkShaderEXT shader, VkAllocationCallbacks* pAllocator)
+		=> vkDestroyShaderEXT_ptr(device, shader, pAllocator);
+
+	public typealias vkGetShaderBinaryDataEXTFunction = function VkResult(VkDevice device, VkShaderEXT shader, uint* pDataSize, void* pData);
+	private static vkGetShaderBinaryDataEXTFunction vkGetShaderBinaryDataEXT_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static VkResult vkGetShaderBinaryDataEXT(VkDevice device, VkShaderEXT shader, uint* pDataSize, void* pData)
+		=> vkGetShaderBinaryDataEXT_ptr(device, shader, pDataSize, pData);
+
+	public typealias vkCmdBindShadersEXTFunction = function void(VkCommandBuffer commandBuffer, uint32 stageCount, VkShaderStageFlags* pStages, VkShaderEXT* pShaders);
+	private static vkCmdBindShadersEXTFunction vkCmdBindShadersEXT_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkCmdBindShadersEXT(VkCommandBuffer commandBuffer, uint32 stageCount, VkShaderStageFlags* pStages, VkShaderEXT* pShaders)
+		=> vkCmdBindShadersEXT_ptr(commandBuffer, stageCount, pStages, pShaders);
+
 	public typealias vkGetFramebufferTilePropertiesQCOMFunction = function VkResult(VkDevice device, VkFramebuffer framebuffer, uint32* pPropertiesCount, VkTilePropertiesQCOM* pProperties);
 	private static vkGetFramebufferTilePropertiesQCOMFunction vkGetFramebufferTilePropertiesQCOM_ptr;
 	[CallingConvention(VulkanNative.CallConv)]
@@ -3328,6 +3364,12 @@ public extension VulkanNative
 	[CallingConvention(VulkanNative.CallConv)]
 	public static void vkDestroySemaphoreSciSyncPoolNV(VkDevice device, VkSemaphoreSciSyncPoolNV semaphorePool, VkAllocationCallbacks* pAllocator)
 		=> vkDestroySemaphoreSciSyncPoolNV_ptr(device, semaphorePool, pAllocator);
+
+	public typealias vkCmdSetAttachmentFeedbackLoopEnableEXTFunction = function void(VkCommandBuffer commandBuffer, VkImageAspectFlags aspectMask);
+	private static vkCmdSetAttachmentFeedbackLoopEnableEXTFunction vkCmdSetAttachmentFeedbackLoopEnableEXT_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkCmdSetAttachmentFeedbackLoopEnableEXT(VkCommandBuffer commandBuffer, VkImageAspectFlags aspectMask)
+		=> vkCmdSetAttachmentFeedbackLoopEnableEXT_ptr(commandBuffer, aspectMask);
 
 	public static void SetInstance(VkInstance instance)
 	{
@@ -5881,6 +5923,18 @@ public extension VulkanNative
 				return .Err;
 			break;
 
+		case "vkMapMemory2KHR":
+			mNativeLib.LoadFunction("vkMapMemory2KHR", out vkMapMemory2KHR_ptr, invokeErrorCallback);
+			if(vkMapMemory2KHR_ptr == null)
+				return .Err;
+			break;
+
+		case "vkUnmapMemory2KHR":
+			mNativeLib.LoadFunction("vkUnmapMemory2KHR", out vkUnmapMemory2KHR_ptr, invokeErrorCallback);
+			if(vkUnmapMemory2KHR_ptr == null)
+				return .Err;
+			break;
+
 		case "vkReleaseSwapchainImagesEXT":
 			mNativeLib.LoadFunction("vkReleaseSwapchainImagesEXT", out vkReleaseSwapchainImagesEXT_ptr, invokeErrorCallback);
 			if(vkReleaseSwapchainImagesEXT_ptr == null)
@@ -6637,6 +6691,30 @@ public extension VulkanNative
 				return .Err;
 			break;
 
+		case "vkCreateShadersEXT":
+			mNativeLib.LoadFunction("vkCreateShadersEXT", out vkCreateShadersEXT_ptr, invokeErrorCallback);
+			if(vkCreateShadersEXT_ptr == null)
+				return .Err;
+			break;
+
+		case "vkDestroyShaderEXT":
+			mNativeLib.LoadFunction("vkDestroyShaderEXT", out vkDestroyShaderEXT_ptr, invokeErrorCallback);
+			if(vkDestroyShaderEXT_ptr == null)
+				return .Err;
+			break;
+
+		case "vkGetShaderBinaryDataEXT":
+			mNativeLib.LoadFunction("vkGetShaderBinaryDataEXT", out vkGetShaderBinaryDataEXT_ptr, invokeErrorCallback);
+			if(vkGetShaderBinaryDataEXT_ptr == null)
+				return .Err;
+			break;
+
+		case "vkCmdBindShadersEXT":
+			mNativeLib.LoadFunction("vkCmdBindShadersEXT", out vkCmdBindShadersEXT_ptr, invokeErrorCallback);
+			if(vkCmdBindShadersEXT_ptr == null)
+				return .Err;
+			break;
+
 		case "vkGetFramebufferTilePropertiesQCOM":
 			mNativeLib.LoadFunction("vkGetFramebufferTilePropertiesQCOM", out vkGetFramebufferTilePropertiesQCOM_ptr, invokeErrorCallback);
 			if(vkGetFramebufferTilePropertiesQCOM_ptr == null)
@@ -6658,6 +6736,12 @@ public extension VulkanNative
 		case "vkDestroySemaphoreSciSyncPoolNV":
 			mNativeLib.LoadFunction("vkDestroySemaphoreSciSyncPoolNV", out vkDestroySemaphoreSciSyncPoolNV_ptr, invokeErrorCallback);
 			if(vkDestroySemaphoreSciSyncPoolNV_ptr == null)
+				return .Err;
+			break;
+
+		case "vkCmdSetAttachmentFeedbackLoopEnableEXT":
+			mNativeLib.LoadFunction("vkCmdSetAttachmentFeedbackLoopEnableEXT", out vkCmdSetAttachmentFeedbackLoopEnableEXT_ptr, invokeErrorCallback);
+			if(vkCmdSetAttachmentFeedbackLoopEnableEXT_ptr == null)
 				return .Err;
 			break;
 
@@ -7957,6 +8041,12 @@ public extension VulkanNative
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPipelineExecutableInternalRepresentationsKHR"))
 			LoadFunction("vkGetPipelineExecutableInternalRepresentationsKHR").IgnoreError();
 
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkMapMemory2KHR"))
+			LoadFunction("vkMapMemory2KHR").IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkUnmapMemory2KHR"))
+			LoadFunction("vkUnmapMemory2KHR").IgnoreError();
+
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkReleaseSwapchainImagesEXT"))
 			LoadFunction("vkReleaseSwapchainImagesEXT").IgnoreError();
 
@@ -8335,6 +8425,18 @@ public extension VulkanNative
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdOpticalFlowExecuteNV"))
 			LoadFunction("vkCmdOpticalFlowExecuteNV").IgnoreError();
 
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateShadersEXT"))
+			LoadFunction("vkCreateShadersEXT").IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyShaderEXT"))
+			LoadFunction("vkDestroyShaderEXT").IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetShaderBinaryDataEXT"))
+			LoadFunction("vkGetShaderBinaryDataEXT").IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBindShadersEXT"))
+			LoadFunction("vkCmdBindShadersEXT").IgnoreError();
+
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetFramebufferTilePropertiesQCOM"))
 			LoadFunction("vkGetFramebufferTilePropertiesQCOM").IgnoreError();
 
@@ -8346,6 +8448,9 @@ public extension VulkanNative
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroySemaphoreSciSyncPoolNV"))
 			LoadFunction("vkDestroySemaphoreSciSyncPoolNV").IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetAttachmentFeedbackLoopEnableEXT"))
+			LoadFunction("vkCmdSetAttachmentFeedbackLoopEnableEXT").IgnoreError();
 
 	}
 
