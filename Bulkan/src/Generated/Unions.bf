@@ -61,6 +61,13 @@ public struct VkDeviceOrHostAddressConstKHR
 }
 
 [CRepr, Union]
+public struct VkDeviceOrHostAddressConstAMDX
+{
+	public uint64 deviceAddress;
+	public void* hostAddress;
+}
+
+[CRepr, Union]
 public struct VkAccelerationStructureGeometryDataKHR
 {
 	public VkAccelerationStructureGeometryTrianglesDataKHR triangles;
