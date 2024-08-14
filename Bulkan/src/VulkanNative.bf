@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System;
 namespace Bulkan;
 
 public static class VulkanNative
@@ -22,6 +23,8 @@ public static class VulkanNative
 
 	private static bool mInitialized = false;
 
+	public static bool Initialized => mInitialized;
+
 	private static List<String> mLoadedFunctions = new .() ~ delete _;
 
 	public static readonly Span<String> LoadedFunctions { get => mLoadedFunctions; }
@@ -32,34 +35,6 @@ public static class VulkanNative
 			"vkCreateInstance",
 			"vkEnumerateInstanceExtensionProperties",
 			"vkEnumerateInstanceLayerProperties"
-		} ~ delete _;
-
-	private static List<String> mInstanceFunctions = new .()
-		{
-			"vkGetPhysicalDeviceSurfaceFormatsKHR",
-			"vkGetPhysicalDeviceSurfaceSupportKHR",
-			"vkGetPhysicalDeviceSurfaceCapabilitiesKHR",
-			"vkGetPhysicalDeviceSurfacePresentModesKHR",
-			"vkDestroySurfaceKHR",
-			"vkGetDeviceProcAddr",
-			"vkDestroyInstance",
-			"vkDestroyDevice",
-			"vkGetPhysicalDeviceMemoryProperties",
-			"vkGetDeviceGroupPeerMemoryFeatures",
-			"vkCreateDevice",
-			"vkGetDeviceQueue",
-			"vkEnumeratePhysicalDeviceGroups",
-			"vkGetPhysicalDeviceProperties",
-			"vkGetPhysicalDeviceProperties2",
-			"vkGetPhysicalDeviceFeatures",
-			"vkGetPhysicalDeviceFeatures2",
-			"vkGetPhysicalDeviceQueueFamilyProperties",
-			"vkEnumerateDeviceExtensionProperties",
-			//"vkCreateDebugReportCallbackEXT",
-			//"vkDestroyDebugReportCallbackEXT",
-#if BF_PLATFORM_WINDOWS
-			"vkCreateWin32SurfaceKHR",
-#endif
 		} ~ delete _;
 
 	static this()
@@ -92,8 +67,48 @@ public static class VulkanNative
 		mNativeLib.LoanFunctionErrorCallBack = callback;
 	}
 
+	public static void LoadFunction<T>(StringView name, out T field, VkInstance? instance = null, bool invokeErrorCallback = true)
+	{
+		Runtime.Assert(mInitialized);
+
+		void* funcPtr = null;
+
+		if (sKnownInstanceCommands.FindIndex(scope (entry) =>
+			{
+				return entry.Name == scope .(name);
+			}) != -1)
+		{
+			if (instance != null && vkGetInstanceProcAddr_ptr != null)
+			{
+				funcPtr = vkGetInstanceProcAddr_ptr(instance.Value, name.Ptr);
+			}
+		}
+
+		if (funcPtr != null)
+		{
+			field = *(T*)(void*)(int*)&funcPtr;
+		} else
+		{
+			mNativeLib.LoadFunction(name, out field, invokeErrorCallback);
+		}
+	}
+
+	public static Result<void, String> LoadFunctions(Span<String> functions)
+	{
+		Runtime.Assert(mInitialized);
+
+		for (var func in functions)
+		{
+			if (LoadFunction(func) case .Err)
+				return .Err(func);
+		}
+		return .Ok;
+	}
+
 	public static Result<void> LoadPreInstanceFunctions(List<String> additionalFunctions = null)
 	{
+		Runtime.Assert(mInitialized);
+
 		if (additionalFunctions != null)
 		{
 			for (var func in additionalFunctions)
@@ -112,35 +127,49 @@ public static class VulkanNative
 		return .Ok;
 	}
 
-	public static Result<void> LoadInstanceFunctions(VkInstance instance, List<String> additionalFunctions = null, delegate void(String) onError = null)
+	public static Result<void> LoadInstanceFunctions(VkInstance instance, InstanceFunctionFlags flags, List<String> additionalFunctions = null, delegate void(String) onError = null)
 	{
+		Runtime.Assert(mInitialized);
+
+		List<String> functionsToLoad = scope .();
 		if (additionalFunctions != null)
 		{
-			for (var func in additionalFunctions)
+			functionsToLoad.AddRange(additionalFunctions);
+		}
+
+		for (var knownInstanceCommand in sKnownInstanceCommands)
+		{
+			if (flags.HasFlag(knownInstanceCommand.Flags))
+				functionsToLoad.Add(knownInstanceCommand.Name);
+		}
+
+		for (var functionToLoad in functionsToLoad)
+		{
+			if (LoadFunction(functionToLoad, instance) case .Err)
 			{
-				if (func != null && !mInstanceFunctions.Contains(func))
-				{
-					mInstanceFunctions.Add(func);
-				}
+				if (onError != null)
+					onError(functionToLoad);
+				return .Err;
+			} else
+			{
+				mLoadedFunctions.Add(functionToLoad);
 			}
 		}
 
-		SetInstance(instance);
-
-		if (LoadFunctions(mInstanceFunctions) case .Err(let func))
+		/*if (LoadFunctions(functionsToLoad) case .Err(let func))
 		{
 			if (onError != null)
 				onError(func);
 			return .Err;
-		}
-
-		mLoadedFunctions.AddRange(mInstanceFunctions);
+		}*/
 
 		return .Ok;
 	}
 
 	public static Result<void> LoadPostInstanceFunctions(VkInstance? instance = null)
 	{
+		Runtime.Assert(mInitialized);
+
 		LoadAllFuncions(instance, mLoadedFunctions);
 		return .Ok;
 	}

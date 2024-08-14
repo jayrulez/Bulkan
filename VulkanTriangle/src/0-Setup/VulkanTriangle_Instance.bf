@@ -64,10 +64,20 @@ extension VulkanTriangle
 
 
 		Helpers.CheckErrors(VulkanNative.vkCreateInstance(&createInfo, null, &instance));
-		VulkanNative.LoadInstanceFunctions(instance, null, scope (func) =>
+		InstanceFunctionFlags instanceFlags = .Agnostic;
+
+#if BF_PLATFORM_WINDOWS 
+		instanceFlags |= .Win32;
+#endif
+
+#if BF_PLATFORM_LINUX 
+		instanceFlags |= .Xlib;
+#endif
+
+		VulkanNative.LoadInstanceFunctions(instance, instanceFlags, null, scope (func) =>
 			{
 				Console.WriteLine(scope $"Failed to load function '{func}'.");
-			});
+			}).IgnoreError();
 
 		VulkanNative.LoadPostInstanceFunctions();
 	}

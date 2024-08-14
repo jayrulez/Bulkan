@@ -3473,3478 +3473,3509 @@ public extension VulkanNative
 	public static void vkCmdPushConstants2KHR(VkCommandBuffer commandBuffer, VkPushConstantsInfoKHR* pPushConstantsInfo)
 		=> vkCmdPushConstants2KHR_ptr(commandBuffer, pPushConstantsInfo);
 
-	public static void SetInstance(VkInstance instance)
-	{
-		mNativeLib.mInstance = instance;
-	}
 
-	public static Result<void> LoadFunction(StringView name, bool invokeErrorCallback = true)
+	private static List<(InstanceFunctionFlags Flags, String Name)> sKnownInstanceCommands = new .()
 	{
+		(.Agnostic, "vkDestroyInstance"),
+		(.Agnostic, "vkEnumeratePhysicalDevices"),
+		(.Agnostic, "vkGetInstanceProcAddr"),
+		(.Agnostic, "vkEnumeratePhysicalDeviceGroups"),
+		(.Agnostic, "vkDestroySurfaceKHR"),
+		(.Agnostic, "vkCreateDisplayPlaneSurfaceKHR"),
+		(.Agnostic, "vkCreateDebugReportCallbackEXT"),
+		(.Agnostic, "vkDestroyDebugReportCallbackEXT"),
+		(.Agnostic, "vkDebugReportMessageEXT"),
+		(.Agnostic, "vkCreateDebugUtilsMessengerEXT"),
+		(.Agnostic, "vkDestroyDebugUtilsMessengerEXT"),
+		(.Agnostic, "vkSubmitDebugUtilsMessageEXT"),
+		(.Xlib, "vkCreateXlibSurfaceKHR"),
+		(.Xcb, "vkCreateXcbSurfaceKHR"),
+		(.Wayland, "vkCreateWaylandSurfaceKHR"),
+		(.Android, "vkCreateAndroidSurfaceKHR"),
+		(.Win32, "vkCreateWin32SurfaceKHR"),
+		(.GGP, "vkCreateStreamDescriptorSurfaceGGP"),
+		(.NN, "vkCreateViSurfaceNN"),
+		(.MVK, "vkCreateIOSSurfaceMVK"),
+		(.MVK, "vkCreateMacOSSurfaceMVK"),
+		(.FUCHSIA, "vkCreateImagePipeSurfaceFUCHSIA"),
+		(.Metal, "vkCreateMetalSurfaceEXT"),
+		(.Headless, "vkCreateHeadlessSurfaceEXT"),
+		(.DirectFB, "vkCreateDirectFBSurfaceEXT"),
+		(.QNX, "vkCreateScreenSurfaceQNX"),
+	} ~ delete _;
+
+	public static Result<void> LoadFunction(StringView name, VkInstance? instance = null, bool invokeErrorCallback = true)
+	{
+		if(mLoadedFunctions.Contains(scope .(name)))
+		{
+			return .Ok;
+		}
+
 		switch (name) {
 		case "vkCreateInstance":
-			mNativeLib.LoadFunction("vkCreateInstance", out vkCreateInstance_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateInstance", out vkCreateInstance_ptr, instance, invokeErrorCallback);
 			if(vkCreateInstance_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDestroyInstance":
-			mNativeLib.LoadFunction("vkDestroyInstance", out vkDestroyInstance_ptr, invokeErrorCallback);
+			LoadFunction("vkDestroyInstance", out vkDestroyInstance_ptr, instance, invokeErrorCallback);
 			if(vkDestroyInstance_ptr == null)
 				return .Err;
 			break;
 
 		case "vkEnumeratePhysicalDevices":
-			mNativeLib.LoadFunction("vkEnumeratePhysicalDevices", out vkEnumeratePhysicalDevices_ptr, invokeErrorCallback);
+			LoadFunction("vkEnumeratePhysicalDevices", out vkEnumeratePhysicalDevices_ptr, instance, invokeErrorCallback);
 			if(vkEnumeratePhysicalDevices_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceFeatures":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceFeatures", out vkGetPhysicalDeviceFeatures_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceFeatures", out vkGetPhysicalDeviceFeatures_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceFeatures_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceFormatProperties":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceFormatProperties", out vkGetPhysicalDeviceFormatProperties_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceFormatProperties", out vkGetPhysicalDeviceFormatProperties_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceFormatProperties_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceImageFormatProperties":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceImageFormatProperties", out vkGetPhysicalDeviceImageFormatProperties_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceImageFormatProperties", out vkGetPhysicalDeviceImageFormatProperties_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceImageFormatProperties_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceProperties":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceProperties", out vkGetPhysicalDeviceProperties_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceProperties", out vkGetPhysicalDeviceProperties_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceProperties_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceQueueFamilyProperties":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceQueueFamilyProperties", out vkGetPhysicalDeviceQueueFamilyProperties_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceQueueFamilyProperties", out vkGetPhysicalDeviceQueueFamilyProperties_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceQueueFamilyProperties_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceMemoryProperties":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceMemoryProperties", out vkGetPhysicalDeviceMemoryProperties_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceMemoryProperties", out vkGetPhysicalDeviceMemoryProperties_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceMemoryProperties_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetInstanceProcAddr":
-			mNativeLib.LoadFunction("vkGetInstanceProcAddr", out vkGetInstanceProcAddr_ptr, invokeErrorCallback);
+			LoadFunction("vkGetInstanceProcAddr", out vkGetInstanceProcAddr_ptr, instance, invokeErrorCallback);
 			if(vkGetInstanceProcAddr_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetDeviceProcAddr":
-			mNativeLib.LoadFunction("vkGetDeviceProcAddr", out vkGetDeviceProcAddr_ptr, invokeErrorCallback);
+			LoadFunction("vkGetDeviceProcAddr", out vkGetDeviceProcAddr_ptr, instance, invokeErrorCallback);
 			if(vkGetDeviceProcAddr_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateDevice":
-			mNativeLib.LoadFunction("vkCreateDevice", out vkCreateDevice_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateDevice", out vkCreateDevice_ptr, instance, invokeErrorCallback);
 			if(vkCreateDevice_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDestroyDevice":
-			mNativeLib.LoadFunction("vkDestroyDevice", out vkDestroyDevice_ptr, invokeErrorCallback);
+			LoadFunction("vkDestroyDevice", out vkDestroyDevice_ptr, instance, invokeErrorCallback);
 			if(vkDestroyDevice_ptr == null)
 				return .Err;
 			break;
 
 		case "vkEnumerateInstanceExtensionProperties":
-			mNativeLib.LoadFunction("vkEnumerateInstanceExtensionProperties", out vkEnumerateInstanceExtensionProperties_ptr, invokeErrorCallback);
+			LoadFunction("vkEnumerateInstanceExtensionProperties", out vkEnumerateInstanceExtensionProperties_ptr, instance, invokeErrorCallback);
 			if(vkEnumerateInstanceExtensionProperties_ptr == null)
 				return .Err;
 			break;
 
 		case "vkEnumerateDeviceExtensionProperties":
-			mNativeLib.LoadFunction("vkEnumerateDeviceExtensionProperties", out vkEnumerateDeviceExtensionProperties_ptr, invokeErrorCallback);
+			LoadFunction("vkEnumerateDeviceExtensionProperties", out vkEnumerateDeviceExtensionProperties_ptr, instance, invokeErrorCallback);
 			if(vkEnumerateDeviceExtensionProperties_ptr == null)
 				return .Err;
 			break;
 
 		case "vkEnumerateInstanceLayerProperties":
-			mNativeLib.LoadFunction("vkEnumerateInstanceLayerProperties", out vkEnumerateInstanceLayerProperties_ptr, invokeErrorCallback);
+			LoadFunction("vkEnumerateInstanceLayerProperties", out vkEnumerateInstanceLayerProperties_ptr, instance, invokeErrorCallback);
 			if(vkEnumerateInstanceLayerProperties_ptr == null)
 				return .Err;
 			break;
 
 		case "vkEnumerateDeviceLayerProperties":
-			mNativeLib.LoadFunction("vkEnumerateDeviceLayerProperties", out vkEnumerateDeviceLayerProperties_ptr, invokeErrorCallback);
+			LoadFunction("vkEnumerateDeviceLayerProperties", out vkEnumerateDeviceLayerProperties_ptr, instance, invokeErrorCallback);
 			if(vkEnumerateDeviceLayerProperties_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetDeviceQueue":
-			mNativeLib.LoadFunction("vkGetDeviceQueue", out vkGetDeviceQueue_ptr, invokeErrorCallback);
+			LoadFunction("vkGetDeviceQueue", out vkGetDeviceQueue_ptr, instance, invokeErrorCallback);
 			if(vkGetDeviceQueue_ptr == null)
 				return .Err;
 			break;
 
 		case "vkQueueSubmit":
-			mNativeLib.LoadFunction("vkQueueSubmit", out vkQueueSubmit_ptr, invokeErrorCallback);
+			LoadFunction("vkQueueSubmit", out vkQueueSubmit_ptr, instance, invokeErrorCallback);
 			if(vkQueueSubmit_ptr == null)
 				return .Err;
 			break;
 
 		case "vkQueueWaitIdle":
-			mNativeLib.LoadFunction("vkQueueWaitIdle", out vkQueueWaitIdle_ptr, invokeErrorCallback);
+			LoadFunction("vkQueueWaitIdle", out vkQueueWaitIdle_ptr, instance, invokeErrorCallback);
 			if(vkQueueWaitIdle_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDeviceWaitIdle":
-			mNativeLib.LoadFunction("vkDeviceWaitIdle", out vkDeviceWaitIdle_ptr, invokeErrorCallback);
+			LoadFunction("vkDeviceWaitIdle", out vkDeviceWaitIdle_ptr, instance, invokeErrorCallback);
 			if(vkDeviceWaitIdle_ptr == null)
 				return .Err;
 			break;
 
 		case "vkAllocateMemory":
-			mNativeLib.LoadFunction("vkAllocateMemory", out vkAllocateMemory_ptr, invokeErrorCallback);
+			LoadFunction("vkAllocateMemory", out vkAllocateMemory_ptr, instance, invokeErrorCallback);
 			if(vkAllocateMemory_ptr == null)
 				return .Err;
 			break;
 
 		case "vkFreeMemory":
-			mNativeLib.LoadFunction("vkFreeMemory", out vkFreeMemory_ptr, invokeErrorCallback);
+			LoadFunction("vkFreeMemory", out vkFreeMemory_ptr, instance, invokeErrorCallback);
 			if(vkFreeMemory_ptr == null)
 				return .Err;
 			break;
 
 		case "vkMapMemory":
-			mNativeLib.LoadFunction("vkMapMemory", out vkMapMemory_ptr, invokeErrorCallback);
+			LoadFunction("vkMapMemory", out vkMapMemory_ptr, instance, invokeErrorCallback);
 			if(vkMapMemory_ptr == null)
 				return .Err;
 			break;
 
 		case "vkUnmapMemory":
-			mNativeLib.LoadFunction("vkUnmapMemory", out vkUnmapMemory_ptr, invokeErrorCallback);
+			LoadFunction("vkUnmapMemory", out vkUnmapMemory_ptr, instance, invokeErrorCallback);
 			if(vkUnmapMemory_ptr == null)
 				return .Err;
 			break;
 
 		case "vkFlushMappedMemoryRanges":
-			mNativeLib.LoadFunction("vkFlushMappedMemoryRanges", out vkFlushMappedMemoryRanges_ptr, invokeErrorCallback);
+			LoadFunction("vkFlushMappedMemoryRanges", out vkFlushMappedMemoryRanges_ptr, instance, invokeErrorCallback);
 			if(vkFlushMappedMemoryRanges_ptr == null)
 				return .Err;
 			break;
 
 		case "vkInvalidateMappedMemoryRanges":
-			mNativeLib.LoadFunction("vkInvalidateMappedMemoryRanges", out vkInvalidateMappedMemoryRanges_ptr, invokeErrorCallback);
+			LoadFunction("vkInvalidateMappedMemoryRanges", out vkInvalidateMappedMemoryRanges_ptr, instance, invokeErrorCallback);
 			if(vkInvalidateMappedMemoryRanges_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetDeviceMemoryCommitment":
-			mNativeLib.LoadFunction("vkGetDeviceMemoryCommitment", out vkGetDeviceMemoryCommitment_ptr, invokeErrorCallback);
+			LoadFunction("vkGetDeviceMemoryCommitment", out vkGetDeviceMemoryCommitment_ptr, instance, invokeErrorCallback);
 			if(vkGetDeviceMemoryCommitment_ptr == null)
 				return .Err;
 			break;
 
 		case "vkBindBufferMemory":
-			mNativeLib.LoadFunction("vkBindBufferMemory", out vkBindBufferMemory_ptr, invokeErrorCallback);
+			LoadFunction("vkBindBufferMemory", out vkBindBufferMemory_ptr, instance, invokeErrorCallback);
 			if(vkBindBufferMemory_ptr == null)
 				return .Err;
 			break;
 
 		case "vkBindImageMemory":
-			mNativeLib.LoadFunction("vkBindImageMemory", out vkBindImageMemory_ptr, invokeErrorCallback);
+			LoadFunction("vkBindImageMemory", out vkBindImageMemory_ptr, instance, invokeErrorCallback);
 			if(vkBindImageMemory_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetBufferMemoryRequirements":
-			mNativeLib.LoadFunction("vkGetBufferMemoryRequirements", out vkGetBufferMemoryRequirements_ptr, invokeErrorCallback);
+			LoadFunction("vkGetBufferMemoryRequirements", out vkGetBufferMemoryRequirements_ptr, instance, invokeErrorCallback);
 			if(vkGetBufferMemoryRequirements_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetImageMemoryRequirements":
-			mNativeLib.LoadFunction("vkGetImageMemoryRequirements", out vkGetImageMemoryRequirements_ptr, invokeErrorCallback);
+			LoadFunction("vkGetImageMemoryRequirements", out vkGetImageMemoryRequirements_ptr, instance, invokeErrorCallback);
 			if(vkGetImageMemoryRequirements_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetImageSparseMemoryRequirements":
-			mNativeLib.LoadFunction("vkGetImageSparseMemoryRequirements", out vkGetImageSparseMemoryRequirements_ptr, invokeErrorCallback);
+			LoadFunction("vkGetImageSparseMemoryRequirements", out vkGetImageSparseMemoryRequirements_ptr, instance, invokeErrorCallback);
 			if(vkGetImageSparseMemoryRequirements_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceSparseImageFormatProperties":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceSparseImageFormatProperties", out vkGetPhysicalDeviceSparseImageFormatProperties_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceSparseImageFormatProperties", out vkGetPhysicalDeviceSparseImageFormatProperties_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceSparseImageFormatProperties_ptr == null)
 				return .Err;
 			break;
 
 		case "vkQueueBindSparse":
-			mNativeLib.LoadFunction("vkQueueBindSparse", out vkQueueBindSparse_ptr, invokeErrorCallback);
+			LoadFunction("vkQueueBindSparse", out vkQueueBindSparse_ptr, instance, invokeErrorCallback);
 			if(vkQueueBindSparse_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateFence":
-			mNativeLib.LoadFunction("vkCreateFence", out vkCreateFence_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateFence", out vkCreateFence_ptr, instance, invokeErrorCallback);
 			if(vkCreateFence_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDestroyFence":
-			mNativeLib.LoadFunction("vkDestroyFence", out vkDestroyFence_ptr, invokeErrorCallback);
+			LoadFunction("vkDestroyFence", out vkDestroyFence_ptr, instance, invokeErrorCallback);
 			if(vkDestroyFence_ptr == null)
 				return .Err;
 			break;
 
 		case "vkResetFences":
-			mNativeLib.LoadFunction("vkResetFences", out vkResetFences_ptr, invokeErrorCallback);
+			LoadFunction("vkResetFences", out vkResetFences_ptr, instance, invokeErrorCallback);
 			if(vkResetFences_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetFenceStatus":
-			mNativeLib.LoadFunction("vkGetFenceStatus", out vkGetFenceStatus_ptr, invokeErrorCallback);
+			LoadFunction("vkGetFenceStatus", out vkGetFenceStatus_ptr, instance, invokeErrorCallback);
 			if(vkGetFenceStatus_ptr == null)
 				return .Err;
 			break;
 
 		case "vkWaitForFences":
-			mNativeLib.LoadFunction("vkWaitForFences", out vkWaitForFences_ptr, invokeErrorCallback);
+			LoadFunction("vkWaitForFences", out vkWaitForFences_ptr, instance, invokeErrorCallback);
 			if(vkWaitForFences_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateSemaphore":
-			mNativeLib.LoadFunction("vkCreateSemaphore", out vkCreateSemaphore_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateSemaphore", out vkCreateSemaphore_ptr, instance, invokeErrorCallback);
 			if(vkCreateSemaphore_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDestroySemaphore":
-			mNativeLib.LoadFunction("vkDestroySemaphore", out vkDestroySemaphore_ptr, invokeErrorCallback);
+			LoadFunction("vkDestroySemaphore", out vkDestroySemaphore_ptr, instance, invokeErrorCallback);
 			if(vkDestroySemaphore_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateEvent":
-			mNativeLib.LoadFunction("vkCreateEvent", out vkCreateEvent_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateEvent", out vkCreateEvent_ptr, instance, invokeErrorCallback);
 			if(vkCreateEvent_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDestroyEvent":
-			mNativeLib.LoadFunction("vkDestroyEvent", out vkDestroyEvent_ptr, invokeErrorCallback);
+			LoadFunction("vkDestroyEvent", out vkDestroyEvent_ptr, instance, invokeErrorCallback);
 			if(vkDestroyEvent_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetEventStatus":
-			mNativeLib.LoadFunction("vkGetEventStatus", out vkGetEventStatus_ptr, invokeErrorCallback);
+			LoadFunction("vkGetEventStatus", out vkGetEventStatus_ptr, instance, invokeErrorCallback);
 			if(vkGetEventStatus_ptr == null)
 				return .Err;
 			break;
 
 		case "vkSetEvent":
-			mNativeLib.LoadFunction("vkSetEvent", out vkSetEvent_ptr, invokeErrorCallback);
+			LoadFunction("vkSetEvent", out vkSetEvent_ptr, instance, invokeErrorCallback);
 			if(vkSetEvent_ptr == null)
 				return .Err;
 			break;
 
 		case "vkResetEvent":
-			mNativeLib.LoadFunction("vkResetEvent", out vkResetEvent_ptr, invokeErrorCallback);
+			LoadFunction("vkResetEvent", out vkResetEvent_ptr, instance, invokeErrorCallback);
 			if(vkResetEvent_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateQueryPool":
-			mNativeLib.LoadFunction("vkCreateQueryPool", out vkCreateQueryPool_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateQueryPool", out vkCreateQueryPool_ptr, instance, invokeErrorCallback);
 			if(vkCreateQueryPool_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDestroyQueryPool":
-			mNativeLib.LoadFunction("vkDestroyQueryPool", out vkDestroyQueryPool_ptr, invokeErrorCallback);
+			LoadFunction("vkDestroyQueryPool", out vkDestroyQueryPool_ptr, instance, invokeErrorCallback);
 			if(vkDestroyQueryPool_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetQueryPoolResults":
-			mNativeLib.LoadFunction("vkGetQueryPoolResults", out vkGetQueryPoolResults_ptr, invokeErrorCallback);
+			LoadFunction("vkGetQueryPoolResults", out vkGetQueryPoolResults_ptr, instance, invokeErrorCallback);
 			if(vkGetQueryPoolResults_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateBuffer":
-			mNativeLib.LoadFunction("vkCreateBuffer", out vkCreateBuffer_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateBuffer", out vkCreateBuffer_ptr, instance, invokeErrorCallback);
 			if(vkCreateBuffer_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDestroyBuffer":
-			mNativeLib.LoadFunction("vkDestroyBuffer", out vkDestroyBuffer_ptr, invokeErrorCallback);
+			LoadFunction("vkDestroyBuffer", out vkDestroyBuffer_ptr, instance, invokeErrorCallback);
 			if(vkDestroyBuffer_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateBufferView":
-			mNativeLib.LoadFunction("vkCreateBufferView", out vkCreateBufferView_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateBufferView", out vkCreateBufferView_ptr, instance, invokeErrorCallback);
 			if(vkCreateBufferView_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDestroyBufferView":
-			mNativeLib.LoadFunction("vkDestroyBufferView", out vkDestroyBufferView_ptr, invokeErrorCallback);
+			LoadFunction("vkDestroyBufferView", out vkDestroyBufferView_ptr, instance, invokeErrorCallback);
 			if(vkDestroyBufferView_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateImage":
-			mNativeLib.LoadFunction("vkCreateImage", out vkCreateImage_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateImage", out vkCreateImage_ptr, instance, invokeErrorCallback);
 			if(vkCreateImage_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDestroyImage":
-			mNativeLib.LoadFunction("vkDestroyImage", out vkDestroyImage_ptr, invokeErrorCallback);
+			LoadFunction("vkDestroyImage", out vkDestroyImage_ptr, instance, invokeErrorCallback);
 			if(vkDestroyImage_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetImageSubresourceLayout":
-			mNativeLib.LoadFunction("vkGetImageSubresourceLayout", out vkGetImageSubresourceLayout_ptr, invokeErrorCallback);
+			LoadFunction("vkGetImageSubresourceLayout", out vkGetImageSubresourceLayout_ptr, instance, invokeErrorCallback);
 			if(vkGetImageSubresourceLayout_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateImageView":
-			mNativeLib.LoadFunction("vkCreateImageView", out vkCreateImageView_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateImageView", out vkCreateImageView_ptr, instance, invokeErrorCallback);
 			if(vkCreateImageView_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDestroyImageView":
-			mNativeLib.LoadFunction("vkDestroyImageView", out vkDestroyImageView_ptr, invokeErrorCallback);
+			LoadFunction("vkDestroyImageView", out vkDestroyImageView_ptr, instance, invokeErrorCallback);
 			if(vkDestroyImageView_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateShaderModule":
-			mNativeLib.LoadFunction("vkCreateShaderModule", out vkCreateShaderModule_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateShaderModule", out vkCreateShaderModule_ptr, instance, invokeErrorCallback);
 			if(vkCreateShaderModule_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDestroyShaderModule":
-			mNativeLib.LoadFunction("vkDestroyShaderModule", out vkDestroyShaderModule_ptr, invokeErrorCallback);
+			LoadFunction("vkDestroyShaderModule", out vkDestroyShaderModule_ptr, instance, invokeErrorCallback);
 			if(vkDestroyShaderModule_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreatePipelineCache":
-			mNativeLib.LoadFunction("vkCreatePipelineCache", out vkCreatePipelineCache_ptr, invokeErrorCallback);
+			LoadFunction("vkCreatePipelineCache", out vkCreatePipelineCache_ptr, instance, invokeErrorCallback);
 			if(vkCreatePipelineCache_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDestroyPipelineCache":
-			mNativeLib.LoadFunction("vkDestroyPipelineCache", out vkDestroyPipelineCache_ptr, invokeErrorCallback);
+			LoadFunction("vkDestroyPipelineCache", out vkDestroyPipelineCache_ptr, instance, invokeErrorCallback);
 			if(vkDestroyPipelineCache_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPipelineCacheData":
-			mNativeLib.LoadFunction("vkGetPipelineCacheData", out vkGetPipelineCacheData_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPipelineCacheData", out vkGetPipelineCacheData_ptr, instance, invokeErrorCallback);
 			if(vkGetPipelineCacheData_ptr == null)
 				return .Err;
 			break;
 
 		case "vkMergePipelineCaches":
-			mNativeLib.LoadFunction("vkMergePipelineCaches", out vkMergePipelineCaches_ptr, invokeErrorCallback);
+			LoadFunction("vkMergePipelineCaches", out vkMergePipelineCaches_ptr, instance, invokeErrorCallback);
 			if(vkMergePipelineCaches_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateGraphicsPipelines":
-			mNativeLib.LoadFunction("vkCreateGraphicsPipelines", out vkCreateGraphicsPipelines_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateGraphicsPipelines", out vkCreateGraphicsPipelines_ptr, instance, invokeErrorCallback);
 			if(vkCreateGraphicsPipelines_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateComputePipelines":
-			mNativeLib.LoadFunction("vkCreateComputePipelines", out vkCreateComputePipelines_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateComputePipelines", out vkCreateComputePipelines_ptr, instance, invokeErrorCallback);
 			if(vkCreateComputePipelines_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDestroyPipeline":
-			mNativeLib.LoadFunction("vkDestroyPipeline", out vkDestroyPipeline_ptr, invokeErrorCallback);
+			LoadFunction("vkDestroyPipeline", out vkDestroyPipeline_ptr, instance, invokeErrorCallback);
 			if(vkDestroyPipeline_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreatePipelineLayout":
-			mNativeLib.LoadFunction("vkCreatePipelineLayout", out vkCreatePipelineLayout_ptr, invokeErrorCallback);
+			LoadFunction("vkCreatePipelineLayout", out vkCreatePipelineLayout_ptr, instance, invokeErrorCallback);
 			if(vkCreatePipelineLayout_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDestroyPipelineLayout":
-			mNativeLib.LoadFunction("vkDestroyPipelineLayout", out vkDestroyPipelineLayout_ptr, invokeErrorCallback);
+			LoadFunction("vkDestroyPipelineLayout", out vkDestroyPipelineLayout_ptr, instance, invokeErrorCallback);
 			if(vkDestroyPipelineLayout_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateSampler":
-			mNativeLib.LoadFunction("vkCreateSampler", out vkCreateSampler_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateSampler", out vkCreateSampler_ptr, instance, invokeErrorCallback);
 			if(vkCreateSampler_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDestroySampler":
-			mNativeLib.LoadFunction("vkDestroySampler", out vkDestroySampler_ptr, invokeErrorCallback);
+			LoadFunction("vkDestroySampler", out vkDestroySampler_ptr, instance, invokeErrorCallback);
 			if(vkDestroySampler_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateDescriptorSetLayout":
-			mNativeLib.LoadFunction("vkCreateDescriptorSetLayout", out vkCreateDescriptorSetLayout_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateDescriptorSetLayout", out vkCreateDescriptorSetLayout_ptr, instance, invokeErrorCallback);
 			if(vkCreateDescriptorSetLayout_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDestroyDescriptorSetLayout":
-			mNativeLib.LoadFunction("vkDestroyDescriptorSetLayout", out vkDestroyDescriptorSetLayout_ptr, invokeErrorCallback);
+			LoadFunction("vkDestroyDescriptorSetLayout", out vkDestroyDescriptorSetLayout_ptr, instance, invokeErrorCallback);
 			if(vkDestroyDescriptorSetLayout_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateDescriptorPool":
-			mNativeLib.LoadFunction("vkCreateDescriptorPool", out vkCreateDescriptorPool_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateDescriptorPool", out vkCreateDescriptorPool_ptr, instance, invokeErrorCallback);
 			if(vkCreateDescriptorPool_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDestroyDescriptorPool":
-			mNativeLib.LoadFunction("vkDestroyDescriptorPool", out vkDestroyDescriptorPool_ptr, invokeErrorCallback);
+			LoadFunction("vkDestroyDescriptorPool", out vkDestroyDescriptorPool_ptr, instance, invokeErrorCallback);
 			if(vkDestroyDescriptorPool_ptr == null)
 				return .Err;
 			break;
 
 		case "vkResetDescriptorPool":
-			mNativeLib.LoadFunction("vkResetDescriptorPool", out vkResetDescriptorPool_ptr, invokeErrorCallback);
+			LoadFunction("vkResetDescriptorPool", out vkResetDescriptorPool_ptr, instance, invokeErrorCallback);
 			if(vkResetDescriptorPool_ptr == null)
 				return .Err;
 			break;
 
 		case "vkAllocateDescriptorSets":
-			mNativeLib.LoadFunction("vkAllocateDescriptorSets", out vkAllocateDescriptorSets_ptr, invokeErrorCallback);
+			LoadFunction("vkAllocateDescriptorSets", out vkAllocateDescriptorSets_ptr, instance, invokeErrorCallback);
 			if(vkAllocateDescriptorSets_ptr == null)
 				return .Err;
 			break;
 
 		case "vkFreeDescriptorSets":
-			mNativeLib.LoadFunction("vkFreeDescriptorSets", out vkFreeDescriptorSets_ptr, invokeErrorCallback);
+			LoadFunction("vkFreeDescriptorSets", out vkFreeDescriptorSets_ptr, instance, invokeErrorCallback);
 			if(vkFreeDescriptorSets_ptr == null)
 				return .Err;
 			break;
 
 		case "vkUpdateDescriptorSets":
-			mNativeLib.LoadFunction("vkUpdateDescriptorSets", out vkUpdateDescriptorSets_ptr, invokeErrorCallback);
+			LoadFunction("vkUpdateDescriptorSets", out vkUpdateDescriptorSets_ptr, instance, invokeErrorCallback);
 			if(vkUpdateDescriptorSets_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateFramebuffer":
-			mNativeLib.LoadFunction("vkCreateFramebuffer", out vkCreateFramebuffer_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateFramebuffer", out vkCreateFramebuffer_ptr, instance, invokeErrorCallback);
 			if(vkCreateFramebuffer_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDestroyFramebuffer":
-			mNativeLib.LoadFunction("vkDestroyFramebuffer", out vkDestroyFramebuffer_ptr, invokeErrorCallback);
+			LoadFunction("vkDestroyFramebuffer", out vkDestroyFramebuffer_ptr, instance, invokeErrorCallback);
 			if(vkDestroyFramebuffer_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateRenderPass":
-			mNativeLib.LoadFunction("vkCreateRenderPass", out vkCreateRenderPass_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateRenderPass", out vkCreateRenderPass_ptr, instance, invokeErrorCallback);
 			if(vkCreateRenderPass_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDestroyRenderPass":
-			mNativeLib.LoadFunction("vkDestroyRenderPass", out vkDestroyRenderPass_ptr, invokeErrorCallback);
+			LoadFunction("vkDestroyRenderPass", out vkDestroyRenderPass_ptr, instance, invokeErrorCallback);
 			if(vkDestroyRenderPass_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetRenderAreaGranularity":
-			mNativeLib.LoadFunction("vkGetRenderAreaGranularity", out vkGetRenderAreaGranularity_ptr, invokeErrorCallback);
+			LoadFunction("vkGetRenderAreaGranularity", out vkGetRenderAreaGranularity_ptr, instance, invokeErrorCallback);
 			if(vkGetRenderAreaGranularity_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateCommandPool":
-			mNativeLib.LoadFunction("vkCreateCommandPool", out vkCreateCommandPool_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateCommandPool", out vkCreateCommandPool_ptr, instance, invokeErrorCallback);
 			if(vkCreateCommandPool_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDestroyCommandPool":
-			mNativeLib.LoadFunction("vkDestroyCommandPool", out vkDestroyCommandPool_ptr, invokeErrorCallback);
+			LoadFunction("vkDestroyCommandPool", out vkDestroyCommandPool_ptr, instance, invokeErrorCallback);
 			if(vkDestroyCommandPool_ptr == null)
 				return .Err;
 			break;
 
 		case "vkResetCommandPool":
-			mNativeLib.LoadFunction("vkResetCommandPool", out vkResetCommandPool_ptr, invokeErrorCallback);
+			LoadFunction("vkResetCommandPool", out vkResetCommandPool_ptr, instance, invokeErrorCallback);
 			if(vkResetCommandPool_ptr == null)
 				return .Err;
 			break;
 
 		case "vkAllocateCommandBuffers":
-			mNativeLib.LoadFunction("vkAllocateCommandBuffers", out vkAllocateCommandBuffers_ptr, invokeErrorCallback);
+			LoadFunction("vkAllocateCommandBuffers", out vkAllocateCommandBuffers_ptr, instance, invokeErrorCallback);
 			if(vkAllocateCommandBuffers_ptr == null)
 				return .Err;
 			break;
 
 		case "vkFreeCommandBuffers":
-			mNativeLib.LoadFunction("vkFreeCommandBuffers", out vkFreeCommandBuffers_ptr, invokeErrorCallback);
+			LoadFunction("vkFreeCommandBuffers", out vkFreeCommandBuffers_ptr, instance, invokeErrorCallback);
 			if(vkFreeCommandBuffers_ptr == null)
 				return .Err;
 			break;
 
 		case "vkBeginCommandBuffer":
-			mNativeLib.LoadFunction("vkBeginCommandBuffer", out vkBeginCommandBuffer_ptr, invokeErrorCallback);
+			LoadFunction("vkBeginCommandBuffer", out vkBeginCommandBuffer_ptr, instance, invokeErrorCallback);
 			if(vkBeginCommandBuffer_ptr == null)
 				return .Err;
 			break;
 
 		case "vkEndCommandBuffer":
-			mNativeLib.LoadFunction("vkEndCommandBuffer", out vkEndCommandBuffer_ptr, invokeErrorCallback);
+			LoadFunction("vkEndCommandBuffer", out vkEndCommandBuffer_ptr, instance, invokeErrorCallback);
 			if(vkEndCommandBuffer_ptr == null)
 				return .Err;
 			break;
 
 		case "vkResetCommandBuffer":
-			mNativeLib.LoadFunction("vkResetCommandBuffer", out vkResetCommandBuffer_ptr, invokeErrorCallback);
+			LoadFunction("vkResetCommandBuffer", out vkResetCommandBuffer_ptr, instance, invokeErrorCallback);
 			if(vkResetCommandBuffer_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdBindPipeline":
-			mNativeLib.LoadFunction("vkCmdBindPipeline", out vkCmdBindPipeline_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdBindPipeline", out vkCmdBindPipeline_ptr, instance, invokeErrorCallback);
 			if(vkCmdBindPipeline_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetViewport":
-			mNativeLib.LoadFunction("vkCmdSetViewport", out vkCmdSetViewport_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetViewport", out vkCmdSetViewport_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetViewport_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetScissor":
-			mNativeLib.LoadFunction("vkCmdSetScissor", out vkCmdSetScissor_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetScissor", out vkCmdSetScissor_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetScissor_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetLineWidth":
-			mNativeLib.LoadFunction("vkCmdSetLineWidth", out vkCmdSetLineWidth_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetLineWidth", out vkCmdSetLineWidth_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetLineWidth_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetDepthBias":
-			mNativeLib.LoadFunction("vkCmdSetDepthBias", out vkCmdSetDepthBias_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetDepthBias", out vkCmdSetDepthBias_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetDepthBias_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetBlendConstants":
-			mNativeLib.LoadFunction("vkCmdSetBlendConstants", out vkCmdSetBlendConstants_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetBlendConstants", out vkCmdSetBlendConstants_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetBlendConstants_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetDepthBounds":
-			mNativeLib.LoadFunction("vkCmdSetDepthBounds", out vkCmdSetDepthBounds_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetDepthBounds", out vkCmdSetDepthBounds_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetDepthBounds_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetStencilCompareMask":
-			mNativeLib.LoadFunction("vkCmdSetStencilCompareMask", out vkCmdSetStencilCompareMask_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetStencilCompareMask", out vkCmdSetStencilCompareMask_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetStencilCompareMask_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetStencilWriteMask":
-			mNativeLib.LoadFunction("vkCmdSetStencilWriteMask", out vkCmdSetStencilWriteMask_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetStencilWriteMask", out vkCmdSetStencilWriteMask_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetStencilWriteMask_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetStencilReference":
-			mNativeLib.LoadFunction("vkCmdSetStencilReference", out vkCmdSetStencilReference_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetStencilReference", out vkCmdSetStencilReference_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetStencilReference_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdBindDescriptorSets":
-			mNativeLib.LoadFunction("vkCmdBindDescriptorSets", out vkCmdBindDescriptorSets_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdBindDescriptorSets", out vkCmdBindDescriptorSets_ptr, instance, invokeErrorCallback);
 			if(vkCmdBindDescriptorSets_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdBindIndexBuffer":
-			mNativeLib.LoadFunction("vkCmdBindIndexBuffer", out vkCmdBindIndexBuffer_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdBindIndexBuffer", out vkCmdBindIndexBuffer_ptr, instance, invokeErrorCallback);
 			if(vkCmdBindIndexBuffer_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdBindVertexBuffers":
-			mNativeLib.LoadFunction("vkCmdBindVertexBuffers", out vkCmdBindVertexBuffers_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdBindVertexBuffers", out vkCmdBindVertexBuffers_ptr, instance, invokeErrorCallback);
 			if(vkCmdBindVertexBuffers_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdDraw":
-			mNativeLib.LoadFunction("vkCmdDraw", out vkCmdDraw_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdDraw", out vkCmdDraw_ptr, instance, invokeErrorCallback);
 			if(vkCmdDraw_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdDrawIndexed":
-			mNativeLib.LoadFunction("vkCmdDrawIndexed", out vkCmdDrawIndexed_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdDrawIndexed", out vkCmdDrawIndexed_ptr, instance, invokeErrorCallback);
 			if(vkCmdDrawIndexed_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdDrawIndirect":
-			mNativeLib.LoadFunction("vkCmdDrawIndirect", out vkCmdDrawIndirect_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdDrawIndirect", out vkCmdDrawIndirect_ptr, instance, invokeErrorCallback);
 			if(vkCmdDrawIndirect_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdDrawIndexedIndirect":
-			mNativeLib.LoadFunction("vkCmdDrawIndexedIndirect", out vkCmdDrawIndexedIndirect_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdDrawIndexedIndirect", out vkCmdDrawIndexedIndirect_ptr, instance, invokeErrorCallback);
 			if(vkCmdDrawIndexedIndirect_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdDispatch":
-			mNativeLib.LoadFunction("vkCmdDispatch", out vkCmdDispatch_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdDispatch", out vkCmdDispatch_ptr, instance, invokeErrorCallback);
 			if(vkCmdDispatch_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdDispatchIndirect":
-			mNativeLib.LoadFunction("vkCmdDispatchIndirect", out vkCmdDispatchIndirect_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdDispatchIndirect", out vkCmdDispatchIndirect_ptr, instance, invokeErrorCallback);
 			if(vkCmdDispatchIndirect_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdCopyBuffer":
-			mNativeLib.LoadFunction("vkCmdCopyBuffer", out vkCmdCopyBuffer_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdCopyBuffer", out vkCmdCopyBuffer_ptr, instance, invokeErrorCallback);
 			if(vkCmdCopyBuffer_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdCopyImage":
-			mNativeLib.LoadFunction("vkCmdCopyImage", out vkCmdCopyImage_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdCopyImage", out vkCmdCopyImage_ptr, instance, invokeErrorCallback);
 			if(vkCmdCopyImage_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdBlitImage":
-			mNativeLib.LoadFunction("vkCmdBlitImage", out vkCmdBlitImage_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdBlitImage", out vkCmdBlitImage_ptr, instance, invokeErrorCallback);
 			if(vkCmdBlitImage_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdCopyBufferToImage":
-			mNativeLib.LoadFunction("vkCmdCopyBufferToImage", out vkCmdCopyBufferToImage_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdCopyBufferToImage", out vkCmdCopyBufferToImage_ptr, instance, invokeErrorCallback);
 			if(vkCmdCopyBufferToImage_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdCopyImageToBuffer":
-			mNativeLib.LoadFunction("vkCmdCopyImageToBuffer", out vkCmdCopyImageToBuffer_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdCopyImageToBuffer", out vkCmdCopyImageToBuffer_ptr, instance, invokeErrorCallback);
 			if(vkCmdCopyImageToBuffer_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdUpdateBuffer":
-			mNativeLib.LoadFunction("vkCmdUpdateBuffer", out vkCmdUpdateBuffer_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdUpdateBuffer", out vkCmdUpdateBuffer_ptr, instance, invokeErrorCallback);
 			if(vkCmdUpdateBuffer_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdFillBuffer":
-			mNativeLib.LoadFunction("vkCmdFillBuffer", out vkCmdFillBuffer_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdFillBuffer", out vkCmdFillBuffer_ptr, instance, invokeErrorCallback);
 			if(vkCmdFillBuffer_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdClearColorImage":
-			mNativeLib.LoadFunction("vkCmdClearColorImage", out vkCmdClearColorImage_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdClearColorImage", out vkCmdClearColorImage_ptr, instance, invokeErrorCallback);
 			if(vkCmdClearColorImage_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdClearDepthStencilImage":
-			mNativeLib.LoadFunction("vkCmdClearDepthStencilImage", out vkCmdClearDepthStencilImage_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdClearDepthStencilImage", out vkCmdClearDepthStencilImage_ptr, instance, invokeErrorCallback);
 			if(vkCmdClearDepthStencilImage_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdClearAttachments":
-			mNativeLib.LoadFunction("vkCmdClearAttachments", out vkCmdClearAttachments_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdClearAttachments", out vkCmdClearAttachments_ptr, instance, invokeErrorCallback);
 			if(vkCmdClearAttachments_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdResolveImage":
-			mNativeLib.LoadFunction("vkCmdResolveImage", out vkCmdResolveImage_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdResolveImage", out vkCmdResolveImage_ptr, instance, invokeErrorCallback);
 			if(vkCmdResolveImage_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetEvent":
-			mNativeLib.LoadFunction("vkCmdSetEvent", out vkCmdSetEvent_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetEvent", out vkCmdSetEvent_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetEvent_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdResetEvent":
-			mNativeLib.LoadFunction("vkCmdResetEvent", out vkCmdResetEvent_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdResetEvent", out vkCmdResetEvent_ptr, instance, invokeErrorCallback);
 			if(vkCmdResetEvent_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdWaitEvents":
-			mNativeLib.LoadFunction("vkCmdWaitEvents", out vkCmdWaitEvents_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdWaitEvents", out vkCmdWaitEvents_ptr, instance, invokeErrorCallback);
 			if(vkCmdWaitEvents_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdPipelineBarrier":
-			mNativeLib.LoadFunction("vkCmdPipelineBarrier", out vkCmdPipelineBarrier_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdPipelineBarrier", out vkCmdPipelineBarrier_ptr, instance, invokeErrorCallback);
 			if(vkCmdPipelineBarrier_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdBeginQuery":
-			mNativeLib.LoadFunction("vkCmdBeginQuery", out vkCmdBeginQuery_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdBeginQuery", out vkCmdBeginQuery_ptr, instance, invokeErrorCallback);
 			if(vkCmdBeginQuery_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdEndQuery":
-			mNativeLib.LoadFunction("vkCmdEndQuery", out vkCmdEndQuery_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdEndQuery", out vkCmdEndQuery_ptr, instance, invokeErrorCallback);
 			if(vkCmdEndQuery_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdResetQueryPool":
-			mNativeLib.LoadFunction("vkCmdResetQueryPool", out vkCmdResetQueryPool_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdResetQueryPool", out vkCmdResetQueryPool_ptr, instance, invokeErrorCallback);
 			if(vkCmdResetQueryPool_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdWriteTimestamp":
-			mNativeLib.LoadFunction("vkCmdWriteTimestamp", out vkCmdWriteTimestamp_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdWriteTimestamp", out vkCmdWriteTimestamp_ptr, instance, invokeErrorCallback);
 			if(vkCmdWriteTimestamp_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdCopyQueryPoolResults":
-			mNativeLib.LoadFunction("vkCmdCopyQueryPoolResults", out vkCmdCopyQueryPoolResults_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdCopyQueryPoolResults", out vkCmdCopyQueryPoolResults_ptr, instance, invokeErrorCallback);
 			if(vkCmdCopyQueryPoolResults_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdPushConstants":
-			mNativeLib.LoadFunction("vkCmdPushConstants", out vkCmdPushConstants_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdPushConstants", out vkCmdPushConstants_ptr, instance, invokeErrorCallback);
 			if(vkCmdPushConstants_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdBeginRenderPass":
-			mNativeLib.LoadFunction("vkCmdBeginRenderPass", out vkCmdBeginRenderPass_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdBeginRenderPass", out vkCmdBeginRenderPass_ptr, instance, invokeErrorCallback);
 			if(vkCmdBeginRenderPass_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdNextSubpass":
-			mNativeLib.LoadFunction("vkCmdNextSubpass", out vkCmdNextSubpass_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdNextSubpass", out vkCmdNextSubpass_ptr, instance, invokeErrorCallback);
 			if(vkCmdNextSubpass_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdEndRenderPass":
-			mNativeLib.LoadFunction("vkCmdEndRenderPass", out vkCmdEndRenderPass_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdEndRenderPass", out vkCmdEndRenderPass_ptr, instance, invokeErrorCallback);
 			if(vkCmdEndRenderPass_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdExecuteCommands":
-			mNativeLib.LoadFunction("vkCmdExecuteCommands", out vkCmdExecuteCommands_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdExecuteCommands", out vkCmdExecuteCommands_ptr, instance, invokeErrorCallback);
 			if(vkCmdExecuteCommands_ptr == null)
 				return .Err;
 			break;
 
 		case "vkEnumerateInstanceVersion":
-			mNativeLib.LoadFunction("vkEnumerateInstanceVersion", out vkEnumerateInstanceVersion_ptr, invokeErrorCallback);
+			LoadFunction("vkEnumerateInstanceVersion", out vkEnumerateInstanceVersion_ptr, instance, invokeErrorCallback);
 			if(vkEnumerateInstanceVersion_ptr == null)
 				return .Err;
 			break;
 
 		case "vkBindBufferMemory2":
-			mNativeLib.LoadFunction("vkBindBufferMemory2", out vkBindBufferMemory2_ptr, invokeErrorCallback);
+			LoadFunction("vkBindBufferMemory2", out vkBindBufferMemory2_ptr, instance, invokeErrorCallback);
 			if(vkBindBufferMemory2_ptr == null)
 				return .Err;
 			break;
 
 		case "vkBindImageMemory2":
-			mNativeLib.LoadFunction("vkBindImageMemory2", out vkBindImageMemory2_ptr, invokeErrorCallback);
+			LoadFunction("vkBindImageMemory2", out vkBindImageMemory2_ptr, instance, invokeErrorCallback);
 			if(vkBindImageMemory2_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetDeviceGroupPeerMemoryFeatures":
-			mNativeLib.LoadFunction("vkGetDeviceGroupPeerMemoryFeatures", out vkGetDeviceGroupPeerMemoryFeatures_ptr, invokeErrorCallback);
+			LoadFunction("vkGetDeviceGroupPeerMemoryFeatures", out vkGetDeviceGroupPeerMemoryFeatures_ptr, instance, invokeErrorCallback);
 			if(vkGetDeviceGroupPeerMemoryFeatures_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetDeviceMask":
-			mNativeLib.LoadFunction("vkCmdSetDeviceMask", out vkCmdSetDeviceMask_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetDeviceMask", out vkCmdSetDeviceMask_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetDeviceMask_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdDispatchBase":
-			mNativeLib.LoadFunction("vkCmdDispatchBase", out vkCmdDispatchBase_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdDispatchBase", out vkCmdDispatchBase_ptr, instance, invokeErrorCallback);
 			if(vkCmdDispatchBase_ptr == null)
 				return .Err;
 			break;
 
 		case "vkEnumeratePhysicalDeviceGroups":
-			mNativeLib.LoadFunction("vkEnumeratePhysicalDeviceGroups", out vkEnumeratePhysicalDeviceGroups_ptr, invokeErrorCallback);
+			LoadFunction("vkEnumeratePhysicalDeviceGroups", out vkEnumeratePhysicalDeviceGroups_ptr, instance, invokeErrorCallback);
 			if(vkEnumeratePhysicalDeviceGroups_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetImageMemoryRequirements2":
-			mNativeLib.LoadFunction("vkGetImageMemoryRequirements2", out vkGetImageMemoryRequirements2_ptr, invokeErrorCallback);
+			LoadFunction("vkGetImageMemoryRequirements2", out vkGetImageMemoryRequirements2_ptr, instance, invokeErrorCallback);
 			if(vkGetImageMemoryRequirements2_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetBufferMemoryRequirements2":
-			mNativeLib.LoadFunction("vkGetBufferMemoryRequirements2", out vkGetBufferMemoryRequirements2_ptr, invokeErrorCallback);
+			LoadFunction("vkGetBufferMemoryRequirements2", out vkGetBufferMemoryRequirements2_ptr, instance, invokeErrorCallback);
 			if(vkGetBufferMemoryRequirements2_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetImageSparseMemoryRequirements2":
-			mNativeLib.LoadFunction("vkGetImageSparseMemoryRequirements2", out vkGetImageSparseMemoryRequirements2_ptr, invokeErrorCallback);
+			LoadFunction("vkGetImageSparseMemoryRequirements2", out vkGetImageSparseMemoryRequirements2_ptr, instance, invokeErrorCallback);
 			if(vkGetImageSparseMemoryRequirements2_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceFeatures2":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceFeatures2", out vkGetPhysicalDeviceFeatures2_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceFeatures2", out vkGetPhysicalDeviceFeatures2_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceFeatures2_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceProperties2":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceProperties2", out vkGetPhysicalDeviceProperties2_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceProperties2", out vkGetPhysicalDeviceProperties2_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceProperties2_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceFormatProperties2":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceFormatProperties2", out vkGetPhysicalDeviceFormatProperties2_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceFormatProperties2", out vkGetPhysicalDeviceFormatProperties2_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceFormatProperties2_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceImageFormatProperties2":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceImageFormatProperties2", out vkGetPhysicalDeviceImageFormatProperties2_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceImageFormatProperties2", out vkGetPhysicalDeviceImageFormatProperties2_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceImageFormatProperties2_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceQueueFamilyProperties2":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceQueueFamilyProperties2", out vkGetPhysicalDeviceQueueFamilyProperties2_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceQueueFamilyProperties2", out vkGetPhysicalDeviceQueueFamilyProperties2_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceQueueFamilyProperties2_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceMemoryProperties2":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceMemoryProperties2", out vkGetPhysicalDeviceMemoryProperties2_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceMemoryProperties2", out vkGetPhysicalDeviceMemoryProperties2_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceMemoryProperties2_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceSparseImageFormatProperties2":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceSparseImageFormatProperties2", out vkGetPhysicalDeviceSparseImageFormatProperties2_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceSparseImageFormatProperties2", out vkGetPhysicalDeviceSparseImageFormatProperties2_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceSparseImageFormatProperties2_ptr == null)
 				return .Err;
 			break;
 
 		case "vkTrimCommandPool":
-			mNativeLib.LoadFunction("vkTrimCommandPool", out vkTrimCommandPool_ptr, invokeErrorCallback);
+			LoadFunction("vkTrimCommandPool", out vkTrimCommandPool_ptr, instance, invokeErrorCallback);
 			if(vkTrimCommandPool_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetDeviceQueue2":
-			mNativeLib.LoadFunction("vkGetDeviceQueue2", out vkGetDeviceQueue2_ptr, invokeErrorCallback);
+			LoadFunction("vkGetDeviceQueue2", out vkGetDeviceQueue2_ptr, instance, invokeErrorCallback);
 			if(vkGetDeviceQueue2_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateSamplerYcbcrConversion":
-			mNativeLib.LoadFunction("vkCreateSamplerYcbcrConversion", out vkCreateSamplerYcbcrConversion_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateSamplerYcbcrConversion", out vkCreateSamplerYcbcrConversion_ptr, instance, invokeErrorCallback);
 			if(vkCreateSamplerYcbcrConversion_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDestroySamplerYcbcrConversion":
-			mNativeLib.LoadFunction("vkDestroySamplerYcbcrConversion", out vkDestroySamplerYcbcrConversion_ptr, invokeErrorCallback);
+			LoadFunction("vkDestroySamplerYcbcrConversion", out vkDestroySamplerYcbcrConversion_ptr, instance, invokeErrorCallback);
 			if(vkDestroySamplerYcbcrConversion_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateDescriptorUpdateTemplate":
-			mNativeLib.LoadFunction("vkCreateDescriptorUpdateTemplate", out vkCreateDescriptorUpdateTemplate_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateDescriptorUpdateTemplate", out vkCreateDescriptorUpdateTemplate_ptr, instance, invokeErrorCallback);
 			if(vkCreateDescriptorUpdateTemplate_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDestroyDescriptorUpdateTemplate":
-			mNativeLib.LoadFunction("vkDestroyDescriptorUpdateTemplate", out vkDestroyDescriptorUpdateTemplate_ptr, invokeErrorCallback);
+			LoadFunction("vkDestroyDescriptorUpdateTemplate", out vkDestroyDescriptorUpdateTemplate_ptr, instance, invokeErrorCallback);
 			if(vkDestroyDescriptorUpdateTemplate_ptr == null)
 				return .Err;
 			break;
 
 		case "vkUpdateDescriptorSetWithTemplate":
-			mNativeLib.LoadFunction("vkUpdateDescriptorSetWithTemplate", out vkUpdateDescriptorSetWithTemplate_ptr, invokeErrorCallback);
+			LoadFunction("vkUpdateDescriptorSetWithTemplate", out vkUpdateDescriptorSetWithTemplate_ptr, instance, invokeErrorCallback);
 			if(vkUpdateDescriptorSetWithTemplate_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceExternalBufferProperties":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceExternalBufferProperties", out vkGetPhysicalDeviceExternalBufferProperties_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceExternalBufferProperties", out vkGetPhysicalDeviceExternalBufferProperties_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceExternalBufferProperties_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceExternalFenceProperties":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceExternalFenceProperties", out vkGetPhysicalDeviceExternalFenceProperties_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceExternalFenceProperties", out vkGetPhysicalDeviceExternalFenceProperties_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceExternalFenceProperties_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceExternalSemaphoreProperties":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceExternalSemaphoreProperties", out vkGetPhysicalDeviceExternalSemaphoreProperties_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceExternalSemaphoreProperties", out vkGetPhysicalDeviceExternalSemaphoreProperties_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceExternalSemaphoreProperties_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetDescriptorSetLayoutSupport":
-			mNativeLib.LoadFunction("vkGetDescriptorSetLayoutSupport", out vkGetDescriptorSetLayoutSupport_ptr, invokeErrorCallback);
+			LoadFunction("vkGetDescriptorSetLayoutSupport", out vkGetDescriptorSetLayoutSupport_ptr, instance, invokeErrorCallback);
 			if(vkGetDescriptorSetLayoutSupport_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdDrawIndirectCount":
-			mNativeLib.LoadFunction("vkCmdDrawIndirectCount", out vkCmdDrawIndirectCount_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdDrawIndirectCount", out vkCmdDrawIndirectCount_ptr, instance, invokeErrorCallback);
 			if(vkCmdDrawIndirectCount_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdDrawIndexedIndirectCount":
-			mNativeLib.LoadFunction("vkCmdDrawIndexedIndirectCount", out vkCmdDrawIndexedIndirectCount_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdDrawIndexedIndirectCount", out vkCmdDrawIndexedIndirectCount_ptr, instance, invokeErrorCallback);
 			if(vkCmdDrawIndexedIndirectCount_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateRenderPass2":
-			mNativeLib.LoadFunction("vkCreateRenderPass2", out vkCreateRenderPass2_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateRenderPass2", out vkCreateRenderPass2_ptr, instance, invokeErrorCallback);
 			if(vkCreateRenderPass2_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdBeginRenderPass2":
-			mNativeLib.LoadFunction("vkCmdBeginRenderPass2", out vkCmdBeginRenderPass2_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdBeginRenderPass2", out vkCmdBeginRenderPass2_ptr, instance, invokeErrorCallback);
 			if(vkCmdBeginRenderPass2_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdNextSubpass2":
-			mNativeLib.LoadFunction("vkCmdNextSubpass2", out vkCmdNextSubpass2_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdNextSubpass2", out vkCmdNextSubpass2_ptr, instance, invokeErrorCallback);
 			if(vkCmdNextSubpass2_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdEndRenderPass2":
-			mNativeLib.LoadFunction("vkCmdEndRenderPass2", out vkCmdEndRenderPass2_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdEndRenderPass2", out vkCmdEndRenderPass2_ptr, instance, invokeErrorCallback);
 			if(vkCmdEndRenderPass2_ptr == null)
 				return .Err;
 			break;
 
 		case "vkResetQueryPool":
-			mNativeLib.LoadFunction("vkResetQueryPool", out vkResetQueryPool_ptr, invokeErrorCallback);
+			LoadFunction("vkResetQueryPool", out vkResetQueryPool_ptr, instance, invokeErrorCallback);
 			if(vkResetQueryPool_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetSemaphoreCounterValue":
-			mNativeLib.LoadFunction("vkGetSemaphoreCounterValue", out vkGetSemaphoreCounterValue_ptr, invokeErrorCallback);
+			LoadFunction("vkGetSemaphoreCounterValue", out vkGetSemaphoreCounterValue_ptr, instance, invokeErrorCallback);
 			if(vkGetSemaphoreCounterValue_ptr == null)
 				return .Err;
 			break;
 
 		case "vkWaitSemaphores":
-			mNativeLib.LoadFunction("vkWaitSemaphores", out vkWaitSemaphores_ptr, invokeErrorCallback);
+			LoadFunction("vkWaitSemaphores", out vkWaitSemaphores_ptr, instance, invokeErrorCallback);
 			if(vkWaitSemaphores_ptr == null)
 				return .Err;
 			break;
 
 		case "vkSignalSemaphore":
-			mNativeLib.LoadFunction("vkSignalSemaphore", out vkSignalSemaphore_ptr, invokeErrorCallback);
+			LoadFunction("vkSignalSemaphore", out vkSignalSemaphore_ptr, instance, invokeErrorCallback);
 			if(vkSignalSemaphore_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetBufferDeviceAddress":
-			mNativeLib.LoadFunction("vkGetBufferDeviceAddress", out vkGetBufferDeviceAddress_ptr, invokeErrorCallback);
+			LoadFunction("vkGetBufferDeviceAddress", out vkGetBufferDeviceAddress_ptr, instance, invokeErrorCallback);
 			if(vkGetBufferDeviceAddress_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetBufferOpaqueCaptureAddress":
-			mNativeLib.LoadFunction("vkGetBufferOpaqueCaptureAddress", out vkGetBufferOpaqueCaptureAddress_ptr, invokeErrorCallback);
+			LoadFunction("vkGetBufferOpaqueCaptureAddress", out vkGetBufferOpaqueCaptureAddress_ptr, instance, invokeErrorCallback);
 			if(vkGetBufferOpaqueCaptureAddress_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetDeviceMemoryOpaqueCaptureAddress":
-			mNativeLib.LoadFunction("vkGetDeviceMemoryOpaqueCaptureAddress", out vkGetDeviceMemoryOpaqueCaptureAddress_ptr, invokeErrorCallback);
+			LoadFunction("vkGetDeviceMemoryOpaqueCaptureAddress", out vkGetDeviceMemoryOpaqueCaptureAddress_ptr, instance, invokeErrorCallback);
 			if(vkGetDeviceMemoryOpaqueCaptureAddress_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceToolProperties":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceToolProperties", out vkGetPhysicalDeviceToolProperties_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceToolProperties", out vkGetPhysicalDeviceToolProperties_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceToolProperties_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreatePrivateDataSlot":
-			mNativeLib.LoadFunction("vkCreatePrivateDataSlot", out vkCreatePrivateDataSlot_ptr, invokeErrorCallback);
+			LoadFunction("vkCreatePrivateDataSlot", out vkCreatePrivateDataSlot_ptr, instance, invokeErrorCallback);
 			if(vkCreatePrivateDataSlot_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDestroyPrivateDataSlot":
-			mNativeLib.LoadFunction("vkDestroyPrivateDataSlot", out vkDestroyPrivateDataSlot_ptr, invokeErrorCallback);
+			LoadFunction("vkDestroyPrivateDataSlot", out vkDestroyPrivateDataSlot_ptr, instance, invokeErrorCallback);
 			if(vkDestroyPrivateDataSlot_ptr == null)
 				return .Err;
 			break;
 
 		case "vkSetPrivateData":
-			mNativeLib.LoadFunction("vkSetPrivateData", out vkSetPrivateData_ptr, invokeErrorCallback);
+			LoadFunction("vkSetPrivateData", out vkSetPrivateData_ptr, instance, invokeErrorCallback);
 			if(vkSetPrivateData_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPrivateData":
-			mNativeLib.LoadFunction("vkGetPrivateData", out vkGetPrivateData_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPrivateData", out vkGetPrivateData_ptr, instance, invokeErrorCallback);
 			if(vkGetPrivateData_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetEvent2":
-			mNativeLib.LoadFunction("vkCmdSetEvent2", out vkCmdSetEvent2_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetEvent2", out vkCmdSetEvent2_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetEvent2_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdResetEvent2":
-			mNativeLib.LoadFunction("vkCmdResetEvent2", out vkCmdResetEvent2_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdResetEvent2", out vkCmdResetEvent2_ptr, instance, invokeErrorCallback);
 			if(vkCmdResetEvent2_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdWaitEvents2":
-			mNativeLib.LoadFunction("vkCmdWaitEvents2", out vkCmdWaitEvents2_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdWaitEvents2", out vkCmdWaitEvents2_ptr, instance, invokeErrorCallback);
 			if(vkCmdWaitEvents2_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdPipelineBarrier2":
-			mNativeLib.LoadFunction("vkCmdPipelineBarrier2", out vkCmdPipelineBarrier2_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdPipelineBarrier2", out vkCmdPipelineBarrier2_ptr, instance, invokeErrorCallback);
 			if(vkCmdPipelineBarrier2_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdWriteTimestamp2":
-			mNativeLib.LoadFunction("vkCmdWriteTimestamp2", out vkCmdWriteTimestamp2_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdWriteTimestamp2", out vkCmdWriteTimestamp2_ptr, instance, invokeErrorCallback);
 			if(vkCmdWriteTimestamp2_ptr == null)
 				return .Err;
 			break;
 
 		case "vkQueueSubmit2":
-			mNativeLib.LoadFunction("vkQueueSubmit2", out vkQueueSubmit2_ptr, invokeErrorCallback);
+			LoadFunction("vkQueueSubmit2", out vkQueueSubmit2_ptr, instance, invokeErrorCallback);
 			if(vkQueueSubmit2_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdCopyBuffer2":
-			mNativeLib.LoadFunction("vkCmdCopyBuffer2", out vkCmdCopyBuffer2_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdCopyBuffer2", out vkCmdCopyBuffer2_ptr, instance, invokeErrorCallback);
 			if(vkCmdCopyBuffer2_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdCopyImage2":
-			mNativeLib.LoadFunction("vkCmdCopyImage2", out vkCmdCopyImage2_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdCopyImage2", out vkCmdCopyImage2_ptr, instance, invokeErrorCallback);
 			if(vkCmdCopyImage2_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdCopyBufferToImage2":
-			mNativeLib.LoadFunction("vkCmdCopyBufferToImage2", out vkCmdCopyBufferToImage2_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdCopyBufferToImage2", out vkCmdCopyBufferToImage2_ptr, instance, invokeErrorCallback);
 			if(vkCmdCopyBufferToImage2_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdCopyImageToBuffer2":
-			mNativeLib.LoadFunction("vkCmdCopyImageToBuffer2", out vkCmdCopyImageToBuffer2_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdCopyImageToBuffer2", out vkCmdCopyImageToBuffer2_ptr, instance, invokeErrorCallback);
 			if(vkCmdCopyImageToBuffer2_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdBlitImage2":
-			mNativeLib.LoadFunction("vkCmdBlitImage2", out vkCmdBlitImage2_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdBlitImage2", out vkCmdBlitImage2_ptr, instance, invokeErrorCallback);
 			if(vkCmdBlitImage2_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdResolveImage2":
-			mNativeLib.LoadFunction("vkCmdResolveImage2", out vkCmdResolveImage2_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdResolveImage2", out vkCmdResolveImage2_ptr, instance, invokeErrorCallback);
 			if(vkCmdResolveImage2_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdBeginRendering":
-			mNativeLib.LoadFunction("vkCmdBeginRendering", out vkCmdBeginRendering_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdBeginRendering", out vkCmdBeginRendering_ptr, instance, invokeErrorCallback);
 			if(vkCmdBeginRendering_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdEndRendering":
-			mNativeLib.LoadFunction("vkCmdEndRendering", out vkCmdEndRendering_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdEndRendering", out vkCmdEndRendering_ptr, instance, invokeErrorCallback);
 			if(vkCmdEndRendering_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetCullMode":
-			mNativeLib.LoadFunction("vkCmdSetCullMode", out vkCmdSetCullMode_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetCullMode", out vkCmdSetCullMode_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetCullMode_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetFrontFace":
-			mNativeLib.LoadFunction("vkCmdSetFrontFace", out vkCmdSetFrontFace_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetFrontFace", out vkCmdSetFrontFace_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetFrontFace_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetPrimitiveTopology":
-			mNativeLib.LoadFunction("vkCmdSetPrimitiveTopology", out vkCmdSetPrimitiveTopology_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetPrimitiveTopology", out vkCmdSetPrimitiveTopology_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetPrimitiveTopology_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetViewportWithCount":
-			mNativeLib.LoadFunction("vkCmdSetViewportWithCount", out vkCmdSetViewportWithCount_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetViewportWithCount", out vkCmdSetViewportWithCount_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetViewportWithCount_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetScissorWithCount":
-			mNativeLib.LoadFunction("vkCmdSetScissorWithCount", out vkCmdSetScissorWithCount_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetScissorWithCount", out vkCmdSetScissorWithCount_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetScissorWithCount_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdBindVertexBuffers2":
-			mNativeLib.LoadFunction("vkCmdBindVertexBuffers2", out vkCmdBindVertexBuffers2_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdBindVertexBuffers2", out vkCmdBindVertexBuffers2_ptr, instance, invokeErrorCallback);
 			if(vkCmdBindVertexBuffers2_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetDepthTestEnable":
-			mNativeLib.LoadFunction("vkCmdSetDepthTestEnable", out vkCmdSetDepthTestEnable_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetDepthTestEnable", out vkCmdSetDepthTestEnable_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetDepthTestEnable_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetDepthWriteEnable":
-			mNativeLib.LoadFunction("vkCmdSetDepthWriteEnable", out vkCmdSetDepthWriteEnable_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetDepthWriteEnable", out vkCmdSetDepthWriteEnable_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetDepthWriteEnable_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetDepthCompareOp":
-			mNativeLib.LoadFunction("vkCmdSetDepthCompareOp", out vkCmdSetDepthCompareOp_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetDepthCompareOp", out vkCmdSetDepthCompareOp_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetDepthCompareOp_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetDepthBoundsTestEnable":
-			mNativeLib.LoadFunction("vkCmdSetDepthBoundsTestEnable", out vkCmdSetDepthBoundsTestEnable_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetDepthBoundsTestEnable", out vkCmdSetDepthBoundsTestEnable_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetDepthBoundsTestEnable_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetStencilTestEnable":
-			mNativeLib.LoadFunction("vkCmdSetStencilTestEnable", out vkCmdSetStencilTestEnable_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetStencilTestEnable", out vkCmdSetStencilTestEnable_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetStencilTestEnable_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetStencilOp":
-			mNativeLib.LoadFunction("vkCmdSetStencilOp", out vkCmdSetStencilOp_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetStencilOp", out vkCmdSetStencilOp_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetStencilOp_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetRasterizerDiscardEnable":
-			mNativeLib.LoadFunction("vkCmdSetRasterizerDiscardEnable", out vkCmdSetRasterizerDiscardEnable_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetRasterizerDiscardEnable", out vkCmdSetRasterizerDiscardEnable_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetRasterizerDiscardEnable_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetDepthBiasEnable":
-			mNativeLib.LoadFunction("vkCmdSetDepthBiasEnable", out vkCmdSetDepthBiasEnable_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetDepthBiasEnable", out vkCmdSetDepthBiasEnable_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetDepthBiasEnable_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetPrimitiveRestartEnable":
-			mNativeLib.LoadFunction("vkCmdSetPrimitiveRestartEnable", out vkCmdSetPrimitiveRestartEnable_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetPrimitiveRestartEnable", out vkCmdSetPrimitiveRestartEnable_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetPrimitiveRestartEnable_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetDeviceBufferMemoryRequirements":
-			mNativeLib.LoadFunction("vkGetDeviceBufferMemoryRequirements", out vkGetDeviceBufferMemoryRequirements_ptr, invokeErrorCallback);
+			LoadFunction("vkGetDeviceBufferMemoryRequirements", out vkGetDeviceBufferMemoryRequirements_ptr, instance, invokeErrorCallback);
 			if(vkGetDeviceBufferMemoryRequirements_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetDeviceImageMemoryRequirements":
-			mNativeLib.LoadFunction("vkGetDeviceImageMemoryRequirements", out vkGetDeviceImageMemoryRequirements_ptr, invokeErrorCallback);
+			LoadFunction("vkGetDeviceImageMemoryRequirements", out vkGetDeviceImageMemoryRequirements_ptr, instance, invokeErrorCallback);
 			if(vkGetDeviceImageMemoryRequirements_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetDeviceImageSparseMemoryRequirements":
-			mNativeLib.LoadFunction("vkGetDeviceImageSparseMemoryRequirements", out vkGetDeviceImageSparseMemoryRequirements_ptr, invokeErrorCallback);
+			LoadFunction("vkGetDeviceImageSparseMemoryRequirements", out vkGetDeviceImageSparseMemoryRequirements_ptr, instance, invokeErrorCallback);
 			if(vkGetDeviceImageSparseMemoryRequirements_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetCommandPoolMemoryConsumption":
-			mNativeLib.LoadFunction("vkGetCommandPoolMemoryConsumption", out vkGetCommandPoolMemoryConsumption_ptr, invokeErrorCallback);
+			LoadFunction("vkGetCommandPoolMemoryConsumption", out vkGetCommandPoolMemoryConsumption_ptr, instance, invokeErrorCallback);
 			if(vkGetCommandPoolMemoryConsumption_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetFaultData":
-			mNativeLib.LoadFunction("vkGetFaultData", out vkGetFaultData_ptr, invokeErrorCallback);
+			LoadFunction("vkGetFaultData", out vkGetFaultData_ptr, instance, invokeErrorCallback);
 			if(vkGetFaultData_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDestroySurfaceKHR":
-			mNativeLib.LoadFunction("vkDestroySurfaceKHR", out vkDestroySurfaceKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkDestroySurfaceKHR", out vkDestroySurfaceKHR_ptr, instance, invokeErrorCallback);
 			if(vkDestroySurfaceKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceSurfaceSupportKHR":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceSurfaceSupportKHR", out vkGetPhysicalDeviceSurfaceSupportKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceSurfaceSupportKHR", out vkGetPhysicalDeviceSurfaceSupportKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceSurfaceSupportKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceSurfaceCapabilitiesKHR":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceSurfaceCapabilitiesKHR", out vkGetPhysicalDeviceSurfaceCapabilitiesKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceSurfaceCapabilitiesKHR", out vkGetPhysicalDeviceSurfaceCapabilitiesKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceSurfaceCapabilitiesKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceSurfaceFormatsKHR":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceSurfaceFormatsKHR", out vkGetPhysicalDeviceSurfaceFormatsKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceSurfaceFormatsKHR", out vkGetPhysicalDeviceSurfaceFormatsKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceSurfaceFormatsKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceSurfacePresentModesKHR":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceSurfacePresentModesKHR", out vkGetPhysicalDeviceSurfacePresentModesKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceSurfacePresentModesKHR", out vkGetPhysicalDeviceSurfacePresentModesKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceSurfacePresentModesKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateSwapchainKHR":
-			mNativeLib.LoadFunction("vkCreateSwapchainKHR", out vkCreateSwapchainKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateSwapchainKHR", out vkCreateSwapchainKHR_ptr, instance, invokeErrorCallback);
 			if(vkCreateSwapchainKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDestroySwapchainKHR":
-			mNativeLib.LoadFunction("vkDestroySwapchainKHR", out vkDestroySwapchainKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkDestroySwapchainKHR", out vkDestroySwapchainKHR_ptr, instance, invokeErrorCallback);
 			if(vkDestroySwapchainKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetSwapchainImagesKHR":
-			mNativeLib.LoadFunction("vkGetSwapchainImagesKHR", out vkGetSwapchainImagesKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetSwapchainImagesKHR", out vkGetSwapchainImagesKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetSwapchainImagesKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkAcquireNextImageKHR":
-			mNativeLib.LoadFunction("vkAcquireNextImageKHR", out vkAcquireNextImageKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkAcquireNextImageKHR", out vkAcquireNextImageKHR_ptr, instance, invokeErrorCallback);
 			if(vkAcquireNextImageKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkQueuePresentKHR":
-			mNativeLib.LoadFunction("vkQueuePresentKHR", out vkQueuePresentKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkQueuePresentKHR", out vkQueuePresentKHR_ptr, instance, invokeErrorCallback);
 			if(vkQueuePresentKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceDisplayPropertiesKHR":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceDisplayPropertiesKHR", out vkGetPhysicalDeviceDisplayPropertiesKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceDisplayPropertiesKHR", out vkGetPhysicalDeviceDisplayPropertiesKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceDisplayPropertiesKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceDisplayPlanePropertiesKHR":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceDisplayPlanePropertiesKHR", out vkGetPhysicalDeviceDisplayPlanePropertiesKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceDisplayPlanePropertiesKHR", out vkGetPhysicalDeviceDisplayPlanePropertiesKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceDisplayPlanePropertiesKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetDisplayPlaneSupportedDisplaysKHR":
-			mNativeLib.LoadFunction("vkGetDisplayPlaneSupportedDisplaysKHR", out vkGetDisplayPlaneSupportedDisplaysKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetDisplayPlaneSupportedDisplaysKHR", out vkGetDisplayPlaneSupportedDisplaysKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetDisplayPlaneSupportedDisplaysKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetDisplayModePropertiesKHR":
-			mNativeLib.LoadFunction("vkGetDisplayModePropertiesKHR", out vkGetDisplayModePropertiesKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetDisplayModePropertiesKHR", out vkGetDisplayModePropertiesKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetDisplayModePropertiesKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateDisplayModeKHR":
-			mNativeLib.LoadFunction("vkCreateDisplayModeKHR", out vkCreateDisplayModeKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateDisplayModeKHR", out vkCreateDisplayModeKHR_ptr, instance, invokeErrorCallback);
 			if(vkCreateDisplayModeKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetDisplayPlaneCapabilitiesKHR":
-			mNativeLib.LoadFunction("vkGetDisplayPlaneCapabilitiesKHR", out vkGetDisplayPlaneCapabilitiesKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetDisplayPlaneCapabilitiesKHR", out vkGetDisplayPlaneCapabilitiesKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetDisplayPlaneCapabilitiesKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateDisplayPlaneSurfaceKHR":
-			mNativeLib.LoadFunction("vkCreateDisplayPlaneSurfaceKHR", out vkCreateDisplayPlaneSurfaceKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateDisplayPlaneSurfaceKHR", out vkCreateDisplayPlaneSurfaceKHR_ptr, instance, invokeErrorCallback);
 			if(vkCreateDisplayPlaneSurfaceKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateSharedSwapchainsKHR":
-			mNativeLib.LoadFunction("vkCreateSharedSwapchainsKHR", out vkCreateSharedSwapchainsKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateSharedSwapchainsKHR", out vkCreateSharedSwapchainsKHR_ptr, instance, invokeErrorCallback);
 			if(vkCreateSharedSwapchainsKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateXlibSurfaceKHR":
-			mNativeLib.LoadFunction("vkCreateXlibSurfaceKHR", out vkCreateXlibSurfaceKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateXlibSurfaceKHR", out vkCreateXlibSurfaceKHR_ptr, instance, invokeErrorCallback);
 			if(vkCreateXlibSurfaceKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceXlibPresentationSupportKHR":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceXlibPresentationSupportKHR", out vkGetPhysicalDeviceXlibPresentationSupportKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceXlibPresentationSupportKHR", out vkGetPhysicalDeviceXlibPresentationSupportKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceXlibPresentationSupportKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateXcbSurfaceKHR":
-			mNativeLib.LoadFunction("vkCreateXcbSurfaceKHR", out vkCreateXcbSurfaceKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateXcbSurfaceKHR", out vkCreateXcbSurfaceKHR_ptr, instance, invokeErrorCallback);
 			if(vkCreateXcbSurfaceKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceXcbPresentationSupportKHR":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceXcbPresentationSupportKHR", out vkGetPhysicalDeviceXcbPresentationSupportKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceXcbPresentationSupportKHR", out vkGetPhysicalDeviceXcbPresentationSupportKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceXcbPresentationSupportKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateWaylandSurfaceKHR":
-			mNativeLib.LoadFunction("vkCreateWaylandSurfaceKHR", out vkCreateWaylandSurfaceKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateWaylandSurfaceKHR", out vkCreateWaylandSurfaceKHR_ptr, instance, invokeErrorCallback);
 			if(vkCreateWaylandSurfaceKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceWaylandPresentationSupportKHR":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceWaylandPresentationSupportKHR", out vkGetPhysicalDeviceWaylandPresentationSupportKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceWaylandPresentationSupportKHR", out vkGetPhysicalDeviceWaylandPresentationSupportKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceWaylandPresentationSupportKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateAndroidSurfaceKHR":
-			mNativeLib.LoadFunction("vkCreateAndroidSurfaceKHR", out vkCreateAndroidSurfaceKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateAndroidSurfaceKHR", out vkCreateAndroidSurfaceKHR_ptr, instance, invokeErrorCallback);
 			if(vkCreateAndroidSurfaceKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateWin32SurfaceKHR":
-			mNativeLib.LoadFunction("vkCreateWin32SurfaceKHR", out vkCreateWin32SurfaceKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateWin32SurfaceKHR", out vkCreateWin32SurfaceKHR_ptr, instance, invokeErrorCallback);
 			if(vkCreateWin32SurfaceKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceWin32PresentationSupportKHR":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceWin32PresentationSupportKHR", out vkGetPhysicalDeviceWin32PresentationSupportKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceWin32PresentationSupportKHR", out vkGetPhysicalDeviceWin32PresentationSupportKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceWin32PresentationSupportKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateDebugReportCallbackEXT":
-			mNativeLib.LoadFunction("vkCreateDebugReportCallbackEXT", out vkCreateDebugReportCallbackEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateDebugReportCallbackEXT", out vkCreateDebugReportCallbackEXT_ptr, instance, invokeErrorCallback);
 			if(vkCreateDebugReportCallbackEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDestroyDebugReportCallbackEXT":
-			mNativeLib.LoadFunction("vkDestroyDebugReportCallbackEXT", out vkDestroyDebugReportCallbackEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkDestroyDebugReportCallbackEXT", out vkDestroyDebugReportCallbackEXT_ptr, instance, invokeErrorCallback);
 			if(vkDestroyDebugReportCallbackEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDebugReportMessageEXT":
-			mNativeLib.LoadFunction("vkDebugReportMessageEXT", out vkDebugReportMessageEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkDebugReportMessageEXT", out vkDebugReportMessageEXT_ptr, instance, invokeErrorCallback);
 			if(vkDebugReportMessageEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDebugMarkerSetObjectTagEXT":
-			mNativeLib.LoadFunction("vkDebugMarkerSetObjectTagEXT", out vkDebugMarkerSetObjectTagEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkDebugMarkerSetObjectTagEXT", out vkDebugMarkerSetObjectTagEXT_ptr, instance, invokeErrorCallback);
 			if(vkDebugMarkerSetObjectTagEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDebugMarkerSetObjectNameEXT":
-			mNativeLib.LoadFunction("vkDebugMarkerSetObjectNameEXT", out vkDebugMarkerSetObjectNameEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkDebugMarkerSetObjectNameEXT", out vkDebugMarkerSetObjectNameEXT_ptr, instance, invokeErrorCallback);
 			if(vkDebugMarkerSetObjectNameEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdDebugMarkerBeginEXT":
-			mNativeLib.LoadFunction("vkCmdDebugMarkerBeginEXT", out vkCmdDebugMarkerBeginEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdDebugMarkerBeginEXT", out vkCmdDebugMarkerBeginEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdDebugMarkerBeginEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdDebugMarkerEndEXT":
-			mNativeLib.LoadFunction("vkCmdDebugMarkerEndEXT", out vkCmdDebugMarkerEndEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdDebugMarkerEndEXT", out vkCmdDebugMarkerEndEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdDebugMarkerEndEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdDebugMarkerInsertEXT":
-			mNativeLib.LoadFunction("vkCmdDebugMarkerInsertEXT", out vkCmdDebugMarkerInsertEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdDebugMarkerInsertEXT", out vkCmdDebugMarkerInsertEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdDebugMarkerInsertEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceVideoCapabilitiesKHR":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceVideoCapabilitiesKHR", out vkGetPhysicalDeviceVideoCapabilitiesKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceVideoCapabilitiesKHR", out vkGetPhysicalDeviceVideoCapabilitiesKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceVideoCapabilitiesKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceVideoFormatPropertiesKHR":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceVideoFormatPropertiesKHR", out vkGetPhysicalDeviceVideoFormatPropertiesKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceVideoFormatPropertiesKHR", out vkGetPhysicalDeviceVideoFormatPropertiesKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceVideoFormatPropertiesKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateVideoSessionKHR":
-			mNativeLib.LoadFunction("vkCreateVideoSessionKHR", out vkCreateVideoSessionKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateVideoSessionKHR", out vkCreateVideoSessionKHR_ptr, instance, invokeErrorCallback);
 			if(vkCreateVideoSessionKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDestroyVideoSessionKHR":
-			mNativeLib.LoadFunction("vkDestroyVideoSessionKHR", out vkDestroyVideoSessionKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkDestroyVideoSessionKHR", out vkDestroyVideoSessionKHR_ptr, instance, invokeErrorCallback);
 			if(vkDestroyVideoSessionKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetVideoSessionMemoryRequirementsKHR":
-			mNativeLib.LoadFunction("vkGetVideoSessionMemoryRequirementsKHR", out vkGetVideoSessionMemoryRequirementsKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetVideoSessionMemoryRequirementsKHR", out vkGetVideoSessionMemoryRequirementsKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetVideoSessionMemoryRequirementsKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkBindVideoSessionMemoryKHR":
-			mNativeLib.LoadFunction("vkBindVideoSessionMemoryKHR", out vkBindVideoSessionMemoryKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkBindVideoSessionMemoryKHR", out vkBindVideoSessionMemoryKHR_ptr, instance, invokeErrorCallback);
 			if(vkBindVideoSessionMemoryKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateVideoSessionParametersKHR":
-			mNativeLib.LoadFunction("vkCreateVideoSessionParametersKHR", out vkCreateVideoSessionParametersKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateVideoSessionParametersKHR", out vkCreateVideoSessionParametersKHR_ptr, instance, invokeErrorCallback);
 			if(vkCreateVideoSessionParametersKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkUpdateVideoSessionParametersKHR":
-			mNativeLib.LoadFunction("vkUpdateVideoSessionParametersKHR", out vkUpdateVideoSessionParametersKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkUpdateVideoSessionParametersKHR", out vkUpdateVideoSessionParametersKHR_ptr, instance, invokeErrorCallback);
 			if(vkUpdateVideoSessionParametersKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDestroyVideoSessionParametersKHR":
-			mNativeLib.LoadFunction("vkDestroyVideoSessionParametersKHR", out vkDestroyVideoSessionParametersKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkDestroyVideoSessionParametersKHR", out vkDestroyVideoSessionParametersKHR_ptr, instance, invokeErrorCallback);
 			if(vkDestroyVideoSessionParametersKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdBeginVideoCodingKHR":
-			mNativeLib.LoadFunction("vkCmdBeginVideoCodingKHR", out vkCmdBeginVideoCodingKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdBeginVideoCodingKHR", out vkCmdBeginVideoCodingKHR_ptr, instance, invokeErrorCallback);
 			if(vkCmdBeginVideoCodingKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdEndVideoCodingKHR":
-			mNativeLib.LoadFunction("vkCmdEndVideoCodingKHR", out vkCmdEndVideoCodingKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdEndVideoCodingKHR", out vkCmdEndVideoCodingKHR_ptr, instance, invokeErrorCallback);
 			if(vkCmdEndVideoCodingKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdControlVideoCodingKHR":
-			mNativeLib.LoadFunction("vkCmdControlVideoCodingKHR", out vkCmdControlVideoCodingKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdControlVideoCodingKHR", out vkCmdControlVideoCodingKHR_ptr, instance, invokeErrorCallback);
 			if(vkCmdControlVideoCodingKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdDecodeVideoKHR":
-			mNativeLib.LoadFunction("vkCmdDecodeVideoKHR", out vkCmdDecodeVideoKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdDecodeVideoKHR", out vkCmdDecodeVideoKHR_ptr, instance, invokeErrorCallback);
 			if(vkCmdDecodeVideoKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdBindTransformFeedbackBuffersEXT":
-			mNativeLib.LoadFunction("vkCmdBindTransformFeedbackBuffersEXT", out vkCmdBindTransformFeedbackBuffersEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdBindTransformFeedbackBuffersEXT", out vkCmdBindTransformFeedbackBuffersEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdBindTransformFeedbackBuffersEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdBeginTransformFeedbackEXT":
-			mNativeLib.LoadFunction("vkCmdBeginTransformFeedbackEXT", out vkCmdBeginTransformFeedbackEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdBeginTransformFeedbackEXT", out vkCmdBeginTransformFeedbackEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdBeginTransformFeedbackEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdEndTransformFeedbackEXT":
-			mNativeLib.LoadFunction("vkCmdEndTransformFeedbackEXT", out vkCmdEndTransformFeedbackEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdEndTransformFeedbackEXT", out vkCmdEndTransformFeedbackEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdEndTransformFeedbackEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdBeginQueryIndexedEXT":
-			mNativeLib.LoadFunction("vkCmdBeginQueryIndexedEXT", out vkCmdBeginQueryIndexedEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdBeginQueryIndexedEXT", out vkCmdBeginQueryIndexedEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdBeginQueryIndexedEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdEndQueryIndexedEXT":
-			mNativeLib.LoadFunction("vkCmdEndQueryIndexedEXT", out vkCmdEndQueryIndexedEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdEndQueryIndexedEXT", out vkCmdEndQueryIndexedEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdEndQueryIndexedEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdDrawIndirectByteCountEXT":
-			mNativeLib.LoadFunction("vkCmdDrawIndirectByteCountEXT", out vkCmdDrawIndirectByteCountEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdDrawIndirectByteCountEXT", out vkCmdDrawIndirectByteCountEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdDrawIndirectByteCountEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateCuModuleNVX":
-			mNativeLib.LoadFunction("vkCreateCuModuleNVX", out vkCreateCuModuleNVX_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateCuModuleNVX", out vkCreateCuModuleNVX_ptr, instance, invokeErrorCallback);
 			if(vkCreateCuModuleNVX_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateCuFunctionNVX":
-			mNativeLib.LoadFunction("vkCreateCuFunctionNVX", out vkCreateCuFunctionNVX_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateCuFunctionNVX", out vkCreateCuFunctionNVX_ptr, instance, invokeErrorCallback);
 			if(vkCreateCuFunctionNVX_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDestroyCuModuleNVX":
-			mNativeLib.LoadFunction("vkDestroyCuModuleNVX", out vkDestroyCuModuleNVX_ptr, invokeErrorCallback);
+			LoadFunction("vkDestroyCuModuleNVX", out vkDestroyCuModuleNVX_ptr, instance, invokeErrorCallback);
 			if(vkDestroyCuModuleNVX_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDestroyCuFunctionNVX":
-			mNativeLib.LoadFunction("vkDestroyCuFunctionNVX", out vkDestroyCuFunctionNVX_ptr, invokeErrorCallback);
+			LoadFunction("vkDestroyCuFunctionNVX", out vkDestroyCuFunctionNVX_ptr, instance, invokeErrorCallback);
 			if(vkDestroyCuFunctionNVX_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdCuLaunchKernelNVX":
-			mNativeLib.LoadFunction("vkCmdCuLaunchKernelNVX", out vkCmdCuLaunchKernelNVX_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdCuLaunchKernelNVX", out vkCmdCuLaunchKernelNVX_ptr, instance, invokeErrorCallback);
 			if(vkCmdCuLaunchKernelNVX_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetImageViewHandleNVX":
-			mNativeLib.LoadFunction("vkGetImageViewHandleNVX", out vkGetImageViewHandleNVX_ptr, invokeErrorCallback);
+			LoadFunction("vkGetImageViewHandleNVX", out vkGetImageViewHandleNVX_ptr, instance, invokeErrorCallback);
 			if(vkGetImageViewHandleNVX_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetImageViewAddressNVX":
-			mNativeLib.LoadFunction("vkGetImageViewAddressNVX", out vkGetImageViewAddressNVX_ptr, invokeErrorCallback);
+			LoadFunction("vkGetImageViewAddressNVX", out vkGetImageViewAddressNVX_ptr, instance, invokeErrorCallback);
 			if(vkGetImageViewAddressNVX_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetShaderInfoAMD":
-			mNativeLib.LoadFunction("vkGetShaderInfoAMD", out vkGetShaderInfoAMD_ptr, invokeErrorCallback);
+			LoadFunction("vkGetShaderInfoAMD", out vkGetShaderInfoAMD_ptr, instance, invokeErrorCallback);
 			if(vkGetShaderInfoAMD_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateStreamDescriptorSurfaceGGP":
-			mNativeLib.LoadFunction("vkCreateStreamDescriptorSurfaceGGP", out vkCreateStreamDescriptorSurfaceGGP_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateStreamDescriptorSurfaceGGP", out vkCreateStreamDescriptorSurfaceGGP_ptr, instance, invokeErrorCallback);
 			if(vkCreateStreamDescriptorSurfaceGGP_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceExternalImageFormatPropertiesNV":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceExternalImageFormatPropertiesNV", out vkGetPhysicalDeviceExternalImageFormatPropertiesNV_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceExternalImageFormatPropertiesNV", out vkGetPhysicalDeviceExternalImageFormatPropertiesNV_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceExternalImageFormatPropertiesNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetMemoryWin32HandleNV":
-			mNativeLib.LoadFunction("vkGetMemoryWin32HandleNV", out vkGetMemoryWin32HandleNV_ptr, invokeErrorCallback);
+			LoadFunction("vkGetMemoryWin32HandleNV", out vkGetMemoryWin32HandleNV_ptr, instance, invokeErrorCallback);
 			if(vkGetMemoryWin32HandleNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateViSurfaceNN":
-			mNativeLib.LoadFunction("vkCreateViSurfaceNN", out vkCreateViSurfaceNN_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateViSurfaceNN", out vkCreateViSurfaceNN_ptr, instance, invokeErrorCallback);
 			if(vkCreateViSurfaceNN_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetMemoryWin32HandleKHR":
-			mNativeLib.LoadFunction("vkGetMemoryWin32HandleKHR", out vkGetMemoryWin32HandleKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetMemoryWin32HandleKHR", out vkGetMemoryWin32HandleKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetMemoryWin32HandleKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetMemoryWin32HandlePropertiesKHR":
-			mNativeLib.LoadFunction("vkGetMemoryWin32HandlePropertiesKHR", out vkGetMemoryWin32HandlePropertiesKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetMemoryWin32HandlePropertiesKHR", out vkGetMemoryWin32HandlePropertiesKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetMemoryWin32HandlePropertiesKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetMemoryFdKHR":
-			mNativeLib.LoadFunction("vkGetMemoryFdKHR", out vkGetMemoryFdKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetMemoryFdKHR", out vkGetMemoryFdKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetMemoryFdKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetMemoryFdPropertiesKHR":
-			mNativeLib.LoadFunction("vkGetMemoryFdPropertiesKHR", out vkGetMemoryFdPropertiesKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetMemoryFdPropertiesKHR", out vkGetMemoryFdPropertiesKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetMemoryFdPropertiesKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkImportSemaphoreWin32HandleKHR":
-			mNativeLib.LoadFunction("vkImportSemaphoreWin32HandleKHR", out vkImportSemaphoreWin32HandleKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkImportSemaphoreWin32HandleKHR", out vkImportSemaphoreWin32HandleKHR_ptr, instance, invokeErrorCallback);
 			if(vkImportSemaphoreWin32HandleKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetSemaphoreWin32HandleKHR":
-			mNativeLib.LoadFunction("vkGetSemaphoreWin32HandleKHR", out vkGetSemaphoreWin32HandleKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetSemaphoreWin32HandleKHR", out vkGetSemaphoreWin32HandleKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetSemaphoreWin32HandleKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkImportSemaphoreFdKHR":
-			mNativeLib.LoadFunction("vkImportSemaphoreFdKHR", out vkImportSemaphoreFdKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkImportSemaphoreFdKHR", out vkImportSemaphoreFdKHR_ptr, instance, invokeErrorCallback);
 			if(vkImportSemaphoreFdKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetSemaphoreFdKHR":
-			mNativeLib.LoadFunction("vkGetSemaphoreFdKHR", out vkGetSemaphoreFdKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetSemaphoreFdKHR", out vkGetSemaphoreFdKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetSemaphoreFdKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdPushDescriptorSetKHR":
-			mNativeLib.LoadFunction("vkCmdPushDescriptorSetKHR", out vkCmdPushDescriptorSetKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdPushDescriptorSetKHR", out vkCmdPushDescriptorSetKHR_ptr, instance, invokeErrorCallback);
 			if(vkCmdPushDescriptorSetKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdBeginConditionalRenderingEXT":
-			mNativeLib.LoadFunction("vkCmdBeginConditionalRenderingEXT", out vkCmdBeginConditionalRenderingEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdBeginConditionalRenderingEXT", out vkCmdBeginConditionalRenderingEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdBeginConditionalRenderingEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdEndConditionalRenderingEXT":
-			mNativeLib.LoadFunction("vkCmdEndConditionalRenderingEXT", out vkCmdEndConditionalRenderingEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdEndConditionalRenderingEXT", out vkCmdEndConditionalRenderingEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdEndConditionalRenderingEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetViewportWScalingNV":
-			mNativeLib.LoadFunction("vkCmdSetViewportWScalingNV", out vkCmdSetViewportWScalingNV_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetViewportWScalingNV", out vkCmdSetViewportWScalingNV_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetViewportWScalingNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkReleaseDisplayEXT":
-			mNativeLib.LoadFunction("vkReleaseDisplayEXT", out vkReleaseDisplayEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkReleaseDisplayEXT", out vkReleaseDisplayEXT_ptr, instance, invokeErrorCallback);
 			if(vkReleaseDisplayEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkAcquireXlibDisplayEXT":
-			mNativeLib.LoadFunction("vkAcquireXlibDisplayEXT", out vkAcquireXlibDisplayEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkAcquireXlibDisplayEXT", out vkAcquireXlibDisplayEXT_ptr, instance, invokeErrorCallback);
 			if(vkAcquireXlibDisplayEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetRandROutputDisplayEXT":
-			mNativeLib.LoadFunction("vkGetRandROutputDisplayEXT", out vkGetRandROutputDisplayEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkGetRandROutputDisplayEXT", out vkGetRandROutputDisplayEXT_ptr, instance, invokeErrorCallback);
 			if(vkGetRandROutputDisplayEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceSurfaceCapabilities2EXT":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceSurfaceCapabilities2EXT", out vkGetPhysicalDeviceSurfaceCapabilities2EXT_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceSurfaceCapabilities2EXT", out vkGetPhysicalDeviceSurfaceCapabilities2EXT_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceSurfaceCapabilities2EXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDisplayPowerControlEXT":
-			mNativeLib.LoadFunction("vkDisplayPowerControlEXT", out vkDisplayPowerControlEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkDisplayPowerControlEXT", out vkDisplayPowerControlEXT_ptr, instance, invokeErrorCallback);
 			if(vkDisplayPowerControlEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkRegisterDeviceEventEXT":
-			mNativeLib.LoadFunction("vkRegisterDeviceEventEXT", out vkRegisterDeviceEventEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkRegisterDeviceEventEXT", out vkRegisterDeviceEventEXT_ptr, instance, invokeErrorCallback);
 			if(vkRegisterDeviceEventEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkRegisterDisplayEventEXT":
-			mNativeLib.LoadFunction("vkRegisterDisplayEventEXT", out vkRegisterDisplayEventEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkRegisterDisplayEventEXT", out vkRegisterDisplayEventEXT_ptr, instance, invokeErrorCallback);
 			if(vkRegisterDisplayEventEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetSwapchainCounterEXT":
-			mNativeLib.LoadFunction("vkGetSwapchainCounterEXT", out vkGetSwapchainCounterEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkGetSwapchainCounterEXT", out vkGetSwapchainCounterEXT_ptr, instance, invokeErrorCallback);
 			if(vkGetSwapchainCounterEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetRefreshCycleDurationGOOGLE":
-			mNativeLib.LoadFunction("vkGetRefreshCycleDurationGOOGLE", out vkGetRefreshCycleDurationGOOGLE_ptr, invokeErrorCallback);
+			LoadFunction("vkGetRefreshCycleDurationGOOGLE", out vkGetRefreshCycleDurationGOOGLE_ptr, instance, invokeErrorCallback);
 			if(vkGetRefreshCycleDurationGOOGLE_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPastPresentationTimingGOOGLE":
-			mNativeLib.LoadFunction("vkGetPastPresentationTimingGOOGLE", out vkGetPastPresentationTimingGOOGLE_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPastPresentationTimingGOOGLE", out vkGetPastPresentationTimingGOOGLE_ptr, instance, invokeErrorCallback);
 			if(vkGetPastPresentationTimingGOOGLE_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetDiscardRectangleEXT":
-			mNativeLib.LoadFunction("vkCmdSetDiscardRectangleEXT", out vkCmdSetDiscardRectangleEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetDiscardRectangleEXT", out vkCmdSetDiscardRectangleEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetDiscardRectangleEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetDiscardRectangleEnableEXT":
-			mNativeLib.LoadFunction("vkCmdSetDiscardRectangleEnableEXT", out vkCmdSetDiscardRectangleEnableEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetDiscardRectangleEnableEXT", out vkCmdSetDiscardRectangleEnableEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetDiscardRectangleEnableEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetDiscardRectangleModeEXT":
-			mNativeLib.LoadFunction("vkCmdSetDiscardRectangleModeEXT", out vkCmdSetDiscardRectangleModeEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetDiscardRectangleModeEXT", out vkCmdSetDiscardRectangleModeEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetDiscardRectangleModeEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkSetHdrMetadataEXT":
-			mNativeLib.LoadFunction("vkSetHdrMetadataEXT", out vkSetHdrMetadataEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkSetHdrMetadataEXT", out vkSetHdrMetadataEXT_ptr, instance, invokeErrorCallback);
 			if(vkSetHdrMetadataEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetSwapchainStatusKHR":
-			mNativeLib.LoadFunction("vkGetSwapchainStatusKHR", out vkGetSwapchainStatusKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetSwapchainStatusKHR", out vkGetSwapchainStatusKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetSwapchainStatusKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkImportFenceWin32HandleKHR":
-			mNativeLib.LoadFunction("vkImportFenceWin32HandleKHR", out vkImportFenceWin32HandleKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkImportFenceWin32HandleKHR", out vkImportFenceWin32HandleKHR_ptr, instance, invokeErrorCallback);
 			if(vkImportFenceWin32HandleKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetFenceWin32HandleKHR":
-			mNativeLib.LoadFunction("vkGetFenceWin32HandleKHR", out vkGetFenceWin32HandleKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetFenceWin32HandleKHR", out vkGetFenceWin32HandleKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetFenceWin32HandleKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkImportFenceFdKHR":
-			mNativeLib.LoadFunction("vkImportFenceFdKHR", out vkImportFenceFdKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkImportFenceFdKHR", out vkImportFenceFdKHR_ptr, instance, invokeErrorCallback);
 			if(vkImportFenceFdKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetFenceFdKHR":
-			mNativeLib.LoadFunction("vkGetFenceFdKHR", out vkGetFenceFdKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetFenceFdKHR", out vkGetFenceFdKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetFenceFdKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR":
-			mNativeLib.LoadFunction("vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR", out vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR", out vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR_ptr, instance, invokeErrorCallback);
 			if(vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR", out vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR", out vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkAcquireProfilingLockKHR":
-			mNativeLib.LoadFunction("vkAcquireProfilingLockKHR", out vkAcquireProfilingLockKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkAcquireProfilingLockKHR", out vkAcquireProfilingLockKHR_ptr, instance, invokeErrorCallback);
 			if(vkAcquireProfilingLockKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkReleaseProfilingLockKHR":
-			mNativeLib.LoadFunction("vkReleaseProfilingLockKHR", out vkReleaseProfilingLockKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkReleaseProfilingLockKHR", out vkReleaseProfilingLockKHR_ptr, instance, invokeErrorCallback);
 			if(vkReleaseProfilingLockKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceSurfaceCapabilities2KHR":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceSurfaceCapabilities2KHR", out vkGetPhysicalDeviceSurfaceCapabilities2KHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceSurfaceCapabilities2KHR", out vkGetPhysicalDeviceSurfaceCapabilities2KHR_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceSurfaceCapabilities2KHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceSurfaceFormats2KHR":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceSurfaceFormats2KHR", out vkGetPhysicalDeviceSurfaceFormats2KHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceSurfaceFormats2KHR", out vkGetPhysicalDeviceSurfaceFormats2KHR_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceSurfaceFormats2KHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceDisplayProperties2KHR":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceDisplayProperties2KHR", out vkGetPhysicalDeviceDisplayProperties2KHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceDisplayProperties2KHR", out vkGetPhysicalDeviceDisplayProperties2KHR_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceDisplayProperties2KHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceDisplayPlaneProperties2KHR":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceDisplayPlaneProperties2KHR", out vkGetPhysicalDeviceDisplayPlaneProperties2KHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceDisplayPlaneProperties2KHR", out vkGetPhysicalDeviceDisplayPlaneProperties2KHR_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceDisplayPlaneProperties2KHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetDisplayModeProperties2KHR":
-			mNativeLib.LoadFunction("vkGetDisplayModeProperties2KHR", out vkGetDisplayModeProperties2KHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetDisplayModeProperties2KHR", out vkGetDisplayModeProperties2KHR_ptr, instance, invokeErrorCallback);
 			if(vkGetDisplayModeProperties2KHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetDisplayPlaneCapabilities2KHR":
-			mNativeLib.LoadFunction("vkGetDisplayPlaneCapabilities2KHR", out vkGetDisplayPlaneCapabilities2KHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetDisplayPlaneCapabilities2KHR", out vkGetDisplayPlaneCapabilities2KHR_ptr, instance, invokeErrorCallback);
 			if(vkGetDisplayPlaneCapabilities2KHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateIOSSurfaceMVK":
-			mNativeLib.LoadFunction("vkCreateIOSSurfaceMVK", out vkCreateIOSSurfaceMVK_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateIOSSurfaceMVK", out vkCreateIOSSurfaceMVK_ptr, instance, invokeErrorCallback);
 			if(vkCreateIOSSurfaceMVK_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateMacOSSurfaceMVK":
-			mNativeLib.LoadFunction("vkCreateMacOSSurfaceMVK", out vkCreateMacOSSurfaceMVK_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateMacOSSurfaceMVK", out vkCreateMacOSSurfaceMVK_ptr, instance, invokeErrorCallback);
 			if(vkCreateMacOSSurfaceMVK_ptr == null)
 				return .Err;
 			break;
 
 		case "vkSetDebugUtilsObjectNameEXT":
-			mNativeLib.LoadFunction("vkSetDebugUtilsObjectNameEXT", out vkSetDebugUtilsObjectNameEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkSetDebugUtilsObjectNameEXT", out vkSetDebugUtilsObjectNameEXT_ptr, instance, invokeErrorCallback);
 			if(vkSetDebugUtilsObjectNameEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkSetDebugUtilsObjectTagEXT":
-			mNativeLib.LoadFunction("vkSetDebugUtilsObjectTagEXT", out vkSetDebugUtilsObjectTagEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkSetDebugUtilsObjectTagEXT", out vkSetDebugUtilsObjectTagEXT_ptr, instance, invokeErrorCallback);
 			if(vkSetDebugUtilsObjectTagEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkQueueBeginDebugUtilsLabelEXT":
-			mNativeLib.LoadFunction("vkQueueBeginDebugUtilsLabelEXT", out vkQueueBeginDebugUtilsLabelEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkQueueBeginDebugUtilsLabelEXT", out vkQueueBeginDebugUtilsLabelEXT_ptr, instance, invokeErrorCallback);
 			if(vkQueueBeginDebugUtilsLabelEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkQueueEndDebugUtilsLabelEXT":
-			mNativeLib.LoadFunction("vkQueueEndDebugUtilsLabelEXT", out vkQueueEndDebugUtilsLabelEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkQueueEndDebugUtilsLabelEXT", out vkQueueEndDebugUtilsLabelEXT_ptr, instance, invokeErrorCallback);
 			if(vkQueueEndDebugUtilsLabelEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkQueueInsertDebugUtilsLabelEXT":
-			mNativeLib.LoadFunction("vkQueueInsertDebugUtilsLabelEXT", out vkQueueInsertDebugUtilsLabelEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkQueueInsertDebugUtilsLabelEXT", out vkQueueInsertDebugUtilsLabelEXT_ptr, instance, invokeErrorCallback);
 			if(vkQueueInsertDebugUtilsLabelEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdBeginDebugUtilsLabelEXT":
-			mNativeLib.LoadFunction("vkCmdBeginDebugUtilsLabelEXT", out vkCmdBeginDebugUtilsLabelEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdBeginDebugUtilsLabelEXT", out vkCmdBeginDebugUtilsLabelEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdBeginDebugUtilsLabelEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdEndDebugUtilsLabelEXT":
-			mNativeLib.LoadFunction("vkCmdEndDebugUtilsLabelEXT", out vkCmdEndDebugUtilsLabelEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdEndDebugUtilsLabelEXT", out vkCmdEndDebugUtilsLabelEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdEndDebugUtilsLabelEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdInsertDebugUtilsLabelEXT":
-			mNativeLib.LoadFunction("vkCmdInsertDebugUtilsLabelEXT", out vkCmdInsertDebugUtilsLabelEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdInsertDebugUtilsLabelEXT", out vkCmdInsertDebugUtilsLabelEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdInsertDebugUtilsLabelEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateDebugUtilsMessengerEXT":
-			mNativeLib.LoadFunction("vkCreateDebugUtilsMessengerEXT", out vkCreateDebugUtilsMessengerEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateDebugUtilsMessengerEXT", out vkCreateDebugUtilsMessengerEXT_ptr, instance, invokeErrorCallback);
 			if(vkCreateDebugUtilsMessengerEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDestroyDebugUtilsMessengerEXT":
-			mNativeLib.LoadFunction("vkDestroyDebugUtilsMessengerEXT", out vkDestroyDebugUtilsMessengerEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkDestroyDebugUtilsMessengerEXT", out vkDestroyDebugUtilsMessengerEXT_ptr, instance, invokeErrorCallback);
 			if(vkDestroyDebugUtilsMessengerEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkSubmitDebugUtilsMessageEXT":
-			mNativeLib.LoadFunction("vkSubmitDebugUtilsMessageEXT", out vkSubmitDebugUtilsMessageEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkSubmitDebugUtilsMessageEXT", out vkSubmitDebugUtilsMessageEXT_ptr, instance, invokeErrorCallback);
 			if(vkSubmitDebugUtilsMessageEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetAndroidHardwareBufferPropertiesANDROID":
-			mNativeLib.LoadFunction("vkGetAndroidHardwareBufferPropertiesANDROID", out vkGetAndroidHardwareBufferPropertiesANDROID_ptr, invokeErrorCallback);
+			LoadFunction("vkGetAndroidHardwareBufferPropertiesANDROID", out vkGetAndroidHardwareBufferPropertiesANDROID_ptr, instance, invokeErrorCallback);
 			if(vkGetAndroidHardwareBufferPropertiesANDROID_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetMemoryAndroidHardwareBufferANDROID":
-			mNativeLib.LoadFunction("vkGetMemoryAndroidHardwareBufferANDROID", out vkGetMemoryAndroidHardwareBufferANDROID_ptr, invokeErrorCallback);
+			LoadFunction("vkGetMemoryAndroidHardwareBufferANDROID", out vkGetMemoryAndroidHardwareBufferANDROID_ptr, instance, invokeErrorCallback);
 			if(vkGetMemoryAndroidHardwareBufferANDROID_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateExecutionGraphPipelinesAMDX":
-			mNativeLib.LoadFunction("vkCreateExecutionGraphPipelinesAMDX", out vkCreateExecutionGraphPipelinesAMDX_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateExecutionGraphPipelinesAMDX", out vkCreateExecutionGraphPipelinesAMDX_ptr, instance, invokeErrorCallback);
 			if(vkCreateExecutionGraphPipelinesAMDX_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetExecutionGraphPipelineScratchSizeAMDX":
-			mNativeLib.LoadFunction("vkGetExecutionGraphPipelineScratchSizeAMDX", out vkGetExecutionGraphPipelineScratchSizeAMDX_ptr, invokeErrorCallback);
+			LoadFunction("vkGetExecutionGraphPipelineScratchSizeAMDX", out vkGetExecutionGraphPipelineScratchSizeAMDX_ptr, instance, invokeErrorCallback);
 			if(vkGetExecutionGraphPipelineScratchSizeAMDX_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetExecutionGraphPipelineNodeIndexAMDX":
-			mNativeLib.LoadFunction("vkGetExecutionGraphPipelineNodeIndexAMDX", out vkGetExecutionGraphPipelineNodeIndexAMDX_ptr, invokeErrorCallback);
+			LoadFunction("vkGetExecutionGraphPipelineNodeIndexAMDX", out vkGetExecutionGraphPipelineNodeIndexAMDX_ptr, instance, invokeErrorCallback);
 			if(vkGetExecutionGraphPipelineNodeIndexAMDX_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdInitializeGraphScratchMemoryAMDX":
-			mNativeLib.LoadFunction("vkCmdInitializeGraphScratchMemoryAMDX", out vkCmdInitializeGraphScratchMemoryAMDX_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdInitializeGraphScratchMemoryAMDX", out vkCmdInitializeGraphScratchMemoryAMDX_ptr, instance, invokeErrorCallback);
 			if(vkCmdInitializeGraphScratchMemoryAMDX_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdDispatchGraphAMDX":
-			mNativeLib.LoadFunction("vkCmdDispatchGraphAMDX", out vkCmdDispatchGraphAMDX_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdDispatchGraphAMDX", out vkCmdDispatchGraphAMDX_ptr, instance, invokeErrorCallback);
 			if(vkCmdDispatchGraphAMDX_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdDispatchGraphIndirectAMDX":
-			mNativeLib.LoadFunction("vkCmdDispatchGraphIndirectAMDX", out vkCmdDispatchGraphIndirectAMDX_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdDispatchGraphIndirectAMDX", out vkCmdDispatchGraphIndirectAMDX_ptr, instance, invokeErrorCallback);
 			if(vkCmdDispatchGraphIndirectAMDX_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdDispatchGraphIndirectCountAMDX":
-			mNativeLib.LoadFunction("vkCmdDispatchGraphIndirectCountAMDX", out vkCmdDispatchGraphIndirectCountAMDX_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdDispatchGraphIndirectCountAMDX", out vkCmdDispatchGraphIndirectCountAMDX_ptr, instance, invokeErrorCallback);
 			if(vkCmdDispatchGraphIndirectCountAMDX_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetSampleLocationsEXT":
-			mNativeLib.LoadFunction("vkCmdSetSampleLocationsEXT", out vkCmdSetSampleLocationsEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetSampleLocationsEXT", out vkCmdSetSampleLocationsEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetSampleLocationsEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceMultisamplePropertiesEXT":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceMultisamplePropertiesEXT", out vkGetPhysicalDeviceMultisamplePropertiesEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceMultisamplePropertiesEXT", out vkGetPhysicalDeviceMultisamplePropertiesEXT_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceMultisamplePropertiesEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateAccelerationStructureKHR":
-			mNativeLib.LoadFunction("vkCreateAccelerationStructureKHR", out vkCreateAccelerationStructureKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateAccelerationStructureKHR", out vkCreateAccelerationStructureKHR_ptr, instance, invokeErrorCallback);
 			if(vkCreateAccelerationStructureKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDestroyAccelerationStructureKHR":
-			mNativeLib.LoadFunction("vkDestroyAccelerationStructureKHR", out vkDestroyAccelerationStructureKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkDestroyAccelerationStructureKHR", out vkDestroyAccelerationStructureKHR_ptr, instance, invokeErrorCallback);
 			if(vkDestroyAccelerationStructureKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdBuildAccelerationStructuresKHR":
-			mNativeLib.LoadFunction("vkCmdBuildAccelerationStructuresKHR", out vkCmdBuildAccelerationStructuresKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdBuildAccelerationStructuresKHR", out vkCmdBuildAccelerationStructuresKHR_ptr, instance, invokeErrorCallback);
 			if(vkCmdBuildAccelerationStructuresKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdBuildAccelerationStructuresIndirectKHR":
-			mNativeLib.LoadFunction("vkCmdBuildAccelerationStructuresIndirectKHR", out vkCmdBuildAccelerationStructuresIndirectKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdBuildAccelerationStructuresIndirectKHR", out vkCmdBuildAccelerationStructuresIndirectKHR_ptr, instance, invokeErrorCallback);
 			if(vkCmdBuildAccelerationStructuresIndirectKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkBuildAccelerationStructuresKHR":
-			mNativeLib.LoadFunction("vkBuildAccelerationStructuresKHR", out vkBuildAccelerationStructuresKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkBuildAccelerationStructuresKHR", out vkBuildAccelerationStructuresKHR_ptr, instance, invokeErrorCallback);
 			if(vkBuildAccelerationStructuresKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCopyAccelerationStructureKHR":
-			mNativeLib.LoadFunction("vkCopyAccelerationStructureKHR", out vkCopyAccelerationStructureKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkCopyAccelerationStructureKHR", out vkCopyAccelerationStructureKHR_ptr, instance, invokeErrorCallback);
 			if(vkCopyAccelerationStructureKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCopyAccelerationStructureToMemoryKHR":
-			mNativeLib.LoadFunction("vkCopyAccelerationStructureToMemoryKHR", out vkCopyAccelerationStructureToMemoryKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkCopyAccelerationStructureToMemoryKHR", out vkCopyAccelerationStructureToMemoryKHR_ptr, instance, invokeErrorCallback);
 			if(vkCopyAccelerationStructureToMemoryKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCopyMemoryToAccelerationStructureKHR":
-			mNativeLib.LoadFunction("vkCopyMemoryToAccelerationStructureKHR", out vkCopyMemoryToAccelerationStructureKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkCopyMemoryToAccelerationStructureKHR", out vkCopyMemoryToAccelerationStructureKHR_ptr, instance, invokeErrorCallback);
 			if(vkCopyMemoryToAccelerationStructureKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkWriteAccelerationStructuresPropertiesKHR":
-			mNativeLib.LoadFunction("vkWriteAccelerationStructuresPropertiesKHR", out vkWriteAccelerationStructuresPropertiesKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkWriteAccelerationStructuresPropertiesKHR", out vkWriteAccelerationStructuresPropertiesKHR_ptr, instance, invokeErrorCallback);
 			if(vkWriteAccelerationStructuresPropertiesKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdCopyAccelerationStructureKHR":
-			mNativeLib.LoadFunction("vkCmdCopyAccelerationStructureKHR", out vkCmdCopyAccelerationStructureKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdCopyAccelerationStructureKHR", out vkCmdCopyAccelerationStructureKHR_ptr, instance, invokeErrorCallback);
 			if(vkCmdCopyAccelerationStructureKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdCopyAccelerationStructureToMemoryKHR":
-			mNativeLib.LoadFunction("vkCmdCopyAccelerationStructureToMemoryKHR", out vkCmdCopyAccelerationStructureToMemoryKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdCopyAccelerationStructureToMemoryKHR", out vkCmdCopyAccelerationStructureToMemoryKHR_ptr, instance, invokeErrorCallback);
 			if(vkCmdCopyAccelerationStructureToMemoryKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdCopyMemoryToAccelerationStructureKHR":
-			mNativeLib.LoadFunction("vkCmdCopyMemoryToAccelerationStructureKHR", out vkCmdCopyMemoryToAccelerationStructureKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdCopyMemoryToAccelerationStructureKHR", out vkCmdCopyMemoryToAccelerationStructureKHR_ptr, instance, invokeErrorCallback);
 			if(vkCmdCopyMemoryToAccelerationStructureKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetAccelerationStructureDeviceAddressKHR":
-			mNativeLib.LoadFunction("vkGetAccelerationStructureDeviceAddressKHR", out vkGetAccelerationStructureDeviceAddressKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetAccelerationStructureDeviceAddressKHR", out vkGetAccelerationStructureDeviceAddressKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetAccelerationStructureDeviceAddressKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdWriteAccelerationStructuresPropertiesKHR":
-			mNativeLib.LoadFunction("vkCmdWriteAccelerationStructuresPropertiesKHR", out vkCmdWriteAccelerationStructuresPropertiesKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdWriteAccelerationStructuresPropertiesKHR", out vkCmdWriteAccelerationStructuresPropertiesKHR_ptr, instance, invokeErrorCallback);
 			if(vkCmdWriteAccelerationStructuresPropertiesKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetDeviceAccelerationStructureCompatibilityKHR":
-			mNativeLib.LoadFunction("vkGetDeviceAccelerationStructureCompatibilityKHR", out vkGetDeviceAccelerationStructureCompatibilityKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetDeviceAccelerationStructureCompatibilityKHR", out vkGetDeviceAccelerationStructureCompatibilityKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetDeviceAccelerationStructureCompatibilityKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetAccelerationStructureBuildSizesKHR":
-			mNativeLib.LoadFunction("vkGetAccelerationStructureBuildSizesKHR", out vkGetAccelerationStructureBuildSizesKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetAccelerationStructureBuildSizesKHR", out vkGetAccelerationStructureBuildSizesKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetAccelerationStructureBuildSizesKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdTraceRaysKHR":
-			mNativeLib.LoadFunction("vkCmdTraceRaysKHR", out vkCmdTraceRaysKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdTraceRaysKHR", out vkCmdTraceRaysKHR_ptr, instance, invokeErrorCallback);
 			if(vkCmdTraceRaysKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateRayTracingPipelinesKHR":
-			mNativeLib.LoadFunction("vkCreateRayTracingPipelinesKHR", out vkCreateRayTracingPipelinesKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateRayTracingPipelinesKHR", out vkCreateRayTracingPipelinesKHR_ptr, instance, invokeErrorCallback);
 			if(vkCreateRayTracingPipelinesKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetRayTracingShaderGroupHandlesKHR":
-			mNativeLib.LoadFunction("vkGetRayTracingShaderGroupHandlesKHR", out vkGetRayTracingShaderGroupHandlesKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetRayTracingShaderGroupHandlesKHR", out vkGetRayTracingShaderGroupHandlesKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetRayTracingShaderGroupHandlesKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetRayTracingCaptureReplayShaderGroupHandlesKHR":
-			mNativeLib.LoadFunction("vkGetRayTracingCaptureReplayShaderGroupHandlesKHR", out vkGetRayTracingCaptureReplayShaderGroupHandlesKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetRayTracingCaptureReplayShaderGroupHandlesKHR", out vkGetRayTracingCaptureReplayShaderGroupHandlesKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetRayTracingCaptureReplayShaderGroupHandlesKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdTraceRaysIndirectKHR":
-			mNativeLib.LoadFunction("vkCmdTraceRaysIndirectKHR", out vkCmdTraceRaysIndirectKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdTraceRaysIndirectKHR", out vkCmdTraceRaysIndirectKHR_ptr, instance, invokeErrorCallback);
 			if(vkCmdTraceRaysIndirectKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetRayTracingShaderGroupStackSizeKHR":
-			mNativeLib.LoadFunction("vkGetRayTracingShaderGroupStackSizeKHR", out vkGetRayTracingShaderGroupStackSizeKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetRayTracingShaderGroupStackSizeKHR", out vkGetRayTracingShaderGroupStackSizeKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetRayTracingShaderGroupStackSizeKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetRayTracingPipelineStackSizeKHR":
-			mNativeLib.LoadFunction("vkCmdSetRayTracingPipelineStackSizeKHR", out vkCmdSetRayTracingPipelineStackSizeKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetRayTracingPipelineStackSizeKHR", out vkCmdSetRayTracingPipelineStackSizeKHR_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetRayTracingPipelineStackSizeKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetImageDrmFormatModifierPropertiesEXT":
-			mNativeLib.LoadFunction("vkGetImageDrmFormatModifierPropertiesEXT", out vkGetImageDrmFormatModifierPropertiesEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkGetImageDrmFormatModifierPropertiesEXT", out vkGetImageDrmFormatModifierPropertiesEXT_ptr, instance, invokeErrorCallback);
 			if(vkGetImageDrmFormatModifierPropertiesEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateValidationCacheEXT":
-			mNativeLib.LoadFunction("vkCreateValidationCacheEXT", out vkCreateValidationCacheEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateValidationCacheEXT", out vkCreateValidationCacheEXT_ptr, instance, invokeErrorCallback);
 			if(vkCreateValidationCacheEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDestroyValidationCacheEXT":
-			mNativeLib.LoadFunction("vkDestroyValidationCacheEXT", out vkDestroyValidationCacheEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkDestroyValidationCacheEXT", out vkDestroyValidationCacheEXT_ptr, instance, invokeErrorCallback);
 			if(vkDestroyValidationCacheEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkMergeValidationCachesEXT":
-			mNativeLib.LoadFunction("vkMergeValidationCachesEXT", out vkMergeValidationCachesEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkMergeValidationCachesEXT", out vkMergeValidationCachesEXT_ptr, instance, invokeErrorCallback);
 			if(vkMergeValidationCachesEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetValidationCacheDataEXT":
-			mNativeLib.LoadFunction("vkGetValidationCacheDataEXT", out vkGetValidationCacheDataEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkGetValidationCacheDataEXT", out vkGetValidationCacheDataEXT_ptr, instance, invokeErrorCallback);
 			if(vkGetValidationCacheDataEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdBindShadingRateImageNV":
-			mNativeLib.LoadFunction("vkCmdBindShadingRateImageNV", out vkCmdBindShadingRateImageNV_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdBindShadingRateImageNV", out vkCmdBindShadingRateImageNV_ptr, instance, invokeErrorCallback);
 			if(vkCmdBindShadingRateImageNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetViewportShadingRatePaletteNV":
-			mNativeLib.LoadFunction("vkCmdSetViewportShadingRatePaletteNV", out vkCmdSetViewportShadingRatePaletteNV_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetViewportShadingRatePaletteNV", out vkCmdSetViewportShadingRatePaletteNV_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetViewportShadingRatePaletteNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetCoarseSampleOrderNV":
-			mNativeLib.LoadFunction("vkCmdSetCoarseSampleOrderNV", out vkCmdSetCoarseSampleOrderNV_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetCoarseSampleOrderNV", out vkCmdSetCoarseSampleOrderNV_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetCoarseSampleOrderNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateAccelerationStructureNV":
-			mNativeLib.LoadFunction("vkCreateAccelerationStructureNV", out vkCreateAccelerationStructureNV_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateAccelerationStructureNV", out vkCreateAccelerationStructureNV_ptr, instance, invokeErrorCallback);
 			if(vkCreateAccelerationStructureNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDestroyAccelerationStructureNV":
-			mNativeLib.LoadFunction("vkDestroyAccelerationStructureNV", out vkDestroyAccelerationStructureNV_ptr, invokeErrorCallback);
+			LoadFunction("vkDestroyAccelerationStructureNV", out vkDestroyAccelerationStructureNV_ptr, instance, invokeErrorCallback);
 			if(vkDestroyAccelerationStructureNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetAccelerationStructureMemoryRequirementsNV":
-			mNativeLib.LoadFunction("vkGetAccelerationStructureMemoryRequirementsNV", out vkGetAccelerationStructureMemoryRequirementsNV_ptr, invokeErrorCallback);
+			LoadFunction("vkGetAccelerationStructureMemoryRequirementsNV", out vkGetAccelerationStructureMemoryRequirementsNV_ptr, instance, invokeErrorCallback);
 			if(vkGetAccelerationStructureMemoryRequirementsNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkBindAccelerationStructureMemoryNV":
-			mNativeLib.LoadFunction("vkBindAccelerationStructureMemoryNV", out vkBindAccelerationStructureMemoryNV_ptr, invokeErrorCallback);
+			LoadFunction("vkBindAccelerationStructureMemoryNV", out vkBindAccelerationStructureMemoryNV_ptr, instance, invokeErrorCallback);
 			if(vkBindAccelerationStructureMemoryNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdBuildAccelerationStructureNV":
-			mNativeLib.LoadFunction("vkCmdBuildAccelerationStructureNV", out vkCmdBuildAccelerationStructureNV_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdBuildAccelerationStructureNV", out vkCmdBuildAccelerationStructureNV_ptr, instance, invokeErrorCallback);
 			if(vkCmdBuildAccelerationStructureNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdCopyAccelerationStructureNV":
-			mNativeLib.LoadFunction("vkCmdCopyAccelerationStructureNV", out vkCmdCopyAccelerationStructureNV_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdCopyAccelerationStructureNV", out vkCmdCopyAccelerationStructureNV_ptr, instance, invokeErrorCallback);
 			if(vkCmdCopyAccelerationStructureNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdTraceRaysNV":
-			mNativeLib.LoadFunction("vkCmdTraceRaysNV", out vkCmdTraceRaysNV_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdTraceRaysNV", out vkCmdTraceRaysNV_ptr, instance, invokeErrorCallback);
 			if(vkCmdTraceRaysNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateRayTracingPipelinesNV":
-			mNativeLib.LoadFunction("vkCreateRayTracingPipelinesNV", out vkCreateRayTracingPipelinesNV_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateRayTracingPipelinesNV", out vkCreateRayTracingPipelinesNV_ptr, instance, invokeErrorCallback);
 			if(vkCreateRayTracingPipelinesNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetAccelerationStructureHandleNV":
-			mNativeLib.LoadFunction("vkGetAccelerationStructureHandleNV", out vkGetAccelerationStructureHandleNV_ptr, invokeErrorCallback);
+			LoadFunction("vkGetAccelerationStructureHandleNV", out vkGetAccelerationStructureHandleNV_ptr, instance, invokeErrorCallback);
 			if(vkGetAccelerationStructureHandleNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdWriteAccelerationStructuresPropertiesNV":
-			mNativeLib.LoadFunction("vkCmdWriteAccelerationStructuresPropertiesNV", out vkCmdWriteAccelerationStructuresPropertiesNV_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdWriteAccelerationStructuresPropertiesNV", out vkCmdWriteAccelerationStructuresPropertiesNV_ptr, instance, invokeErrorCallback);
 			if(vkCmdWriteAccelerationStructuresPropertiesNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCompileDeferredNV":
-			mNativeLib.LoadFunction("vkCompileDeferredNV", out vkCompileDeferredNV_ptr, invokeErrorCallback);
+			LoadFunction("vkCompileDeferredNV", out vkCompileDeferredNV_ptr, instance, invokeErrorCallback);
 			if(vkCompileDeferredNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetMemoryHostPointerPropertiesEXT":
-			mNativeLib.LoadFunction("vkGetMemoryHostPointerPropertiesEXT", out vkGetMemoryHostPointerPropertiesEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkGetMemoryHostPointerPropertiesEXT", out vkGetMemoryHostPointerPropertiesEXT_ptr, instance, invokeErrorCallback);
 			if(vkGetMemoryHostPointerPropertiesEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdWriteBufferMarkerAMD":
-			mNativeLib.LoadFunction("vkCmdWriteBufferMarkerAMD", out vkCmdWriteBufferMarkerAMD_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdWriteBufferMarkerAMD", out vkCmdWriteBufferMarkerAMD_ptr, instance, invokeErrorCallback);
 			if(vkCmdWriteBufferMarkerAMD_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceCalibrateableTimeDomainsKHR":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceCalibrateableTimeDomainsKHR", out vkGetPhysicalDeviceCalibrateableTimeDomainsKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceCalibrateableTimeDomainsKHR", out vkGetPhysicalDeviceCalibrateableTimeDomainsKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceCalibrateableTimeDomainsKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetCalibratedTimestampsKHR":
-			mNativeLib.LoadFunction("vkGetCalibratedTimestampsKHR", out vkGetCalibratedTimestampsKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetCalibratedTimestampsKHR", out vkGetCalibratedTimestampsKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetCalibratedTimestampsKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdDrawMeshTasksNV":
-			mNativeLib.LoadFunction("vkCmdDrawMeshTasksNV", out vkCmdDrawMeshTasksNV_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdDrawMeshTasksNV", out vkCmdDrawMeshTasksNV_ptr, instance, invokeErrorCallback);
 			if(vkCmdDrawMeshTasksNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdDrawMeshTasksIndirectNV":
-			mNativeLib.LoadFunction("vkCmdDrawMeshTasksIndirectNV", out vkCmdDrawMeshTasksIndirectNV_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdDrawMeshTasksIndirectNV", out vkCmdDrawMeshTasksIndirectNV_ptr, instance, invokeErrorCallback);
 			if(vkCmdDrawMeshTasksIndirectNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdDrawMeshTasksIndirectCountNV":
-			mNativeLib.LoadFunction("vkCmdDrawMeshTasksIndirectCountNV", out vkCmdDrawMeshTasksIndirectCountNV_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdDrawMeshTasksIndirectCountNV", out vkCmdDrawMeshTasksIndirectCountNV_ptr, instance, invokeErrorCallback);
 			if(vkCmdDrawMeshTasksIndirectCountNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetExclusiveScissorEnableNV":
-			mNativeLib.LoadFunction("vkCmdSetExclusiveScissorEnableNV", out vkCmdSetExclusiveScissorEnableNV_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetExclusiveScissorEnableNV", out vkCmdSetExclusiveScissorEnableNV_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetExclusiveScissorEnableNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetExclusiveScissorNV":
-			mNativeLib.LoadFunction("vkCmdSetExclusiveScissorNV", out vkCmdSetExclusiveScissorNV_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetExclusiveScissorNV", out vkCmdSetExclusiveScissorNV_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetExclusiveScissorNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetCheckpointNV":
-			mNativeLib.LoadFunction("vkCmdSetCheckpointNV", out vkCmdSetCheckpointNV_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetCheckpointNV", out vkCmdSetCheckpointNV_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetCheckpointNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetQueueCheckpointDataNV":
-			mNativeLib.LoadFunction("vkGetQueueCheckpointDataNV", out vkGetQueueCheckpointDataNV_ptr, invokeErrorCallback);
+			LoadFunction("vkGetQueueCheckpointDataNV", out vkGetQueueCheckpointDataNV_ptr, instance, invokeErrorCallback);
 			if(vkGetQueueCheckpointDataNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkInitializePerformanceApiINTEL":
-			mNativeLib.LoadFunction("vkInitializePerformanceApiINTEL", out vkInitializePerformanceApiINTEL_ptr, invokeErrorCallback);
+			LoadFunction("vkInitializePerformanceApiINTEL", out vkInitializePerformanceApiINTEL_ptr, instance, invokeErrorCallback);
 			if(vkInitializePerformanceApiINTEL_ptr == null)
 				return .Err;
 			break;
 
 		case "vkUninitializePerformanceApiINTEL":
-			mNativeLib.LoadFunction("vkUninitializePerformanceApiINTEL", out vkUninitializePerformanceApiINTEL_ptr, invokeErrorCallback);
+			LoadFunction("vkUninitializePerformanceApiINTEL", out vkUninitializePerformanceApiINTEL_ptr, instance, invokeErrorCallback);
 			if(vkUninitializePerformanceApiINTEL_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetPerformanceMarkerINTEL":
-			mNativeLib.LoadFunction("vkCmdSetPerformanceMarkerINTEL", out vkCmdSetPerformanceMarkerINTEL_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetPerformanceMarkerINTEL", out vkCmdSetPerformanceMarkerINTEL_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetPerformanceMarkerINTEL_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetPerformanceStreamMarkerINTEL":
-			mNativeLib.LoadFunction("vkCmdSetPerformanceStreamMarkerINTEL", out vkCmdSetPerformanceStreamMarkerINTEL_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetPerformanceStreamMarkerINTEL", out vkCmdSetPerformanceStreamMarkerINTEL_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetPerformanceStreamMarkerINTEL_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetPerformanceOverrideINTEL":
-			mNativeLib.LoadFunction("vkCmdSetPerformanceOverrideINTEL", out vkCmdSetPerformanceOverrideINTEL_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetPerformanceOverrideINTEL", out vkCmdSetPerformanceOverrideINTEL_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetPerformanceOverrideINTEL_ptr == null)
 				return .Err;
 			break;
 
 		case "vkAcquirePerformanceConfigurationINTEL":
-			mNativeLib.LoadFunction("vkAcquirePerformanceConfigurationINTEL", out vkAcquirePerformanceConfigurationINTEL_ptr, invokeErrorCallback);
+			LoadFunction("vkAcquirePerformanceConfigurationINTEL", out vkAcquirePerformanceConfigurationINTEL_ptr, instance, invokeErrorCallback);
 			if(vkAcquirePerformanceConfigurationINTEL_ptr == null)
 				return .Err;
 			break;
 
 		case "vkReleasePerformanceConfigurationINTEL":
-			mNativeLib.LoadFunction("vkReleasePerformanceConfigurationINTEL", out vkReleasePerformanceConfigurationINTEL_ptr, invokeErrorCallback);
+			LoadFunction("vkReleasePerformanceConfigurationINTEL", out vkReleasePerformanceConfigurationINTEL_ptr, instance, invokeErrorCallback);
 			if(vkReleasePerformanceConfigurationINTEL_ptr == null)
 				return .Err;
 			break;
 
 		case "vkQueueSetPerformanceConfigurationINTEL":
-			mNativeLib.LoadFunction("vkQueueSetPerformanceConfigurationINTEL", out vkQueueSetPerformanceConfigurationINTEL_ptr, invokeErrorCallback);
+			LoadFunction("vkQueueSetPerformanceConfigurationINTEL", out vkQueueSetPerformanceConfigurationINTEL_ptr, instance, invokeErrorCallback);
 			if(vkQueueSetPerformanceConfigurationINTEL_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPerformanceParameterINTEL":
-			mNativeLib.LoadFunction("vkGetPerformanceParameterINTEL", out vkGetPerformanceParameterINTEL_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPerformanceParameterINTEL", out vkGetPerformanceParameterINTEL_ptr, instance, invokeErrorCallback);
 			if(vkGetPerformanceParameterINTEL_ptr == null)
 				return .Err;
 			break;
 
 		case "vkSetLocalDimmingAMD":
-			mNativeLib.LoadFunction("vkSetLocalDimmingAMD", out vkSetLocalDimmingAMD_ptr, invokeErrorCallback);
+			LoadFunction("vkSetLocalDimmingAMD", out vkSetLocalDimmingAMD_ptr, instance, invokeErrorCallback);
 			if(vkSetLocalDimmingAMD_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateImagePipeSurfaceFUCHSIA":
-			mNativeLib.LoadFunction("vkCreateImagePipeSurfaceFUCHSIA", out vkCreateImagePipeSurfaceFUCHSIA_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateImagePipeSurfaceFUCHSIA", out vkCreateImagePipeSurfaceFUCHSIA_ptr, instance, invokeErrorCallback);
 			if(vkCreateImagePipeSurfaceFUCHSIA_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateMetalSurfaceEXT":
-			mNativeLib.LoadFunction("vkCreateMetalSurfaceEXT", out vkCreateMetalSurfaceEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateMetalSurfaceEXT", out vkCreateMetalSurfaceEXT_ptr, instance, invokeErrorCallback);
 			if(vkCreateMetalSurfaceEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceFragmentShadingRatesKHR":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceFragmentShadingRatesKHR", out vkGetPhysicalDeviceFragmentShadingRatesKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceFragmentShadingRatesKHR", out vkGetPhysicalDeviceFragmentShadingRatesKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceFragmentShadingRatesKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetFragmentShadingRateKHR":
-			mNativeLib.LoadFunction("vkCmdSetFragmentShadingRateKHR", out vkCmdSetFragmentShadingRateKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetFragmentShadingRateKHR", out vkCmdSetFragmentShadingRateKHR_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetFragmentShadingRateKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetRenderingAttachmentLocationsKHR":
-			mNativeLib.LoadFunction("vkCmdSetRenderingAttachmentLocationsKHR", out vkCmdSetRenderingAttachmentLocationsKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetRenderingAttachmentLocationsKHR", out vkCmdSetRenderingAttachmentLocationsKHR_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetRenderingAttachmentLocationsKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetRenderingInputAttachmentIndicesKHR":
-			mNativeLib.LoadFunction("vkCmdSetRenderingInputAttachmentIndicesKHR", out vkCmdSetRenderingInputAttachmentIndicesKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetRenderingInputAttachmentIndicesKHR", out vkCmdSetRenderingInputAttachmentIndicesKHR_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetRenderingInputAttachmentIndicesKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkWaitForPresentKHR":
-			mNativeLib.LoadFunction("vkWaitForPresentKHR", out vkWaitForPresentKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkWaitForPresentKHR", out vkWaitForPresentKHR_ptr, instance, invokeErrorCallback);
 			if(vkWaitForPresentKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceCooperativeMatrixPropertiesNV":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceCooperativeMatrixPropertiesNV", out vkGetPhysicalDeviceCooperativeMatrixPropertiesNV_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceCooperativeMatrixPropertiesNV", out vkGetPhysicalDeviceCooperativeMatrixPropertiesNV_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceCooperativeMatrixPropertiesNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV", out vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV", out vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceSurfacePresentModes2EXT":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceSurfacePresentModes2EXT", out vkGetPhysicalDeviceSurfacePresentModes2EXT_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceSurfacePresentModes2EXT", out vkGetPhysicalDeviceSurfacePresentModes2EXT_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceSurfacePresentModes2EXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkAcquireFullScreenExclusiveModeEXT":
-			mNativeLib.LoadFunction("vkAcquireFullScreenExclusiveModeEXT", out vkAcquireFullScreenExclusiveModeEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkAcquireFullScreenExclusiveModeEXT", out vkAcquireFullScreenExclusiveModeEXT_ptr, instance, invokeErrorCallback);
 			if(vkAcquireFullScreenExclusiveModeEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkReleaseFullScreenExclusiveModeEXT":
-			mNativeLib.LoadFunction("vkReleaseFullScreenExclusiveModeEXT", out vkReleaseFullScreenExclusiveModeEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkReleaseFullScreenExclusiveModeEXT", out vkReleaseFullScreenExclusiveModeEXT_ptr, instance, invokeErrorCallback);
 			if(vkReleaseFullScreenExclusiveModeEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateHeadlessSurfaceEXT":
-			mNativeLib.LoadFunction("vkCreateHeadlessSurfaceEXT", out vkCreateHeadlessSurfaceEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateHeadlessSurfaceEXT", out vkCreateHeadlessSurfaceEXT_ptr, instance, invokeErrorCallback);
 			if(vkCreateHeadlessSurfaceEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetLineStippleKHR":
-			mNativeLib.LoadFunction("vkCmdSetLineStippleKHR", out vkCmdSetLineStippleKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetLineStippleKHR", out vkCmdSetLineStippleKHR_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetLineStippleKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateDeferredOperationKHR":
-			mNativeLib.LoadFunction("vkCreateDeferredOperationKHR", out vkCreateDeferredOperationKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateDeferredOperationKHR", out vkCreateDeferredOperationKHR_ptr, instance, invokeErrorCallback);
 			if(vkCreateDeferredOperationKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDestroyDeferredOperationKHR":
-			mNativeLib.LoadFunction("vkDestroyDeferredOperationKHR", out vkDestroyDeferredOperationKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkDestroyDeferredOperationKHR", out vkDestroyDeferredOperationKHR_ptr, instance, invokeErrorCallback);
 			if(vkDestroyDeferredOperationKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetDeferredOperationMaxConcurrencyKHR":
-			mNativeLib.LoadFunction("vkGetDeferredOperationMaxConcurrencyKHR", out vkGetDeferredOperationMaxConcurrencyKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetDeferredOperationMaxConcurrencyKHR", out vkGetDeferredOperationMaxConcurrencyKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetDeferredOperationMaxConcurrencyKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetDeferredOperationResultKHR":
-			mNativeLib.LoadFunction("vkGetDeferredOperationResultKHR", out vkGetDeferredOperationResultKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetDeferredOperationResultKHR", out vkGetDeferredOperationResultKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetDeferredOperationResultKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDeferredOperationJoinKHR":
-			mNativeLib.LoadFunction("vkDeferredOperationJoinKHR", out vkDeferredOperationJoinKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkDeferredOperationJoinKHR", out vkDeferredOperationJoinKHR_ptr, instance, invokeErrorCallback);
 			if(vkDeferredOperationJoinKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPipelineExecutablePropertiesKHR":
-			mNativeLib.LoadFunction("vkGetPipelineExecutablePropertiesKHR", out vkGetPipelineExecutablePropertiesKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPipelineExecutablePropertiesKHR", out vkGetPipelineExecutablePropertiesKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetPipelineExecutablePropertiesKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPipelineExecutableStatisticsKHR":
-			mNativeLib.LoadFunction("vkGetPipelineExecutableStatisticsKHR", out vkGetPipelineExecutableStatisticsKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPipelineExecutableStatisticsKHR", out vkGetPipelineExecutableStatisticsKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetPipelineExecutableStatisticsKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPipelineExecutableInternalRepresentationsKHR":
-			mNativeLib.LoadFunction("vkGetPipelineExecutableInternalRepresentationsKHR", out vkGetPipelineExecutableInternalRepresentationsKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPipelineExecutableInternalRepresentationsKHR", out vkGetPipelineExecutableInternalRepresentationsKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetPipelineExecutableInternalRepresentationsKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCopyMemoryToImageEXT":
-			mNativeLib.LoadFunction("vkCopyMemoryToImageEXT", out vkCopyMemoryToImageEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCopyMemoryToImageEXT", out vkCopyMemoryToImageEXT_ptr, instance, invokeErrorCallback);
 			if(vkCopyMemoryToImageEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCopyImageToMemoryEXT":
-			mNativeLib.LoadFunction("vkCopyImageToMemoryEXT", out vkCopyImageToMemoryEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCopyImageToMemoryEXT", out vkCopyImageToMemoryEXT_ptr, instance, invokeErrorCallback);
 			if(vkCopyImageToMemoryEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCopyImageToImageEXT":
-			mNativeLib.LoadFunction("vkCopyImageToImageEXT", out vkCopyImageToImageEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCopyImageToImageEXT", out vkCopyImageToImageEXT_ptr, instance, invokeErrorCallback);
 			if(vkCopyImageToImageEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkTransitionImageLayoutEXT":
-			mNativeLib.LoadFunction("vkTransitionImageLayoutEXT", out vkTransitionImageLayoutEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkTransitionImageLayoutEXT", out vkTransitionImageLayoutEXT_ptr, instance, invokeErrorCallback);
 			if(vkTransitionImageLayoutEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetImageSubresourceLayout2KHR":
-			mNativeLib.LoadFunction("vkGetImageSubresourceLayout2KHR", out vkGetImageSubresourceLayout2KHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetImageSubresourceLayout2KHR", out vkGetImageSubresourceLayout2KHR_ptr, instance, invokeErrorCallback);
 			if(vkGetImageSubresourceLayout2KHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkMapMemory2KHR":
-			mNativeLib.LoadFunction("vkMapMemory2KHR", out vkMapMemory2KHR_ptr, invokeErrorCallback);
+			LoadFunction("vkMapMemory2KHR", out vkMapMemory2KHR_ptr, instance, invokeErrorCallback);
 			if(vkMapMemory2KHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkUnmapMemory2KHR":
-			mNativeLib.LoadFunction("vkUnmapMemory2KHR", out vkUnmapMemory2KHR_ptr, invokeErrorCallback);
+			LoadFunction("vkUnmapMemory2KHR", out vkUnmapMemory2KHR_ptr, instance, invokeErrorCallback);
 			if(vkUnmapMemory2KHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkReleaseSwapchainImagesEXT":
-			mNativeLib.LoadFunction("vkReleaseSwapchainImagesEXT", out vkReleaseSwapchainImagesEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkReleaseSwapchainImagesEXT", out vkReleaseSwapchainImagesEXT_ptr, instance, invokeErrorCallback);
 			if(vkReleaseSwapchainImagesEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetGeneratedCommandsMemoryRequirementsNV":
-			mNativeLib.LoadFunction("vkGetGeneratedCommandsMemoryRequirementsNV", out vkGetGeneratedCommandsMemoryRequirementsNV_ptr, invokeErrorCallback);
+			LoadFunction("vkGetGeneratedCommandsMemoryRequirementsNV", out vkGetGeneratedCommandsMemoryRequirementsNV_ptr, instance, invokeErrorCallback);
 			if(vkGetGeneratedCommandsMemoryRequirementsNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdPreprocessGeneratedCommandsNV":
-			mNativeLib.LoadFunction("vkCmdPreprocessGeneratedCommandsNV", out vkCmdPreprocessGeneratedCommandsNV_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdPreprocessGeneratedCommandsNV", out vkCmdPreprocessGeneratedCommandsNV_ptr, instance, invokeErrorCallback);
 			if(vkCmdPreprocessGeneratedCommandsNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdExecuteGeneratedCommandsNV":
-			mNativeLib.LoadFunction("vkCmdExecuteGeneratedCommandsNV", out vkCmdExecuteGeneratedCommandsNV_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdExecuteGeneratedCommandsNV", out vkCmdExecuteGeneratedCommandsNV_ptr, instance, invokeErrorCallback);
 			if(vkCmdExecuteGeneratedCommandsNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdBindPipelineShaderGroupNV":
-			mNativeLib.LoadFunction("vkCmdBindPipelineShaderGroupNV", out vkCmdBindPipelineShaderGroupNV_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdBindPipelineShaderGroupNV", out vkCmdBindPipelineShaderGroupNV_ptr, instance, invokeErrorCallback);
 			if(vkCmdBindPipelineShaderGroupNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateIndirectCommandsLayoutNV":
-			mNativeLib.LoadFunction("vkCreateIndirectCommandsLayoutNV", out vkCreateIndirectCommandsLayoutNV_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateIndirectCommandsLayoutNV", out vkCreateIndirectCommandsLayoutNV_ptr, instance, invokeErrorCallback);
 			if(vkCreateIndirectCommandsLayoutNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDestroyIndirectCommandsLayoutNV":
-			mNativeLib.LoadFunction("vkDestroyIndirectCommandsLayoutNV", out vkDestroyIndirectCommandsLayoutNV_ptr, invokeErrorCallback);
+			LoadFunction("vkDestroyIndirectCommandsLayoutNV", out vkDestroyIndirectCommandsLayoutNV_ptr, instance, invokeErrorCallback);
 			if(vkDestroyIndirectCommandsLayoutNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetDepthBias2EXT":
-			mNativeLib.LoadFunction("vkCmdSetDepthBias2EXT", out vkCmdSetDepthBias2EXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetDepthBias2EXT", out vkCmdSetDepthBias2EXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetDepthBias2EXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkAcquireDrmDisplayEXT":
-			mNativeLib.LoadFunction("vkAcquireDrmDisplayEXT", out vkAcquireDrmDisplayEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkAcquireDrmDisplayEXT", out vkAcquireDrmDisplayEXT_ptr, instance, invokeErrorCallback);
 			if(vkAcquireDrmDisplayEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetDrmDisplayEXT":
-			mNativeLib.LoadFunction("vkGetDrmDisplayEXT", out vkGetDrmDisplayEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkGetDrmDisplayEXT", out vkGetDrmDisplayEXT_ptr, instance, invokeErrorCallback);
 			if(vkGetDrmDisplayEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR", out vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR", out vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetEncodedVideoSessionParametersKHR":
-			mNativeLib.LoadFunction("vkGetEncodedVideoSessionParametersKHR", out vkGetEncodedVideoSessionParametersKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetEncodedVideoSessionParametersKHR", out vkGetEncodedVideoSessionParametersKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetEncodedVideoSessionParametersKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdEncodeVideoKHR":
-			mNativeLib.LoadFunction("vkCmdEncodeVideoKHR", out vkCmdEncodeVideoKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdEncodeVideoKHR", out vkCmdEncodeVideoKHR_ptr, instance, invokeErrorCallback);
 			if(vkCmdEncodeVideoKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateCudaModuleNV":
-			mNativeLib.LoadFunction("vkCreateCudaModuleNV", out vkCreateCudaModuleNV_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateCudaModuleNV", out vkCreateCudaModuleNV_ptr, instance, invokeErrorCallback);
 			if(vkCreateCudaModuleNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetCudaModuleCacheNV":
-			mNativeLib.LoadFunction("vkGetCudaModuleCacheNV", out vkGetCudaModuleCacheNV_ptr, invokeErrorCallback);
+			LoadFunction("vkGetCudaModuleCacheNV", out vkGetCudaModuleCacheNV_ptr, instance, invokeErrorCallback);
 			if(vkGetCudaModuleCacheNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateCudaFunctionNV":
-			mNativeLib.LoadFunction("vkCreateCudaFunctionNV", out vkCreateCudaFunctionNV_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateCudaFunctionNV", out vkCreateCudaFunctionNV_ptr, instance, invokeErrorCallback);
 			if(vkCreateCudaFunctionNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDestroyCudaModuleNV":
-			mNativeLib.LoadFunction("vkDestroyCudaModuleNV", out vkDestroyCudaModuleNV_ptr, invokeErrorCallback);
+			LoadFunction("vkDestroyCudaModuleNV", out vkDestroyCudaModuleNV_ptr, instance, invokeErrorCallback);
 			if(vkDestroyCudaModuleNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDestroyCudaFunctionNV":
-			mNativeLib.LoadFunction("vkDestroyCudaFunctionNV", out vkDestroyCudaFunctionNV_ptr, invokeErrorCallback);
+			LoadFunction("vkDestroyCudaFunctionNV", out vkDestroyCudaFunctionNV_ptr, instance, invokeErrorCallback);
 			if(vkDestroyCudaFunctionNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdCudaLaunchKernelNV":
-			mNativeLib.LoadFunction("vkCmdCudaLaunchKernelNV", out vkCmdCudaLaunchKernelNV_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdCudaLaunchKernelNV", out vkCmdCudaLaunchKernelNV_ptr, instance, invokeErrorCallback);
 			if(vkCmdCudaLaunchKernelNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdRefreshObjectsKHR":
-			mNativeLib.LoadFunction("vkCmdRefreshObjectsKHR", out vkCmdRefreshObjectsKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdRefreshObjectsKHR", out vkCmdRefreshObjectsKHR_ptr, instance, invokeErrorCallback);
 			if(vkCmdRefreshObjectsKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceRefreshableObjectTypesKHR":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceRefreshableObjectTypesKHR", out vkGetPhysicalDeviceRefreshableObjectTypesKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceRefreshableObjectTypesKHR", out vkGetPhysicalDeviceRefreshableObjectTypesKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceRefreshableObjectTypesKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkExportMetalObjectsEXT":
-			mNativeLib.LoadFunction("vkExportMetalObjectsEXT", out vkExportMetalObjectsEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkExportMetalObjectsEXT", out vkExportMetalObjectsEXT_ptr, instance, invokeErrorCallback);
 			if(vkExportMetalObjectsEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetDescriptorSetLayoutSizeEXT":
-			mNativeLib.LoadFunction("vkGetDescriptorSetLayoutSizeEXT", out vkGetDescriptorSetLayoutSizeEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkGetDescriptorSetLayoutSizeEXT", out vkGetDescriptorSetLayoutSizeEXT_ptr, instance, invokeErrorCallback);
 			if(vkGetDescriptorSetLayoutSizeEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetDescriptorSetLayoutBindingOffsetEXT":
-			mNativeLib.LoadFunction("vkGetDescriptorSetLayoutBindingOffsetEXT", out vkGetDescriptorSetLayoutBindingOffsetEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkGetDescriptorSetLayoutBindingOffsetEXT", out vkGetDescriptorSetLayoutBindingOffsetEXT_ptr, instance, invokeErrorCallback);
 			if(vkGetDescriptorSetLayoutBindingOffsetEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetDescriptorEXT":
-			mNativeLib.LoadFunction("vkGetDescriptorEXT", out vkGetDescriptorEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkGetDescriptorEXT", out vkGetDescriptorEXT_ptr, instance, invokeErrorCallback);
 			if(vkGetDescriptorEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdBindDescriptorBuffersEXT":
-			mNativeLib.LoadFunction("vkCmdBindDescriptorBuffersEXT", out vkCmdBindDescriptorBuffersEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdBindDescriptorBuffersEXT", out vkCmdBindDescriptorBuffersEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdBindDescriptorBuffersEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetDescriptorBufferOffsetsEXT":
-			mNativeLib.LoadFunction("vkCmdSetDescriptorBufferOffsetsEXT", out vkCmdSetDescriptorBufferOffsetsEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetDescriptorBufferOffsetsEXT", out vkCmdSetDescriptorBufferOffsetsEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetDescriptorBufferOffsetsEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdBindDescriptorBufferEmbeddedSamplersEXT":
-			mNativeLib.LoadFunction("vkCmdBindDescriptorBufferEmbeddedSamplersEXT", out vkCmdBindDescriptorBufferEmbeddedSamplersEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdBindDescriptorBufferEmbeddedSamplersEXT", out vkCmdBindDescriptorBufferEmbeddedSamplersEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdBindDescriptorBufferEmbeddedSamplersEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetBufferOpaqueCaptureDescriptorDataEXT":
-			mNativeLib.LoadFunction("vkGetBufferOpaqueCaptureDescriptorDataEXT", out vkGetBufferOpaqueCaptureDescriptorDataEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkGetBufferOpaqueCaptureDescriptorDataEXT", out vkGetBufferOpaqueCaptureDescriptorDataEXT_ptr, instance, invokeErrorCallback);
 			if(vkGetBufferOpaqueCaptureDescriptorDataEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetImageOpaqueCaptureDescriptorDataEXT":
-			mNativeLib.LoadFunction("vkGetImageOpaqueCaptureDescriptorDataEXT", out vkGetImageOpaqueCaptureDescriptorDataEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkGetImageOpaqueCaptureDescriptorDataEXT", out vkGetImageOpaqueCaptureDescriptorDataEXT_ptr, instance, invokeErrorCallback);
 			if(vkGetImageOpaqueCaptureDescriptorDataEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetImageViewOpaqueCaptureDescriptorDataEXT":
-			mNativeLib.LoadFunction("vkGetImageViewOpaqueCaptureDescriptorDataEXT", out vkGetImageViewOpaqueCaptureDescriptorDataEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkGetImageViewOpaqueCaptureDescriptorDataEXT", out vkGetImageViewOpaqueCaptureDescriptorDataEXT_ptr, instance, invokeErrorCallback);
 			if(vkGetImageViewOpaqueCaptureDescriptorDataEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetSamplerOpaqueCaptureDescriptorDataEXT":
-			mNativeLib.LoadFunction("vkGetSamplerOpaqueCaptureDescriptorDataEXT", out vkGetSamplerOpaqueCaptureDescriptorDataEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkGetSamplerOpaqueCaptureDescriptorDataEXT", out vkGetSamplerOpaqueCaptureDescriptorDataEXT_ptr, instance, invokeErrorCallback);
 			if(vkGetSamplerOpaqueCaptureDescriptorDataEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetFragmentShadingRateEnumNV":
-			mNativeLib.LoadFunction("vkCmdSetFragmentShadingRateEnumNV", out vkCmdSetFragmentShadingRateEnumNV_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetFragmentShadingRateEnumNV", out vkCmdSetFragmentShadingRateEnumNV_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetFragmentShadingRateEnumNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdDrawMeshTasksEXT":
-			mNativeLib.LoadFunction("vkCmdDrawMeshTasksEXT", out vkCmdDrawMeshTasksEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdDrawMeshTasksEXT", out vkCmdDrawMeshTasksEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdDrawMeshTasksEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdDrawMeshTasksIndirectEXT":
-			mNativeLib.LoadFunction("vkCmdDrawMeshTasksIndirectEXT", out vkCmdDrawMeshTasksIndirectEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdDrawMeshTasksIndirectEXT", out vkCmdDrawMeshTasksIndirectEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdDrawMeshTasksIndirectEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdDrawMeshTasksIndirectCountEXT":
-			mNativeLib.LoadFunction("vkCmdDrawMeshTasksIndirectCountEXT", out vkCmdDrawMeshTasksIndirectCountEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdDrawMeshTasksIndirectCountEXT", out vkCmdDrawMeshTasksIndirectCountEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdDrawMeshTasksIndirectCountEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetDeviceFaultInfoEXT":
-			mNativeLib.LoadFunction("vkGetDeviceFaultInfoEXT", out vkGetDeviceFaultInfoEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkGetDeviceFaultInfoEXT", out vkGetDeviceFaultInfoEXT_ptr, instance, invokeErrorCallback);
 			if(vkGetDeviceFaultInfoEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkAcquireWinrtDisplayNV":
-			mNativeLib.LoadFunction("vkAcquireWinrtDisplayNV", out vkAcquireWinrtDisplayNV_ptr, invokeErrorCallback);
+			LoadFunction("vkAcquireWinrtDisplayNV", out vkAcquireWinrtDisplayNV_ptr, instance, invokeErrorCallback);
 			if(vkAcquireWinrtDisplayNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetWinrtDisplayNV":
-			mNativeLib.LoadFunction("vkGetWinrtDisplayNV", out vkGetWinrtDisplayNV_ptr, invokeErrorCallback);
+			LoadFunction("vkGetWinrtDisplayNV", out vkGetWinrtDisplayNV_ptr, instance, invokeErrorCallback);
 			if(vkGetWinrtDisplayNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateDirectFBSurfaceEXT":
-			mNativeLib.LoadFunction("vkCreateDirectFBSurfaceEXT", out vkCreateDirectFBSurfaceEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateDirectFBSurfaceEXT", out vkCreateDirectFBSurfaceEXT_ptr, instance, invokeErrorCallback);
 			if(vkCreateDirectFBSurfaceEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceDirectFBPresentationSupportEXT":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceDirectFBPresentationSupportEXT", out vkGetPhysicalDeviceDirectFBPresentationSupportEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceDirectFBPresentationSupportEXT", out vkGetPhysicalDeviceDirectFBPresentationSupportEXT_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceDirectFBPresentationSupportEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetVertexInputEXT":
-			mNativeLib.LoadFunction("vkCmdSetVertexInputEXT", out vkCmdSetVertexInputEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetVertexInputEXT", out vkCmdSetVertexInputEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetVertexInputEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetMemoryZirconHandleFUCHSIA":
-			mNativeLib.LoadFunction("vkGetMemoryZirconHandleFUCHSIA", out vkGetMemoryZirconHandleFUCHSIA_ptr, invokeErrorCallback);
+			LoadFunction("vkGetMemoryZirconHandleFUCHSIA", out vkGetMemoryZirconHandleFUCHSIA_ptr, instance, invokeErrorCallback);
 			if(vkGetMemoryZirconHandleFUCHSIA_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetMemoryZirconHandlePropertiesFUCHSIA":
-			mNativeLib.LoadFunction("vkGetMemoryZirconHandlePropertiesFUCHSIA", out vkGetMemoryZirconHandlePropertiesFUCHSIA_ptr, invokeErrorCallback);
+			LoadFunction("vkGetMemoryZirconHandlePropertiesFUCHSIA", out vkGetMemoryZirconHandlePropertiesFUCHSIA_ptr, instance, invokeErrorCallback);
 			if(vkGetMemoryZirconHandlePropertiesFUCHSIA_ptr == null)
 				return .Err;
 			break;
 
 		case "vkImportSemaphoreZirconHandleFUCHSIA":
-			mNativeLib.LoadFunction("vkImportSemaphoreZirconHandleFUCHSIA", out vkImportSemaphoreZirconHandleFUCHSIA_ptr, invokeErrorCallback);
+			LoadFunction("vkImportSemaphoreZirconHandleFUCHSIA", out vkImportSemaphoreZirconHandleFUCHSIA_ptr, instance, invokeErrorCallback);
 			if(vkImportSemaphoreZirconHandleFUCHSIA_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetSemaphoreZirconHandleFUCHSIA":
-			mNativeLib.LoadFunction("vkGetSemaphoreZirconHandleFUCHSIA", out vkGetSemaphoreZirconHandleFUCHSIA_ptr, invokeErrorCallback);
+			LoadFunction("vkGetSemaphoreZirconHandleFUCHSIA", out vkGetSemaphoreZirconHandleFUCHSIA_ptr, instance, invokeErrorCallback);
 			if(vkGetSemaphoreZirconHandleFUCHSIA_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateBufferCollectionFUCHSIA":
-			mNativeLib.LoadFunction("vkCreateBufferCollectionFUCHSIA", out vkCreateBufferCollectionFUCHSIA_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateBufferCollectionFUCHSIA", out vkCreateBufferCollectionFUCHSIA_ptr, instance, invokeErrorCallback);
 			if(vkCreateBufferCollectionFUCHSIA_ptr == null)
 				return .Err;
 			break;
 
 		case "vkSetBufferCollectionImageConstraintsFUCHSIA":
-			mNativeLib.LoadFunction("vkSetBufferCollectionImageConstraintsFUCHSIA", out vkSetBufferCollectionImageConstraintsFUCHSIA_ptr, invokeErrorCallback);
+			LoadFunction("vkSetBufferCollectionImageConstraintsFUCHSIA", out vkSetBufferCollectionImageConstraintsFUCHSIA_ptr, instance, invokeErrorCallback);
 			if(vkSetBufferCollectionImageConstraintsFUCHSIA_ptr == null)
 				return .Err;
 			break;
 
 		case "vkSetBufferCollectionBufferConstraintsFUCHSIA":
-			mNativeLib.LoadFunction("vkSetBufferCollectionBufferConstraintsFUCHSIA", out vkSetBufferCollectionBufferConstraintsFUCHSIA_ptr, invokeErrorCallback);
+			LoadFunction("vkSetBufferCollectionBufferConstraintsFUCHSIA", out vkSetBufferCollectionBufferConstraintsFUCHSIA_ptr, instance, invokeErrorCallback);
 			if(vkSetBufferCollectionBufferConstraintsFUCHSIA_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDestroyBufferCollectionFUCHSIA":
-			mNativeLib.LoadFunction("vkDestroyBufferCollectionFUCHSIA", out vkDestroyBufferCollectionFUCHSIA_ptr, invokeErrorCallback);
+			LoadFunction("vkDestroyBufferCollectionFUCHSIA", out vkDestroyBufferCollectionFUCHSIA_ptr, instance, invokeErrorCallback);
 			if(vkDestroyBufferCollectionFUCHSIA_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetBufferCollectionPropertiesFUCHSIA":
-			mNativeLib.LoadFunction("vkGetBufferCollectionPropertiesFUCHSIA", out vkGetBufferCollectionPropertiesFUCHSIA_ptr, invokeErrorCallback);
+			LoadFunction("vkGetBufferCollectionPropertiesFUCHSIA", out vkGetBufferCollectionPropertiesFUCHSIA_ptr, instance, invokeErrorCallback);
 			if(vkGetBufferCollectionPropertiesFUCHSIA_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI":
-			mNativeLib.LoadFunction("vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI", out vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI_ptr, invokeErrorCallback);
+			LoadFunction("vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI", out vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI_ptr, instance, invokeErrorCallback);
 			if(vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSubpassShadingHUAWEI":
-			mNativeLib.LoadFunction("vkCmdSubpassShadingHUAWEI", out vkCmdSubpassShadingHUAWEI_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSubpassShadingHUAWEI", out vkCmdSubpassShadingHUAWEI_ptr, instance, invokeErrorCallback);
 			if(vkCmdSubpassShadingHUAWEI_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdBindInvocationMaskHUAWEI":
-			mNativeLib.LoadFunction("vkCmdBindInvocationMaskHUAWEI", out vkCmdBindInvocationMaskHUAWEI_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdBindInvocationMaskHUAWEI", out vkCmdBindInvocationMaskHUAWEI_ptr, instance, invokeErrorCallback);
 			if(vkCmdBindInvocationMaskHUAWEI_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetMemoryRemoteAddressNV":
-			mNativeLib.LoadFunction("vkGetMemoryRemoteAddressNV", out vkGetMemoryRemoteAddressNV_ptr, invokeErrorCallback);
+			LoadFunction("vkGetMemoryRemoteAddressNV", out vkGetMemoryRemoteAddressNV_ptr, instance, invokeErrorCallback);
 			if(vkGetMemoryRemoteAddressNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPipelinePropertiesEXT":
-			mNativeLib.LoadFunction("vkGetPipelinePropertiesEXT", out vkGetPipelinePropertiesEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPipelinePropertiesEXT", out vkGetPipelinePropertiesEXT_ptr, instance, invokeErrorCallback);
 			if(vkGetPipelinePropertiesEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetFenceSciSyncFenceNV":
-			mNativeLib.LoadFunction("vkGetFenceSciSyncFenceNV", out vkGetFenceSciSyncFenceNV_ptr, invokeErrorCallback);
+			LoadFunction("vkGetFenceSciSyncFenceNV", out vkGetFenceSciSyncFenceNV_ptr, instance, invokeErrorCallback);
 			if(vkGetFenceSciSyncFenceNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetFenceSciSyncObjNV":
-			mNativeLib.LoadFunction("vkGetFenceSciSyncObjNV", out vkGetFenceSciSyncObjNV_ptr, invokeErrorCallback);
+			LoadFunction("vkGetFenceSciSyncObjNV", out vkGetFenceSciSyncObjNV_ptr, instance, invokeErrorCallback);
 			if(vkGetFenceSciSyncObjNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkImportFenceSciSyncFenceNV":
-			mNativeLib.LoadFunction("vkImportFenceSciSyncFenceNV", out vkImportFenceSciSyncFenceNV_ptr, invokeErrorCallback);
+			LoadFunction("vkImportFenceSciSyncFenceNV", out vkImportFenceSciSyncFenceNV_ptr, instance, invokeErrorCallback);
 			if(vkImportFenceSciSyncFenceNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkImportFenceSciSyncObjNV":
-			mNativeLib.LoadFunction("vkImportFenceSciSyncObjNV", out vkImportFenceSciSyncObjNV_ptr, invokeErrorCallback);
+			LoadFunction("vkImportFenceSciSyncObjNV", out vkImportFenceSciSyncObjNV_ptr, instance, invokeErrorCallback);
 			if(vkImportFenceSciSyncObjNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceSciSyncAttributesNV":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceSciSyncAttributesNV", out vkGetPhysicalDeviceSciSyncAttributesNV_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceSciSyncAttributesNV", out vkGetPhysicalDeviceSciSyncAttributesNV_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceSciSyncAttributesNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetSemaphoreSciSyncObjNV":
-			mNativeLib.LoadFunction("vkGetSemaphoreSciSyncObjNV", out vkGetSemaphoreSciSyncObjNV_ptr, invokeErrorCallback);
+			LoadFunction("vkGetSemaphoreSciSyncObjNV", out vkGetSemaphoreSciSyncObjNV_ptr, instance, invokeErrorCallback);
 			if(vkGetSemaphoreSciSyncObjNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkImportSemaphoreSciSyncObjNV":
-			mNativeLib.LoadFunction("vkImportSemaphoreSciSyncObjNV", out vkImportSemaphoreSciSyncObjNV_ptr, invokeErrorCallback);
+			LoadFunction("vkImportSemaphoreSciSyncObjNV", out vkImportSemaphoreSciSyncObjNV_ptr, instance, invokeErrorCallback);
 			if(vkImportSemaphoreSciSyncObjNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetMemorySciBufNV":
-			mNativeLib.LoadFunction("vkGetMemorySciBufNV", out vkGetMemorySciBufNV_ptr, invokeErrorCallback);
+			LoadFunction("vkGetMemorySciBufNV", out vkGetMemorySciBufNV_ptr, instance, invokeErrorCallback);
 			if(vkGetMemorySciBufNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV", out vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV", out vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceSciBufAttributesNV":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceSciBufAttributesNV", out vkGetPhysicalDeviceSciBufAttributesNV_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceSciBufAttributesNV", out vkGetPhysicalDeviceSciBufAttributesNV_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceSciBufAttributesNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetPatchControlPointsEXT":
-			mNativeLib.LoadFunction("vkCmdSetPatchControlPointsEXT", out vkCmdSetPatchControlPointsEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetPatchControlPointsEXT", out vkCmdSetPatchControlPointsEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetPatchControlPointsEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetLogicOpEXT":
-			mNativeLib.LoadFunction("vkCmdSetLogicOpEXT", out vkCmdSetLogicOpEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetLogicOpEXT", out vkCmdSetLogicOpEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetLogicOpEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateScreenSurfaceQNX":
-			mNativeLib.LoadFunction("vkCreateScreenSurfaceQNX", out vkCreateScreenSurfaceQNX_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateScreenSurfaceQNX", out vkCreateScreenSurfaceQNX_ptr, instance, invokeErrorCallback);
 			if(vkCreateScreenSurfaceQNX_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceScreenPresentationSupportQNX":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceScreenPresentationSupportQNX", out vkGetPhysicalDeviceScreenPresentationSupportQNX_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceScreenPresentationSupportQNX", out vkGetPhysicalDeviceScreenPresentationSupportQNX_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceScreenPresentationSupportQNX_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetColorWriteEnableEXT":
-			mNativeLib.LoadFunction("vkCmdSetColorWriteEnableEXT", out vkCmdSetColorWriteEnableEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetColorWriteEnableEXT", out vkCmdSetColorWriteEnableEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetColorWriteEnableEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdDrawMultiEXT":
-			mNativeLib.LoadFunction("vkCmdDrawMultiEXT", out vkCmdDrawMultiEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdDrawMultiEXT", out vkCmdDrawMultiEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdDrawMultiEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdDrawMultiIndexedEXT":
-			mNativeLib.LoadFunction("vkCmdDrawMultiIndexedEXT", out vkCmdDrawMultiIndexedEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdDrawMultiIndexedEXT", out vkCmdDrawMultiIndexedEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdDrawMultiIndexedEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateMicromapEXT":
-			mNativeLib.LoadFunction("vkCreateMicromapEXT", out vkCreateMicromapEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateMicromapEXT", out vkCreateMicromapEXT_ptr, instance, invokeErrorCallback);
 			if(vkCreateMicromapEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDestroyMicromapEXT":
-			mNativeLib.LoadFunction("vkDestroyMicromapEXT", out vkDestroyMicromapEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkDestroyMicromapEXT", out vkDestroyMicromapEXT_ptr, instance, invokeErrorCallback);
 			if(vkDestroyMicromapEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdBuildMicromapsEXT":
-			mNativeLib.LoadFunction("vkCmdBuildMicromapsEXT", out vkCmdBuildMicromapsEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdBuildMicromapsEXT", out vkCmdBuildMicromapsEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdBuildMicromapsEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkBuildMicromapsEXT":
-			mNativeLib.LoadFunction("vkBuildMicromapsEXT", out vkBuildMicromapsEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkBuildMicromapsEXT", out vkBuildMicromapsEXT_ptr, instance, invokeErrorCallback);
 			if(vkBuildMicromapsEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCopyMicromapEXT":
-			mNativeLib.LoadFunction("vkCopyMicromapEXT", out vkCopyMicromapEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCopyMicromapEXT", out vkCopyMicromapEXT_ptr, instance, invokeErrorCallback);
 			if(vkCopyMicromapEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCopyMicromapToMemoryEXT":
-			mNativeLib.LoadFunction("vkCopyMicromapToMemoryEXT", out vkCopyMicromapToMemoryEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCopyMicromapToMemoryEXT", out vkCopyMicromapToMemoryEXT_ptr, instance, invokeErrorCallback);
 			if(vkCopyMicromapToMemoryEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCopyMemoryToMicromapEXT":
-			mNativeLib.LoadFunction("vkCopyMemoryToMicromapEXT", out vkCopyMemoryToMicromapEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCopyMemoryToMicromapEXT", out vkCopyMemoryToMicromapEXT_ptr, instance, invokeErrorCallback);
 			if(vkCopyMemoryToMicromapEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkWriteMicromapsPropertiesEXT":
-			mNativeLib.LoadFunction("vkWriteMicromapsPropertiesEXT", out vkWriteMicromapsPropertiesEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkWriteMicromapsPropertiesEXT", out vkWriteMicromapsPropertiesEXT_ptr, instance, invokeErrorCallback);
 			if(vkWriteMicromapsPropertiesEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdCopyMicromapEXT":
-			mNativeLib.LoadFunction("vkCmdCopyMicromapEXT", out vkCmdCopyMicromapEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdCopyMicromapEXT", out vkCmdCopyMicromapEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdCopyMicromapEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdCopyMicromapToMemoryEXT":
-			mNativeLib.LoadFunction("vkCmdCopyMicromapToMemoryEXT", out vkCmdCopyMicromapToMemoryEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdCopyMicromapToMemoryEXT", out vkCmdCopyMicromapToMemoryEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdCopyMicromapToMemoryEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdCopyMemoryToMicromapEXT":
-			mNativeLib.LoadFunction("vkCmdCopyMemoryToMicromapEXT", out vkCmdCopyMemoryToMicromapEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdCopyMemoryToMicromapEXT", out vkCmdCopyMemoryToMicromapEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdCopyMemoryToMicromapEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdWriteMicromapsPropertiesEXT":
-			mNativeLib.LoadFunction("vkCmdWriteMicromapsPropertiesEXT", out vkCmdWriteMicromapsPropertiesEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdWriteMicromapsPropertiesEXT", out vkCmdWriteMicromapsPropertiesEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdWriteMicromapsPropertiesEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetDeviceMicromapCompatibilityEXT":
-			mNativeLib.LoadFunction("vkGetDeviceMicromapCompatibilityEXT", out vkGetDeviceMicromapCompatibilityEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkGetDeviceMicromapCompatibilityEXT", out vkGetDeviceMicromapCompatibilityEXT_ptr, instance, invokeErrorCallback);
 			if(vkGetDeviceMicromapCompatibilityEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetMicromapBuildSizesEXT":
-			mNativeLib.LoadFunction("vkGetMicromapBuildSizesEXT", out vkGetMicromapBuildSizesEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkGetMicromapBuildSizesEXT", out vkGetMicromapBuildSizesEXT_ptr, instance, invokeErrorCallback);
 			if(vkGetMicromapBuildSizesEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdDrawClusterHUAWEI":
-			mNativeLib.LoadFunction("vkCmdDrawClusterHUAWEI", out vkCmdDrawClusterHUAWEI_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdDrawClusterHUAWEI", out vkCmdDrawClusterHUAWEI_ptr, instance, invokeErrorCallback);
 			if(vkCmdDrawClusterHUAWEI_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdDrawClusterIndirectHUAWEI":
-			mNativeLib.LoadFunction("vkCmdDrawClusterIndirectHUAWEI", out vkCmdDrawClusterIndirectHUAWEI_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdDrawClusterIndirectHUAWEI", out vkCmdDrawClusterIndirectHUAWEI_ptr, instance, invokeErrorCallback);
 			if(vkCmdDrawClusterIndirectHUAWEI_ptr == null)
 				return .Err;
 			break;
 
 		case "vkSetDeviceMemoryPriorityEXT":
-			mNativeLib.LoadFunction("vkSetDeviceMemoryPriorityEXT", out vkSetDeviceMemoryPriorityEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkSetDeviceMemoryPriorityEXT", out vkSetDeviceMemoryPriorityEXT_ptr, instance, invokeErrorCallback);
 			if(vkSetDeviceMemoryPriorityEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetDescriptorSetLayoutHostMappingInfoVALVE":
-			mNativeLib.LoadFunction("vkGetDescriptorSetLayoutHostMappingInfoVALVE", out vkGetDescriptorSetLayoutHostMappingInfoVALVE_ptr, invokeErrorCallback);
+			LoadFunction("vkGetDescriptorSetLayoutHostMappingInfoVALVE", out vkGetDescriptorSetLayoutHostMappingInfoVALVE_ptr, instance, invokeErrorCallback);
 			if(vkGetDescriptorSetLayoutHostMappingInfoVALVE_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetDescriptorSetHostMappingVALVE":
-			mNativeLib.LoadFunction("vkGetDescriptorSetHostMappingVALVE", out vkGetDescriptorSetHostMappingVALVE_ptr, invokeErrorCallback);
+			LoadFunction("vkGetDescriptorSetHostMappingVALVE", out vkGetDescriptorSetHostMappingVALVE_ptr, instance, invokeErrorCallback);
 			if(vkGetDescriptorSetHostMappingVALVE_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdCopyMemoryIndirectNV":
-			mNativeLib.LoadFunction("vkCmdCopyMemoryIndirectNV", out vkCmdCopyMemoryIndirectNV_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdCopyMemoryIndirectNV", out vkCmdCopyMemoryIndirectNV_ptr, instance, invokeErrorCallback);
 			if(vkCmdCopyMemoryIndirectNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdCopyMemoryToImageIndirectNV":
-			mNativeLib.LoadFunction("vkCmdCopyMemoryToImageIndirectNV", out vkCmdCopyMemoryToImageIndirectNV_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdCopyMemoryToImageIndirectNV", out vkCmdCopyMemoryToImageIndirectNV_ptr, instance, invokeErrorCallback);
 			if(vkCmdCopyMemoryToImageIndirectNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdDecompressMemoryNV":
-			mNativeLib.LoadFunction("vkCmdDecompressMemoryNV", out vkCmdDecompressMemoryNV_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdDecompressMemoryNV", out vkCmdDecompressMemoryNV_ptr, instance, invokeErrorCallback);
 			if(vkCmdDecompressMemoryNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdDecompressMemoryIndirectCountNV":
-			mNativeLib.LoadFunction("vkCmdDecompressMemoryIndirectCountNV", out vkCmdDecompressMemoryIndirectCountNV_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdDecompressMemoryIndirectCountNV", out vkCmdDecompressMemoryIndirectCountNV_ptr, instance, invokeErrorCallback);
 			if(vkCmdDecompressMemoryIndirectCountNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPipelineIndirectMemoryRequirementsNV":
-			mNativeLib.LoadFunction("vkGetPipelineIndirectMemoryRequirementsNV", out vkGetPipelineIndirectMemoryRequirementsNV_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPipelineIndirectMemoryRequirementsNV", out vkGetPipelineIndirectMemoryRequirementsNV_ptr, instance, invokeErrorCallback);
 			if(vkGetPipelineIndirectMemoryRequirementsNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdUpdatePipelineIndirectBufferNV":
-			mNativeLib.LoadFunction("vkCmdUpdatePipelineIndirectBufferNV", out vkCmdUpdatePipelineIndirectBufferNV_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdUpdatePipelineIndirectBufferNV", out vkCmdUpdatePipelineIndirectBufferNV_ptr, instance, invokeErrorCallback);
 			if(vkCmdUpdatePipelineIndirectBufferNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPipelineIndirectDeviceAddressNV":
-			mNativeLib.LoadFunction("vkGetPipelineIndirectDeviceAddressNV", out vkGetPipelineIndirectDeviceAddressNV_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPipelineIndirectDeviceAddressNV", out vkGetPipelineIndirectDeviceAddressNV_ptr, instance, invokeErrorCallback);
 			if(vkGetPipelineIndirectDeviceAddressNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetDepthClampEnableEXT":
-			mNativeLib.LoadFunction("vkCmdSetDepthClampEnableEXT", out vkCmdSetDepthClampEnableEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetDepthClampEnableEXT", out vkCmdSetDepthClampEnableEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetDepthClampEnableEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetPolygonModeEXT":
-			mNativeLib.LoadFunction("vkCmdSetPolygonModeEXT", out vkCmdSetPolygonModeEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetPolygonModeEXT", out vkCmdSetPolygonModeEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetPolygonModeEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetRasterizationSamplesEXT":
-			mNativeLib.LoadFunction("vkCmdSetRasterizationSamplesEXT", out vkCmdSetRasterizationSamplesEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetRasterizationSamplesEXT", out vkCmdSetRasterizationSamplesEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetRasterizationSamplesEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetSampleMaskEXT":
-			mNativeLib.LoadFunction("vkCmdSetSampleMaskEXT", out vkCmdSetSampleMaskEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetSampleMaskEXT", out vkCmdSetSampleMaskEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetSampleMaskEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetAlphaToCoverageEnableEXT":
-			mNativeLib.LoadFunction("vkCmdSetAlphaToCoverageEnableEXT", out vkCmdSetAlphaToCoverageEnableEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetAlphaToCoverageEnableEXT", out vkCmdSetAlphaToCoverageEnableEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetAlphaToCoverageEnableEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetAlphaToOneEnableEXT":
-			mNativeLib.LoadFunction("vkCmdSetAlphaToOneEnableEXT", out vkCmdSetAlphaToOneEnableEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetAlphaToOneEnableEXT", out vkCmdSetAlphaToOneEnableEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetAlphaToOneEnableEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetLogicOpEnableEXT":
-			mNativeLib.LoadFunction("vkCmdSetLogicOpEnableEXT", out vkCmdSetLogicOpEnableEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetLogicOpEnableEXT", out vkCmdSetLogicOpEnableEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetLogicOpEnableEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetColorBlendEnableEXT":
-			mNativeLib.LoadFunction("vkCmdSetColorBlendEnableEXT", out vkCmdSetColorBlendEnableEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetColorBlendEnableEXT", out vkCmdSetColorBlendEnableEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetColorBlendEnableEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetColorBlendEquationEXT":
-			mNativeLib.LoadFunction("vkCmdSetColorBlendEquationEXT", out vkCmdSetColorBlendEquationEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetColorBlendEquationEXT", out vkCmdSetColorBlendEquationEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetColorBlendEquationEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetColorWriteMaskEXT":
-			mNativeLib.LoadFunction("vkCmdSetColorWriteMaskEXT", out vkCmdSetColorWriteMaskEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetColorWriteMaskEXT", out vkCmdSetColorWriteMaskEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetColorWriteMaskEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetShaderModuleIdentifierEXT":
-			mNativeLib.LoadFunction("vkGetShaderModuleIdentifierEXT", out vkGetShaderModuleIdentifierEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkGetShaderModuleIdentifierEXT", out vkGetShaderModuleIdentifierEXT_ptr, instance, invokeErrorCallback);
 			if(vkGetShaderModuleIdentifierEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetShaderModuleCreateInfoIdentifierEXT":
-			mNativeLib.LoadFunction("vkGetShaderModuleCreateInfoIdentifierEXT", out vkGetShaderModuleCreateInfoIdentifierEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkGetShaderModuleCreateInfoIdentifierEXT", out vkGetShaderModuleCreateInfoIdentifierEXT_ptr, instance, invokeErrorCallback);
 			if(vkGetShaderModuleCreateInfoIdentifierEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceOpticalFlowImageFormatsNV":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceOpticalFlowImageFormatsNV", out vkGetPhysicalDeviceOpticalFlowImageFormatsNV_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceOpticalFlowImageFormatsNV", out vkGetPhysicalDeviceOpticalFlowImageFormatsNV_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceOpticalFlowImageFormatsNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateOpticalFlowSessionNV":
-			mNativeLib.LoadFunction("vkCreateOpticalFlowSessionNV", out vkCreateOpticalFlowSessionNV_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateOpticalFlowSessionNV", out vkCreateOpticalFlowSessionNV_ptr, instance, invokeErrorCallback);
 			if(vkCreateOpticalFlowSessionNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDestroyOpticalFlowSessionNV":
-			mNativeLib.LoadFunction("vkDestroyOpticalFlowSessionNV", out vkDestroyOpticalFlowSessionNV_ptr, invokeErrorCallback);
+			LoadFunction("vkDestroyOpticalFlowSessionNV", out vkDestroyOpticalFlowSessionNV_ptr, instance, invokeErrorCallback);
 			if(vkDestroyOpticalFlowSessionNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkBindOpticalFlowSessionImageNV":
-			mNativeLib.LoadFunction("vkBindOpticalFlowSessionImageNV", out vkBindOpticalFlowSessionImageNV_ptr, invokeErrorCallback);
+			LoadFunction("vkBindOpticalFlowSessionImageNV", out vkBindOpticalFlowSessionImageNV_ptr, instance, invokeErrorCallback);
 			if(vkBindOpticalFlowSessionImageNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdOpticalFlowExecuteNV":
-			mNativeLib.LoadFunction("vkCmdOpticalFlowExecuteNV", out vkCmdOpticalFlowExecuteNV_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdOpticalFlowExecuteNV", out vkCmdOpticalFlowExecuteNV_ptr, instance, invokeErrorCallback);
 			if(vkCmdOpticalFlowExecuteNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdBindIndexBuffer2KHR":
-			mNativeLib.LoadFunction("vkCmdBindIndexBuffer2KHR", out vkCmdBindIndexBuffer2KHR_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdBindIndexBuffer2KHR", out vkCmdBindIndexBuffer2KHR_ptr, instance, invokeErrorCallback);
 			if(vkCmdBindIndexBuffer2KHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetRenderingAreaGranularityKHR":
-			mNativeLib.LoadFunction("vkGetRenderingAreaGranularityKHR", out vkGetRenderingAreaGranularityKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetRenderingAreaGranularityKHR", out vkGetRenderingAreaGranularityKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetRenderingAreaGranularityKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetDeviceImageSubresourceLayoutKHR":
-			mNativeLib.LoadFunction("vkGetDeviceImageSubresourceLayoutKHR", out vkGetDeviceImageSubresourceLayoutKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetDeviceImageSubresourceLayoutKHR", out vkGetDeviceImageSubresourceLayoutKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetDeviceImageSubresourceLayoutKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateShadersEXT":
-			mNativeLib.LoadFunction("vkCreateShadersEXT", out vkCreateShadersEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateShadersEXT", out vkCreateShadersEXT_ptr, instance, invokeErrorCallback);
 			if(vkCreateShadersEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDestroyShaderEXT":
-			mNativeLib.LoadFunction("vkDestroyShaderEXT", out vkDestroyShaderEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkDestroyShaderEXT", out vkDestroyShaderEXT_ptr, instance, invokeErrorCallback);
 			if(vkDestroyShaderEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetShaderBinaryDataEXT":
-			mNativeLib.LoadFunction("vkGetShaderBinaryDataEXT", out vkGetShaderBinaryDataEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkGetShaderBinaryDataEXT", out vkGetShaderBinaryDataEXT_ptr, instance, invokeErrorCallback);
 			if(vkGetShaderBinaryDataEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdBindShadersEXT":
-			mNativeLib.LoadFunction("vkCmdBindShadersEXT", out vkCmdBindShadersEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdBindShadersEXT", out vkCmdBindShadersEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdBindShadersEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetTessellationDomainOriginEXT":
-			mNativeLib.LoadFunction("vkCmdSetTessellationDomainOriginEXT", out vkCmdSetTessellationDomainOriginEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetTessellationDomainOriginEXT", out vkCmdSetTessellationDomainOriginEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetTessellationDomainOriginEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetFramebufferTilePropertiesQCOM":
-			mNativeLib.LoadFunction("vkGetFramebufferTilePropertiesQCOM", out vkGetFramebufferTilePropertiesQCOM_ptr, invokeErrorCallback);
+			LoadFunction("vkGetFramebufferTilePropertiesQCOM", out vkGetFramebufferTilePropertiesQCOM_ptr, instance, invokeErrorCallback);
 			if(vkGetFramebufferTilePropertiesQCOM_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetDynamicRenderingTilePropertiesQCOM":
-			mNativeLib.LoadFunction("vkGetDynamicRenderingTilePropertiesQCOM", out vkGetDynamicRenderingTilePropertiesQCOM_ptr, invokeErrorCallback);
+			LoadFunction("vkGetDynamicRenderingTilePropertiesQCOM", out vkGetDynamicRenderingTilePropertiesQCOM_ptr, instance, invokeErrorCallback);
 			if(vkGetDynamicRenderingTilePropertiesQCOM_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCreateSemaphoreSciSyncPoolNV":
-			mNativeLib.LoadFunction("vkCreateSemaphoreSciSyncPoolNV", out vkCreateSemaphoreSciSyncPoolNV_ptr, invokeErrorCallback);
+			LoadFunction("vkCreateSemaphoreSciSyncPoolNV", out vkCreateSemaphoreSciSyncPoolNV_ptr, instance, invokeErrorCallback);
 			if(vkCreateSemaphoreSciSyncPoolNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkDestroySemaphoreSciSyncPoolNV":
-			mNativeLib.LoadFunction("vkDestroySemaphoreSciSyncPoolNV", out vkDestroySemaphoreSciSyncPoolNV_ptr, invokeErrorCallback);
+			LoadFunction("vkDestroySemaphoreSciSyncPoolNV", out vkDestroySemaphoreSciSyncPoolNV_ptr, instance, invokeErrorCallback);
 			if(vkDestroySemaphoreSciSyncPoolNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkSetLatencySleepModeNV":
-			mNativeLib.LoadFunction("vkSetLatencySleepModeNV", out vkSetLatencySleepModeNV_ptr, invokeErrorCallback);
+			LoadFunction("vkSetLatencySleepModeNV", out vkSetLatencySleepModeNV_ptr, instance, invokeErrorCallback);
 			if(vkSetLatencySleepModeNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkLatencySleepNV":
-			mNativeLib.LoadFunction("vkLatencySleepNV", out vkLatencySleepNV_ptr, invokeErrorCallback);
+			LoadFunction("vkLatencySleepNV", out vkLatencySleepNV_ptr, instance, invokeErrorCallback);
 			if(vkLatencySleepNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkSetLatencyMarkerNV":
-			mNativeLib.LoadFunction("vkSetLatencyMarkerNV", out vkSetLatencyMarkerNV_ptr, invokeErrorCallback);
+			LoadFunction("vkSetLatencyMarkerNV", out vkSetLatencyMarkerNV_ptr, instance, invokeErrorCallback);
 			if(vkSetLatencyMarkerNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetLatencyTimingsNV":
-			mNativeLib.LoadFunction("vkGetLatencyTimingsNV", out vkGetLatencyTimingsNV_ptr, invokeErrorCallback);
+			LoadFunction("vkGetLatencyTimingsNV", out vkGetLatencyTimingsNV_ptr, instance, invokeErrorCallback);
 			if(vkGetLatencyTimingsNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkQueueNotifyOutOfBandNV":
-			mNativeLib.LoadFunction("vkQueueNotifyOutOfBandNV", out vkQueueNotifyOutOfBandNV_ptr, invokeErrorCallback);
+			LoadFunction("vkQueueNotifyOutOfBandNV", out vkQueueNotifyOutOfBandNV_ptr, instance, invokeErrorCallback);
 			if(vkQueueNotifyOutOfBandNV_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR":
-			mNativeLib.LoadFunction("vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR", out vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR_ptr, invokeErrorCallback);
+			LoadFunction("vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR", out vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdSetAttachmentFeedbackLoopEnableEXT":
-			mNativeLib.LoadFunction("vkCmdSetAttachmentFeedbackLoopEnableEXT", out vkCmdSetAttachmentFeedbackLoopEnableEXT_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdSetAttachmentFeedbackLoopEnableEXT", out vkCmdSetAttachmentFeedbackLoopEnableEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetAttachmentFeedbackLoopEnableEXT_ptr == null)
 				return .Err;
 			break;
 
 		case "vkGetScreenBufferPropertiesQNX":
-			mNativeLib.LoadFunction("vkGetScreenBufferPropertiesQNX", out vkGetScreenBufferPropertiesQNX_ptr, invokeErrorCallback);
+			LoadFunction("vkGetScreenBufferPropertiesQNX", out vkGetScreenBufferPropertiesQNX_ptr, instance, invokeErrorCallback);
 			if(vkGetScreenBufferPropertiesQNX_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdBindDescriptorSets2KHR":
-			mNativeLib.LoadFunction("vkCmdBindDescriptorSets2KHR", out vkCmdBindDescriptorSets2KHR_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdBindDescriptorSets2KHR", out vkCmdBindDescriptorSets2KHR_ptr, instance, invokeErrorCallback);
 			if(vkCmdBindDescriptorSets2KHR_ptr == null)
 				return .Err;
 			break;
 
 		case "vkCmdPushConstants2KHR":
-			mNativeLib.LoadFunction("vkCmdPushConstants2KHR", out vkCmdPushConstants2KHR_ptr, invokeErrorCallback);
+			LoadFunction("vkCmdPushConstants2KHR", out vkCmdPushConstants2KHR_ptr, instance, invokeErrorCallback);
 			if(vkCmdPushConstants2KHR_ptr == null)
 				return .Err;
 			break;
@@ -6955,1762 +6986,1741 @@ public extension VulkanNative
 		return .Ok;
 	}
 
-	public static Result<void, String> LoadFunctions(Span<String> functions, VkInstance? instance = null)
-	{
-		if(instance != null)
-			SetInstance(instance.Value);
-
-		for (var func in functions)
-		{
-			if(LoadFunction(func) case .Err)
-				return .Err(func);
-		}
-		return .Ok;
-	}
-
 	private static void LoadAllFuncions(VkInstance? instance = null, List<String> excludeFunctions = null)
 	{
-		if (instance != null)
-			SetInstance(instance.Value);
-
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateInstance"))
-			LoadFunction("vkCreateInstance").IgnoreError();
+			LoadFunction("vkCreateInstance", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyInstance"))
-			LoadFunction("vkDestroyInstance").IgnoreError();
+			LoadFunction("vkDestroyInstance", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkEnumeratePhysicalDevices"))
-			LoadFunction("vkEnumeratePhysicalDevices").IgnoreError();
+			LoadFunction("vkEnumeratePhysicalDevices", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceFeatures"))
-			LoadFunction("vkGetPhysicalDeviceFeatures").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceFeatures", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceFormatProperties"))
-			LoadFunction("vkGetPhysicalDeviceFormatProperties").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceFormatProperties", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceImageFormatProperties"))
-			LoadFunction("vkGetPhysicalDeviceImageFormatProperties").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceImageFormatProperties", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceProperties"))
-			LoadFunction("vkGetPhysicalDeviceProperties").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceProperties", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceQueueFamilyProperties"))
-			LoadFunction("vkGetPhysicalDeviceQueueFamilyProperties").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceQueueFamilyProperties", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceMemoryProperties"))
-			LoadFunction("vkGetPhysicalDeviceMemoryProperties").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceMemoryProperties", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetInstanceProcAddr"))
-			LoadFunction("vkGetInstanceProcAddr").IgnoreError();
+			LoadFunction("vkGetInstanceProcAddr", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDeviceProcAddr"))
-			LoadFunction("vkGetDeviceProcAddr").IgnoreError();
+			LoadFunction("vkGetDeviceProcAddr", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateDevice"))
-			LoadFunction("vkCreateDevice").IgnoreError();
+			LoadFunction("vkCreateDevice", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyDevice"))
-			LoadFunction("vkDestroyDevice").IgnoreError();
+			LoadFunction("vkDestroyDevice", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkEnumerateInstanceExtensionProperties"))
-			LoadFunction("vkEnumerateInstanceExtensionProperties").IgnoreError();
+			LoadFunction("vkEnumerateInstanceExtensionProperties", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkEnumerateDeviceExtensionProperties"))
-			LoadFunction("vkEnumerateDeviceExtensionProperties").IgnoreError();
+			LoadFunction("vkEnumerateDeviceExtensionProperties", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkEnumerateInstanceLayerProperties"))
-			LoadFunction("vkEnumerateInstanceLayerProperties").IgnoreError();
+			LoadFunction("vkEnumerateInstanceLayerProperties", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkEnumerateDeviceLayerProperties"))
-			LoadFunction("vkEnumerateDeviceLayerProperties").IgnoreError();
+			LoadFunction("vkEnumerateDeviceLayerProperties", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDeviceQueue"))
-			LoadFunction("vkGetDeviceQueue").IgnoreError();
+			LoadFunction("vkGetDeviceQueue", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkQueueSubmit"))
-			LoadFunction("vkQueueSubmit").IgnoreError();
+			LoadFunction("vkQueueSubmit", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkQueueWaitIdle"))
-			LoadFunction("vkQueueWaitIdle").IgnoreError();
+			LoadFunction("vkQueueWaitIdle", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDeviceWaitIdle"))
-			LoadFunction("vkDeviceWaitIdle").IgnoreError();
+			LoadFunction("vkDeviceWaitIdle", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkAllocateMemory"))
-			LoadFunction("vkAllocateMemory").IgnoreError();
+			LoadFunction("vkAllocateMemory", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkFreeMemory"))
-			LoadFunction("vkFreeMemory").IgnoreError();
+			LoadFunction("vkFreeMemory", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkMapMemory"))
-			LoadFunction("vkMapMemory").IgnoreError();
+			LoadFunction("vkMapMemory", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkUnmapMemory"))
-			LoadFunction("vkUnmapMemory").IgnoreError();
+			LoadFunction("vkUnmapMemory", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkFlushMappedMemoryRanges"))
-			LoadFunction("vkFlushMappedMemoryRanges").IgnoreError();
+			LoadFunction("vkFlushMappedMemoryRanges", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkInvalidateMappedMemoryRanges"))
-			LoadFunction("vkInvalidateMappedMemoryRanges").IgnoreError();
+			LoadFunction("vkInvalidateMappedMemoryRanges", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDeviceMemoryCommitment"))
-			LoadFunction("vkGetDeviceMemoryCommitment").IgnoreError();
+			LoadFunction("vkGetDeviceMemoryCommitment", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkBindBufferMemory"))
-			LoadFunction("vkBindBufferMemory").IgnoreError();
+			LoadFunction("vkBindBufferMemory", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkBindImageMemory"))
-			LoadFunction("vkBindImageMemory").IgnoreError();
+			LoadFunction("vkBindImageMemory", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetBufferMemoryRequirements"))
-			LoadFunction("vkGetBufferMemoryRequirements").IgnoreError();
+			LoadFunction("vkGetBufferMemoryRequirements", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetImageMemoryRequirements"))
-			LoadFunction("vkGetImageMemoryRequirements").IgnoreError();
+			LoadFunction("vkGetImageMemoryRequirements", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetImageSparseMemoryRequirements"))
-			LoadFunction("vkGetImageSparseMemoryRequirements").IgnoreError();
+			LoadFunction("vkGetImageSparseMemoryRequirements", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceSparseImageFormatProperties"))
-			LoadFunction("vkGetPhysicalDeviceSparseImageFormatProperties").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceSparseImageFormatProperties", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkQueueBindSparse"))
-			LoadFunction("vkQueueBindSparse").IgnoreError();
+			LoadFunction("vkQueueBindSparse", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateFence"))
-			LoadFunction("vkCreateFence").IgnoreError();
+			LoadFunction("vkCreateFence", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyFence"))
-			LoadFunction("vkDestroyFence").IgnoreError();
+			LoadFunction("vkDestroyFence", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkResetFences"))
-			LoadFunction("vkResetFences").IgnoreError();
+			LoadFunction("vkResetFences", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetFenceStatus"))
-			LoadFunction("vkGetFenceStatus").IgnoreError();
+			LoadFunction("vkGetFenceStatus", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkWaitForFences"))
-			LoadFunction("vkWaitForFences").IgnoreError();
+			LoadFunction("vkWaitForFences", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateSemaphore"))
-			LoadFunction("vkCreateSemaphore").IgnoreError();
+			LoadFunction("vkCreateSemaphore", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroySemaphore"))
-			LoadFunction("vkDestroySemaphore").IgnoreError();
+			LoadFunction("vkDestroySemaphore", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateEvent"))
-			LoadFunction("vkCreateEvent").IgnoreError();
+			LoadFunction("vkCreateEvent", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyEvent"))
-			LoadFunction("vkDestroyEvent").IgnoreError();
+			LoadFunction("vkDestroyEvent", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetEventStatus"))
-			LoadFunction("vkGetEventStatus").IgnoreError();
+			LoadFunction("vkGetEventStatus", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkSetEvent"))
-			LoadFunction("vkSetEvent").IgnoreError();
+			LoadFunction("vkSetEvent", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkResetEvent"))
-			LoadFunction("vkResetEvent").IgnoreError();
+			LoadFunction("vkResetEvent", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateQueryPool"))
-			LoadFunction("vkCreateQueryPool").IgnoreError();
+			LoadFunction("vkCreateQueryPool", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyQueryPool"))
-			LoadFunction("vkDestroyQueryPool").IgnoreError();
+			LoadFunction("vkDestroyQueryPool", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetQueryPoolResults"))
-			LoadFunction("vkGetQueryPoolResults").IgnoreError();
+			LoadFunction("vkGetQueryPoolResults", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateBuffer"))
-			LoadFunction("vkCreateBuffer").IgnoreError();
+			LoadFunction("vkCreateBuffer", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyBuffer"))
-			LoadFunction("vkDestroyBuffer").IgnoreError();
+			LoadFunction("vkDestroyBuffer", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateBufferView"))
-			LoadFunction("vkCreateBufferView").IgnoreError();
+			LoadFunction("vkCreateBufferView", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyBufferView"))
-			LoadFunction("vkDestroyBufferView").IgnoreError();
+			LoadFunction("vkDestroyBufferView", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateImage"))
-			LoadFunction("vkCreateImage").IgnoreError();
+			LoadFunction("vkCreateImage", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyImage"))
-			LoadFunction("vkDestroyImage").IgnoreError();
+			LoadFunction("vkDestroyImage", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetImageSubresourceLayout"))
-			LoadFunction("vkGetImageSubresourceLayout").IgnoreError();
+			LoadFunction("vkGetImageSubresourceLayout", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateImageView"))
-			LoadFunction("vkCreateImageView").IgnoreError();
+			LoadFunction("vkCreateImageView", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyImageView"))
-			LoadFunction("vkDestroyImageView").IgnoreError();
+			LoadFunction("vkDestroyImageView", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateShaderModule"))
-			LoadFunction("vkCreateShaderModule").IgnoreError();
+			LoadFunction("vkCreateShaderModule", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyShaderModule"))
-			LoadFunction("vkDestroyShaderModule").IgnoreError();
+			LoadFunction("vkDestroyShaderModule", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreatePipelineCache"))
-			LoadFunction("vkCreatePipelineCache").IgnoreError();
+			LoadFunction("vkCreatePipelineCache", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyPipelineCache"))
-			LoadFunction("vkDestroyPipelineCache").IgnoreError();
+			LoadFunction("vkDestroyPipelineCache", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPipelineCacheData"))
-			LoadFunction("vkGetPipelineCacheData").IgnoreError();
+			LoadFunction("vkGetPipelineCacheData", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkMergePipelineCaches"))
-			LoadFunction("vkMergePipelineCaches").IgnoreError();
+			LoadFunction("vkMergePipelineCaches", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateGraphicsPipelines"))
-			LoadFunction("vkCreateGraphicsPipelines").IgnoreError();
+			LoadFunction("vkCreateGraphicsPipelines", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateComputePipelines"))
-			LoadFunction("vkCreateComputePipelines").IgnoreError();
+			LoadFunction("vkCreateComputePipelines", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyPipeline"))
-			LoadFunction("vkDestroyPipeline").IgnoreError();
+			LoadFunction("vkDestroyPipeline", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreatePipelineLayout"))
-			LoadFunction("vkCreatePipelineLayout").IgnoreError();
+			LoadFunction("vkCreatePipelineLayout", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyPipelineLayout"))
-			LoadFunction("vkDestroyPipelineLayout").IgnoreError();
+			LoadFunction("vkDestroyPipelineLayout", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateSampler"))
-			LoadFunction("vkCreateSampler").IgnoreError();
+			LoadFunction("vkCreateSampler", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroySampler"))
-			LoadFunction("vkDestroySampler").IgnoreError();
+			LoadFunction("vkDestroySampler", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateDescriptorSetLayout"))
-			LoadFunction("vkCreateDescriptorSetLayout").IgnoreError();
+			LoadFunction("vkCreateDescriptorSetLayout", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyDescriptorSetLayout"))
-			LoadFunction("vkDestroyDescriptorSetLayout").IgnoreError();
+			LoadFunction("vkDestroyDescriptorSetLayout", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateDescriptorPool"))
-			LoadFunction("vkCreateDescriptorPool").IgnoreError();
+			LoadFunction("vkCreateDescriptorPool", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyDescriptorPool"))
-			LoadFunction("vkDestroyDescriptorPool").IgnoreError();
+			LoadFunction("vkDestroyDescriptorPool", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkResetDescriptorPool"))
-			LoadFunction("vkResetDescriptorPool").IgnoreError();
+			LoadFunction("vkResetDescriptorPool", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkAllocateDescriptorSets"))
-			LoadFunction("vkAllocateDescriptorSets").IgnoreError();
+			LoadFunction("vkAllocateDescriptorSets", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkFreeDescriptorSets"))
-			LoadFunction("vkFreeDescriptorSets").IgnoreError();
+			LoadFunction("vkFreeDescriptorSets", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkUpdateDescriptorSets"))
-			LoadFunction("vkUpdateDescriptorSets").IgnoreError();
+			LoadFunction("vkUpdateDescriptorSets", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateFramebuffer"))
-			LoadFunction("vkCreateFramebuffer").IgnoreError();
+			LoadFunction("vkCreateFramebuffer", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyFramebuffer"))
-			LoadFunction("vkDestroyFramebuffer").IgnoreError();
+			LoadFunction("vkDestroyFramebuffer", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateRenderPass"))
-			LoadFunction("vkCreateRenderPass").IgnoreError();
+			LoadFunction("vkCreateRenderPass", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyRenderPass"))
-			LoadFunction("vkDestroyRenderPass").IgnoreError();
+			LoadFunction("vkDestroyRenderPass", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetRenderAreaGranularity"))
-			LoadFunction("vkGetRenderAreaGranularity").IgnoreError();
+			LoadFunction("vkGetRenderAreaGranularity", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateCommandPool"))
-			LoadFunction("vkCreateCommandPool").IgnoreError();
+			LoadFunction("vkCreateCommandPool", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyCommandPool"))
-			LoadFunction("vkDestroyCommandPool").IgnoreError();
+			LoadFunction("vkDestroyCommandPool", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkResetCommandPool"))
-			LoadFunction("vkResetCommandPool").IgnoreError();
+			LoadFunction("vkResetCommandPool", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkAllocateCommandBuffers"))
-			LoadFunction("vkAllocateCommandBuffers").IgnoreError();
+			LoadFunction("vkAllocateCommandBuffers", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkFreeCommandBuffers"))
-			LoadFunction("vkFreeCommandBuffers").IgnoreError();
+			LoadFunction("vkFreeCommandBuffers", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkBeginCommandBuffer"))
-			LoadFunction("vkBeginCommandBuffer").IgnoreError();
+			LoadFunction("vkBeginCommandBuffer", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkEndCommandBuffer"))
-			LoadFunction("vkEndCommandBuffer").IgnoreError();
+			LoadFunction("vkEndCommandBuffer", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkResetCommandBuffer"))
-			LoadFunction("vkResetCommandBuffer").IgnoreError();
+			LoadFunction("vkResetCommandBuffer", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBindPipeline"))
-			LoadFunction("vkCmdBindPipeline").IgnoreError();
+			LoadFunction("vkCmdBindPipeline", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetViewport"))
-			LoadFunction("vkCmdSetViewport").IgnoreError();
+			LoadFunction("vkCmdSetViewport", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetScissor"))
-			LoadFunction("vkCmdSetScissor").IgnoreError();
+			LoadFunction("vkCmdSetScissor", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetLineWidth"))
-			LoadFunction("vkCmdSetLineWidth").IgnoreError();
+			LoadFunction("vkCmdSetLineWidth", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetDepthBias"))
-			LoadFunction("vkCmdSetDepthBias").IgnoreError();
+			LoadFunction("vkCmdSetDepthBias", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetBlendConstants"))
-			LoadFunction("vkCmdSetBlendConstants").IgnoreError();
+			LoadFunction("vkCmdSetBlendConstants", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetDepthBounds"))
-			LoadFunction("vkCmdSetDepthBounds").IgnoreError();
+			LoadFunction("vkCmdSetDepthBounds", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetStencilCompareMask"))
-			LoadFunction("vkCmdSetStencilCompareMask").IgnoreError();
+			LoadFunction("vkCmdSetStencilCompareMask", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetStencilWriteMask"))
-			LoadFunction("vkCmdSetStencilWriteMask").IgnoreError();
+			LoadFunction("vkCmdSetStencilWriteMask", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetStencilReference"))
-			LoadFunction("vkCmdSetStencilReference").IgnoreError();
+			LoadFunction("vkCmdSetStencilReference", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBindDescriptorSets"))
-			LoadFunction("vkCmdBindDescriptorSets").IgnoreError();
+			LoadFunction("vkCmdBindDescriptorSets", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBindIndexBuffer"))
-			LoadFunction("vkCmdBindIndexBuffer").IgnoreError();
+			LoadFunction("vkCmdBindIndexBuffer", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBindVertexBuffers"))
-			LoadFunction("vkCmdBindVertexBuffers").IgnoreError();
+			LoadFunction("vkCmdBindVertexBuffers", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDraw"))
-			LoadFunction("vkCmdDraw").IgnoreError();
+			LoadFunction("vkCmdDraw", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDrawIndexed"))
-			LoadFunction("vkCmdDrawIndexed").IgnoreError();
+			LoadFunction("vkCmdDrawIndexed", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDrawIndirect"))
-			LoadFunction("vkCmdDrawIndirect").IgnoreError();
+			LoadFunction("vkCmdDrawIndirect", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDrawIndexedIndirect"))
-			LoadFunction("vkCmdDrawIndexedIndirect").IgnoreError();
+			LoadFunction("vkCmdDrawIndexedIndirect", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDispatch"))
-			LoadFunction("vkCmdDispatch").IgnoreError();
+			LoadFunction("vkCmdDispatch", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDispatchIndirect"))
-			LoadFunction("vkCmdDispatchIndirect").IgnoreError();
+			LoadFunction("vkCmdDispatchIndirect", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdCopyBuffer"))
-			LoadFunction("vkCmdCopyBuffer").IgnoreError();
+			LoadFunction("vkCmdCopyBuffer", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdCopyImage"))
-			LoadFunction("vkCmdCopyImage").IgnoreError();
+			LoadFunction("vkCmdCopyImage", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBlitImage"))
-			LoadFunction("vkCmdBlitImage").IgnoreError();
+			LoadFunction("vkCmdBlitImage", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdCopyBufferToImage"))
-			LoadFunction("vkCmdCopyBufferToImage").IgnoreError();
+			LoadFunction("vkCmdCopyBufferToImage", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdCopyImageToBuffer"))
-			LoadFunction("vkCmdCopyImageToBuffer").IgnoreError();
+			LoadFunction("vkCmdCopyImageToBuffer", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdUpdateBuffer"))
-			LoadFunction("vkCmdUpdateBuffer").IgnoreError();
+			LoadFunction("vkCmdUpdateBuffer", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdFillBuffer"))
-			LoadFunction("vkCmdFillBuffer").IgnoreError();
+			LoadFunction("vkCmdFillBuffer", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdClearColorImage"))
-			LoadFunction("vkCmdClearColorImage").IgnoreError();
+			LoadFunction("vkCmdClearColorImage", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdClearDepthStencilImage"))
-			LoadFunction("vkCmdClearDepthStencilImage").IgnoreError();
+			LoadFunction("vkCmdClearDepthStencilImage", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdClearAttachments"))
-			LoadFunction("vkCmdClearAttachments").IgnoreError();
+			LoadFunction("vkCmdClearAttachments", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdResolveImage"))
-			LoadFunction("vkCmdResolveImage").IgnoreError();
+			LoadFunction("vkCmdResolveImage", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetEvent"))
-			LoadFunction("vkCmdSetEvent").IgnoreError();
+			LoadFunction("vkCmdSetEvent", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdResetEvent"))
-			LoadFunction("vkCmdResetEvent").IgnoreError();
+			LoadFunction("vkCmdResetEvent", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdWaitEvents"))
-			LoadFunction("vkCmdWaitEvents").IgnoreError();
+			LoadFunction("vkCmdWaitEvents", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdPipelineBarrier"))
-			LoadFunction("vkCmdPipelineBarrier").IgnoreError();
+			LoadFunction("vkCmdPipelineBarrier", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBeginQuery"))
-			LoadFunction("vkCmdBeginQuery").IgnoreError();
+			LoadFunction("vkCmdBeginQuery", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdEndQuery"))
-			LoadFunction("vkCmdEndQuery").IgnoreError();
+			LoadFunction("vkCmdEndQuery", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdResetQueryPool"))
-			LoadFunction("vkCmdResetQueryPool").IgnoreError();
+			LoadFunction("vkCmdResetQueryPool", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdWriteTimestamp"))
-			LoadFunction("vkCmdWriteTimestamp").IgnoreError();
+			LoadFunction("vkCmdWriteTimestamp", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdCopyQueryPoolResults"))
-			LoadFunction("vkCmdCopyQueryPoolResults").IgnoreError();
+			LoadFunction("vkCmdCopyQueryPoolResults", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdPushConstants"))
-			LoadFunction("vkCmdPushConstants").IgnoreError();
+			LoadFunction("vkCmdPushConstants", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBeginRenderPass"))
-			LoadFunction("vkCmdBeginRenderPass").IgnoreError();
+			LoadFunction("vkCmdBeginRenderPass", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdNextSubpass"))
-			LoadFunction("vkCmdNextSubpass").IgnoreError();
+			LoadFunction("vkCmdNextSubpass", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdEndRenderPass"))
-			LoadFunction("vkCmdEndRenderPass").IgnoreError();
+			LoadFunction("vkCmdEndRenderPass", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdExecuteCommands"))
-			LoadFunction("vkCmdExecuteCommands").IgnoreError();
+			LoadFunction("vkCmdExecuteCommands", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkEnumerateInstanceVersion"))
-			LoadFunction("vkEnumerateInstanceVersion").IgnoreError();
+			LoadFunction("vkEnumerateInstanceVersion", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkBindBufferMemory2"))
-			LoadFunction("vkBindBufferMemory2").IgnoreError();
+			LoadFunction("vkBindBufferMemory2", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkBindImageMemory2"))
-			LoadFunction("vkBindImageMemory2").IgnoreError();
+			LoadFunction("vkBindImageMemory2", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDeviceGroupPeerMemoryFeatures"))
-			LoadFunction("vkGetDeviceGroupPeerMemoryFeatures").IgnoreError();
+			LoadFunction("vkGetDeviceGroupPeerMemoryFeatures", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetDeviceMask"))
-			LoadFunction("vkCmdSetDeviceMask").IgnoreError();
+			LoadFunction("vkCmdSetDeviceMask", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDispatchBase"))
-			LoadFunction("vkCmdDispatchBase").IgnoreError();
+			LoadFunction("vkCmdDispatchBase", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkEnumeratePhysicalDeviceGroups"))
-			LoadFunction("vkEnumeratePhysicalDeviceGroups").IgnoreError();
+			LoadFunction("vkEnumeratePhysicalDeviceGroups", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetImageMemoryRequirements2"))
-			LoadFunction("vkGetImageMemoryRequirements2").IgnoreError();
+			LoadFunction("vkGetImageMemoryRequirements2", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetBufferMemoryRequirements2"))
-			LoadFunction("vkGetBufferMemoryRequirements2").IgnoreError();
+			LoadFunction("vkGetBufferMemoryRequirements2", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetImageSparseMemoryRequirements2"))
-			LoadFunction("vkGetImageSparseMemoryRequirements2").IgnoreError();
+			LoadFunction("vkGetImageSparseMemoryRequirements2", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceFeatures2"))
-			LoadFunction("vkGetPhysicalDeviceFeatures2").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceFeatures2", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceProperties2"))
-			LoadFunction("vkGetPhysicalDeviceProperties2").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceProperties2", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceFormatProperties2"))
-			LoadFunction("vkGetPhysicalDeviceFormatProperties2").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceFormatProperties2", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceImageFormatProperties2"))
-			LoadFunction("vkGetPhysicalDeviceImageFormatProperties2").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceImageFormatProperties2", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceQueueFamilyProperties2"))
-			LoadFunction("vkGetPhysicalDeviceQueueFamilyProperties2").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceQueueFamilyProperties2", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceMemoryProperties2"))
-			LoadFunction("vkGetPhysicalDeviceMemoryProperties2").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceMemoryProperties2", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceSparseImageFormatProperties2"))
-			LoadFunction("vkGetPhysicalDeviceSparseImageFormatProperties2").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceSparseImageFormatProperties2", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkTrimCommandPool"))
-			LoadFunction("vkTrimCommandPool").IgnoreError();
+			LoadFunction("vkTrimCommandPool", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDeviceQueue2"))
-			LoadFunction("vkGetDeviceQueue2").IgnoreError();
+			LoadFunction("vkGetDeviceQueue2", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateSamplerYcbcrConversion"))
-			LoadFunction("vkCreateSamplerYcbcrConversion").IgnoreError();
+			LoadFunction("vkCreateSamplerYcbcrConversion", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroySamplerYcbcrConversion"))
-			LoadFunction("vkDestroySamplerYcbcrConversion").IgnoreError();
+			LoadFunction("vkDestroySamplerYcbcrConversion", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateDescriptorUpdateTemplate"))
-			LoadFunction("vkCreateDescriptorUpdateTemplate").IgnoreError();
+			LoadFunction("vkCreateDescriptorUpdateTemplate", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyDescriptorUpdateTemplate"))
-			LoadFunction("vkDestroyDescriptorUpdateTemplate").IgnoreError();
+			LoadFunction("vkDestroyDescriptorUpdateTemplate", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkUpdateDescriptorSetWithTemplate"))
-			LoadFunction("vkUpdateDescriptorSetWithTemplate").IgnoreError();
+			LoadFunction("vkUpdateDescriptorSetWithTemplate", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceExternalBufferProperties"))
-			LoadFunction("vkGetPhysicalDeviceExternalBufferProperties").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceExternalBufferProperties", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceExternalFenceProperties"))
-			LoadFunction("vkGetPhysicalDeviceExternalFenceProperties").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceExternalFenceProperties", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceExternalSemaphoreProperties"))
-			LoadFunction("vkGetPhysicalDeviceExternalSemaphoreProperties").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceExternalSemaphoreProperties", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDescriptorSetLayoutSupport"))
-			LoadFunction("vkGetDescriptorSetLayoutSupport").IgnoreError();
+			LoadFunction("vkGetDescriptorSetLayoutSupport", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDrawIndirectCount"))
-			LoadFunction("vkCmdDrawIndirectCount").IgnoreError();
+			LoadFunction("vkCmdDrawIndirectCount", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDrawIndexedIndirectCount"))
-			LoadFunction("vkCmdDrawIndexedIndirectCount").IgnoreError();
+			LoadFunction("vkCmdDrawIndexedIndirectCount", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateRenderPass2"))
-			LoadFunction("vkCreateRenderPass2").IgnoreError();
+			LoadFunction("vkCreateRenderPass2", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBeginRenderPass2"))
-			LoadFunction("vkCmdBeginRenderPass2").IgnoreError();
+			LoadFunction("vkCmdBeginRenderPass2", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdNextSubpass2"))
-			LoadFunction("vkCmdNextSubpass2").IgnoreError();
+			LoadFunction("vkCmdNextSubpass2", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdEndRenderPass2"))
-			LoadFunction("vkCmdEndRenderPass2").IgnoreError();
+			LoadFunction("vkCmdEndRenderPass2", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkResetQueryPool"))
-			LoadFunction("vkResetQueryPool").IgnoreError();
+			LoadFunction("vkResetQueryPool", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetSemaphoreCounterValue"))
-			LoadFunction("vkGetSemaphoreCounterValue").IgnoreError();
+			LoadFunction("vkGetSemaphoreCounterValue", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkWaitSemaphores"))
-			LoadFunction("vkWaitSemaphores").IgnoreError();
+			LoadFunction("vkWaitSemaphores", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkSignalSemaphore"))
-			LoadFunction("vkSignalSemaphore").IgnoreError();
+			LoadFunction("vkSignalSemaphore", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetBufferDeviceAddress"))
-			LoadFunction("vkGetBufferDeviceAddress").IgnoreError();
+			LoadFunction("vkGetBufferDeviceAddress", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetBufferOpaqueCaptureAddress"))
-			LoadFunction("vkGetBufferOpaqueCaptureAddress").IgnoreError();
+			LoadFunction("vkGetBufferOpaqueCaptureAddress", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDeviceMemoryOpaqueCaptureAddress"))
-			LoadFunction("vkGetDeviceMemoryOpaqueCaptureAddress").IgnoreError();
+			LoadFunction("vkGetDeviceMemoryOpaqueCaptureAddress", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceToolProperties"))
-			LoadFunction("vkGetPhysicalDeviceToolProperties").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceToolProperties", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreatePrivateDataSlot"))
-			LoadFunction("vkCreatePrivateDataSlot").IgnoreError();
+			LoadFunction("vkCreatePrivateDataSlot", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyPrivateDataSlot"))
-			LoadFunction("vkDestroyPrivateDataSlot").IgnoreError();
+			LoadFunction("vkDestroyPrivateDataSlot", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkSetPrivateData"))
-			LoadFunction("vkSetPrivateData").IgnoreError();
+			LoadFunction("vkSetPrivateData", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPrivateData"))
-			LoadFunction("vkGetPrivateData").IgnoreError();
+			LoadFunction("vkGetPrivateData", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetEvent2"))
-			LoadFunction("vkCmdSetEvent2").IgnoreError();
+			LoadFunction("vkCmdSetEvent2", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdResetEvent2"))
-			LoadFunction("vkCmdResetEvent2").IgnoreError();
+			LoadFunction("vkCmdResetEvent2", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdWaitEvents2"))
-			LoadFunction("vkCmdWaitEvents2").IgnoreError();
+			LoadFunction("vkCmdWaitEvents2", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdPipelineBarrier2"))
-			LoadFunction("vkCmdPipelineBarrier2").IgnoreError();
+			LoadFunction("vkCmdPipelineBarrier2", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdWriteTimestamp2"))
-			LoadFunction("vkCmdWriteTimestamp2").IgnoreError();
+			LoadFunction("vkCmdWriteTimestamp2", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkQueueSubmit2"))
-			LoadFunction("vkQueueSubmit2").IgnoreError();
+			LoadFunction("vkQueueSubmit2", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdCopyBuffer2"))
-			LoadFunction("vkCmdCopyBuffer2").IgnoreError();
+			LoadFunction("vkCmdCopyBuffer2", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdCopyImage2"))
-			LoadFunction("vkCmdCopyImage2").IgnoreError();
+			LoadFunction("vkCmdCopyImage2", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdCopyBufferToImage2"))
-			LoadFunction("vkCmdCopyBufferToImage2").IgnoreError();
+			LoadFunction("vkCmdCopyBufferToImage2", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdCopyImageToBuffer2"))
-			LoadFunction("vkCmdCopyImageToBuffer2").IgnoreError();
+			LoadFunction("vkCmdCopyImageToBuffer2", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBlitImage2"))
-			LoadFunction("vkCmdBlitImage2").IgnoreError();
+			LoadFunction("vkCmdBlitImage2", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdResolveImage2"))
-			LoadFunction("vkCmdResolveImage2").IgnoreError();
+			LoadFunction("vkCmdResolveImage2", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBeginRendering"))
-			LoadFunction("vkCmdBeginRendering").IgnoreError();
+			LoadFunction("vkCmdBeginRendering", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdEndRendering"))
-			LoadFunction("vkCmdEndRendering").IgnoreError();
+			LoadFunction("vkCmdEndRendering", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetCullMode"))
-			LoadFunction("vkCmdSetCullMode").IgnoreError();
+			LoadFunction("vkCmdSetCullMode", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetFrontFace"))
-			LoadFunction("vkCmdSetFrontFace").IgnoreError();
+			LoadFunction("vkCmdSetFrontFace", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetPrimitiveTopology"))
-			LoadFunction("vkCmdSetPrimitiveTopology").IgnoreError();
+			LoadFunction("vkCmdSetPrimitiveTopology", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetViewportWithCount"))
-			LoadFunction("vkCmdSetViewportWithCount").IgnoreError();
+			LoadFunction("vkCmdSetViewportWithCount", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetScissorWithCount"))
-			LoadFunction("vkCmdSetScissorWithCount").IgnoreError();
+			LoadFunction("vkCmdSetScissorWithCount", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBindVertexBuffers2"))
-			LoadFunction("vkCmdBindVertexBuffers2").IgnoreError();
+			LoadFunction("vkCmdBindVertexBuffers2", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetDepthTestEnable"))
-			LoadFunction("vkCmdSetDepthTestEnable").IgnoreError();
+			LoadFunction("vkCmdSetDepthTestEnable", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetDepthWriteEnable"))
-			LoadFunction("vkCmdSetDepthWriteEnable").IgnoreError();
+			LoadFunction("vkCmdSetDepthWriteEnable", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetDepthCompareOp"))
-			LoadFunction("vkCmdSetDepthCompareOp").IgnoreError();
+			LoadFunction("vkCmdSetDepthCompareOp", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetDepthBoundsTestEnable"))
-			LoadFunction("vkCmdSetDepthBoundsTestEnable").IgnoreError();
+			LoadFunction("vkCmdSetDepthBoundsTestEnable", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetStencilTestEnable"))
-			LoadFunction("vkCmdSetStencilTestEnable").IgnoreError();
+			LoadFunction("vkCmdSetStencilTestEnable", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetStencilOp"))
-			LoadFunction("vkCmdSetStencilOp").IgnoreError();
+			LoadFunction("vkCmdSetStencilOp", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetRasterizerDiscardEnable"))
-			LoadFunction("vkCmdSetRasterizerDiscardEnable").IgnoreError();
+			LoadFunction("vkCmdSetRasterizerDiscardEnable", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetDepthBiasEnable"))
-			LoadFunction("vkCmdSetDepthBiasEnable").IgnoreError();
+			LoadFunction("vkCmdSetDepthBiasEnable", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetPrimitiveRestartEnable"))
-			LoadFunction("vkCmdSetPrimitiveRestartEnable").IgnoreError();
+			LoadFunction("vkCmdSetPrimitiveRestartEnable", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDeviceBufferMemoryRequirements"))
-			LoadFunction("vkGetDeviceBufferMemoryRequirements").IgnoreError();
+			LoadFunction("vkGetDeviceBufferMemoryRequirements", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDeviceImageMemoryRequirements"))
-			LoadFunction("vkGetDeviceImageMemoryRequirements").IgnoreError();
+			LoadFunction("vkGetDeviceImageMemoryRequirements", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDeviceImageSparseMemoryRequirements"))
-			LoadFunction("vkGetDeviceImageSparseMemoryRequirements").IgnoreError();
+			LoadFunction("vkGetDeviceImageSparseMemoryRequirements", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetCommandPoolMemoryConsumption"))
-			LoadFunction("vkGetCommandPoolMemoryConsumption").IgnoreError();
+			LoadFunction("vkGetCommandPoolMemoryConsumption", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetFaultData"))
-			LoadFunction("vkGetFaultData").IgnoreError();
+			LoadFunction("vkGetFaultData", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroySurfaceKHR"))
-			LoadFunction("vkDestroySurfaceKHR").IgnoreError();
+			LoadFunction("vkDestroySurfaceKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceSurfaceSupportKHR"))
-			LoadFunction("vkGetPhysicalDeviceSurfaceSupportKHR").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceSurfaceSupportKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceSurfaceCapabilitiesKHR"))
-			LoadFunction("vkGetPhysicalDeviceSurfaceCapabilitiesKHR").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceSurfaceCapabilitiesKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceSurfaceFormatsKHR"))
-			LoadFunction("vkGetPhysicalDeviceSurfaceFormatsKHR").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceSurfaceFormatsKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceSurfacePresentModesKHR"))
-			LoadFunction("vkGetPhysicalDeviceSurfacePresentModesKHR").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceSurfacePresentModesKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateSwapchainKHR"))
-			LoadFunction("vkCreateSwapchainKHR").IgnoreError();
+			LoadFunction("vkCreateSwapchainKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroySwapchainKHR"))
-			LoadFunction("vkDestroySwapchainKHR").IgnoreError();
+			LoadFunction("vkDestroySwapchainKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetSwapchainImagesKHR"))
-			LoadFunction("vkGetSwapchainImagesKHR").IgnoreError();
+			LoadFunction("vkGetSwapchainImagesKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkAcquireNextImageKHR"))
-			LoadFunction("vkAcquireNextImageKHR").IgnoreError();
+			LoadFunction("vkAcquireNextImageKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkQueuePresentKHR"))
-			LoadFunction("vkQueuePresentKHR").IgnoreError();
+			LoadFunction("vkQueuePresentKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceDisplayPropertiesKHR"))
-			LoadFunction("vkGetPhysicalDeviceDisplayPropertiesKHR").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceDisplayPropertiesKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceDisplayPlanePropertiesKHR"))
-			LoadFunction("vkGetPhysicalDeviceDisplayPlanePropertiesKHR").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceDisplayPlanePropertiesKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDisplayPlaneSupportedDisplaysKHR"))
-			LoadFunction("vkGetDisplayPlaneSupportedDisplaysKHR").IgnoreError();
+			LoadFunction("vkGetDisplayPlaneSupportedDisplaysKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDisplayModePropertiesKHR"))
-			LoadFunction("vkGetDisplayModePropertiesKHR").IgnoreError();
+			LoadFunction("vkGetDisplayModePropertiesKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateDisplayModeKHR"))
-			LoadFunction("vkCreateDisplayModeKHR").IgnoreError();
+			LoadFunction("vkCreateDisplayModeKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDisplayPlaneCapabilitiesKHR"))
-			LoadFunction("vkGetDisplayPlaneCapabilitiesKHR").IgnoreError();
+			LoadFunction("vkGetDisplayPlaneCapabilitiesKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateDisplayPlaneSurfaceKHR"))
-			LoadFunction("vkCreateDisplayPlaneSurfaceKHR").IgnoreError();
+			LoadFunction("vkCreateDisplayPlaneSurfaceKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateSharedSwapchainsKHR"))
-			LoadFunction("vkCreateSharedSwapchainsKHR").IgnoreError();
+			LoadFunction("vkCreateSharedSwapchainsKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateXlibSurfaceKHR"))
-			LoadFunction("vkCreateXlibSurfaceKHR").IgnoreError();
+			LoadFunction("vkCreateXlibSurfaceKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceXlibPresentationSupportKHR"))
-			LoadFunction("vkGetPhysicalDeviceXlibPresentationSupportKHR").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceXlibPresentationSupportKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateXcbSurfaceKHR"))
-			LoadFunction("vkCreateXcbSurfaceKHR").IgnoreError();
+			LoadFunction("vkCreateXcbSurfaceKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceXcbPresentationSupportKHR"))
-			LoadFunction("vkGetPhysicalDeviceXcbPresentationSupportKHR").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceXcbPresentationSupportKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateWaylandSurfaceKHR"))
-			LoadFunction("vkCreateWaylandSurfaceKHR").IgnoreError();
+			LoadFunction("vkCreateWaylandSurfaceKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceWaylandPresentationSupportKHR"))
-			LoadFunction("vkGetPhysicalDeviceWaylandPresentationSupportKHR").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceWaylandPresentationSupportKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateAndroidSurfaceKHR"))
-			LoadFunction("vkCreateAndroidSurfaceKHR").IgnoreError();
+			LoadFunction("vkCreateAndroidSurfaceKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateWin32SurfaceKHR"))
-			LoadFunction("vkCreateWin32SurfaceKHR").IgnoreError();
+			LoadFunction("vkCreateWin32SurfaceKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceWin32PresentationSupportKHR"))
-			LoadFunction("vkGetPhysicalDeviceWin32PresentationSupportKHR").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceWin32PresentationSupportKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateDebugReportCallbackEXT"))
-			LoadFunction("vkCreateDebugReportCallbackEXT").IgnoreError();
+			LoadFunction("vkCreateDebugReportCallbackEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyDebugReportCallbackEXT"))
-			LoadFunction("vkDestroyDebugReportCallbackEXT").IgnoreError();
+			LoadFunction("vkDestroyDebugReportCallbackEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDebugReportMessageEXT"))
-			LoadFunction("vkDebugReportMessageEXT").IgnoreError();
+			LoadFunction("vkDebugReportMessageEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDebugMarkerSetObjectTagEXT"))
-			LoadFunction("vkDebugMarkerSetObjectTagEXT").IgnoreError();
+			LoadFunction("vkDebugMarkerSetObjectTagEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDebugMarkerSetObjectNameEXT"))
-			LoadFunction("vkDebugMarkerSetObjectNameEXT").IgnoreError();
+			LoadFunction("vkDebugMarkerSetObjectNameEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDebugMarkerBeginEXT"))
-			LoadFunction("vkCmdDebugMarkerBeginEXT").IgnoreError();
+			LoadFunction("vkCmdDebugMarkerBeginEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDebugMarkerEndEXT"))
-			LoadFunction("vkCmdDebugMarkerEndEXT").IgnoreError();
+			LoadFunction("vkCmdDebugMarkerEndEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDebugMarkerInsertEXT"))
-			LoadFunction("vkCmdDebugMarkerInsertEXT").IgnoreError();
+			LoadFunction("vkCmdDebugMarkerInsertEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceVideoCapabilitiesKHR"))
-			LoadFunction("vkGetPhysicalDeviceVideoCapabilitiesKHR").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceVideoCapabilitiesKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceVideoFormatPropertiesKHR"))
-			LoadFunction("vkGetPhysicalDeviceVideoFormatPropertiesKHR").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceVideoFormatPropertiesKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateVideoSessionKHR"))
-			LoadFunction("vkCreateVideoSessionKHR").IgnoreError();
+			LoadFunction("vkCreateVideoSessionKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyVideoSessionKHR"))
-			LoadFunction("vkDestroyVideoSessionKHR").IgnoreError();
+			LoadFunction("vkDestroyVideoSessionKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetVideoSessionMemoryRequirementsKHR"))
-			LoadFunction("vkGetVideoSessionMemoryRequirementsKHR").IgnoreError();
+			LoadFunction("vkGetVideoSessionMemoryRequirementsKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkBindVideoSessionMemoryKHR"))
-			LoadFunction("vkBindVideoSessionMemoryKHR").IgnoreError();
+			LoadFunction("vkBindVideoSessionMemoryKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateVideoSessionParametersKHR"))
-			LoadFunction("vkCreateVideoSessionParametersKHR").IgnoreError();
+			LoadFunction("vkCreateVideoSessionParametersKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkUpdateVideoSessionParametersKHR"))
-			LoadFunction("vkUpdateVideoSessionParametersKHR").IgnoreError();
+			LoadFunction("vkUpdateVideoSessionParametersKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyVideoSessionParametersKHR"))
-			LoadFunction("vkDestroyVideoSessionParametersKHR").IgnoreError();
+			LoadFunction("vkDestroyVideoSessionParametersKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBeginVideoCodingKHR"))
-			LoadFunction("vkCmdBeginVideoCodingKHR").IgnoreError();
+			LoadFunction("vkCmdBeginVideoCodingKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdEndVideoCodingKHR"))
-			LoadFunction("vkCmdEndVideoCodingKHR").IgnoreError();
+			LoadFunction("vkCmdEndVideoCodingKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdControlVideoCodingKHR"))
-			LoadFunction("vkCmdControlVideoCodingKHR").IgnoreError();
+			LoadFunction("vkCmdControlVideoCodingKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDecodeVideoKHR"))
-			LoadFunction("vkCmdDecodeVideoKHR").IgnoreError();
+			LoadFunction("vkCmdDecodeVideoKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBindTransformFeedbackBuffersEXT"))
-			LoadFunction("vkCmdBindTransformFeedbackBuffersEXT").IgnoreError();
+			LoadFunction("vkCmdBindTransformFeedbackBuffersEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBeginTransformFeedbackEXT"))
-			LoadFunction("vkCmdBeginTransformFeedbackEXT").IgnoreError();
+			LoadFunction("vkCmdBeginTransformFeedbackEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdEndTransformFeedbackEXT"))
-			LoadFunction("vkCmdEndTransformFeedbackEXT").IgnoreError();
+			LoadFunction("vkCmdEndTransformFeedbackEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBeginQueryIndexedEXT"))
-			LoadFunction("vkCmdBeginQueryIndexedEXT").IgnoreError();
+			LoadFunction("vkCmdBeginQueryIndexedEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdEndQueryIndexedEXT"))
-			LoadFunction("vkCmdEndQueryIndexedEXT").IgnoreError();
+			LoadFunction("vkCmdEndQueryIndexedEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDrawIndirectByteCountEXT"))
-			LoadFunction("vkCmdDrawIndirectByteCountEXT").IgnoreError();
+			LoadFunction("vkCmdDrawIndirectByteCountEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateCuModuleNVX"))
-			LoadFunction("vkCreateCuModuleNVX").IgnoreError();
+			LoadFunction("vkCreateCuModuleNVX", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateCuFunctionNVX"))
-			LoadFunction("vkCreateCuFunctionNVX").IgnoreError();
+			LoadFunction("vkCreateCuFunctionNVX", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyCuModuleNVX"))
-			LoadFunction("vkDestroyCuModuleNVX").IgnoreError();
+			LoadFunction("vkDestroyCuModuleNVX", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyCuFunctionNVX"))
-			LoadFunction("vkDestroyCuFunctionNVX").IgnoreError();
+			LoadFunction("vkDestroyCuFunctionNVX", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdCuLaunchKernelNVX"))
-			LoadFunction("vkCmdCuLaunchKernelNVX").IgnoreError();
+			LoadFunction("vkCmdCuLaunchKernelNVX", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetImageViewHandleNVX"))
-			LoadFunction("vkGetImageViewHandleNVX").IgnoreError();
+			LoadFunction("vkGetImageViewHandleNVX", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetImageViewAddressNVX"))
-			LoadFunction("vkGetImageViewAddressNVX").IgnoreError();
+			LoadFunction("vkGetImageViewAddressNVX", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetShaderInfoAMD"))
-			LoadFunction("vkGetShaderInfoAMD").IgnoreError();
+			LoadFunction("vkGetShaderInfoAMD", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateStreamDescriptorSurfaceGGP"))
-			LoadFunction("vkCreateStreamDescriptorSurfaceGGP").IgnoreError();
+			LoadFunction("vkCreateStreamDescriptorSurfaceGGP", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceExternalImageFormatPropertiesNV"))
-			LoadFunction("vkGetPhysicalDeviceExternalImageFormatPropertiesNV").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceExternalImageFormatPropertiesNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetMemoryWin32HandleNV"))
-			LoadFunction("vkGetMemoryWin32HandleNV").IgnoreError();
+			LoadFunction("vkGetMemoryWin32HandleNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateViSurfaceNN"))
-			LoadFunction("vkCreateViSurfaceNN").IgnoreError();
+			LoadFunction("vkCreateViSurfaceNN", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetMemoryWin32HandleKHR"))
-			LoadFunction("vkGetMemoryWin32HandleKHR").IgnoreError();
+			LoadFunction("vkGetMemoryWin32HandleKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetMemoryWin32HandlePropertiesKHR"))
-			LoadFunction("vkGetMemoryWin32HandlePropertiesKHR").IgnoreError();
+			LoadFunction("vkGetMemoryWin32HandlePropertiesKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetMemoryFdKHR"))
-			LoadFunction("vkGetMemoryFdKHR").IgnoreError();
+			LoadFunction("vkGetMemoryFdKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetMemoryFdPropertiesKHR"))
-			LoadFunction("vkGetMemoryFdPropertiesKHR").IgnoreError();
+			LoadFunction("vkGetMemoryFdPropertiesKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkImportSemaphoreWin32HandleKHR"))
-			LoadFunction("vkImportSemaphoreWin32HandleKHR").IgnoreError();
+			LoadFunction("vkImportSemaphoreWin32HandleKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetSemaphoreWin32HandleKHR"))
-			LoadFunction("vkGetSemaphoreWin32HandleKHR").IgnoreError();
+			LoadFunction("vkGetSemaphoreWin32HandleKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkImportSemaphoreFdKHR"))
-			LoadFunction("vkImportSemaphoreFdKHR").IgnoreError();
+			LoadFunction("vkImportSemaphoreFdKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetSemaphoreFdKHR"))
-			LoadFunction("vkGetSemaphoreFdKHR").IgnoreError();
+			LoadFunction("vkGetSemaphoreFdKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdPushDescriptorSetKHR"))
-			LoadFunction("vkCmdPushDescriptorSetKHR").IgnoreError();
+			LoadFunction("vkCmdPushDescriptorSetKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBeginConditionalRenderingEXT"))
-			LoadFunction("vkCmdBeginConditionalRenderingEXT").IgnoreError();
+			LoadFunction("vkCmdBeginConditionalRenderingEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdEndConditionalRenderingEXT"))
-			LoadFunction("vkCmdEndConditionalRenderingEXT").IgnoreError();
+			LoadFunction("vkCmdEndConditionalRenderingEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetViewportWScalingNV"))
-			LoadFunction("vkCmdSetViewportWScalingNV").IgnoreError();
+			LoadFunction("vkCmdSetViewportWScalingNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkReleaseDisplayEXT"))
-			LoadFunction("vkReleaseDisplayEXT").IgnoreError();
+			LoadFunction("vkReleaseDisplayEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkAcquireXlibDisplayEXT"))
-			LoadFunction("vkAcquireXlibDisplayEXT").IgnoreError();
+			LoadFunction("vkAcquireXlibDisplayEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetRandROutputDisplayEXT"))
-			LoadFunction("vkGetRandROutputDisplayEXT").IgnoreError();
+			LoadFunction("vkGetRandROutputDisplayEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceSurfaceCapabilities2EXT"))
-			LoadFunction("vkGetPhysicalDeviceSurfaceCapabilities2EXT").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceSurfaceCapabilities2EXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDisplayPowerControlEXT"))
-			LoadFunction("vkDisplayPowerControlEXT").IgnoreError();
+			LoadFunction("vkDisplayPowerControlEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkRegisterDeviceEventEXT"))
-			LoadFunction("vkRegisterDeviceEventEXT").IgnoreError();
+			LoadFunction("vkRegisterDeviceEventEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkRegisterDisplayEventEXT"))
-			LoadFunction("vkRegisterDisplayEventEXT").IgnoreError();
+			LoadFunction("vkRegisterDisplayEventEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetSwapchainCounterEXT"))
-			LoadFunction("vkGetSwapchainCounterEXT").IgnoreError();
+			LoadFunction("vkGetSwapchainCounterEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetRefreshCycleDurationGOOGLE"))
-			LoadFunction("vkGetRefreshCycleDurationGOOGLE").IgnoreError();
+			LoadFunction("vkGetRefreshCycleDurationGOOGLE", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPastPresentationTimingGOOGLE"))
-			LoadFunction("vkGetPastPresentationTimingGOOGLE").IgnoreError();
+			LoadFunction("vkGetPastPresentationTimingGOOGLE", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetDiscardRectangleEXT"))
-			LoadFunction("vkCmdSetDiscardRectangleEXT").IgnoreError();
+			LoadFunction("vkCmdSetDiscardRectangleEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetDiscardRectangleEnableEXT"))
-			LoadFunction("vkCmdSetDiscardRectangleEnableEXT").IgnoreError();
+			LoadFunction("vkCmdSetDiscardRectangleEnableEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetDiscardRectangleModeEXT"))
-			LoadFunction("vkCmdSetDiscardRectangleModeEXT").IgnoreError();
+			LoadFunction("vkCmdSetDiscardRectangleModeEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkSetHdrMetadataEXT"))
-			LoadFunction("vkSetHdrMetadataEXT").IgnoreError();
+			LoadFunction("vkSetHdrMetadataEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetSwapchainStatusKHR"))
-			LoadFunction("vkGetSwapchainStatusKHR").IgnoreError();
+			LoadFunction("vkGetSwapchainStatusKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkImportFenceWin32HandleKHR"))
-			LoadFunction("vkImportFenceWin32HandleKHR").IgnoreError();
+			LoadFunction("vkImportFenceWin32HandleKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetFenceWin32HandleKHR"))
-			LoadFunction("vkGetFenceWin32HandleKHR").IgnoreError();
+			LoadFunction("vkGetFenceWin32HandleKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkImportFenceFdKHR"))
-			LoadFunction("vkImportFenceFdKHR").IgnoreError();
+			LoadFunction("vkImportFenceFdKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetFenceFdKHR"))
-			LoadFunction("vkGetFenceFdKHR").IgnoreError();
+			LoadFunction("vkGetFenceFdKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR"))
-			LoadFunction("vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR").IgnoreError();
+			LoadFunction("vkEnumeratePhysicalDeviceQueueFamilyPerformanceQueryCountersKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR"))
-			LoadFunction("vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceQueueFamilyPerformanceQueryPassesKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkAcquireProfilingLockKHR"))
-			LoadFunction("vkAcquireProfilingLockKHR").IgnoreError();
+			LoadFunction("vkAcquireProfilingLockKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkReleaseProfilingLockKHR"))
-			LoadFunction("vkReleaseProfilingLockKHR").IgnoreError();
+			LoadFunction("vkReleaseProfilingLockKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceSurfaceCapabilities2KHR"))
-			LoadFunction("vkGetPhysicalDeviceSurfaceCapabilities2KHR").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceSurfaceCapabilities2KHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceSurfaceFormats2KHR"))
-			LoadFunction("vkGetPhysicalDeviceSurfaceFormats2KHR").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceSurfaceFormats2KHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceDisplayProperties2KHR"))
-			LoadFunction("vkGetPhysicalDeviceDisplayProperties2KHR").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceDisplayProperties2KHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceDisplayPlaneProperties2KHR"))
-			LoadFunction("vkGetPhysicalDeviceDisplayPlaneProperties2KHR").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceDisplayPlaneProperties2KHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDisplayModeProperties2KHR"))
-			LoadFunction("vkGetDisplayModeProperties2KHR").IgnoreError();
+			LoadFunction("vkGetDisplayModeProperties2KHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDisplayPlaneCapabilities2KHR"))
-			LoadFunction("vkGetDisplayPlaneCapabilities2KHR").IgnoreError();
+			LoadFunction("vkGetDisplayPlaneCapabilities2KHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateIOSSurfaceMVK"))
-			LoadFunction("vkCreateIOSSurfaceMVK").IgnoreError();
+			LoadFunction("vkCreateIOSSurfaceMVK", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateMacOSSurfaceMVK"))
-			LoadFunction("vkCreateMacOSSurfaceMVK").IgnoreError();
+			LoadFunction("vkCreateMacOSSurfaceMVK", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkSetDebugUtilsObjectNameEXT"))
-			LoadFunction("vkSetDebugUtilsObjectNameEXT").IgnoreError();
+			LoadFunction("vkSetDebugUtilsObjectNameEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkSetDebugUtilsObjectTagEXT"))
-			LoadFunction("vkSetDebugUtilsObjectTagEXT").IgnoreError();
+			LoadFunction("vkSetDebugUtilsObjectTagEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkQueueBeginDebugUtilsLabelEXT"))
-			LoadFunction("vkQueueBeginDebugUtilsLabelEXT").IgnoreError();
+			LoadFunction("vkQueueBeginDebugUtilsLabelEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkQueueEndDebugUtilsLabelEXT"))
-			LoadFunction("vkQueueEndDebugUtilsLabelEXT").IgnoreError();
+			LoadFunction("vkQueueEndDebugUtilsLabelEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkQueueInsertDebugUtilsLabelEXT"))
-			LoadFunction("vkQueueInsertDebugUtilsLabelEXT").IgnoreError();
+			LoadFunction("vkQueueInsertDebugUtilsLabelEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBeginDebugUtilsLabelEXT"))
-			LoadFunction("vkCmdBeginDebugUtilsLabelEXT").IgnoreError();
+			LoadFunction("vkCmdBeginDebugUtilsLabelEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdEndDebugUtilsLabelEXT"))
-			LoadFunction("vkCmdEndDebugUtilsLabelEXT").IgnoreError();
+			LoadFunction("vkCmdEndDebugUtilsLabelEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdInsertDebugUtilsLabelEXT"))
-			LoadFunction("vkCmdInsertDebugUtilsLabelEXT").IgnoreError();
+			LoadFunction("vkCmdInsertDebugUtilsLabelEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateDebugUtilsMessengerEXT"))
-			LoadFunction("vkCreateDebugUtilsMessengerEXT").IgnoreError();
+			LoadFunction("vkCreateDebugUtilsMessengerEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyDebugUtilsMessengerEXT"))
-			LoadFunction("vkDestroyDebugUtilsMessengerEXT").IgnoreError();
+			LoadFunction("vkDestroyDebugUtilsMessengerEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkSubmitDebugUtilsMessageEXT"))
-			LoadFunction("vkSubmitDebugUtilsMessageEXT").IgnoreError();
+			LoadFunction("vkSubmitDebugUtilsMessageEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetAndroidHardwareBufferPropertiesANDROID"))
-			LoadFunction("vkGetAndroidHardwareBufferPropertiesANDROID").IgnoreError();
+			LoadFunction("vkGetAndroidHardwareBufferPropertiesANDROID", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetMemoryAndroidHardwareBufferANDROID"))
-			LoadFunction("vkGetMemoryAndroidHardwareBufferANDROID").IgnoreError();
+			LoadFunction("vkGetMemoryAndroidHardwareBufferANDROID", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateExecutionGraphPipelinesAMDX"))
-			LoadFunction("vkCreateExecutionGraphPipelinesAMDX").IgnoreError();
+			LoadFunction("vkCreateExecutionGraphPipelinesAMDX", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetExecutionGraphPipelineScratchSizeAMDX"))
-			LoadFunction("vkGetExecutionGraphPipelineScratchSizeAMDX").IgnoreError();
+			LoadFunction("vkGetExecutionGraphPipelineScratchSizeAMDX", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetExecutionGraphPipelineNodeIndexAMDX"))
-			LoadFunction("vkGetExecutionGraphPipelineNodeIndexAMDX").IgnoreError();
+			LoadFunction("vkGetExecutionGraphPipelineNodeIndexAMDX", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdInitializeGraphScratchMemoryAMDX"))
-			LoadFunction("vkCmdInitializeGraphScratchMemoryAMDX").IgnoreError();
+			LoadFunction("vkCmdInitializeGraphScratchMemoryAMDX", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDispatchGraphAMDX"))
-			LoadFunction("vkCmdDispatchGraphAMDX").IgnoreError();
+			LoadFunction("vkCmdDispatchGraphAMDX", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDispatchGraphIndirectAMDX"))
-			LoadFunction("vkCmdDispatchGraphIndirectAMDX").IgnoreError();
+			LoadFunction("vkCmdDispatchGraphIndirectAMDX", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDispatchGraphIndirectCountAMDX"))
-			LoadFunction("vkCmdDispatchGraphIndirectCountAMDX").IgnoreError();
+			LoadFunction("vkCmdDispatchGraphIndirectCountAMDX", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetSampleLocationsEXT"))
-			LoadFunction("vkCmdSetSampleLocationsEXT").IgnoreError();
+			LoadFunction("vkCmdSetSampleLocationsEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceMultisamplePropertiesEXT"))
-			LoadFunction("vkGetPhysicalDeviceMultisamplePropertiesEXT").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceMultisamplePropertiesEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateAccelerationStructureKHR"))
-			LoadFunction("vkCreateAccelerationStructureKHR").IgnoreError();
+			LoadFunction("vkCreateAccelerationStructureKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyAccelerationStructureKHR"))
-			LoadFunction("vkDestroyAccelerationStructureKHR").IgnoreError();
+			LoadFunction("vkDestroyAccelerationStructureKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBuildAccelerationStructuresKHR"))
-			LoadFunction("vkCmdBuildAccelerationStructuresKHR").IgnoreError();
+			LoadFunction("vkCmdBuildAccelerationStructuresKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBuildAccelerationStructuresIndirectKHR"))
-			LoadFunction("vkCmdBuildAccelerationStructuresIndirectKHR").IgnoreError();
+			LoadFunction("vkCmdBuildAccelerationStructuresIndirectKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkBuildAccelerationStructuresKHR"))
-			LoadFunction("vkBuildAccelerationStructuresKHR").IgnoreError();
+			LoadFunction("vkBuildAccelerationStructuresKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCopyAccelerationStructureKHR"))
-			LoadFunction("vkCopyAccelerationStructureKHR").IgnoreError();
+			LoadFunction("vkCopyAccelerationStructureKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCopyAccelerationStructureToMemoryKHR"))
-			LoadFunction("vkCopyAccelerationStructureToMemoryKHR").IgnoreError();
+			LoadFunction("vkCopyAccelerationStructureToMemoryKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCopyMemoryToAccelerationStructureKHR"))
-			LoadFunction("vkCopyMemoryToAccelerationStructureKHR").IgnoreError();
+			LoadFunction("vkCopyMemoryToAccelerationStructureKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkWriteAccelerationStructuresPropertiesKHR"))
-			LoadFunction("vkWriteAccelerationStructuresPropertiesKHR").IgnoreError();
+			LoadFunction("vkWriteAccelerationStructuresPropertiesKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdCopyAccelerationStructureKHR"))
-			LoadFunction("vkCmdCopyAccelerationStructureKHR").IgnoreError();
+			LoadFunction("vkCmdCopyAccelerationStructureKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdCopyAccelerationStructureToMemoryKHR"))
-			LoadFunction("vkCmdCopyAccelerationStructureToMemoryKHR").IgnoreError();
+			LoadFunction("vkCmdCopyAccelerationStructureToMemoryKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdCopyMemoryToAccelerationStructureKHR"))
-			LoadFunction("vkCmdCopyMemoryToAccelerationStructureKHR").IgnoreError();
+			LoadFunction("vkCmdCopyMemoryToAccelerationStructureKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetAccelerationStructureDeviceAddressKHR"))
-			LoadFunction("vkGetAccelerationStructureDeviceAddressKHR").IgnoreError();
+			LoadFunction("vkGetAccelerationStructureDeviceAddressKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdWriteAccelerationStructuresPropertiesKHR"))
-			LoadFunction("vkCmdWriteAccelerationStructuresPropertiesKHR").IgnoreError();
+			LoadFunction("vkCmdWriteAccelerationStructuresPropertiesKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDeviceAccelerationStructureCompatibilityKHR"))
-			LoadFunction("vkGetDeviceAccelerationStructureCompatibilityKHR").IgnoreError();
+			LoadFunction("vkGetDeviceAccelerationStructureCompatibilityKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetAccelerationStructureBuildSizesKHR"))
-			LoadFunction("vkGetAccelerationStructureBuildSizesKHR").IgnoreError();
+			LoadFunction("vkGetAccelerationStructureBuildSizesKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdTraceRaysKHR"))
-			LoadFunction("vkCmdTraceRaysKHR").IgnoreError();
+			LoadFunction("vkCmdTraceRaysKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateRayTracingPipelinesKHR"))
-			LoadFunction("vkCreateRayTracingPipelinesKHR").IgnoreError();
+			LoadFunction("vkCreateRayTracingPipelinesKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetRayTracingShaderGroupHandlesKHR"))
-			LoadFunction("vkGetRayTracingShaderGroupHandlesKHR").IgnoreError();
+			LoadFunction("vkGetRayTracingShaderGroupHandlesKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetRayTracingCaptureReplayShaderGroupHandlesKHR"))
-			LoadFunction("vkGetRayTracingCaptureReplayShaderGroupHandlesKHR").IgnoreError();
+			LoadFunction("vkGetRayTracingCaptureReplayShaderGroupHandlesKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdTraceRaysIndirectKHR"))
-			LoadFunction("vkCmdTraceRaysIndirectKHR").IgnoreError();
+			LoadFunction("vkCmdTraceRaysIndirectKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetRayTracingShaderGroupStackSizeKHR"))
-			LoadFunction("vkGetRayTracingShaderGroupStackSizeKHR").IgnoreError();
+			LoadFunction("vkGetRayTracingShaderGroupStackSizeKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetRayTracingPipelineStackSizeKHR"))
-			LoadFunction("vkCmdSetRayTracingPipelineStackSizeKHR").IgnoreError();
+			LoadFunction("vkCmdSetRayTracingPipelineStackSizeKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetImageDrmFormatModifierPropertiesEXT"))
-			LoadFunction("vkGetImageDrmFormatModifierPropertiesEXT").IgnoreError();
+			LoadFunction("vkGetImageDrmFormatModifierPropertiesEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateValidationCacheEXT"))
-			LoadFunction("vkCreateValidationCacheEXT").IgnoreError();
+			LoadFunction("vkCreateValidationCacheEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyValidationCacheEXT"))
-			LoadFunction("vkDestroyValidationCacheEXT").IgnoreError();
+			LoadFunction("vkDestroyValidationCacheEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkMergeValidationCachesEXT"))
-			LoadFunction("vkMergeValidationCachesEXT").IgnoreError();
+			LoadFunction("vkMergeValidationCachesEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetValidationCacheDataEXT"))
-			LoadFunction("vkGetValidationCacheDataEXT").IgnoreError();
+			LoadFunction("vkGetValidationCacheDataEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBindShadingRateImageNV"))
-			LoadFunction("vkCmdBindShadingRateImageNV").IgnoreError();
+			LoadFunction("vkCmdBindShadingRateImageNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetViewportShadingRatePaletteNV"))
-			LoadFunction("vkCmdSetViewportShadingRatePaletteNV").IgnoreError();
+			LoadFunction("vkCmdSetViewportShadingRatePaletteNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetCoarseSampleOrderNV"))
-			LoadFunction("vkCmdSetCoarseSampleOrderNV").IgnoreError();
+			LoadFunction("vkCmdSetCoarseSampleOrderNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateAccelerationStructureNV"))
-			LoadFunction("vkCreateAccelerationStructureNV").IgnoreError();
+			LoadFunction("vkCreateAccelerationStructureNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyAccelerationStructureNV"))
-			LoadFunction("vkDestroyAccelerationStructureNV").IgnoreError();
+			LoadFunction("vkDestroyAccelerationStructureNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetAccelerationStructureMemoryRequirementsNV"))
-			LoadFunction("vkGetAccelerationStructureMemoryRequirementsNV").IgnoreError();
+			LoadFunction("vkGetAccelerationStructureMemoryRequirementsNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkBindAccelerationStructureMemoryNV"))
-			LoadFunction("vkBindAccelerationStructureMemoryNV").IgnoreError();
+			LoadFunction("vkBindAccelerationStructureMemoryNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBuildAccelerationStructureNV"))
-			LoadFunction("vkCmdBuildAccelerationStructureNV").IgnoreError();
+			LoadFunction("vkCmdBuildAccelerationStructureNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdCopyAccelerationStructureNV"))
-			LoadFunction("vkCmdCopyAccelerationStructureNV").IgnoreError();
+			LoadFunction("vkCmdCopyAccelerationStructureNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdTraceRaysNV"))
-			LoadFunction("vkCmdTraceRaysNV").IgnoreError();
+			LoadFunction("vkCmdTraceRaysNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateRayTracingPipelinesNV"))
-			LoadFunction("vkCreateRayTracingPipelinesNV").IgnoreError();
+			LoadFunction("vkCreateRayTracingPipelinesNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetAccelerationStructureHandleNV"))
-			LoadFunction("vkGetAccelerationStructureHandleNV").IgnoreError();
+			LoadFunction("vkGetAccelerationStructureHandleNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdWriteAccelerationStructuresPropertiesNV"))
-			LoadFunction("vkCmdWriteAccelerationStructuresPropertiesNV").IgnoreError();
+			LoadFunction("vkCmdWriteAccelerationStructuresPropertiesNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCompileDeferredNV"))
-			LoadFunction("vkCompileDeferredNV").IgnoreError();
+			LoadFunction("vkCompileDeferredNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetMemoryHostPointerPropertiesEXT"))
-			LoadFunction("vkGetMemoryHostPointerPropertiesEXT").IgnoreError();
+			LoadFunction("vkGetMemoryHostPointerPropertiesEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdWriteBufferMarkerAMD"))
-			LoadFunction("vkCmdWriteBufferMarkerAMD").IgnoreError();
+			LoadFunction("vkCmdWriteBufferMarkerAMD", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceCalibrateableTimeDomainsKHR"))
-			LoadFunction("vkGetPhysicalDeviceCalibrateableTimeDomainsKHR").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceCalibrateableTimeDomainsKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetCalibratedTimestampsKHR"))
-			LoadFunction("vkGetCalibratedTimestampsKHR").IgnoreError();
+			LoadFunction("vkGetCalibratedTimestampsKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDrawMeshTasksNV"))
-			LoadFunction("vkCmdDrawMeshTasksNV").IgnoreError();
+			LoadFunction("vkCmdDrawMeshTasksNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDrawMeshTasksIndirectNV"))
-			LoadFunction("vkCmdDrawMeshTasksIndirectNV").IgnoreError();
+			LoadFunction("vkCmdDrawMeshTasksIndirectNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDrawMeshTasksIndirectCountNV"))
-			LoadFunction("vkCmdDrawMeshTasksIndirectCountNV").IgnoreError();
+			LoadFunction("vkCmdDrawMeshTasksIndirectCountNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetExclusiveScissorEnableNV"))
-			LoadFunction("vkCmdSetExclusiveScissorEnableNV").IgnoreError();
+			LoadFunction("vkCmdSetExclusiveScissorEnableNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetExclusiveScissorNV"))
-			LoadFunction("vkCmdSetExclusiveScissorNV").IgnoreError();
+			LoadFunction("vkCmdSetExclusiveScissorNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetCheckpointNV"))
-			LoadFunction("vkCmdSetCheckpointNV").IgnoreError();
+			LoadFunction("vkCmdSetCheckpointNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetQueueCheckpointDataNV"))
-			LoadFunction("vkGetQueueCheckpointDataNV").IgnoreError();
+			LoadFunction("vkGetQueueCheckpointDataNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkInitializePerformanceApiINTEL"))
-			LoadFunction("vkInitializePerformanceApiINTEL").IgnoreError();
+			LoadFunction("vkInitializePerformanceApiINTEL", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkUninitializePerformanceApiINTEL"))
-			LoadFunction("vkUninitializePerformanceApiINTEL").IgnoreError();
+			LoadFunction("vkUninitializePerformanceApiINTEL", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetPerformanceMarkerINTEL"))
-			LoadFunction("vkCmdSetPerformanceMarkerINTEL").IgnoreError();
+			LoadFunction("vkCmdSetPerformanceMarkerINTEL", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetPerformanceStreamMarkerINTEL"))
-			LoadFunction("vkCmdSetPerformanceStreamMarkerINTEL").IgnoreError();
+			LoadFunction("vkCmdSetPerformanceStreamMarkerINTEL", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetPerformanceOverrideINTEL"))
-			LoadFunction("vkCmdSetPerformanceOverrideINTEL").IgnoreError();
+			LoadFunction("vkCmdSetPerformanceOverrideINTEL", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkAcquirePerformanceConfigurationINTEL"))
-			LoadFunction("vkAcquirePerformanceConfigurationINTEL").IgnoreError();
+			LoadFunction("vkAcquirePerformanceConfigurationINTEL", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkReleasePerformanceConfigurationINTEL"))
-			LoadFunction("vkReleasePerformanceConfigurationINTEL").IgnoreError();
+			LoadFunction("vkReleasePerformanceConfigurationINTEL", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkQueueSetPerformanceConfigurationINTEL"))
-			LoadFunction("vkQueueSetPerformanceConfigurationINTEL").IgnoreError();
+			LoadFunction("vkQueueSetPerformanceConfigurationINTEL", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPerformanceParameterINTEL"))
-			LoadFunction("vkGetPerformanceParameterINTEL").IgnoreError();
+			LoadFunction("vkGetPerformanceParameterINTEL", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkSetLocalDimmingAMD"))
-			LoadFunction("vkSetLocalDimmingAMD").IgnoreError();
+			LoadFunction("vkSetLocalDimmingAMD", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateImagePipeSurfaceFUCHSIA"))
-			LoadFunction("vkCreateImagePipeSurfaceFUCHSIA").IgnoreError();
+			LoadFunction("vkCreateImagePipeSurfaceFUCHSIA", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateMetalSurfaceEXT"))
-			LoadFunction("vkCreateMetalSurfaceEXT").IgnoreError();
+			LoadFunction("vkCreateMetalSurfaceEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceFragmentShadingRatesKHR"))
-			LoadFunction("vkGetPhysicalDeviceFragmentShadingRatesKHR").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceFragmentShadingRatesKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetFragmentShadingRateKHR"))
-			LoadFunction("vkCmdSetFragmentShadingRateKHR").IgnoreError();
+			LoadFunction("vkCmdSetFragmentShadingRateKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetRenderingAttachmentLocationsKHR"))
-			LoadFunction("vkCmdSetRenderingAttachmentLocationsKHR").IgnoreError();
+			LoadFunction("vkCmdSetRenderingAttachmentLocationsKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetRenderingInputAttachmentIndicesKHR"))
-			LoadFunction("vkCmdSetRenderingInputAttachmentIndicesKHR").IgnoreError();
+			LoadFunction("vkCmdSetRenderingInputAttachmentIndicesKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkWaitForPresentKHR"))
-			LoadFunction("vkWaitForPresentKHR").IgnoreError();
+			LoadFunction("vkWaitForPresentKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceCooperativeMatrixPropertiesNV"))
-			LoadFunction("vkGetPhysicalDeviceCooperativeMatrixPropertiesNV").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceCooperativeMatrixPropertiesNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV"))
-			LoadFunction("vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceSupportedFramebufferMixedSamplesCombinationsNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceSurfacePresentModes2EXT"))
-			LoadFunction("vkGetPhysicalDeviceSurfacePresentModes2EXT").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceSurfacePresentModes2EXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkAcquireFullScreenExclusiveModeEXT"))
-			LoadFunction("vkAcquireFullScreenExclusiveModeEXT").IgnoreError();
+			LoadFunction("vkAcquireFullScreenExclusiveModeEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkReleaseFullScreenExclusiveModeEXT"))
-			LoadFunction("vkReleaseFullScreenExclusiveModeEXT").IgnoreError();
+			LoadFunction("vkReleaseFullScreenExclusiveModeEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateHeadlessSurfaceEXT"))
-			LoadFunction("vkCreateHeadlessSurfaceEXT").IgnoreError();
+			LoadFunction("vkCreateHeadlessSurfaceEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetLineStippleKHR"))
-			LoadFunction("vkCmdSetLineStippleKHR").IgnoreError();
+			LoadFunction("vkCmdSetLineStippleKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateDeferredOperationKHR"))
-			LoadFunction("vkCreateDeferredOperationKHR").IgnoreError();
+			LoadFunction("vkCreateDeferredOperationKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyDeferredOperationKHR"))
-			LoadFunction("vkDestroyDeferredOperationKHR").IgnoreError();
+			LoadFunction("vkDestroyDeferredOperationKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDeferredOperationMaxConcurrencyKHR"))
-			LoadFunction("vkGetDeferredOperationMaxConcurrencyKHR").IgnoreError();
+			LoadFunction("vkGetDeferredOperationMaxConcurrencyKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDeferredOperationResultKHR"))
-			LoadFunction("vkGetDeferredOperationResultKHR").IgnoreError();
+			LoadFunction("vkGetDeferredOperationResultKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDeferredOperationJoinKHR"))
-			LoadFunction("vkDeferredOperationJoinKHR").IgnoreError();
+			LoadFunction("vkDeferredOperationJoinKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPipelineExecutablePropertiesKHR"))
-			LoadFunction("vkGetPipelineExecutablePropertiesKHR").IgnoreError();
+			LoadFunction("vkGetPipelineExecutablePropertiesKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPipelineExecutableStatisticsKHR"))
-			LoadFunction("vkGetPipelineExecutableStatisticsKHR").IgnoreError();
+			LoadFunction("vkGetPipelineExecutableStatisticsKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPipelineExecutableInternalRepresentationsKHR"))
-			LoadFunction("vkGetPipelineExecutableInternalRepresentationsKHR").IgnoreError();
+			LoadFunction("vkGetPipelineExecutableInternalRepresentationsKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCopyMemoryToImageEXT"))
-			LoadFunction("vkCopyMemoryToImageEXT").IgnoreError();
+			LoadFunction("vkCopyMemoryToImageEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCopyImageToMemoryEXT"))
-			LoadFunction("vkCopyImageToMemoryEXT").IgnoreError();
+			LoadFunction("vkCopyImageToMemoryEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCopyImageToImageEXT"))
-			LoadFunction("vkCopyImageToImageEXT").IgnoreError();
+			LoadFunction("vkCopyImageToImageEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkTransitionImageLayoutEXT"))
-			LoadFunction("vkTransitionImageLayoutEXT").IgnoreError();
+			LoadFunction("vkTransitionImageLayoutEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetImageSubresourceLayout2KHR"))
-			LoadFunction("vkGetImageSubresourceLayout2KHR").IgnoreError();
+			LoadFunction("vkGetImageSubresourceLayout2KHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkMapMemory2KHR"))
-			LoadFunction("vkMapMemory2KHR").IgnoreError();
+			LoadFunction("vkMapMemory2KHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkUnmapMemory2KHR"))
-			LoadFunction("vkUnmapMemory2KHR").IgnoreError();
+			LoadFunction("vkUnmapMemory2KHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkReleaseSwapchainImagesEXT"))
-			LoadFunction("vkReleaseSwapchainImagesEXT").IgnoreError();
+			LoadFunction("vkReleaseSwapchainImagesEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetGeneratedCommandsMemoryRequirementsNV"))
-			LoadFunction("vkGetGeneratedCommandsMemoryRequirementsNV").IgnoreError();
+			LoadFunction("vkGetGeneratedCommandsMemoryRequirementsNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdPreprocessGeneratedCommandsNV"))
-			LoadFunction("vkCmdPreprocessGeneratedCommandsNV").IgnoreError();
+			LoadFunction("vkCmdPreprocessGeneratedCommandsNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdExecuteGeneratedCommandsNV"))
-			LoadFunction("vkCmdExecuteGeneratedCommandsNV").IgnoreError();
+			LoadFunction("vkCmdExecuteGeneratedCommandsNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBindPipelineShaderGroupNV"))
-			LoadFunction("vkCmdBindPipelineShaderGroupNV").IgnoreError();
+			LoadFunction("vkCmdBindPipelineShaderGroupNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateIndirectCommandsLayoutNV"))
-			LoadFunction("vkCreateIndirectCommandsLayoutNV").IgnoreError();
+			LoadFunction("vkCreateIndirectCommandsLayoutNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyIndirectCommandsLayoutNV"))
-			LoadFunction("vkDestroyIndirectCommandsLayoutNV").IgnoreError();
+			LoadFunction("vkDestroyIndirectCommandsLayoutNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetDepthBias2EXT"))
-			LoadFunction("vkCmdSetDepthBias2EXT").IgnoreError();
+			LoadFunction("vkCmdSetDepthBias2EXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkAcquireDrmDisplayEXT"))
-			LoadFunction("vkAcquireDrmDisplayEXT").IgnoreError();
+			LoadFunction("vkAcquireDrmDisplayEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDrmDisplayEXT"))
-			LoadFunction("vkGetDrmDisplayEXT").IgnoreError();
+			LoadFunction("vkGetDrmDisplayEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR"))
-			LoadFunction("vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceVideoEncodeQualityLevelPropertiesKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetEncodedVideoSessionParametersKHR"))
-			LoadFunction("vkGetEncodedVideoSessionParametersKHR").IgnoreError();
+			LoadFunction("vkGetEncodedVideoSessionParametersKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdEncodeVideoKHR"))
-			LoadFunction("vkCmdEncodeVideoKHR").IgnoreError();
+			LoadFunction("vkCmdEncodeVideoKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateCudaModuleNV"))
-			LoadFunction("vkCreateCudaModuleNV").IgnoreError();
+			LoadFunction("vkCreateCudaModuleNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetCudaModuleCacheNV"))
-			LoadFunction("vkGetCudaModuleCacheNV").IgnoreError();
+			LoadFunction("vkGetCudaModuleCacheNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateCudaFunctionNV"))
-			LoadFunction("vkCreateCudaFunctionNV").IgnoreError();
+			LoadFunction("vkCreateCudaFunctionNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyCudaModuleNV"))
-			LoadFunction("vkDestroyCudaModuleNV").IgnoreError();
+			LoadFunction("vkDestroyCudaModuleNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyCudaFunctionNV"))
-			LoadFunction("vkDestroyCudaFunctionNV").IgnoreError();
+			LoadFunction("vkDestroyCudaFunctionNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdCudaLaunchKernelNV"))
-			LoadFunction("vkCmdCudaLaunchKernelNV").IgnoreError();
+			LoadFunction("vkCmdCudaLaunchKernelNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdRefreshObjectsKHR"))
-			LoadFunction("vkCmdRefreshObjectsKHR").IgnoreError();
+			LoadFunction("vkCmdRefreshObjectsKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceRefreshableObjectTypesKHR"))
-			LoadFunction("vkGetPhysicalDeviceRefreshableObjectTypesKHR").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceRefreshableObjectTypesKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkExportMetalObjectsEXT"))
-			LoadFunction("vkExportMetalObjectsEXT").IgnoreError();
+			LoadFunction("vkExportMetalObjectsEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDescriptorSetLayoutSizeEXT"))
-			LoadFunction("vkGetDescriptorSetLayoutSizeEXT").IgnoreError();
+			LoadFunction("vkGetDescriptorSetLayoutSizeEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDescriptorSetLayoutBindingOffsetEXT"))
-			LoadFunction("vkGetDescriptorSetLayoutBindingOffsetEXT").IgnoreError();
+			LoadFunction("vkGetDescriptorSetLayoutBindingOffsetEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDescriptorEXT"))
-			LoadFunction("vkGetDescriptorEXT").IgnoreError();
+			LoadFunction("vkGetDescriptorEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBindDescriptorBuffersEXT"))
-			LoadFunction("vkCmdBindDescriptorBuffersEXT").IgnoreError();
+			LoadFunction("vkCmdBindDescriptorBuffersEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetDescriptorBufferOffsetsEXT"))
-			LoadFunction("vkCmdSetDescriptorBufferOffsetsEXT").IgnoreError();
+			LoadFunction("vkCmdSetDescriptorBufferOffsetsEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBindDescriptorBufferEmbeddedSamplersEXT"))
-			LoadFunction("vkCmdBindDescriptorBufferEmbeddedSamplersEXT").IgnoreError();
+			LoadFunction("vkCmdBindDescriptorBufferEmbeddedSamplersEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetBufferOpaqueCaptureDescriptorDataEXT"))
-			LoadFunction("vkGetBufferOpaqueCaptureDescriptorDataEXT").IgnoreError();
+			LoadFunction("vkGetBufferOpaqueCaptureDescriptorDataEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetImageOpaqueCaptureDescriptorDataEXT"))
-			LoadFunction("vkGetImageOpaqueCaptureDescriptorDataEXT").IgnoreError();
+			LoadFunction("vkGetImageOpaqueCaptureDescriptorDataEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetImageViewOpaqueCaptureDescriptorDataEXT"))
-			LoadFunction("vkGetImageViewOpaqueCaptureDescriptorDataEXT").IgnoreError();
+			LoadFunction("vkGetImageViewOpaqueCaptureDescriptorDataEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetSamplerOpaqueCaptureDescriptorDataEXT"))
-			LoadFunction("vkGetSamplerOpaqueCaptureDescriptorDataEXT").IgnoreError();
+			LoadFunction("vkGetSamplerOpaqueCaptureDescriptorDataEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetFragmentShadingRateEnumNV"))
-			LoadFunction("vkCmdSetFragmentShadingRateEnumNV").IgnoreError();
+			LoadFunction("vkCmdSetFragmentShadingRateEnumNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDrawMeshTasksEXT"))
-			LoadFunction("vkCmdDrawMeshTasksEXT").IgnoreError();
+			LoadFunction("vkCmdDrawMeshTasksEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDrawMeshTasksIndirectEXT"))
-			LoadFunction("vkCmdDrawMeshTasksIndirectEXT").IgnoreError();
+			LoadFunction("vkCmdDrawMeshTasksIndirectEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDrawMeshTasksIndirectCountEXT"))
-			LoadFunction("vkCmdDrawMeshTasksIndirectCountEXT").IgnoreError();
+			LoadFunction("vkCmdDrawMeshTasksIndirectCountEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDeviceFaultInfoEXT"))
-			LoadFunction("vkGetDeviceFaultInfoEXT").IgnoreError();
+			LoadFunction("vkGetDeviceFaultInfoEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkAcquireWinrtDisplayNV"))
-			LoadFunction("vkAcquireWinrtDisplayNV").IgnoreError();
+			LoadFunction("vkAcquireWinrtDisplayNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetWinrtDisplayNV"))
-			LoadFunction("vkGetWinrtDisplayNV").IgnoreError();
+			LoadFunction("vkGetWinrtDisplayNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateDirectFBSurfaceEXT"))
-			LoadFunction("vkCreateDirectFBSurfaceEXT").IgnoreError();
+			LoadFunction("vkCreateDirectFBSurfaceEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceDirectFBPresentationSupportEXT"))
-			LoadFunction("vkGetPhysicalDeviceDirectFBPresentationSupportEXT").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceDirectFBPresentationSupportEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetVertexInputEXT"))
-			LoadFunction("vkCmdSetVertexInputEXT").IgnoreError();
+			LoadFunction("vkCmdSetVertexInputEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetMemoryZirconHandleFUCHSIA"))
-			LoadFunction("vkGetMemoryZirconHandleFUCHSIA").IgnoreError();
+			LoadFunction("vkGetMemoryZirconHandleFUCHSIA", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetMemoryZirconHandlePropertiesFUCHSIA"))
-			LoadFunction("vkGetMemoryZirconHandlePropertiesFUCHSIA").IgnoreError();
+			LoadFunction("vkGetMemoryZirconHandlePropertiesFUCHSIA", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkImportSemaphoreZirconHandleFUCHSIA"))
-			LoadFunction("vkImportSemaphoreZirconHandleFUCHSIA").IgnoreError();
+			LoadFunction("vkImportSemaphoreZirconHandleFUCHSIA", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetSemaphoreZirconHandleFUCHSIA"))
-			LoadFunction("vkGetSemaphoreZirconHandleFUCHSIA").IgnoreError();
+			LoadFunction("vkGetSemaphoreZirconHandleFUCHSIA", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateBufferCollectionFUCHSIA"))
-			LoadFunction("vkCreateBufferCollectionFUCHSIA").IgnoreError();
+			LoadFunction("vkCreateBufferCollectionFUCHSIA", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkSetBufferCollectionImageConstraintsFUCHSIA"))
-			LoadFunction("vkSetBufferCollectionImageConstraintsFUCHSIA").IgnoreError();
+			LoadFunction("vkSetBufferCollectionImageConstraintsFUCHSIA", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkSetBufferCollectionBufferConstraintsFUCHSIA"))
-			LoadFunction("vkSetBufferCollectionBufferConstraintsFUCHSIA").IgnoreError();
+			LoadFunction("vkSetBufferCollectionBufferConstraintsFUCHSIA", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyBufferCollectionFUCHSIA"))
-			LoadFunction("vkDestroyBufferCollectionFUCHSIA").IgnoreError();
+			LoadFunction("vkDestroyBufferCollectionFUCHSIA", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetBufferCollectionPropertiesFUCHSIA"))
-			LoadFunction("vkGetBufferCollectionPropertiesFUCHSIA").IgnoreError();
+			LoadFunction("vkGetBufferCollectionPropertiesFUCHSIA", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI"))
-			LoadFunction("vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI").IgnoreError();
+			LoadFunction("vkGetDeviceSubpassShadingMaxWorkgroupSizeHUAWEI", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSubpassShadingHUAWEI"))
-			LoadFunction("vkCmdSubpassShadingHUAWEI").IgnoreError();
+			LoadFunction("vkCmdSubpassShadingHUAWEI", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBindInvocationMaskHUAWEI"))
-			LoadFunction("vkCmdBindInvocationMaskHUAWEI").IgnoreError();
+			LoadFunction("vkCmdBindInvocationMaskHUAWEI", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetMemoryRemoteAddressNV"))
-			LoadFunction("vkGetMemoryRemoteAddressNV").IgnoreError();
+			LoadFunction("vkGetMemoryRemoteAddressNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPipelinePropertiesEXT"))
-			LoadFunction("vkGetPipelinePropertiesEXT").IgnoreError();
+			LoadFunction("vkGetPipelinePropertiesEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetFenceSciSyncFenceNV"))
-			LoadFunction("vkGetFenceSciSyncFenceNV").IgnoreError();
+			LoadFunction("vkGetFenceSciSyncFenceNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetFenceSciSyncObjNV"))
-			LoadFunction("vkGetFenceSciSyncObjNV").IgnoreError();
+			LoadFunction("vkGetFenceSciSyncObjNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkImportFenceSciSyncFenceNV"))
-			LoadFunction("vkImportFenceSciSyncFenceNV").IgnoreError();
+			LoadFunction("vkImportFenceSciSyncFenceNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkImportFenceSciSyncObjNV"))
-			LoadFunction("vkImportFenceSciSyncObjNV").IgnoreError();
+			LoadFunction("vkImportFenceSciSyncObjNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceSciSyncAttributesNV"))
-			LoadFunction("vkGetPhysicalDeviceSciSyncAttributesNV").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceSciSyncAttributesNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetSemaphoreSciSyncObjNV"))
-			LoadFunction("vkGetSemaphoreSciSyncObjNV").IgnoreError();
+			LoadFunction("vkGetSemaphoreSciSyncObjNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkImportSemaphoreSciSyncObjNV"))
-			LoadFunction("vkImportSemaphoreSciSyncObjNV").IgnoreError();
+			LoadFunction("vkImportSemaphoreSciSyncObjNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetMemorySciBufNV"))
-			LoadFunction("vkGetMemorySciBufNV").IgnoreError();
+			LoadFunction("vkGetMemorySciBufNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV"))
-			LoadFunction("vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceExternalMemorySciBufPropertiesNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceSciBufAttributesNV"))
-			LoadFunction("vkGetPhysicalDeviceSciBufAttributesNV").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceSciBufAttributesNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetPatchControlPointsEXT"))
-			LoadFunction("vkCmdSetPatchControlPointsEXT").IgnoreError();
+			LoadFunction("vkCmdSetPatchControlPointsEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetLogicOpEXT"))
-			LoadFunction("vkCmdSetLogicOpEXT").IgnoreError();
+			LoadFunction("vkCmdSetLogicOpEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateScreenSurfaceQNX"))
-			LoadFunction("vkCreateScreenSurfaceQNX").IgnoreError();
+			LoadFunction("vkCreateScreenSurfaceQNX", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceScreenPresentationSupportQNX"))
-			LoadFunction("vkGetPhysicalDeviceScreenPresentationSupportQNX").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceScreenPresentationSupportQNX", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetColorWriteEnableEXT"))
-			LoadFunction("vkCmdSetColorWriteEnableEXT").IgnoreError();
+			LoadFunction("vkCmdSetColorWriteEnableEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDrawMultiEXT"))
-			LoadFunction("vkCmdDrawMultiEXT").IgnoreError();
+			LoadFunction("vkCmdDrawMultiEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDrawMultiIndexedEXT"))
-			LoadFunction("vkCmdDrawMultiIndexedEXT").IgnoreError();
+			LoadFunction("vkCmdDrawMultiIndexedEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateMicromapEXT"))
-			LoadFunction("vkCreateMicromapEXT").IgnoreError();
+			LoadFunction("vkCreateMicromapEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyMicromapEXT"))
-			LoadFunction("vkDestroyMicromapEXT").IgnoreError();
+			LoadFunction("vkDestroyMicromapEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBuildMicromapsEXT"))
-			LoadFunction("vkCmdBuildMicromapsEXT").IgnoreError();
+			LoadFunction("vkCmdBuildMicromapsEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkBuildMicromapsEXT"))
-			LoadFunction("vkBuildMicromapsEXT").IgnoreError();
+			LoadFunction("vkBuildMicromapsEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCopyMicromapEXT"))
-			LoadFunction("vkCopyMicromapEXT").IgnoreError();
+			LoadFunction("vkCopyMicromapEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCopyMicromapToMemoryEXT"))
-			LoadFunction("vkCopyMicromapToMemoryEXT").IgnoreError();
+			LoadFunction("vkCopyMicromapToMemoryEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCopyMemoryToMicromapEXT"))
-			LoadFunction("vkCopyMemoryToMicromapEXT").IgnoreError();
+			LoadFunction("vkCopyMemoryToMicromapEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkWriteMicromapsPropertiesEXT"))
-			LoadFunction("vkWriteMicromapsPropertiesEXT").IgnoreError();
+			LoadFunction("vkWriteMicromapsPropertiesEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdCopyMicromapEXT"))
-			LoadFunction("vkCmdCopyMicromapEXT").IgnoreError();
+			LoadFunction("vkCmdCopyMicromapEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdCopyMicromapToMemoryEXT"))
-			LoadFunction("vkCmdCopyMicromapToMemoryEXT").IgnoreError();
+			LoadFunction("vkCmdCopyMicromapToMemoryEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdCopyMemoryToMicromapEXT"))
-			LoadFunction("vkCmdCopyMemoryToMicromapEXT").IgnoreError();
+			LoadFunction("vkCmdCopyMemoryToMicromapEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdWriteMicromapsPropertiesEXT"))
-			LoadFunction("vkCmdWriteMicromapsPropertiesEXT").IgnoreError();
+			LoadFunction("vkCmdWriteMicromapsPropertiesEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDeviceMicromapCompatibilityEXT"))
-			LoadFunction("vkGetDeviceMicromapCompatibilityEXT").IgnoreError();
+			LoadFunction("vkGetDeviceMicromapCompatibilityEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetMicromapBuildSizesEXT"))
-			LoadFunction("vkGetMicromapBuildSizesEXT").IgnoreError();
+			LoadFunction("vkGetMicromapBuildSizesEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDrawClusterHUAWEI"))
-			LoadFunction("vkCmdDrawClusterHUAWEI").IgnoreError();
+			LoadFunction("vkCmdDrawClusterHUAWEI", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDrawClusterIndirectHUAWEI"))
-			LoadFunction("vkCmdDrawClusterIndirectHUAWEI").IgnoreError();
+			LoadFunction("vkCmdDrawClusterIndirectHUAWEI", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkSetDeviceMemoryPriorityEXT"))
-			LoadFunction("vkSetDeviceMemoryPriorityEXT").IgnoreError();
+			LoadFunction("vkSetDeviceMemoryPriorityEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDescriptorSetLayoutHostMappingInfoVALVE"))
-			LoadFunction("vkGetDescriptorSetLayoutHostMappingInfoVALVE").IgnoreError();
+			LoadFunction("vkGetDescriptorSetLayoutHostMappingInfoVALVE", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDescriptorSetHostMappingVALVE"))
-			LoadFunction("vkGetDescriptorSetHostMappingVALVE").IgnoreError();
+			LoadFunction("vkGetDescriptorSetHostMappingVALVE", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdCopyMemoryIndirectNV"))
-			LoadFunction("vkCmdCopyMemoryIndirectNV").IgnoreError();
+			LoadFunction("vkCmdCopyMemoryIndirectNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdCopyMemoryToImageIndirectNV"))
-			LoadFunction("vkCmdCopyMemoryToImageIndirectNV").IgnoreError();
+			LoadFunction("vkCmdCopyMemoryToImageIndirectNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDecompressMemoryNV"))
-			LoadFunction("vkCmdDecompressMemoryNV").IgnoreError();
+			LoadFunction("vkCmdDecompressMemoryNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDecompressMemoryIndirectCountNV"))
-			LoadFunction("vkCmdDecompressMemoryIndirectCountNV").IgnoreError();
+			LoadFunction("vkCmdDecompressMemoryIndirectCountNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPipelineIndirectMemoryRequirementsNV"))
-			LoadFunction("vkGetPipelineIndirectMemoryRequirementsNV").IgnoreError();
+			LoadFunction("vkGetPipelineIndirectMemoryRequirementsNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdUpdatePipelineIndirectBufferNV"))
-			LoadFunction("vkCmdUpdatePipelineIndirectBufferNV").IgnoreError();
+			LoadFunction("vkCmdUpdatePipelineIndirectBufferNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPipelineIndirectDeviceAddressNV"))
-			LoadFunction("vkGetPipelineIndirectDeviceAddressNV").IgnoreError();
+			LoadFunction("vkGetPipelineIndirectDeviceAddressNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetDepthClampEnableEXT"))
-			LoadFunction("vkCmdSetDepthClampEnableEXT").IgnoreError();
+			LoadFunction("vkCmdSetDepthClampEnableEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetPolygonModeEXT"))
-			LoadFunction("vkCmdSetPolygonModeEXT").IgnoreError();
+			LoadFunction("vkCmdSetPolygonModeEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetRasterizationSamplesEXT"))
-			LoadFunction("vkCmdSetRasterizationSamplesEXT").IgnoreError();
+			LoadFunction("vkCmdSetRasterizationSamplesEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetSampleMaskEXT"))
-			LoadFunction("vkCmdSetSampleMaskEXT").IgnoreError();
+			LoadFunction("vkCmdSetSampleMaskEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetAlphaToCoverageEnableEXT"))
-			LoadFunction("vkCmdSetAlphaToCoverageEnableEXT").IgnoreError();
+			LoadFunction("vkCmdSetAlphaToCoverageEnableEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetAlphaToOneEnableEXT"))
-			LoadFunction("vkCmdSetAlphaToOneEnableEXT").IgnoreError();
+			LoadFunction("vkCmdSetAlphaToOneEnableEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetLogicOpEnableEXT"))
-			LoadFunction("vkCmdSetLogicOpEnableEXT").IgnoreError();
+			LoadFunction("vkCmdSetLogicOpEnableEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetColorBlendEnableEXT"))
-			LoadFunction("vkCmdSetColorBlendEnableEXT").IgnoreError();
+			LoadFunction("vkCmdSetColorBlendEnableEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetColorBlendEquationEXT"))
-			LoadFunction("vkCmdSetColorBlendEquationEXT").IgnoreError();
+			LoadFunction("vkCmdSetColorBlendEquationEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetColorWriteMaskEXT"))
-			LoadFunction("vkCmdSetColorWriteMaskEXT").IgnoreError();
+			LoadFunction("vkCmdSetColorWriteMaskEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetShaderModuleIdentifierEXT"))
-			LoadFunction("vkGetShaderModuleIdentifierEXT").IgnoreError();
+			LoadFunction("vkGetShaderModuleIdentifierEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetShaderModuleCreateInfoIdentifierEXT"))
-			LoadFunction("vkGetShaderModuleCreateInfoIdentifierEXT").IgnoreError();
+			LoadFunction("vkGetShaderModuleCreateInfoIdentifierEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceOpticalFlowImageFormatsNV"))
-			LoadFunction("vkGetPhysicalDeviceOpticalFlowImageFormatsNV").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceOpticalFlowImageFormatsNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateOpticalFlowSessionNV"))
-			LoadFunction("vkCreateOpticalFlowSessionNV").IgnoreError();
+			LoadFunction("vkCreateOpticalFlowSessionNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyOpticalFlowSessionNV"))
-			LoadFunction("vkDestroyOpticalFlowSessionNV").IgnoreError();
+			LoadFunction("vkDestroyOpticalFlowSessionNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkBindOpticalFlowSessionImageNV"))
-			LoadFunction("vkBindOpticalFlowSessionImageNV").IgnoreError();
+			LoadFunction("vkBindOpticalFlowSessionImageNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdOpticalFlowExecuteNV"))
-			LoadFunction("vkCmdOpticalFlowExecuteNV").IgnoreError();
+			LoadFunction("vkCmdOpticalFlowExecuteNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBindIndexBuffer2KHR"))
-			LoadFunction("vkCmdBindIndexBuffer2KHR").IgnoreError();
+			LoadFunction("vkCmdBindIndexBuffer2KHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetRenderingAreaGranularityKHR"))
-			LoadFunction("vkGetRenderingAreaGranularityKHR").IgnoreError();
+			LoadFunction("vkGetRenderingAreaGranularityKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDeviceImageSubresourceLayoutKHR"))
-			LoadFunction("vkGetDeviceImageSubresourceLayoutKHR").IgnoreError();
+			LoadFunction("vkGetDeviceImageSubresourceLayoutKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateShadersEXT"))
-			LoadFunction("vkCreateShadersEXT").IgnoreError();
+			LoadFunction("vkCreateShadersEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyShaderEXT"))
-			LoadFunction("vkDestroyShaderEXT").IgnoreError();
+			LoadFunction("vkDestroyShaderEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetShaderBinaryDataEXT"))
-			LoadFunction("vkGetShaderBinaryDataEXT").IgnoreError();
+			LoadFunction("vkGetShaderBinaryDataEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBindShadersEXT"))
-			LoadFunction("vkCmdBindShadersEXT").IgnoreError();
+			LoadFunction("vkCmdBindShadersEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetTessellationDomainOriginEXT"))
-			LoadFunction("vkCmdSetTessellationDomainOriginEXT").IgnoreError();
+			LoadFunction("vkCmdSetTessellationDomainOriginEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetFramebufferTilePropertiesQCOM"))
-			LoadFunction("vkGetFramebufferTilePropertiesQCOM").IgnoreError();
+			LoadFunction("vkGetFramebufferTilePropertiesQCOM", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDynamicRenderingTilePropertiesQCOM"))
-			LoadFunction("vkGetDynamicRenderingTilePropertiesQCOM").IgnoreError();
+			LoadFunction("vkGetDynamicRenderingTilePropertiesQCOM", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateSemaphoreSciSyncPoolNV"))
-			LoadFunction("vkCreateSemaphoreSciSyncPoolNV").IgnoreError();
+			LoadFunction("vkCreateSemaphoreSciSyncPoolNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroySemaphoreSciSyncPoolNV"))
-			LoadFunction("vkDestroySemaphoreSciSyncPoolNV").IgnoreError();
+			LoadFunction("vkDestroySemaphoreSciSyncPoolNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkSetLatencySleepModeNV"))
-			LoadFunction("vkSetLatencySleepModeNV").IgnoreError();
+			LoadFunction("vkSetLatencySleepModeNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkLatencySleepNV"))
-			LoadFunction("vkLatencySleepNV").IgnoreError();
+			LoadFunction("vkLatencySleepNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkSetLatencyMarkerNV"))
-			LoadFunction("vkSetLatencyMarkerNV").IgnoreError();
+			LoadFunction("vkSetLatencyMarkerNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetLatencyTimingsNV"))
-			LoadFunction("vkGetLatencyTimingsNV").IgnoreError();
+			LoadFunction("vkGetLatencyTimingsNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkQueueNotifyOutOfBandNV"))
-			LoadFunction("vkQueueNotifyOutOfBandNV").IgnoreError();
+			LoadFunction("vkQueueNotifyOutOfBandNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR"))
-			LoadFunction("vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR").IgnoreError();
+			LoadFunction("vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetAttachmentFeedbackLoopEnableEXT"))
-			LoadFunction("vkCmdSetAttachmentFeedbackLoopEnableEXT").IgnoreError();
+			LoadFunction("vkCmdSetAttachmentFeedbackLoopEnableEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetScreenBufferPropertiesQNX"))
-			LoadFunction("vkGetScreenBufferPropertiesQNX").IgnoreError();
+			LoadFunction("vkGetScreenBufferPropertiesQNX", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBindDescriptorSets2KHR"))
-			LoadFunction("vkCmdBindDescriptorSets2KHR").IgnoreError();
+			LoadFunction("vkCmdBindDescriptorSets2KHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdPushConstants2KHR"))
-			LoadFunction("vkCmdPushConstants2KHR").IgnoreError();
+			LoadFunction("vkCmdPushConstants2KHR", instance).IgnoreError();
 
-	}
-
-	public static void LoadFunction<T>(StringView name, out T funcPtr)
-	{
-		mNativeLib.LoadFunction(name, out funcPtr);
 	}
 }

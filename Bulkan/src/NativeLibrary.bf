@@ -27,7 +27,6 @@ abstract class NativeLibrary : IDisposable
 {
 	private readonly String mLibraryName;
 	private readonly int mLibraryHandle;
-	internal VkInstance mInstance;
 
 	public int NativeHandle => mLibraryHandle;
 
@@ -63,14 +62,6 @@ abstract class NativeLibrary : IDisposable
 	{
 		void* funcPtr = null;
 		LoadFunction(name, out funcPtr);
-
-		if (funcPtr == null)
-		{
-			if (mInstance != 0)
-			{
-				funcPtr = VulkanNative.vkGetInstanceProcAddr(mInstance, name.Ptr);
-			}
-		}
 
 		if (funcPtr != null)
 		{
