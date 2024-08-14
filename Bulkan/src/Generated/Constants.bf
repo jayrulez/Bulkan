@@ -212,9 +212,9 @@ public extension VulkanNative
 	public const char8* VK_EXT_CONSERVATIVE_RASTERIZATION_EXTENSION_NAME = "VK_EXT_conservative_rasterization";
 	public const uint32 VK_EXT_DEPTH_CLIP_ENABLE_SPEC_VERSION = 1;
 	public const char8* VK_EXT_DEPTH_CLIP_ENABLE_EXTENSION_NAME = "VK_EXT_depth_clip_enable";
-	public const uint32 VK_EXT_SWAPCHAIN_COLOR_SPACE_SPEC_VERSION = 4;
+	public const uint32 VK_EXT_SWAPCHAIN_COLOR_SPACE_SPEC_VERSION = 5;
 	public const char8* VK_EXT_SWAPCHAIN_COLOR_SPACE_EXTENSION_NAME = "VK_EXT_swapchain_colorspace";
-	public const uint32 VK_EXT_HDR_METADATA_SPEC_VERSION = 2;
+	public const uint32 VK_EXT_HDR_METADATA_SPEC_VERSION = 3;
 	public const char8* VK_EXT_HDR_METADATA_EXTENSION_NAME = "VK_EXT_hdr_metadata";
 	public const uint32 VK_KHR_IMAGELESS_FRAMEBUFFER_SPEC_VERSION = 1;
 	public const char8* VK_KHR_IMAGELESS_FRAMEBUFFER_EXTENSION_NAME = "VK_KHR_imageless_framebuffer";
@@ -678,7 +678,7 @@ public extension VulkanNative
 	public const char8* VK_EXT_NON_SEAMLESS_CUBE_MAP_EXTENSION_NAME = "VK_EXT_non_seamless_cube_map";
 	public const uint32 VK_ARM_RENDER_PASS_STRIPED_SPEC_VERSION = 1;
 	public const char8* VK_ARM_RENDER_PASS_STRIPED_EXTENSION_NAME = "VK_ARM_render_pass_striped";
-	public const uint32 VK_QCOM_FRAGMENT_DENSITY_MAP_OFFSET_SPEC_VERSION = 1;
+	public const uint32 VK_QCOM_FRAGMENT_DENSITY_MAP_OFFSET_SPEC_VERSION = 2;
 	public const char8* VK_QCOM_FRAGMENT_DENSITY_MAP_OFFSET_EXTENSION_NAME = "VK_QCOM_fragment_density_map_offset";
 	public const uint32 VK_NV_COPY_MEMORY_INDIRECT_SPEC_VERSION = 1;
 	public const char8* VK_NV_COPY_MEMORY_INDIRECT_EXTENSION_NAME = "VK_NV_copy_memory_indirect";
@@ -722,6 +722,8 @@ public extension VulkanNative
 	public const char8* VK_ANDROID_EXTERNAL_FORMAT_RESOLVE_EXTENSION_NAME = "VK_ANDROID_external_format_resolve";
 	public const uint32 VK_KHR_MAINTENANCE_5_SPEC_VERSION = 1;
 	public const char8* VK_KHR_MAINTENANCE_5_EXTENSION_NAME = "VK_KHR_maintenance5";
+	public const uint32 VK_AMD_ANTI_LAG_SPEC_VERSION = 1;
+	public const char8* VK_AMD_ANTI_LAG_EXTENSION_NAME = "VK_AMD_anti_lag";
 	public const uint32 VK_KHR_RAY_TRACING_POSITION_FETCH_SPEC_VERSION = 1;
 	public const char8* VK_KHR_RAY_TRACING_POSITION_FETCH_EXTENSION_NAME = "VK_KHR_ray_tracing_position_fetch";
 	public const uint32 VK_EXT_SHADER_OBJECT_SPEC_VERSION = 1;
@@ -740,6 +742,8 @@ public extension VulkanNative
 	public const char8* VK_NV_EXTENDED_SPARSE_ADDRESS_SPACE_EXTENSION_NAME = "VK_NV_extended_sparse_address_space";
 	public const uint32 VK_EXT_MUTABLE_DESCRIPTOR_TYPE_SPEC_VERSION = 1;
 	public const char8* VK_EXT_MUTABLE_DESCRIPTOR_TYPE_EXTENSION_NAME = "VK_EXT_mutable_descriptor_type";
+	public const uint32 VK_EXT_LEGACY_VERTEX_ATTRIBUTES_SPEC_VERSION = 1;
+	public const char8* VK_EXT_LEGACY_VERTEX_ATTRIBUTES_EXTENSION_NAME = "VK_EXT_legacy_vertex_attributes";
 	public const uint32 VK_EXT_LAYER_SETTINGS_SPEC_VERSION = 2;
 	public const char8* VK_EXT_LAYER_SETTINGS_EXTENSION_NAME = "VK_EXT_layer_settings";
 	public const uint32 VK_ARM_SHADER_CORE_BUILTINS_SPEC_VERSION = 2;
@@ -794,9 +798,17 @@ public extension VulkanNative
 	public const char8* VK_NV_DESCRIPTOR_POOL_OVERALLOCATION_EXTENSION_NAME = "VK_NV_descriptor_pool_overallocation";
 	public const uint32 VK_NV_RAW_ACCESS_CHAINS_SPEC_VERSION = 1;
 	public const char8* VK_NV_RAW_ACCESS_CHAINS_EXTENSION_NAME = "VK_NV_raw_access_chains";
+	public const uint32 VK_KHR_SHADER_RELAXED_EXTENDED_INSTRUCTION_SPEC_VERSION = 1;
+	public const char8* VK_KHR_SHADER_RELAXED_EXTENDED_INSTRUCTION_EXTENSION_NAME = "VK_KHR_shader_relaxed_extended_instruction";
+	public const uint32 VK_KHR_MAINTENANCE_7_SPEC_VERSION = 1;
+	public const char8* VK_KHR_MAINTENANCE_7_EXTENSION_NAME = "VK_KHR_maintenance7";
 	public const uint32 VK_NV_SHADER_ATOMIC_FLOAT16_VECTOR_SPEC_VERSION = 1;
 	public const char8* VK_NV_SHADER_ATOMIC_FLOAT16_VECTOR_EXTENSION_NAME = "VK_NV_shader_atomic_float16_vector";
+	public const uint32 VK_EXT_SHADER_REPLICATED_COMPOSITES_SPEC_VERSION = 1;
+	public const char8* VK_EXT_SHADER_REPLICATED_COMPOSITES_EXTENSION_NAME = "VK_EXT_shader_replicated_composites";
 	public const uint32 VK_NV_RAY_TRACING_VALIDATION_SPEC_VERSION = 1;
 	public const char8* VK_NV_RAY_TRACING_VALIDATION_EXTENSION_NAME = "VK_NV_ray_tracing_validation";
+	public const uint32 VK_MESA_IMAGE_ALIGNMENT_CONTROL_SPEC_VERSION = 1;
+	public const char8* VK_MESA_IMAGE_ALIGNMENT_CONTROL_EXTENSION_NAME = "VK_MESA_image_alignment_control";
 }
 

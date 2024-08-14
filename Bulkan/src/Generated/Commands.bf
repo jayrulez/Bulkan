@@ -2501,11 +2501,11 @@ public extension VulkanNative
 	public static void vkCmdSetRenderingAttachmentLocationsKHR(VkCommandBuffer commandBuffer, VkRenderingAttachmentLocationInfoKHR* pLocationInfo)
 		=> vkCmdSetRenderingAttachmentLocationsKHR_ptr(commandBuffer, pLocationInfo);
 
-	public typealias vkCmdSetRenderingInputAttachmentIndicesKHRFunction = function void(VkCommandBuffer commandBuffer, VkRenderingInputAttachmentIndexInfoKHR* pLocationInfo);
+	public typealias vkCmdSetRenderingInputAttachmentIndicesKHRFunction = function void(VkCommandBuffer commandBuffer, VkRenderingInputAttachmentIndexInfoKHR* pInputAttachmentIndexInfo);
 	private static vkCmdSetRenderingInputAttachmentIndicesKHRFunction vkCmdSetRenderingInputAttachmentIndicesKHR_ptr;
 	[CallingConvention(VulkanNative.CallConv)]
-	public static void vkCmdSetRenderingInputAttachmentIndicesKHR(VkCommandBuffer commandBuffer, VkRenderingInputAttachmentIndexInfoKHR* pLocationInfo)
-		=> vkCmdSetRenderingInputAttachmentIndicesKHR_ptr(commandBuffer, pLocationInfo);
+	public static void vkCmdSetRenderingInputAttachmentIndicesKHR(VkCommandBuffer commandBuffer, VkRenderingInputAttachmentIndexInfoKHR* pInputAttachmentIndexInfo)
+		=> vkCmdSetRenderingInputAttachmentIndicesKHR_ptr(commandBuffer, pInputAttachmentIndexInfo);
 
 	public typealias vkWaitForPresentKHRFunction = function VkResult(VkDevice device, VkSwapchainKHR swapchain, uint64 presentId, uint64 timeout);
 	private static vkWaitForPresentKHRFunction vkWaitForPresentKHR_ptr;
@@ -3358,6 +3358,12 @@ public extension VulkanNative
 	[CallingConvention(VulkanNative.CallConv)]
 	public static void vkGetDeviceImageSubresourceLayoutKHR(VkDevice device, VkDeviceImageSubresourceInfoKHR* pInfo, VkSubresourceLayout2KHR* pLayout)
 		=> vkGetDeviceImageSubresourceLayoutKHR_ptr(device, pInfo, pLayout);
+
+	public typealias vkAntiLagUpdateAMDFunction = function void(VkDevice device, VkAntiLagDataAMD* pData);
+	private static vkAntiLagUpdateAMDFunction vkAntiLagUpdateAMD_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkAntiLagUpdateAMD(VkDevice device, VkAntiLagDataAMD* pData)
+		=> vkAntiLagUpdateAMD_ptr(device, pData);
 
 	public typealias vkCreateShadersEXTFunction = function VkResult(VkDevice device, uint32 createInfoCount, VkShaderCreateInfoEXT* pCreateInfos, VkAllocationCallbacks* pAllocator, VkShaderEXT* pShaders);
 	private static vkCreateShadersEXTFunction vkCreateShadersEXT_ptr;
@@ -6866,6 +6872,12 @@ public extension VulkanNative
 				return .Err;
 			break;
 
+		case "vkAntiLagUpdateAMD":
+			LoadFunction("vkAntiLagUpdateAMD", out vkAntiLagUpdateAMD_ptr, instance, invokeErrorCallback);
+			if(vkAntiLagUpdateAMD_ptr == null)
+				return .Err;
+			break;
+
 		case "vkCreateShadersEXT":
 			LoadFunction("vkCreateShadersEXT", out vkCreateShadersEXT_ptr, instance, invokeErrorCallback);
 			if(vkCreateShadersEXT_ptr == null)
@@ -8664,6 +8676,9 @@ public extension VulkanNative
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDeviceImageSubresourceLayoutKHR"))
 			LoadFunction("vkGetDeviceImageSubresourceLayoutKHR", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkAntiLagUpdateAMD"))
+			LoadFunction("vkAntiLagUpdateAMD", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateShadersEXT"))
 			LoadFunction("vkCreateShadersEXT", instance).IgnoreError();
