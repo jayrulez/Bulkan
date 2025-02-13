@@ -47,4 +47,13 @@ namespace Bulkan;
 	}
 }
 
+[CRepr] struct VkFlags64 : uint64
+{
+	public static T operator implicit<T>(Self self)
+		where T : operator implicit uint64
+	{
+		return (.)(uint64)self;
+	}
+}
+
 [CRepr] struct VkBufferViewCreateFlags : VkFlags { }

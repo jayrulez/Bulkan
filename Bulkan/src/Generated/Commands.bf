@@ -1295,6 +1295,120 @@ public extension VulkanNative
 	public static void vkGetDeviceImageSparseMemoryRequirements(VkDevice device, VkDeviceImageMemoryRequirements* pInfo, uint32* pSparseMemoryRequirementCount, VkSparseImageMemoryRequirements2* pSparseMemoryRequirements)
 		=> vkGetDeviceImageSparseMemoryRequirements_ptr(device, pInfo, pSparseMemoryRequirementCount, pSparseMemoryRequirements);
 
+	public typealias vkCmdSetLineStippleFunction = function void(VkCommandBuffer commandBuffer, uint32 lineStippleFactor, uint16 lineStipplePattern);
+	private static vkCmdSetLineStippleFunction vkCmdSetLineStipple_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkCmdSetLineStipple(VkCommandBuffer commandBuffer, uint32 lineStippleFactor, uint16 lineStipplePattern)
+		=> vkCmdSetLineStipple_ptr(commandBuffer, lineStippleFactor, lineStipplePattern);
+
+	public typealias vkMapMemory2Function = function VkResult(VkDevice device, VkMemoryMapInfo* pMemoryMapInfo, void** ppData);
+	private static vkMapMemory2Function vkMapMemory2_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static VkResult vkMapMemory2(VkDevice device, VkMemoryMapInfo* pMemoryMapInfo, void** ppData)
+		=> vkMapMemory2_ptr(device, pMemoryMapInfo, ppData);
+
+	public typealias vkUnmapMemory2Function = function VkResult(VkDevice device, VkMemoryUnmapInfo* pMemoryUnmapInfo);
+	private static vkUnmapMemory2Function vkUnmapMemory2_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static VkResult vkUnmapMemory2(VkDevice device, VkMemoryUnmapInfo* pMemoryUnmapInfo)
+		=> vkUnmapMemory2_ptr(device, pMemoryUnmapInfo);
+
+	public typealias vkCmdBindIndexBuffer2Function = function void(VkCommandBuffer commandBuffer, VkBuffer buffer, uint64 offset, uint64 size, VkIndexType indexType);
+	private static vkCmdBindIndexBuffer2Function vkCmdBindIndexBuffer2_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkCmdBindIndexBuffer2(VkCommandBuffer commandBuffer, VkBuffer buffer, uint64 offset, uint64 size, VkIndexType indexType)
+		=> vkCmdBindIndexBuffer2_ptr(commandBuffer, buffer, offset, size, indexType);
+
+	public typealias vkGetRenderingAreaGranularityFunction = function void(VkDevice device, VkRenderingAreaInfo* pRenderingAreaInfo, VkExtent2D* pGranularity);
+	private static vkGetRenderingAreaGranularityFunction vkGetRenderingAreaGranularity_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkGetRenderingAreaGranularity(VkDevice device, VkRenderingAreaInfo* pRenderingAreaInfo, VkExtent2D* pGranularity)
+		=> vkGetRenderingAreaGranularity_ptr(device, pRenderingAreaInfo, pGranularity);
+
+	public typealias vkGetDeviceImageSubresourceLayoutFunction = function void(VkDevice device, VkDeviceImageSubresourceInfo* pInfo, VkSubresourceLayout2* pLayout);
+	private static vkGetDeviceImageSubresourceLayoutFunction vkGetDeviceImageSubresourceLayout_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkGetDeviceImageSubresourceLayout(VkDevice device, VkDeviceImageSubresourceInfo* pInfo, VkSubresourceLayout2* pLayout)
+		=> vkGetDeviceImageSubresourceLayout_ptr(device, pInfo, pLayout);
+
+	public typealias vkGetImageSubresourceLayout2Function = function void(VkDevice device, VkImage image, VkImageSubresource2* pSubresource, VkSubresourceLayout2* pLayout);
+	private static vkGetImageSubresourceLayout2Function vkGetImageSubresourceLayout2_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkGetImageSubresourceLayout2(VkDevice device, VkImage image, VkImageSubresource2* pSubresource, VkSubresourceLayout2* pLayout)
+		=> vkGetImageSubresourceLayout2_ptr(device, image, pSubresource, pLayout);
+
+	public typealias vkCmdPushDescriptorSetFunction = function void(VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipelineLayout layout, uint32 set, uint32 descriptorWriteCount, VkWriteDescriptorSet* pDescriptorWrites);
+	private static vkCmdPushDescriptorSetFunction vkCmdPushDescriptorSet_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkCmdPushDescriptorSet(VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipelineLayout layout, uint32 set, uint32 descriptorWriteCount, VkWriteDescriptorSet* pDescriptorWrites)
+		=> vkCmdPushDescriptorSet_ptr(commandBuffer, pipelineBindPoint, layout, set, descriptorWriteCount, pDescriptorWrites);
+
+	public typealias vkCmdPushDescriptorSetWithTemplateFunction = function void(VkCommandBuffer commandBuffer, VkDescriptorUpdateTemplate descriptorUpdateTemplate, VkPipelineLayout layout, uint32 set, void* pData);
+	private static vkCmdPushDescriptorSetWithTemplateFunction vkCmdPushDescriptorSetWithTemplate_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkCmdPushDescriptorSetWithTemplate(VkCommandBuffer commandBuffer, VkDescriptorUpdateTemplate descriptorUpdateTemplate, VkPipelineLayout layout, uint32 set, void* pData)
+		=> vkCmdPushDescriptorSetWithTemplate_ptr(commandBuffer, descriptorUpdateTemplate, layout, set, pData);
+
+	public typealias vkCmdSetRenderingAttachmentLocationsFunction = function void(VkCommandBuffer commandBuffer, VkRenderingAttachmentLocationInfo* pLocationInfo);
+	private static vkCmdSetRenderingAttachmentLocationsFunction vkCmdSetRenderingAttachmentLocations_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkCmdSetRenderingAttachmentLocations(VkCommandBuffer commandBuffer, VkRenderingAttachmentLocationInfo* pLocationInfo)
+		=> vkCmdSetRenderingAttachmentLocations_ptr(commandBuffer, pLocationInfo);
+
+	public typealias vkCmdSetRenderingInputAttachmentIndicesFunction = function void(VkCommandBuffer commandBuffer, VkRenderingInputAttachmentIndexInfo* pInputAttachmentIndexInfo);
+	private static vkCmdSetRenderingInputAttachmentIndicesFunction vkCmdSetRenderingInputAttachmentIndices_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkCmdSetRenderingInputAttachmentIndices(VkCommandBuffer commandBuffer, VkRenderingInputAttachmentIndexInfo* pInputAttachmentIndexInfo)
+		=> vkCmdSetRenderingInputAttachmentIndices_ptr(commandBuffer, pInputAttachmentIndexInfo);
+
+	public typealias vkCmdBindDescriptorSets2Function = function void(VkCommandBuffer commandBuffer, VkBindDescriptorSetsInfo* pBindDescriptorSetsInfo);
+	private static vkCmdBindDescriptorSets2Function vkCmdBindDescriptorSets2_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkCmdBindDescriptorSets2(VkCommandBuffer commandBuffer, VkBindDescriptorSetsInfo* pBindDescriptorSetsInfo)
+		=> vkCmdBindDescriptorSets2_ptr(commandBuffer, pBindDescriptorSetsInfo);
+
+	public typealias vkCmdPushConstants2Function = function void(VkCommandBuffer commandBuffer, VkPushConstantsInfo* pPushConstantsInfo);
+	private static vkCmdPushConstants2Function vkCmdPushConstants2_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkCmdPushConstants2(VkCommandBuffer commandBuffer, VkPushConstantsInfo* pPushConstantsInfo)
+		=> vkCmdPushConstants2_ptr(commandBuffer, pPushConstantsInfo);
+
+	public typealias vkCmdPushDescriptorSet2Function = function void(VkCommandBuffer commandBuffer, VkPushDescriptorSetInfo* pPushDescriptorSetInfo);
+	private static vkCmdPushDescriptorSet2Function vkCmdPushDescriptorSet2_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkCmdPushDescriptorSet2(VkCommandBuffer commandBuffer, VkPushDescriptorSetInfo* pPushDescriptorSetInfo)
+		=> vkCmdPushDescriptorSet2_ptr(commandBuffer, pPushDescriptorSetInfo);
+
+	public typealias vkCmdPushDescriptorSetWithTemplate2Function = function void(VkCommandBuffer commandBuffer, VkPushDescriptorSetWithTemplateInfo* pPushDescriptorSetWithTemplateInfo);
+	private static vkCmdPushDescriptorSetWithTemplate2Function vkCmdPushDescriptorSetWithTemplate2_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkCmdPushDescriptorSetWithTemplate2(VkCommandBuffer commandBuffer, VkPushDescriptorSetWithTemplateInfo* pPushDescriptorSetWithTemplateInfo)
+		=> vkCmdPushDescriptorSetWithTemplate2_ptr(commandBuffer, pPushDescriptorSetWithTemplateInfo);
+
+	public typealias vkCopyMemoryToImageFunction = function VkResult(VkDevice device, VkCopyMemoryToImageInfo* pCopyMemoryToImageInfo);
+	private static vkCopyMemoryToImageFunction vkCopyMemoryToImage_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static VkResult vkCopyMemoryToImage(VkDevice device, VkCopyMemoryToImageInfo* pCopyMemoryToImageInfo)
+		=> vkCopyMemoryToImage_ptr(device, pCopyMemoryToImageInfo);
+
+	public typealias vkCopyImageToMemoryFunction = function VkResult(VkDevice device, VkCopyImageToMemoryInfo* pCopyImageToMemoryInfo);
+	private static vkCopyImageToMemoryFunction vkCopyImageToMemory_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static VkResult vkCopyImageToMemory(VkDevice device, VkCopyImageToMemoryInfo* pCopyImageToMemoryInfo)
+		=> vkCopyImageToMemory_ptr(device, pCopyImageToMemoryInfo);
+
+	public typealias vkCopyImageToImageFunction = function VkResult(VkDevice device, VkCopyImageToImageInfo* pCopyImageToImageInfo);
+	private static vkCopyImageToImageFunction vkCopyImageToImage_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static VkResult vkCopyImageToImage(VkDevice device, VkCopyImageToImageInfo* pCopyImageToImageInfo)
+		=> vkCopyImageToImage_ptr(device, pCopyImageToImageInfo);
+
+	public typealias vkTransitionImageLayoutFunction = function VkResult(VkDevice device, uint32 transitionCount, VkHostImageLayoutTransitionInfo* pTransitions);
+	private static vkTransitionImageLayoutFunction vkTransitionImageLayout_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static VkResult vkTransitionImageLayout(VkDevice device, uint32 transitionCount, VkHostImageLayoutTransitionInfo* pTransitions)
+		=> vkTransitionImageLayout_ptr(device, transitionCount, pTransitions);
+
 	public typealias vkGetCommandPoolMemoryConsumptionFunction = function void(VkDevice device, VkCommandPool commandPool, VkCommandBuffer commandBuffer, VkCommandPoolMemoryConsumption* pConsumption);
 	private static vkGetCommandPoolMemoryConsumptionFunction vkGetCommandPoolMemoryConsumption_ptr;
 	[CallingConvention(VulkanNative.CallConv)]
@@ -1667,6 +1781,12 @@ public extension VulkanNative
 	public static uint32 vkGetImageViewHandleNVX(VkDevice device, VkImageViewHandleInfoNVX* pInfo)
 		=> vkGetImageViewHandleNVX_ptr(device, pInfo);
 
+	public typealias vkGetImageViewHandle64NVXFunction = function uint64(VkDevice device, VkImageViewHandleInfoNVX* pInfo);
+	private static vkGetImageViewHandle64NVXFunction vkGetImageViewHandle64NVX_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static uint64 vkGetImageViewHandle64NVX(VkDevice device, VkImageViewHandleInfoNVX* pInfo)
+		=> vkGetImageViewHandle64NVX_ptr(device, pInfo);
+
 	public typealias vkGetImageViewAddressNVXFunction = function VkResult(VkDevice device, VkImageView imageView, VkImageViewAddressPropertiesNVX* pProperties);
 	private static vkGetImageViewAddressNVXFunction vkGetImageViewAddressNVX_ptr;
 	[CallingConvention(VulkanNative.CallConv)]
@@ -1750,12 +1870,6 @@ public extension VulkanNative
 	[CallingConvention(VulkanNative.CallConv)]
 	public static VkResult vkGetSemaphoreFdKHR(VkDevice device, VkSemaphoreGetFdInfoKHR* pGetFdInfo, int* pFd)
 		=> vkGetSemaphoreFdKHR_ptr(device, pGetFdInfo, pFd);
-
-	public typealias vkCmdPushDescriptorSetKHRFunction = function void(VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipelineLayout layout, uint32 set, uint32 descriptorWriteCount, VkWriteDescriptorSet* pDescriptorWrites);
-	private static vkCmdPushDescriptorSetKHRFunction vkCmdPushDescriptorSetKHR_ptr;
-	[CallingConvention(VulkanNative.CallConv)]
-	public static void vkCmdPushDescriptorSetKHR(VkCommandBuffer commandBuffer, VkPipelineBindPoint pipelineBindPoint, VkPipelineLayout layout, uint32 set, uint32 descriptorWriteCount, VkWriteDescriptorSet* pDescriptorWrites)
-		=> vkCmdPushDescriptorSetKHR_ptr(commandBuffer, pipelineBindPoint, layout, set, descriptorWriteCount, pDescriptorWrites);
 
 	public typealias vkCmdBeginConditionalRenderingEXTFunction = function void(VkCommandBuffer commandBuffer, VkConditionalRenderingBeginInfoEXT* pConditionalRenderingBegin);
 	private static vkCmdBeginConditionalRenderingEXTFunction vkCmdBeginConditionalRenderingEXT_ptr;
@@ -2057,29 +2171,29 @@ public extension VulkanNative
 	public static VkResult vkGetExecutionGraphPipelineNodeIndexAMDX(VkDevice device, VkPipeline executionGraph, VkPipelineShaderStageNodeCreateInfoAMDX* pNodeInfo, uint32* pNodeIndex)
 		=> vkGetExecutionGraphPipelineNodeIndexAMDX_ptr(device, executionGraph, pNodeInfo, pNodeIndex);
 
-	public typealias vkCmdInitializeGraphScratchMemoryAMDXFunction = function void(VkCommandBuffer commandBuffer, uint64 scratch);
+	public typealias vkCmdInitializeGraphScratchMemoryAMDXFunction = function void(VkCommandBuffer commandBuffer, VkPipeline executionGraph, uint64 scratch, uint64 scratchSize);
 	private static vkCmdInitializeGraphScratchMemoryAMDXFunction vkCmdInitializeGraphScratchMemoryAMDX_ptr;
 	[CallingConvention(VulkanNative.CallConv)]
-	public static void vkCmdInitializeGraphScratchMemoryAMDX(VkCommandBuffer commandBuffer, uint64 scratch)
-		=> vkCmdInitializeGraphScratchMemoryAMDX_ptr(commandBuffer, scratch);
+	public static void vkCmdInitializeGraphScratchMemoryAMDX(VkCommandBuffer commandBuffer, VkPipeline executionGraph, uint64 scratch, uint64 scratchSize)
+		=> vkCmdInitializeGraphScratchMemoryAMDX_ptr(commandBuffer, executionGraph, scratch, scratchSize);
 
-	public typealias vkCmdDispatchGraphAMDXFunction = function void(VkCommandBuffer commandBuffer, uint64 scratch, VkDispatchGraphCountInfoAMDX* pCountInfo);
+	public typealias vkCmdDispatchGraphAMDXFunction = function void(VkCommandBuffer commandBuffer, uint64 scratch, uint64 scratchSize, VkDispatchGraphCountInfoAMDX* pCountInfo);
 	private static vkCmdDispatchGraphAMDXFunction vkCmdDispatchGraphAMDX_ptr;
 	[CallingConvention(VulkanNative.CallConv)]
-	public static void vkCmdDispatchGraphAMDX(VkCommandBuffer commandBuffer, uint64 scratch, VkDispatchGraphCountInfoAMDX* pCountInfo)
-		=> vkCmdDispatchGraphAMDX_ptr(commandBuffer, scratch, pCountInfo);
+	public static void vkCmdDispatchGraphAMDX(VkCommandBuffer commandBuffer, uint64 scratch, uint64 scratchSize, VkDispatchGraphCountInfoAMDX* pCountInfo)
+		=> vkCmdDispatchGraphAMDX_ptr(commandBuffer, scratch, scratchSize, pCountInfo);
 
-	public typealias vkCmdDispatchGraphIndirectAMDXFunction = function void(VkCommandBuffer commandBuffer, uint64 scratch, VkDispatchGraphCountInfoAMDX* pCountInfo);
+	public typealias vkCmdDispatchGraphIndirectAMDXFunction = function void(VkCommandBuffer commandBuffer, uint64 scratch, uint64 scratchSize, VkDispatchGraphCountInfoAMDX* pCountInfo);
 	private static vkCmdDispatchGraphIndirectAMDXFunction vkCmdDispatchGraphIndirectAMDX_ptr;
 	[CallingConvention(VulkanNative.CallConv)]
-	public static void vkCmdDispatchGraphIndirectAMDX(VkCommandBuffer commandBuffer, uint64 scratch, VkDispatchGraphCountInfoAMDX* pCountInfo)
-		=> vkCmdDispatchGraphIndirectAMDX_ptr(commandBuffer, scratch, pCountInfo);
+	public static void vkCmdDispatchGraphIndirectAMDX(VkCommandBuffer commandBuffer, uint64 scratch, uint64 scratchSize, VkDispatchGraphCountInfoAMDX* pCountInfo)
+		=> vkCmdDispatchGraphIndirectAMDX_ptr(commandBuffer, scratch, scratchSize, pCountInfo);
 
-	public typealias vkCmdDispatchGraphIndirectCountAMDXFunction = function void(VkCommandBuffer commandBuffer, uint64 scratch, uint64 countInfo);
+	public typealias vkCmdDispatchGraphIndirectCountAMDXFunction = function void(VkCommandBuffer commandBuffer, uint64 scratch, uint64 scratchSize, uint64 countInfo);
 	private static vkCmdDispatchGraphIndirectCountAMDXFunction vkCmdDispatchGraphIndirectCountAMDX_ptr;
 	[CallingConvention(VulkanNative.CallConv)]
-	public static void vkCmdDispatchGraphIndirectCountAMDX(VkCommandBuffer commandBuffer, uint64 scratch, uint64 countInfo)
-		=> vkCmdDispatchGraphIndirectCountAMDX_ptr(commandBuffer, scratch, countInfo);
+	public static void vkCmdDispatchGraphIndirectCountAMDX(VkCommandBuffer commandBuffer, uint64 scratch, uint64 scratchSize, uint64 countInfo)
+		=> vkCmdDispatchGraphIndirectCountAMDX_ptr(commandBuffer, scratch, scratchSize, countInfo);
 
 	public typealias vkCmdSetSampleLocationsEXTFunction = function void(VkCommandBuffer commandBuffer, VkSampleLocationsInfoEXT* pSampleLocationsInfo);
 	private static vkCmdSetSampleLocationsEXTFunction vkCmdSetSampleLocationsEXT_ptr;
@@ -2381,12 +2495,6 @@ public extension VulkanNative
 	public static void vkCmdDrawMeshTasksIndirectNV(VkCommandBuffer commandBuffer, VkBuffer buffer, uint64 offset, uint32 drawCount, uint32 stride)
 		=> vkCmdDrawMeshTasksIndirectNV_ptr(commandBuffer, buffer, offset, drawCount, stride);
 
-	public typealias vkCmdDrawMeshTasksIndirectCountNVFunction = function void(VkCommandBuffer commandBuffer, VkBuffer buffer, uint64 offset, VkBuffer countBuffer, uint64 countBufferOffset, uint32 maxDrawCount, uint32 stride);
-	private static vkCmdDrawMeshTasksIndirectCountNVFunction vkCmdDrawMeshTasksIndirectCountNV_ptr;
-	[CallingConvention(VulkanNative.CallConv)]
-	public static void vkCmdDrawMeshTasksIndirectCountNV(VkCommandBuffer commandBuffer, VkBuffer buffer, uint64 offset, VkBuffer countBuffer, uint64 countBufferOffset, uint32 maxDrawCount, uint32 stride)
-		=> vkCmdDrawMeshTasksIndirectCountNV_ptr(commandBuffer, buffer, offset, countBuffer, countBufferOffset, maxDrawCount, stride);
-
 	public typealias vkCmdSetExclusiveScissorEnableNVFunction = function void(VkCommandBuffer commandBuffer, uint32 firstExclusiveScissor, uint32 exclusiveScissorCount, VkBool32* pExclusiveScissorEnables);
 	private static vkCmdSetExclusiveScissorEnableNVFunction vkCmdSetExclusiveScissorEnableNV_ptr;
 	[CallingConvention(VulkanNative.CallConv)]
@@ -2495,18 +2603,6 @@ public extension VulkanNative
 	public static void vkCmdSetFragmentShadingRateKHR(VkCommandBuffer commandBuffer, VkExtent2D* pFragmentSize, VkFragmentShadingRateCombinerOpKHR[2] combinerOps)
 		=> vkCmdSetFragmentShadingRateKHR_ptr(commandBuffer, pFragmentSize, combinerOps);
 
-	public typealias vkCmdSetRenderingAttachmentLocationsKHRFunction = function void(VkCommandBuffer commandBuffer, VkRenderingAttachmentLocationInfoKHR* pLocationInfo);
-	private static vkCmdSetRenderingAttachmentLocationsKHRFunction vkCmdSetRenderingAttachmentLocationsKHR_ptr;
-	[CallingConvention(VulkanNative.CallConv)]
-	public static void vkCmdSetRenderingAttachmentLocationsKHR(VkCommandBuffer commandBuffer, VkRenderingAttachmentLocationInfoKHR* pLocationInfo)
-		=> vkCmdSetRenderingAttachmentLocationsKHR_ptr(commandBuffer, pLocationInfo);
-
-	public typealias vkCmdSetRenderingInputAttachmentIndicesKHRFunction = function void(VkCommandBuffer commandBuffer, VkRenderingInputAttachmentIndexInfoKHR* pInputAttachmentIndexInfo);
-	private static vkCmdSetRenderingInputAttachmentIndicesKHRFunction vkCmdSetRenderingInputAttachmentIndicesKHR_ptr;
-	[CallingConvention(VulkanNative.CallConv)]
-	public static void vkCmdSetRenderingInputAttachmentIndicesKHR(VkCommandBuffer commandBuffer, VkRenderingInputAttachmentIndexInfoKHR* pInputAttachmentIndexInfo)
-		=> vkCmdSetRenderingInputAttachmentIndicesKHR_ptr(commandBuffer, pInputAttachmentIndexInfo);
-
 	public typealias vkWaitForPresentKHRFunction = function VkResult(VkDevice device, VkSwapchainKHR swapchain, uint64 presentId, uint64 timeout);
 	private static vkWaitForPresentKHRFunction vkWaitForPresentKHR_ptr;
 	[CallingConvention(VulkanNative.CallConv)]
@@ -2548,12 +2644,6 @@ public extension VulkanNative
 	[CallingConvention(VulkanNative.CallConv)]
 	public static VkResult vkCreateHeadlessSurfaceEXT(VkInstance instance, VkHeadlessSurfaceCreateInfoEXT* pCreateInfo, VkAllocationCallbacks* pAllocator, VkSurfaceKHR* pSurface)
 		=> vkCreateHeadlessSurfaceEXT_ptr(instance, pCreateInfo, pAllocator, pSurface);
-
-	public typealias vkCmdSetLineStippleKHRFunction = function void(VkCommandBuffer commandBuffer, uint32 lineStippleFactor, uint16 lineStipplePattern);
-	private static vkCmdSetLineStippleKHRFunction vkCmdSetLineStippleKHR_ptr;
-	[CallingConvention(VulkanNative.CallConv)]
-	public static void vkCmdSetLineStippleKHR(VkCommandBuffer commandBuffer, uint32 lineStippleFactor, uint16 lineStipplePattern)
-		=> vkCmdSetLineStippleKHR_ptr(commandBuffer, lineStippleFactor, lineStipplePattern);
 
 	public typealias vkCreateDeferredOperationKHRFunction = function VkResult(VkDevice device, VkAllocationCallbacks* pAllocator, VkDeferredOperationKHR* pDeferredOperation);
 	private static vkCreateDeferredOperationKHRFunction vkCreateDeferredOperationKHR_ptr;
@@ -2602,48 +2692,6 @@ public extension VulkanNative
 	[CallingConvention(VulkanNative.CallConv)]
 	public static VkResult vkGetPipelineExecutableInternalRepresentationsKHR(VkDevice device, VkPipelineExecutableInfoKHR* pExecutableInfo, uint32* pInternalRepresentationCount, VkPipelineExecutableInternalRepresentationKHR* pInternalRepresentations)
 		=> vkGetPipelineExecutableInternalRepresentationsKHR_ptr(device, pExecutableInfo, pInternalRepresentationCount, pInternalRepresentations);
-
-	public typealias vkCopyMemoryToImageEXTFunction = function VkResult(VkDevice device, VkCopyMemoryToImageInfoEXT* pCopyMemoryToImageInfo);
-	private static vkCopyMemoryToImageEXTFunction vkCopyMemoryToImageEXT_ptr;
-	[CallingConvention(VulkanNative.CallConv)]
-	public static VkResult vkCopyMemoryToImageEXT(VkDevice device, VkCopyMemoryToImageInfoEXT* pCopyMemoryToImageInfo)
-		=> vkCopyMemoryToImageEXT_ptr(device, pCopyMemoryToImageInfo);
-
-	public typealias vkCopyImageToMemoryEXTFunction = function VkResult(VkDevice device, VkCopyImageToMemoryInfoEXT* pCopyImageToMemoryInfo);
-	private static vkCopyImageToMemoryEXTFunction vkCopyImageToMemoryEXT_ptr;
-	[CallingConvention(VulkanNative.CallConv)]
-	public static VkResult vkCopyImageToMemoryEXT(VkDevice device, VkCopyImageToMemoryInfoEXT* pCopyImageToMemoryInfo)
-		=> vkCopyImageToMemoryEXT_ptr(device, pCopyImageToMemoryInfo);
-
-	public typealias vkCopyImageToImageEXTFunction = function VkResult(VkDevice device, VkCopyImageToImageInfoEXT* pCopyImageToImageInfo);
-	private static vkCopyImageToImageEXTFunction vkCopyImageToImageEXT_ptr;
-	[CallingConvention(VulkanNative.CallConv)]
-	public static VkResult vkCopyImageToImageEXT(VkDevice device, VkCopyImageToImageInfoEXT* pCopyImageToImageInfo)
-		=> vkCopyImageToImageEXT_ptr(device, pCopyImageToImageInfo);
-
-	public typealias vkTransitionImageLayoutEXTFunction = function VkResult(VkDevice device, uint32 transitionCount, VkHostImageLayoutTransitionInfoEXT* pTransitions);
-	private static vkTransitionImageLayoutEXTFunction vkTransitionImageLayoutEXT_ptr;
-	[CallingConvention(VulkanNative.CallConv)]
-	public static VkResult vkTransitionImageLayoutEXT(VkDevice device, uint32 transitionCount, VkHostImageLayoutTransitionInfoEXT* pTransitions)
-		=> vkTransitionImageLayoutEXT_ptr(device, transitionCount, pTransitions);
-
-	public typealias vkGetImageSubresourceLayout2KHRFunction = function void(VkDevice device, VkImage image, VkImageSubresource2KHR* pSubresource, VkSubresourceLayout2KHR* pLayout);
-	private static vkGetImageSubresourceLayout2KHRFunction vkGetImageSubresourceLayout2KHR_ptr;
-	[CallingConvention(VulkanNative.CallConv)]
-	public static void vkGetImageSubresourceLayout2KHR(VkDevice device, VkImage image, VkImageSubresource2KHR* pSubresource, VkSubresourceLayout2KHR* pLayout)
-		=> vkGetImageSubresourceLayout2KHR_ptr(device, image, pSubresource, pLayout);
-
-	public typealias vkMapMemory2KHRFunction = function VkResult(VkDevice device, VkMemoryMapInfoKHR* pMemoryMapInfo, void** ppData);
-	private static vkMapMemory2KHRFunction vkMapMemory2KHR_ptr;
-	[CallingConvention(VulkanNative.CallConv)]
-	public static VkResult vkMapMemory2KHR(VkDevice device, VkMemoryMapInfoKHR* pMemoryMapInfo, void** ppData)
-		=> vkMapMemory2KHR_ptr(device, pMemoryMapInfo, ppData);
-
-	public typealias vkUnmapMemory2KHRFunction = function VkResult(VkDevice device, VkMemoryUnmapInfoKHR* pMemoryUnmapInfo);
-	private static vkUnmapMemory2KHRFunction vkUnmapMemory2KHR_ptr;
-	[CallingConvention(VulkanNative.CallConv)]
-	public static VkResult vkUnmapMemory2KHR(VkDevice device, VkMemoryUnmapInfoKHR* pMemoryUnmapInfo)
-		=> vkUnmapMemory2KHR_ptr(device, pMemoryUnmapInfo);
 
 	public typealias vkReleaseSwapchainImagesEXTFunction = function VkResult(VkDevice device, VkReleaseSwapchainImagesInfoEXT* pReleaseInfo);
 	private static vkReleaseSwapchainImagesEXTFunction vkReleaseSwapchainImagesEXT_ptr;
@@ -2854,12 +2902,6 @@ public extension VulkanNative
 	[CallingConvention(VulkanNative.CallConv)]
 	public static void vkCmdDrawMeshTasksIndirectEXT(VkCommandBuffer commandBuffer, VkBuffer buffer, uint64 offset, uint32 drawCount, uint32 stride)
 		=> vkCmdDrawMeshTasksIndirectEXT_ptr(commandBuffer, buffer, offset, drawCount, stride);
-
-	public typealias vkCmdDrawMeshTasksIndirectCountEXTFunction = function void(VkCommandBuffer commandBuffer, VkBuffer buffer, uint64 offset, VkBuffer countBuffer, uint64 countBufferOffset, uint32 maxDrawCount, uint32 stride);
-	private static vkCmdDrawMeshTasksIndirectCountEXTFunction vkCmdDrawMeshTasksIndirectCountEXT_ptr;
-	[CallingConvention(VulkanNative.CallConv)]
-	public static void vkCmdDrawMeshTasksIndirectCountEXT(VkCommandBuffer commandBuffer, VkBuffer buffer, uint64 offset, VkBuffer countBuffer, uint64 countBufferOffset, uint32 maxDrawCount, uint32 stride)
-		=> vkCmdDrawMeshTasksIndirectCountEXT_ptr(commandBuffer, buffer, offset, countBuffer, countBufferOffset, maxDrawCount, stride);
 
 	public typealias vkGetDeviceFaultInfoEXTFunction = function VkResult(VkDevice device, VkDeviceFaultCountsEXT* pFaultCounts, VkDeviceFaultInfoEXT* pFaultInfo);
 	private static vkGetDeviceFaultInfoEXTFunction vkGetDeviceFaultInfoEXT_ptr;
@@ -3341,24 +3383,6 @@ public extension VulkanNative
 	public static void vkCmdOpticalFlowExecuteNV(VkCommandBuffer commandBuffer, VkOpticalFlowSessionNV session, VkOpticalFlowExecuteInfoNV* pExecuteInfo)
 		=> vkCmdOpticalFlowExecuteNV_ptr(commandBuffer, session, pExecuteInfo);
 
-	public typealias vkCmdBindIndexBuffer2KHRFunction = function void(VkCommandBuffer commandBuffer, VkBuffer buffer, uint64 offset, uint64 size, VkIndexType indexType);
-	private static vkCmdBindIndexBuffer2KHRFunction vkCmdBindIndexBuffer2KHR_ptr;
-	[CallingConvention(VulkanNative.CallConv)]
-	public static void vkCmdBindIndexBuffer2KHR(VkCommandBuffer commandBuffer, VkBuffer buffer, uint64 offset, uint64 size, VkIndexType indexType)
-		=> vkCmdBindIndexBuffer2KHR_ptr(commandBuffer, buffer, offset, size, indexType);
-
-	public typealias vkGetRenderingAreaGranularityKHRFunction = function void(VkDevice device, VkRenderingAreaInfoKHR* pRenderingAreaInfo, VkExtent2D* pGranularity);
-	private static vkGetRenderingAreaGranularityKHRFunction vkGetRenderingAreaGranularityKHR_ptr;
-	[CallingConvention(VulkanNative.CallConv)]
-	public static void vkGetRenderingAreaGranularityKHR(VkDevice device, VkRenderingAreaInfoKHR* pRenderingAreaInfo, VkExtent2D* pGranularity)
-		=> vkGetRenderingAreaGranularityKHR_ptr(device, pRenderingAreaInfo, pGranularity);
-
-	public typealias vkGetDeviceImageSubresourceLayoutKHRFunction = function void(VkDevice device, VkDeviceImageSubresourceInfoKHR* pInfo, VkSubresourceLayout2KHR* pLayout);
-	private static vkGetDeviceImageSubresourceLayoutKHRFunction vkGetDeviceImageSubresourceLayoutKHR_ptr;
-	[CallingConvention(VulkanNative.CallConv)]
-	public static void vkGetDeviceImageSubresourceLayoutKHR(VkDevice device, VkDeviceImageSubresourceInfoKHR* pInfo, VkSubresourceLayout2KHR* pLayout)
-		=> vkGetDeviceImageSubresourceLayoutKHR_ptr(device, pInfo, pLayout);
-
 	public typealias vkAntiLagUpdateAMDFunction = function void(VkDevice device, VkAntiLagDataAMD* pData);
 	private static vkAntiLagUpdateAMDFunction vkAntiLagUpdateAMD_ptr;
 	[CallingConvention(VulkanNative.CallConv)]
@@ -3395,6 +3419,36 @@ public extension VulkanNative
 	public static void vkCmdSetTessellationDomainOriginEXT(VkCommandBuffer commandBuffer, VkTessellationDomainOrigin domainOrigin)
 		=> vkCmdSetTessellationDomainOriginEXT_ptr(commandBuffer, domainOrigin);
 
+	public typealias vkCreatePipelineBinariesKHRFunction = function VkResult(VkDevice device, VkPipelineBinaryCreateInfoKHR* pCreateInfo, VkAllocationCallbacks* pAllocator, VkPipelineBinaryHandlesInfoKHR* pBinaries);
+	private static vkCreatePipelineBinariesKHRFunction vkCreatePipelineBinariesKHR_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static VkResult vkCreatePipelineBinariesKHR(VkDevice device, VkPipelineBinaryCreateInfoKHR* pCreateInfo, VkAllocationCallbacks* pAllocator, VkPipelineBinaryHandlesInfoKHR* pBinaries)
+		=> vkCreatePipelineBinariesKHR_ptr(device, pCreateInfo, pAllocator, pBinaries);
+
+	public typealias vkDestroyPipelineBinaryKHRFunction = function void(VkDevice device, VkPipelineBinaryKHR pipelineBinary, VkAllocationCallbacks* pAllocator);
+	private static vkDestroyPipelineBinaryKHRFunction vkDestroyPipelineBinaryKHR_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkDestroyPipelineBinaryKHR(VkDevice device, VkPipelineBinaryKHR pipelineBinary, VkAllocationCallbacks* pAllocator)
+		=> vkDestroyPipelineBinaryKHR_ptr(device, pipelineBinary, pAllocator);
+
+	public typealias vkGetPipelineKeyKHRFunction = function VkResult(VkDevice device, VkPipelineCreateInfoKHR* pPipelineCreateInfo, VkPipelineBinaryKeyKHR* pPipelineKey);
+	private static vkGetPipelineKeyKHRFunction vkGetPipelineKeyKHR_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static VkResult vkGetPipelineKeyKHR(VkDevice device, VkPipelineCreateInfoKHR* pPipelineCreateInfo, VkPipelineBinaryKeyKHR* pPipelineKey)
+		=> vkGetPipelineKeyKHR_ptr(device, pPipelineCreateInfo, pPipelineKey);
+
+	public typealias vkGetPipelineBinaryDataKHRFunction = function VkResult(VkDevice device, VkPipelineBinaryDataInfoKHR* pInfo, VkPipelineBinaryKeyKHR* pPipelineBinaryKey, uint* pPipelineBinaryDataSize, void* pPipelineBinaryData);
+	private static vkGetPipelineBinaryDataKHRFunction vkGetPipelineBinaryDataKHR_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static VkResult vkGetPipelineBinaryDataKHR(VkDevice device, VkPipelineBinaryDataInfoKHR* pInfo, VkPipelineBinaryKeyKHR* pPipelineBinaryKey, uint* pPipelineBinaryDataSize, void* pPipelineBinaryData)
+		=> vkGetPipelineBinaryDataKHR_ptr(device, pInfo, pPipelineBinaryKey, pPipelineBinaryDataSize, pPipelineBinaryData);
+
+	public typealias vkReleaseCapturedPipelineDataKHRFunction = function VkResult(VkDevice device, VkReleaseCapturedPipelineDataInfoKHR* pInfo, VkAllocationCallbacks* pAllocator);
+	private static vkReleaseCapturedPipelineDataKHRFunction vkReleaseCapturedPipelineDataKHR_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static VkResult vkReleaseCapturedPipelineDataKHR(VkDevice device, VkReleaseCapturedPipelineDataInfoKHR* pInfo, VkAllocationCallbacks* pAllocator)
+		=> vkReleaseCapturedPipelineDataKHR_ptr(device, pInfo, pAllocator);
+
 	public typealias vkGetFramebufferTilePropertiesQCOMFunction = function VkResult(VkDevice device, VkFramebuffer framebuffer, uint32* pPropertiesCount, VkTilePropertiesQCOM* pProperties);
 	private static vkGetFramebufferTilePropertiesQCOMFunction vkGetFramebufferTilePropertiesQCOM_ptr;
 	[CallingConvention(VulkanNative.CallConv)]
@@ -3418,6 +3472,24 @@ public extension VulkanNative
 	[CallingConvention(VulkanNative.CallConv)]
 	public static void vkDestroySemaphoreSciSyncPoolNV(VkDevice device, VkSemaphoreSciSyncPoolNV semaphorePool, VkAllocationCallbacks* pAllocator)
 		=> vkDestroySemaphoreSciSyncPoolNV_ptr(device, semaphorePool, pAllocator);
+
+	public typealias vkGetPhysicalDeviceCooperativeVectorPropertiesNVFunction = function VkResult(VkPhysicalDevice physicalDevice, uint32* pPropertyCount, VkCooperativeVectorPropertiesNV* pProperties);
+	private static vkGetPhysicalDeviceCooperativeVectorPropertiesNVFunction vkGetPhysicalDeviceCooperativeVectorPropertiesNV_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static VkResult vkGetPhysicalDeviceCooperativeVectorPropertiesNV(VkPhysicalDevice physicalDevice, uint32* pPropertyCount, VkCooperativeVectorPropertiesNV* pProperties)
+		=> vkGetPhysicalDeviceCooperativeVectorPropertiesNV_ptr(physicalDevice, pPropertyCount, pProperties);
+
+	public typealias vkConvertCooperativeVectorMatrixNVFunction = function VkResult(VkDevice device, VkConvertCooperativeVectorMatrixInfoNV* pInfo);
+	private static vkConvertCooperativeVectorMatrixNVFunction vkConvertCooperativeVectorMatrixNV_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static VkResult vkConvertCooperativeVectorMatrixNV(VkDevice device, VkConvertCooperativeVectorMatrixInfoNV* pInfo)
+		=> vkConvertCooperativeVectorMatrixNV_ptr(device, pInfo);
+
+	public typealias vkCmdConvertCooperativeVectorMatrixNVFunction = function void(VkCommandBuffer commandBuffer, uint32 infoCount, VkConvertCooperativeVectorMatrixInfoNV* pInfos);
+	private static vkCmdConvertCooperativeVectorMatrixNVFunction vkCmdConvertCooperativeVectorMatrixNV_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkCmdConvertCooperativeVectorMatrixNV(VkCommandBuffer commandBuffer, uint32 infoCount, VkConvertCooperativeVectorMatrixInfoNV* pInfos)
+		=> vkCmdConvertCooperativeVectorMatrixNV_ptr(commandBuffer, infoCount, pInfos);
 
 	public typealias vkSetLatencySleepModeNVFunction = function VkResult(VkDevice device, VkSwapchainKHR swapchain, VkLatencySleepModeInfoNV* pSleepModeInfo);
 	private static vkSetLatencySleepModeNVFunction vkSetLatencySleepModeNV_ptr;
@@ -3467,17 +3539,107 @@ public extension VulkanNative
 	public static VkResult vkGetScreenBufferPropertiesQNX(VkDevice device, void* buffer, VkScreenBufferPropertiesQNX* pProperties)
 		=> vkGetScreenBufferPropertiesQNX_ptr(device, buffer, pProperties);
 
-	public typealias vkCmdBindDescriptorSets2KHRFunction = function void(VkCommandBuffer commandBuffer, VkBindDescriptorSetsInfoKHR* pBindDescriptorSetsInfo);
-	private static vkCmdBindDescriptorSets2KHRFunction vkCmdBindDescriptorSets2KHR_ptr;
+	public typealias vkGetClusterAccelerationStructureBuildSizesNVFunction = function void(VkDevice device, VkClusterAccelerationStructureInputInfoNV* pInfo, VkAccelerationStructureBuildSizesInfoKHR* pSizeInfo);
+	private static vkGetClusterAccelerationStructureBuildSizesNVFunction vkGetClusterAccelerationStructureBuildSizesNV_ptr;
 	[CallingConvention(VulkanNative.CallConv)]
-	public static void vkCmdBindDescriptorSets2KHR(VkCommandBuffer commandBuffer, VkBindDescriptorSetsInfoKHR* pBindDescriptorSetsInfo)
-		=> vkCmdBindDescriptorSets2KHR_ptr(commandBuffer, pBindDescriptorSetsInfo);
+	public static void vkGetClusterAccelerationStructureBuildSizesNV(VkDevice device, VkClusterAccelerationStructureInputInfoNV* pInfo, VkAccelerationStructureBuildSizesInfoKHR* pSizeInfo)
+		=> vkGetClusterAccelerationStructureBuildSizesNV_ptr(device, pInfo, pSizeInfo);
 
-	public typealias vkCmdPushConstants2KHRFunction = function void(VkCommandBuffer commandBuffer, VkPushConstantsInfoKHR* pPushConstantsInfo);
-	private static vkCmdPushConstants2KHRFunction vkCmdPushConstants2KHR_ptr;
+	public typealias vkCmdBuildClusterAccelerationStructureIndirectNVFunction = function void(VkCommandBuffer commandBuffer, VkClusterAccelerationStructureCommandsInfoNV* pCommandInfos);
+	private static vkCmdBuildClusterAccelerationStructureIndirectNVFunction vkCmdBuildClusterAccelerationStructureIndirectNV_ptr;
 	[CallingConvention(VulkanNative.CallConv)]
-	public static void vkCmdPushConstants2KHR(VkCommandBuffer commandBuffer, VkPushConstantsInfoKHR* pPushConstantsInfo)
-		=> vkCmdPushConstants2KHR_ptr(commandBuffer, pPushConstantsInfo);
+	public static void vkCmdBuildClusterAccelerationStructureIndirectNV(VkCommandBuffer commandBuffer, VkClusterAccelerationStructureCommandsInfoNV* pCommandInfos)
+		=> vkCmdBuildClusterAccelerationStructureIndirectNV_ptr(commandBuffer, pCommandInfos);
+
+	public typealias vkGetPartitionedAccelerationStructuresBuildSizesNVFunction = function void(VkDevice device, VkPartitionedAccelerationStructureInstancesInputNV* pInfo, VkAccelerationStructureBuildSizesInfoKHR* pSizeInfo);
+	private static vkGetPartitionedAccelerationStructuresBuildSizesNVFunction vkGetPartitionedAccelerationStructuresBuildSizesNV_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkGetPartitionedAccelerationStructuresBuildSizesNV(VkDevice device, VkPartitionedAccelerationStructureInstancesInputNV* pInfo, VkAccelerationStructureBuildSizesInfoKHR* pSizeInfo)
+		=> vkGetPartitionedAccelerationStructuresBuildSizesNV_ptr(device, pInfo, pSizeInfo);
+
+	public typealias vkCmdBuildPartitionedAccelerationStructuresNVFunction = function void(VkCommandBuffer commandBuffer, VkBuildPartitionedAccelerationStructureInfoNV* pBuildInfo);
+	private static vkCmdBuildPartitionedAccelerationStructuresNVFunction vkCmdBuildPartitionedAccelerationStructuresNV_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkCmdBuildPartitionedAccelerationStructuresNV(VkCommandBuffer commandBuffer, VkBuildPartitionedAccelerationStructureInfoNV* pBuildInfo)
+		=> vkCmdBuildPartitionedAccelerationStructuresNV_ptr(commandBuffer, pBuildInfo);
+
+	public typealias vkGetGeneratedCommandsMemoryRequirementsEXTFunction = function void(VkDevice device, VkGeneratedCommandsMemoryRequirementsInfoEXT* pInfo, VkMemoryRequirements2* pMemoryRequirements);
+	private static vkGetGeneratedCommandsMemoryRequirementsEXTFunction vkGetGeneratedCommandsMemoryRequirementsEXT_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkGetGeneratedCommandsMemoryRequirementsEXT(VkDevice device, VkGeneratedCommandsMemoryRequirementsInfoEXT* pInfo, VkMemoryRequirements2* pMemoryRequirements)
+		=> vkGetGeneratedCommandsMemoryRequirementsEXT_ptr(device, pInfo, pMemoryRequirements);
+
+	public typealias vkCmdPreprocessGeneratedCommandsEXTFunction = function void(VkCommandBuffer commandBuffer, VkGeneratedCommandsInfoEXT* pGeneratedCommandsInfo, VkCommandBuffer stateCommandBuffer);
+	private static vkCmdPreprocessGeneratedCommandsEXTFunction vkCmdPreprocessGeneratedCommandsEXT_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkCmdPreprocessGeneratedCommandsEXT(VkCommandBuffer commandBuffer, VkGeneratedCommandsInfoEXT* pGeneratedCommandsInfo, VkCommandBuffer stateCommandBuffer)
+		=> vkCmdPreprocessGeneratedCommandsEXT_ptr(commandBuffer, pGeneratedCommandsInfo, stateCommandBuffer);
+
+	public typealias vkCmdExecuteGeneratedCommandsEXTFunction = function void(VkCommandBuffer commandBuffer, VkBool32 isPreprocessed, VkGeneratedCommandsInfoEXT* pGeneratedCommandsInfo);
+	private static vkCmdExecuteGeneratedCommandsEXTFunction vkCmdExecuteGeneratedCommandsEXT_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkCmdExecuteGeneratedCommandsEXT(VkCommandBuffer commandBuffer, VkBool32 isPreprocessed, VkGeneratedCommandsInfoEXT* pGeneratedCommandsInfo)
+		=> vkCmdExecuteGeneratedCommandsEXT_ptr(commandBuffer, isPreprocessed, pGeneratedCommandsInfo);
+
+	public typealias vkCreateIndirectCommandsLayoutEXTFunction = function VkResult(VkDevice device, VkIndirectCommandsLayoutCreateInfoEXT* pCreateInfo, VkAllocationCallbacks* pAllocator, VkIndirectCommandsLayoutEXT* pIndirectCommandsLayout);
+	private static vkCreateIndirectCommandsLayoutEXTFunction vkCreateIndirectCommandsLayoutEXT_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static VkResult vkCreateIndirectCommandsLayoutEXT(VkDevice device, VkIndirectCommandsLayoutCreateInfoEXT* pCreateInfo, VkAllocationCallbacks* pAllocator, VkIndirectCommandsLayoutEXT* pIndirectCommandsLayout)
+		=> vkCreateIndirectCommandsLayoutEXT_ptr(device, pCreateInfo, pAllocator, pIndirectCommandsLayout);
+
+	public typealias vkDestroyIndirectCommandsLayoutEXTFunction = function void(VkDevice device, VkIndirectCommandsLayoutEXT indirectCommandsLayout, VkAllocationCallbacks* pAllocator);
+	private static vkDestroyIndirectCommandsLayoutEXTFunction vkDestroyIndirectCommandsLayoutEXT_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkDestroyIndirectCommandsLayoutEXT(VkDevice device, VkIndirectCommandsLayoutEXT indirectCommandsLayout, VkAllocationCallbacks* pAllocator)
+		=> vkDestroyIndirectCommandsLayoutEXT_ptr(device, indirectCommandsLayout, pAllocator);
+
+	public typealias vkCreateIndirectExecutionSetEXTFunction = function VkResult(VkDevice device, VkIndirectExecutionSetCreateInfoEXT* pCreateInfo, VkAllocationCallbacks* pAllocator, VkIndirectExecutionSetEXT* pIndirectExecutionSet);
+	private static vkCreateIndirectExecutionSetEXTFunction vkCreateIndirectExecutionSetEXT_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static VkResult vkCreateIndirectExecutionSetEXT(VkDevice device, VkIndirectExecutionSetCreateInfoEXT* pCreateInfo, VkAllocationCallbacks* pAllocator, VkIndirectExecutionSetEXT* pIndirectExecutionSet)
+		=> vkCreateIndirectExecutionSetEXT_ptr(device, pCreateInfo, pAllocator, pIndirectExecutionSet);
+
+	public typealias vkDestroyIndirectExecutionSetEXTFunction = function void(VkDevice device, VkIndirectExecutionSetEXT indirectExecutionSet, VkAllocationCallbacks* pAllocator);
+	private static vkDestroyIndirectExecutionSetEXTFunction vkDestroyIndirectExecutionSetEXT_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkDestroyIndirectExecutionSetEXT(VkDevice device, VkIndirectExecutionSetEXT indirectExecutionSet, VkAllocationCallbacks* pAllocator)
+		=> vkDestroyIndirectExecutionSetEXT_ptr(device, indirectExecutionSet, pAllocator);
+
+	public typealias vkUpdateIndirectExecutionSetPipelineEXTFunction = function void(VkDevice device, VkIndirectExecutionSetEXT indirectExecutionSet, uint32 executionSetWriteCount, VkWriteIndirectExecutionSetPipelineEXT* pExecutionSetWrites);
+	private static vkUpdateIndirectExecutionSetPipelineEXTFunction vkUpdateIndirectExecutionSetPipelineEXT_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkUpdateIndirectExecutionSetPipelineEXT(VkDevice device, VkIndirectExecutionSetEXT indirectExecutionSet, uint32 executionSetWriteCount, VkWriteIndirectExecutionSetPipelineEXT* pExecutionSetWrites)
+		=> vkUpdateIndirectExecutionSetPipelineEXT_ptr(device, indirectExecutionSet, executionSetWriteCount, pExecutionSetWrites);
+
+	public typealias vkUpdateIndirectExecutionSetShaderEXTFunction = function void(VkDevice device, VkIndirectExecutionSetEXT indirectExecutionSet, uint32 executionSetWriteCount, VkWriteIndirectExecutionSetShaderEXT* pExecutionSetWrites);
+	private static vkUpdateIndirectExecutionSetShaderEXTFunction vkUpdateIndirectExecutionSetShaderEXT_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkUpdateIndirectExecutionSetShaderEXT(VkDevice device, VkIndirectExecutionSetEXT indirectExecutionSet, uint32 executionSetWriteCount, VkWriteIndirectExecutionSetShaderEXT* pExecutionSetWrites)
+		=> vkUpdateIndirectExecutionSetShaderEXT_ptr(device, indirectExecutionSet, executionSetWriteCount, pExecutionSetWrites);
+
+	public typealias vkCmdSetDepthClampRangeEXTFunction = function void(VkCommandBuffer commandBuffer, VkDepthClampModeEXT depthClampMode, VkDepthClampRangeEXT* pDepthClampRange);
+	private static vkCmdSetDepthClampRangeEXTFunction vkCmdSetDepthClampRangeEXT_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkCmdSetDepthClampRangeEXT(VkCommandBuffer commandBuffer, VkDepthClampModeEXT depthClampMode, VkDepthClampRangeEXT* pDepthClampRange)
+		=> vkCmdSetDepthClampRangeEXT_ptr(commandBuffer, depthClampMode, pDepthClampRange);
+
+	public typealias vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNVFunction = function VkResult(VkPhysicalDevice physicalDevice, uint32* pPropertyCount, VkCooperativeMatrixFlexibleDimensionsPropertiesNV* pProperties);
+	private static vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNVFunction vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static VkResult vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV(VkPhysicalDevice physicalDevice, uint32* pPropertyCount, VkCooperativeMatrixFlexibleDimensionsPropertiesNV* pProperties)
+		=> vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV_ptr(physicalDevice, pPropertyCount, pProperties);
+
+	public typealias vkGetMemoryMetalHandleEXTFunction = function VkResult(VkDevice device, VkMemoryGetMetalHandleInfoEXT* pGetMetalHandleInfo, void** pHandle);
+	private static vkGetMemoryMetalHandleEXTFunction vkGetMemoryMetalHandleEXT_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static VkResult vkGetMemoryMetalHandleEXT(VkDevice device, VkMemoryGetMetalHandleInfoEXT* pGetMetalHandleInfo, void** pHandle)
+		=> vkGetMemoryMetalHandleEXT_ptr(device, pGetMetalHandleInfo, pHandle);
+
+	public typealias vkGetMemoryMetalHandlePropertiesEXTFunction = function VkResult(VkDevice device, VkExternalMemoryHandleTypeFlags handleType, void* pHandle, VkMemoryMetalHandlePropertiesEXT* pMemoryMetalHandleProperties);
+	private static vkGetMemoryMetalHandlePropertiesEXTFunction vkGetMemoryMetalHandlePropertiesEXT_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static VkResult vkGetMemoryMetalHandlePropertiesEXT(VkDevice device, VkExternalMemoryHandleTypeFlags handleType, void* pHandle, VkMemoryMetalHandlePropertiesEXT* pMemoryMetalHandleProperties)
+		=> vkGetMemoryMetalHandlePropertiesEXT_ptr(device, handleType, pHandle, pMemoryMetalHandleProperties);
 
 
 	private static List<(InstanceFunctionFlags Flags, String Name)> sKnownInstanceCommands = new .()
@@ -3488,12 +3650,6 @@ public extension VulkanNative
 		(.Agnostic, "vkEnumeratePhysicalDeviceGroups"),
 		(.Agnostic, "vkDestroySurfaceKHR"),
 		(.Agnostic, "vkCreateDisplayPlaneSurfaceKHR"),
-		(.Agnostic, "vkCreateDebugReportCallbackEXT"),
-		(.Agnostic, "vkDestroyDebugReportCallbackEXT"),
-		(.Agnostic, "vkDebugReportMessageEXT"),
-		(.Agnostic, "vkCreateDebugUtilsMessengerEXT"),
-		(.Agnostic, "vkDestroyDebugUtilsMessengerEXT"),
-		(.Agnostic, "vkSubmitDebugUtilsMessageEXT"),
 		(.Xlib, "vkCreateXlibSurfaceKHR"),
 		(.Xcb, "vkCreateXcbSurfaceKHR"),
 		(.Wayland, "vkCreateWaylandSurfaceKHR"),
@@ -4808,6 +4964,120 @@ public extension VulkanNative
 				return .Err;
 			break;
 
+		case "vkCmdSetLineStipple":
+			LoadFunction("vkCmdSetLineStipple", out vkCmdSetLineStipple_ptr, instance, invokeErrorCallback);
+			if(vkCmdSetLineStipple_ptr == null)
+				return .Err;
+			break;
+
+		case "vkMapMemory2":
+			LoadFunction("vkMapMemory2", out vkMapMemory2_ptr, instance, invokeErrorCallback);
+			if(vkMapMemory2_ptr == null)
+				return .Err;
+			break;
+
+		case "vkUnmapMemory2":
+			LoadFunction("vkUnmapMemory2", out vkUnmapMemory2_ptr, instance, invokeErrorCallback);
+			if(vkUnmapMemory2_ptr == null)
+				return .Err;
+			break;
+
+		case "vkCmdBindIndexBuffer2":
+			LoadFunction("vkCmdBindIndexBuffer2", out vkCmdBindIndexBuffer2_ptr, instance, invokeErrorCallback);
+			if(vkCmdBindIndexBuffer2_ptr == null)
+				return .Err;
+			break;
+
+		case "vkGetRenderingAreaGranularity":
+			LoadFunction("vkGetRenderingAreaGranularity", out vkGetRenderingAreaGranularity_ptr, instance, invokeErrorCallback);
+			if(vkGetRenderingAreaGranularity_ptr == null)
+				return .Err;
+			break;
+
+		case "vkGetDeviceImageSubresourceLayout":
+			LoadFunction("vkGetDeviceImageSubresourceLayout", out vkGetDeviceImageSubresourceLayout_ptr, instance, invokeErrorCallback);
+			if(vkGetDeviceImageSubresourceLayout_ptr == null)
+				return .Err;
+			break;
+
+		case "vkGetImageSubresourceLayout2":
+			LoadFunction("vkGetImageSubresourceLayout2", out vkGetImageSubresourceLayout2_ptr, instance, invokeErrorCallback);
+			if(vkGetImageSubresourceLayout2_ptr == null)
+				return .Err;
+			break;
+
+		case "vkCmdPushDescriptorSet":
+			LoadFunction("vkCmdPushDescriptorSet", out vkCmdPushDescriptorSet_ptr, instance, invokeErrorCallback);
+			if(vkCmdPushDescriptorSet_ptr == null)
+				return .Err;
+			break;
+
+		case "vkCmdPushDescriptorSetWithTemplate":
+			LoadFunction("vkCmdPushDescriptorSetWithTemplate", out vkCmdPushDescriptorSetWithTemplate_ptr, instance, invokeErrorCallback);
+			if(vkCmdPushDescriptorSetWithTemplate_ptr == null)
+				return .Err;
+			break;
+
+		case "vkCmdSetRenderingAttachmentLocations":
+			LoadFunction("vkCmdSetRenderingAttachmentLocations", out vkCmdSetRenderingAttachmentLocations_ptr, instance, invokeErrorCallback);
+			if(vkCmdSetRenderingAttachmentLocations_ptr == null)
+				return .Err;
+			break;
+
+		case "vkCmdSetRenderingInputAttachmentIndices":
+			LoadFunction("vkCmdSetRenderingInputAttachmentIndices", out vkCmdSetRenderingInputAttachmentIndices_ptr, instance, invokeErrorCallback);
+			if(vkCmdSetRenderingInputAttachmentIndices_ptr == null)
+				return .Err;
+			break;
+
+		case "vkCmdBindDescriptorSets2":
+			LoadFunction("vkCmdBindDescriptorSets2", out vkCmdBindDescriptorSets2_ptr, instance, invokeErrorCallback);
+			if(vkCmdBindDescriptorSets2_ptr == null)
+				return .Err;
+			break;
+
+		case "vkCmdPushConstants2":
+			LoadFunction("vkCmdPushConstants2", out vkCmdPushConstants2_ptr, instance, invokeErrorCallback);
+			if(vkCmdPushConstants2_ptr == null)
+				return .Err;
+			break;
+
+		case "vkCmdPushDescriptorSet2":
+			LoadFunction("vkCmdPushDescriptorSet2", out vkCmdPushDescriptorSet2_ptr, instance, invokeErrorCallback);
+			if(vkCmdPushDescriptorSet2_ptr == null)
+				return .Err;
+			break;
+
+		case "vkCmdPushDescriptorSetWithTemplate2":
+			LoadFunction("vkCmdPushDescriptorSetWithTemplate2", out vkCmdPushDescriptorSetWithTemplate2_ptr, instance, invokeErrorCallback);
+			if(vkCmdPushDescriptorSetWithTemplate2_ptr == null)
+				return .Err;
+			break;
+
+		case "vkCopyMemoryToImage":
+			LoadFunction("vkCopyMemoryToImage", out vkCopyMemoryToImage_ptr, instance, invokeErrorCallback);
+			if(vkCopyMemoryToImage_ptr == null)
+				return .Err;
+			break;
+
+		case "vkCopyImageToMemory":
+			LoadFunction("vkCopyImageToMemory", out vkCopyImageToMemory_ptr, instance, invokeErrorCallback);
+			if(vkCopyImageToMemory_ptr == null)
+				return .Err;
+			break;
+
+		case "vkCopyImageToImage":
+			LoadFunction("vkCopyImageToImage", out vkCopyImageToImage_ptr, instance, invokeErrorCallback);
+			if(vkCopyImageToImage_ptr == null)
+				return .Err;
+			break;
+
+		case "vkTransitionImageLayout":
+			LoadFunction("vkTransitionImageLayout", out vkTransitionImageLayout_ptr, instance, invokeErrorCallback);
+			if(vkTransitionImageLayout_ptr == null)
+				return .Err;
+			break;
+
 		case "vkGetCommandPoolMemoryConsumption":
 			LoadFunction("vkGetCommandPoolMemoryConsumption", out vkGetCommandPoolMemoryConsumption_ptr, instance, invokeErrorCallback);
 			if(vkGetCommandPoolMemoryConsumption_ptr == null)
@@ -5180,6 +5450,12 @@ public extension VulkanNative
 				return .Err;
 			break;
 
+		case "vkGetImageViewHandle64NVX":
+			LoadFunction("vkGetImageViewHandle64NVX", out vkGetImageViewHandle64NVX_ptr, instance, invokeErrorCallback);
+			if(vkGetImageViewHandle64NVX_ptr == null)
+				return .Err;
+			break;
+
 		case "vkGetImageViewAddressNVX":
 			LoadFunction("vkGetImageViewAddressNVX", out vkGetImageViewAddressNVX_ptr, instance, invokeErrorCallback);
 			if(vkGetImageViewAddressNVX_ptr == null)
@@ -5261,12 +5537,6 @@ public extension VulkanNative
 		case "vkGetSemaphoreFdKHR":
 			LoadFunction("vkGetSemaphoreFdKHR", out vkGetSemaphoreFdKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetSemaphoreFdKHR_ptr == null)
-				return .Err;
-			break;
-
-		case "vkCmdPushDescriptorSetKHR":
-			LoadFunction("vkCmdPushDescriptorSetKHR", out vkCmdPushDescriptorSetKHR_ptr, instance, invokeErrorCallback);
-			if(vkCmdPushDescriptorSetKHR_ptr == null)
 				return .Err;
 			break;
 
@@ -5894,12 +6164,6 @@ public extension VulkanNative
 				return .Err;
 			break;
 
-		case "vkCmdDrawMeshTasksIndirectCountNV":
-			LoadFunction("vkCmdDrawMeshTasksIndirectCountNV", out vkCmdDrawMeshTasksIndirectCountNV_ptr, instance, invokeErrorCallback);
-			if(vkCmdDrawMeshTasksIndirectCountNV_ptr == null)
-				return .Err;
-			break;
-
 		case "vkCmdSetExclusiveScissorEnableNV":
 			LoadFunction("vkCmdSetExclusiveScissorEnableNV", out vkCmdSetExclusiveScissorEnableNV_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetExclusiveScissorEnableNV_ptr == null)
@@ -6008,18 +6272,6 @@ public extension VulkanNative
 				return .Err;
 			break;
 
-		case "vkCmdSetRenderingAttachmentLocationsKHR":
-			LoadFunction("vkCmdSetRenderingAttachmentLocationsKHR", out vkCmdSetRenderingAttachmentLocationsKHR_ptr, instance, invokeErrorCallback);
-			if(vkCmdSetRenderingAttachmentLocationsKHR_ptr == null)
-				return .Err;
-			break;
-
-		case "vkCmdSetRenderingInputAttachmentIndicesKHR":
-			LoadFunction("vkCmdSetRenderingInputAttachmentIndicesKHR", out vkCmdSetRenderingInputAttachmentIndicesKHR_ptr, instance, invokeErrorCallback);
-			if(vkCmdSetRenderingInputAttachmentIndicesKHR_ptr == null)
-				return .Err;
-			break;
-
 		case "vkWaitForPresentKHR":
 			LoadFunction("vkWaitForPresentKHR", out vkWaitForPresentKHR_ptr, instance, invokeErrorCallback);
 			if(vkWaitForPresentKHR_ptr == null)
@@ -6059,12 +6311,6 @@ public extension VulkanNative
 		case "vkCreateHeadlessSurfaceEXT":
 			LoadFunction("vkCreateHeadlessSurfaceEXT", out vkCreateHeadlessSurfaceEXT_ptr, instance, invokeErrorCallback);
 			if(vkCreateHeadlessSurfaceEXT_ptr == null)
-				return .Err;
-			break;
-
-		case "vkCmdSetLineStippleKHR":
-			LoadFunction("vkCmdSetLineStippleKHR", out vkCmdSetLineStippleKHR_ptr, instance, invokeErrorCallback);
-			if(vkCmdSetLineStippleKHR_ptr == null)
 				return .Err;
 			break;
 
@@ -6113,48 +6359,6 @@ public extension VulkanNative
 		case "vkGetPipelineExecutableInternalRepresentationsKHR":
 			LoadFunction("vkGetPipelineExecutableInternalRepresentationsKHR", out vkGetPipelineExecutableInternalRepresentationsKHR_ptr, instance, invokeErrorCallback);
 			if(vkGetPipelineExecutableInternalRepresentationsKHR_ptr == null)
-				return .Err;
-			break;
-
-		case "vkCopyMemoryToImageEXT":
-			LoadFunction("vkCopyMemoryToImageEXT", out vkCopyMemoryToImageEXT_ptr, instance, invokeErrorCallback);
-			if(vkCopyMemoryToImageEXT_ptr == null)
-				return .Err;
-			break;
-
-		case "vkCopyImageToMemoryEXT":
-			LoadFunction("vkCopyImageToMemoryEXT", out vkCopyImageToMemoryEXT_ptr, instance, invokeErrorCallback);
-			if(vkCopyImageToMemoryEXT_ptr == null)
-				return .Err;
-			break;
-
-		case "vkCopyImageToImageEXT":
-			LoadFunction("vkCopyImageToImageEXT", out vkCopyImageToImageEXT_ptr, instance, invokeErrorCallback);
-			if(vkCopyImageToImageEXT_ptr == null)
-				return .Err;
-			break;
-
-		case "vkTransitionImageLayoutEXT":
-			LoadFunction("vkTransitionImageLayoutEXT", out vkTransitionImageLayoutEXT_ptr, instance, invokeErrorCallback);
-			if(vkTransitionImageLayoutEXT_ptr == null)
-				return .Err;
-			break;
-
-		case "vkGetImageSubresourceLayout2KHR":
-			LoadFunction("vkGetImageSubresourceLayout2KHR", out vkGetImageSubresourceLayout2KHR_ptr, instance, invokeErrorCallback);
-			if(vkGetImageSubresourceLayout2KHR_ptr == null)
-				return .Err;
-			break;
-
-		case "vkMapMemory2KHR":
-			LoadFunction("vkMapMemory2KHR", out vkMapMemory2KHR_ptr, instance, invokeErrorCallback);
-			if(vkMapMemory2KHR_ptr == null)
-				return .Err;
-			break;
-
-		case "vkUnmapMemory2KHR":
-			LoadFunction("vkUnmapMemory2KHR", out vkUnmapMemory2KHR_ptr, instance, invokeErrorCallback);
-			if(vkUnmapMemory2KHR_ptr == null)
 				return .Err;
 			break;
 
@@ -6365,12 +6569,6 @@ public extension VulkanNative
 		case "vkCmdDrawMeshTasksIndirectEXT":
 			LoadFunction("vkCmdDrawMeshTasksIndirectEXT", out vkCmdDrawMeshTasksIndirectEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdDrawMeshTasksIndirectEXT_ptr == null)
-				return .Err;
-			break;
-
-		case "vkCmdDrawMeshTasksIndirectCountEXT":
-			LoadFunction("vkCmdDrawMeshTasksIndirectCountEXT", out vkCmdDrawMeshTasksIndirectCountEXT_ptr, instance, invokeErrorCallback);
-			if(vkCmdDrawMeshTasksIndirectCountEXT_ptr == null)
 				return .Err;
 			break;
 
@@ -6854,24 +7052,6 @@ public extension VulkanNative
 				return .Err;
 			break;
 
-		case "vkCmdBindIndexBuffer2KHR":
-			LoadFunction("vkCmdBindIndexBuffer2KHR", out vkCmdBindIndexBuffer2KHR_ptr, instance, invokeErrorCallback);
-			if(vkCmdBindIndexBuffer2KHR_ptr == null)
-				return .Err;
-			break;
-
-		case "vkGetRenderingAreaGranularityKHR":
-			LoadFunction("vkGetRenderingAreaGranularityKHR", out vkGetRenderingAreaGranularityKHR_ptr, instance, invokeErrorCallback);
-			if(vkGetRenderingAreaGranularityKHR_ptr == null)
-				return .Err;
-			break;
-
-		case "vkGetDeviceImageSubresourceLayoutKHR":
-			LoadFunction("vkGetDeviceImageSubresourceLayoutKHR", out vkGetDeviceImageSubresourceLayoutKHR_ptr, instance, invokeErrorCallback);
-			if(vkGetDeviceImageSubresourceLayoutKHR_ptr == null)
-				return .Err;
-			break;
-
 		case "vkAntiLagUpdateAMD":
 			LoadFunction("vkAntiLagUpdateAMD", out vkAntiLagUpdateAMD_ptr, instance, invokeErrorCallback);
 			if(vkAntiLagUpdateAMD_ptr == null)
@@ -6908,6 +7088,36 @@ public extension VulkanNative
 				return .Err;
 			break;
 
+		case "vkCreatePipelineBinariesKHR":
+			LoadFunction("vkCreatePipelineBinariesKHR", out vkCreatePipelineBinariesKHR_ptr, instance, invokeErrorCallback);
+			if(vkCreatePipelineBinariesKHR_ptr == null)
+				return .Err;
+			break;
+
+		case "vkDestroyPipelineBinaryKHR":
+			LoadFunction("vkDestroyPipelineBinaryKHR", out vkDestroyPipelineBinaryKHR_ptr, instance, invokeErrorCallback);
+			if(vkDestroyPipelineBinaryKHR_ptr == null)
+				return .Err;
+			break;
+
+		case "vkGetPipelineKeyKHR":
+			LoadFunction("vkGetPipelineKeyKHR", out vkGetPipelineKeyKHR_ptr, instance, invokeErrorCallback);
+			if(vkGetPipelineKeyKHR_ptr == null)
+				return .Err;
+			break;
+
+		case "vkGetPipelineBinaryDataKHR":
+			LoadFunction("vkGetPipelineBinaryDataKHR", out vkGetPipelineBinaryDataKHR_ptr, instance, invokeErrorCallback);
+			if(vkGetPipelineBinaryDataKHR_ptr == null)
+				return .Err;
+			break;
+
+		case "vkReleaseCapturedPipelineDataKHR":
+			LoadFunction("vkReleaseCapturedPipelineDataKHR", out vkReleaseCapturedPipelineDataKHR_ptr, instance, invokeErrorCallback);
+			if(vkReleaseCapturedPipelineDataKHR_ptr == null)
+				return .Err;
+			break;
+
 		case "vkGetFramebufferTilePropertiesQCOM":
 			LoadFunction("vkGetFramebufferTilePropertiesQCOM", out vkGetFramebufferTilePropertiesQCOM_ptr, instance, invokeErrorCallback);
 			if(vkGetFramebufferTilePropertiesQCOM_ptr == null)
@@ -6929,6 +7139,24 @@ public extension VulkanNative
 		case "vkDestroySemaphoreSciSyncPoolNV":
 			LoadFunction("vkDestroySemaphoreSciSyncPoolNV", out vkDestroySemaphoreSciSyncPoolNV_ptr, instance, invokeErrorCallback);
 			if(vkDestroySemaphoreSciSyncPoolNV_ptr == null)
+				return .Err;
+			break;
+
+		case "vkGetPhysicalDeviceCooperativeVectorPropertiesNV":
+			LoadFunction("vkGetPhysicalDeviceCooperativeVectorPropertiesNV", out vkGetPhysicalDeviceCooperativeVectorPropertiesNV_ptr, instance, invokeErrorCallback);
+			if(vkGetPhysicalDeviceCooperativeVectorPropertiesNV_ptr == null)
+				return .Err;
+			break;
+
+		case "vkConvertCooperativeVectorMatrixNV":
+			LoadFunction("vkConvertCooperativeVectorMatrixNV", out vkConvertCooperativeVectorMatrixNV_ptr, instance, invokeErrorCallback);
+			if(vkConvertCooperativeVectorMatrixNV_ptr == null)
+				return .Err;
+			break;
+
+		case "vkCmdConvertCooperativeVectorMatrixNV":
+			LoadFunction("vkCmdConvertCooperativeVectorMatrixNV", out vkCmdConvertCooperativeVectorMatrixNV_ptr, instance, invokeErrorCallback);
+			if(vkCmdConvertCooperativeVectorMatrixNV_ptr == null)
 				return .Err;
 			break;
 
@@ -6980,15 +7208,105 @@ public extension VulkanNative
 				return .Err;
 			break;
 
-		case "vkCmdBindDescriptorSets2KHR":
-			LoadFunction("vkCmdBindDescriptorSets2KHR", out vkCmdBindDescriptorSets2KHR_ptr, instance, invokeErrorCallback);
-			if(vkCmdBindDescriptorSets2KHR_ptr == null)
+		case "vkGetClusterAccelerationStructureBuildSizesNV":
+			LoadFunction("vkGetClusterAccelerationStructureBuildSizesNV", out vkGetClusterAccelerationStructureBuildSizesNV_ptr, instance, invokeErrorCallback);
+			if(vkGetClusterAccelerationStructureBuildSizesNV_ptr == null)
 				return .Err;
 			break;
 
-		case "vkCmdPushConstants2KHR":
-			LoadFunction("vkCmdPushConstants2KHR", out vkCmdPushConstants2KHR_ptr, instance, invokeErrorCallback);
-			if(vkCmdPushConstants2KHR_ptr == null)
+		case "vkCmdBuildClusterAccelerationStructureIndirectNV":
+			LoadFunction("vkCmdBuildClusterAccelerationStructureIndirectNV", out vkCmdBuildClusterAccelerationStructureIndirectNV_ptr, instance, invokeErrorCallback);
+			if(vkCmdBuildClusterAccelerationStructureIndirectNV_ptr == null)
+				return .Err;
+			break;
+
+		case "vkGetPartitionedAccelerationStructuresBuildSizesNV":
+			LoadFunction("vkGetPartitionedAccelerationStructuresBuildSizesNV", out vkGetPartitionedAccelerationStructuresBuildSizesNV_ptr, instance, invokeErrorCallback);
+			if(vkGetPartitionedAccelerationStructuresBuildSizesNV_ptr == null)
+				return .Err;
+			break;
+
+		case "vkCmdBuildPartitionedAccelerationStructuresNV":
+			LoadFunction("vkCmdBuildPartitionedAccelerationStructuresNV", out vkCmdBuildPartitionedAccelerationStructuresNV_ptr, instance, invokeErrorCallback);
+			if(vkCmdBuildPartitionedAccelerationStructuresNV_ptr == null)
+				return .Err;
+			break;
+
+		case "vkGetGeneratedCommandsMemoryRequirementsEXT":
+			LoadFunction("vkGetGeneratedCommandsMemoryRequirementsEXT", out vkGetGeneratedCommandsMemoryRequirementsEXT_ptr, instance, invokeErrorCallback);
+			if(vkGetGeneratedCommandsMemoryRequirementsEXT_ptr == null)
+				return .Err;
+			break;
+
+		case "vkCmdPreprocessGeneratedCommandsEXT":
+			LoadFunction("vkCmdPreprocessGeneratedCommandsEXT", out vkCmdPreprocessGeneratedCommandsEXT_ptr, instance, invokeErrorCallback);
+			if(vkCmdPreprocessGeneratedCommandsEXT_ptr == null)
+				return .Err;
+			break;
+
+		case "vkCmdExecuteGeneratedCommandsEXT":
+			LoadFunction("vkCmdExecuteGeneratedCommandsEXT", out vkCmdExecuteGeneratedCommandsEXT_ptr, instance, invokeErrorCallback);
+			if(vkCmdExecuteGeneratedCommandsEXT_ptr == null)
+				return .Err;
+			break;
+
+		case "vkCreateIndirectCommandsLayoutEXT":
+			LoadFunction("vkCreateIndirectCommandsLayoutEXT", out vkCreateIndirectCommandsLayoutEXT_ptr, instance, invokeErrorCallback);
+			if(vkCreateIndirectCommandsLayoutEXT_ptr == null)
+				return .Err;
+			break;
+
+		case "vkDestroyIndirectCommandsLayoutEXT":
+			LoadFunction("vkDestroyIndirectCommandsLayoutEXT", out vkDestroyIndirectCommandsLayoutEXT_ptr, instance, invokeErrorCallback);
+			if(vkDestroyIndirectCommandsLayoutEXT_ptr == null)
+				return .Err;
+			break;
+
+		case "vkCreateIndirectExecutionSetEXT":
+			LoadFunction("vkCreateIndirectExecutionSetEXT", out vkCreateIndirectExecutionSetEXT_ptr, instance, invokeErrorCallback);
+			if(vkCreateIndirectExecutionSetEXT_ptr == null)
+				return .Err;
+			break;
+
+		case "vkDestroyIndirectExecutionSetEXT":
+			LoadFunction("vkDestroyIndirectExecutionSetEXT", out vkDestroyIndirectExecutionSetEXT_ptr, instance, invokeErrorCallback);
+			if(vkDestroyIndirectExecutionSetEXT_ptr == null)
+				return .Err;
+			break;
+
+		case "vkUpdateIndirectExecutionSetPipelineEXT":
+			LoadFunction("vkUpdateIndirectExecutionSetPipelineEXT", out vkUpdateIndirectExecutionSetPipelineEXT_ptr, instance, invokeErrorCallback);
+			if(vkUpdateIndirectExecutionSetPipelineEXT_ptr == null)
+				return .Err;
+			break;
+
+		case "vkUpdateIndirectExecutionSetShaderEXT":
+			LoadFunction("vkUpdateIndirectExecutionSetShaderEXT", out vkUpdateIndirectExecutionSetShaderEXT_ptr, instance, invokeErrorCallback);
+			if(vkUpdateIndirectExecutionSetShaderEXT_ptr == null)
+				return .Err;
+			break;
+
+		case "vkCmdSetDepthClampRangeEXT":
+			LoadFunction("vkCmdSetDepthClampRangeEXT", out vkCmdSetDepthClampRangeEXT_ptr, instance, invokeErrorCallback);
+			if(vkCmdSetDepthClampRangeEXT_ptr == null)
+				return .Err;
+			break;
+
+		case "vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV":
+			LoadFunction("vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV", out vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV_ptr, instance, invokeErrorCallback);
+			if(vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV_ptr == null)
+				return .Err;
+			break;
+
+		case "vkGetMemoryMetalHandleEXT":
+			LoadFunction("vkGetMemoryMetalHandleEXT", out vkGetMemoryMetalHandleEXT_ptr, instance, invokeErrorCallback);
+			if(vkGetMemoryMetalHandleEXT_ptr == null)
+				return .Err;
+			break;
+
+		case "vkGetMemoryMetalHandlePropertiesEXT":
+			LoadFunction("vkGetMemoryMetalHandlePropertiesEXT", out vkGetMemoryMetalHandlePropertiesEXT_ptr, instance, invokeErrorCallback);
+			if(vkGetMemoryMetalHandlePropertiesEXT_ptr == null)
 				return .Err;
 			break;
 
@@ -7645,6 +7963,63 @@ public extension VulkanNative
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDeviceImageSparseMemoryRequirements"))
 			LoadFunction("vkGetDeviceImageSparseMemoryRequirements", instance).IgnoreError();
 
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetLineStipple"))
+			LoadFunction("vkCmdSetLineStipple", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkMapMemory2"))
+			LoadFunction("vkMapMemory2", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkUnmapMemory2"))
+			LoadFunction("vkUnmapMemory2", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBindIndexBuffer2"))
+			LoadFunction("vkCmdBindIndexBuffer2", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetRenderingAreaGranularity"))
+			LoadFunction("vkGetRenderingAreaGranularity", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDeviceImageSubresourceLayout"))
+			LoadFunction("vkGetDeviceImageSubresourceLayout", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetImageSubresourceLayout2"))
+			LoadFunction("vkGetImageSubresourceLayout2", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdPushDescriptorSet"))
+			LoadFunction("vkCmdPushDescriptorSet", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdPushDescriptorSetWithTemplate"))
+			LoadFunction("vkCmdPushDescriptorSetWithTemplate", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetRenderingAttachmentLocations"))
+			LoadFunction("vkCmdSetRenderingAttachmentLocations", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetRenderingInputAttachmentIndices"))
+			LoadFunction("vkCmdSetRenderingInputAttachmentIndices", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBindDescriptorSets2"))
+			LoadFunction("vkCmdBindDescriptorSets2", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdPushConstants2"))
+			LoadFunction("vkCmdPushConstants2", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdPushDescriptorSet2"))
+			LoadFunction("vkCmdPushDescriptorSet2", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdPushDescriptorSetWithTemplate2"))
+			LoadFunction("vkCmdPushDescriptorSetWithTemplate2", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkCopyMemoryToImage"))
+			LoadFunction("vkCopyMemoryToImage", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkCopyImageToMemory"))
+			LoadFunction("vkCopyImageToMemory", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkCopyImageToImage"))
+			LoadFunction("vkCopyImageToImage", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkTransitionImageLayout"))
+			LoadFunction("vkTransitionImageLayout", instance).IgnoreError();
+
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetCommandPoolMemoryConsumption"))
 			LoadFunction("vkGetCommandPoolMemoryConsumption", instance).IgnoreError();
 
@@ -7831,6 +8206,9 @@ public extension VulkanNative
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetImageViewHandleNVX"))
 			LoadFunction("vkGetImageViewHandleNVX", instance).IgnoreError();
 
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetImageViewHandle64NVX"))
+			LoadFunction("vkGetImageViewHandle64NVX", instance).IgnoreError();
+
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetImageViewAddressNVX"))
 			LoadFunction("vkGetImageViewAddressNVX", instance).IgnoreError();
 
@@ -7872,9 +8250,6 @@ public extension VulkanNative
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetSemaphoreFdKHR"))
 			LoadFunction("vkGetSemaphoreFdKHR", instance).IgnoreError();
-
-		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdPushDescriptorSetKHR"))
-			LoadFunction("vkCmdPushDescriptorSetKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBeginConditionalRenderingEXT"))
 			LoadFunction("vkCmdBeginConditionalRenderingEXT", instance).IgnoreError();
@@ -8188,9 +8563,6 @@ public extension VulkanNative
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDrawMeshTasksIndirectNV"))
 			LoadFunction("vkCmdDrawMeshTasksIndirectNV", instance).IgnoreError();
 
-		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDrawMeshTasksIndirectCountNV"))
-			LoadFunction("vkCmdDrawMeshTasksIndirectCountNV", instance).IgnoreError();
-
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetExclusiveScissorEnableNV"))
 			LoadFunction("vkCmdSetExclusiveScissorEnableNV", instance).IgnoreError();
 
@@ -8245,12 +8617,6 @@ public extension VulkanNative
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetFragmentShadingRateKHR"))
 			LoadFunction("vkCmdSetFragmentShadingRateKHR", instance).IgnoreError();
 
-		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetRenderingAttachmentLocationsKHR"))
-			LoadFunction("vkCmdSetRenderingAttachmentLocationsKHR", instance).IgnoreError();
-
-		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetRenderingInputAttachmentIndicesKHR"))
-			LoadFunction("vkCmdSetRenderingInputAttachmentIndicesKHR", instance).IgnoreError();
-
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkWaitForPresentKHR"))
 			LoadFunction("vkWaitForPresentKHR", instance).IgnoreError();
 
@@ -8271,9 +8637,6 @@ public extension VulkanNative
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateHeadlessSurfaceEXT"))
 			LoadFunction("vkCreateHeadlessSurfaceEXT", instance).IgnoreError();
-
-		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetLineStippleKHR"))
-			LoadFunction("vkCmdSetLineStippleKHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateDeferredOperationKHR"))
 			LoadFunction("vkCreateDeferredOperationKHR", instance).IgnoreError();
@@ -8298,27 +8661,6 @@ public extension VulkanNative
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPipelineExecutableInternalRepresentationsKHR"))
 			LoadFunction("vkGetPipelineExecutableInternalRepresentationsKHR", instance).IgnoreError();
-
-		if(excludeFunctions == null || !excludeFunctions.Contains("vkCopyMemoryToImageEXT"))
-			LoadFunction("vkCopyMemoryToImageEXT", instance).IgnoreError();
-
-		if(excludeFunctions == null || !excludeFunctions.Contains("vkCopyImageToMemoryEXT"))
-			LoadFunction("vkCopyImageToMemoryEXT", instance).IgnoreError();
-
-		if(excludeFunctions == null || !excludeFunctions.Contains("vkCopyImageToImageEXT"))
-			LoadFunction("vkCopyImageToImageEXT", instance).IgnoreError();
-
-		if(excludeFunctions == null || !excludeFunctions.Contains("vkTransitionImageLayoutEXT"))
-			LoadFunction("vkTransitionImageLayoutEXT", instance).IgnoreError();
-
-		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetImageSubresourceLayout2KHR"))
-			LoadFunction("vkGetImageSubresourceLayout2KHR", instance).IgnoreError();
-
-		if(excludeFunctions == null || !excludeFunctions.Contains("vkMapMemory2KHR"))
-			LoadFunction("vkMapMemory2KHR", instance).IgnoreError();
-
-		if(excludeFunctions == null || !excludeFunctions.Contains("vkUnmapMemory2KHR"))
-			LoadFunction("vkUnmapMemory2KHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkReleaseSwapchainImagesEXT"))
 			LoadFunction("vkReleaseSwapchainImagesEXT", instance).IgnoreError();
@@ -8424,9 +8766,6 @@ public extension VulkanNative
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDrawMeshTasksIndirectEXT"))
 			LoadFunction("vkCmdDrawMeshTasksIndirectEXT", instance).IgnoreError();
-
-		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDrawMeshTasksIndirectCountEXT"))
-			LoadFunction("vkCmdDrawMeshTasksIndirectCountEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDeviceFaultInfoEXT"))
 			LoadFunction("vkGetDeviceFaultInfoEXT", instance).IgnoreError();
@@ -8668,15 +9007,6 @@ public extension VulkanNative
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdOpticalFlowExecuteNV"))
 			LoadFunction("vkCmdOpticalFlowExecuteNV", instance).IgnoreError();
 
-		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBindIndexBuffer2KHR"))
-			LoadFunction("vkCmdBindIndexBuffer2KHR", instance).IgnoreError();
-
-		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetRenderingAreaGranularityKHR"))
-			LoadFunction("vkGetRenderingAreaGranularityKHR", instance).IgnoreError();
-
-		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDeviceImageSubresourceLayoutKHR"))
-			LoadFunction("vkGetDeviceImageSubresourceLayoutKHR", instance).IgnoreError();
-
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkAntiLagUpdateAMD"))
 			LoadFunction("vkAntiLagUpdateAMD", instance).IgnoreError();
 
@@ -8695,6 +9025,21 @@ public extension VulkanNative
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetTessellationDomainOriginEXT"))
 			LoadFunction("vkCmdSetTessellationDomainOriginEXT", instance).IgnoreError();
 
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreatePipelineBinariesKHR"))
+			LoadFunction("vkCreatePipelineBinariesKHR", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyPipelineBinaryKHR"))
+			LoadFunction("vkDestroyPipelineBinaryKHR", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPipelineKeyKHR"))
+			LoadFunction("vkGetPipelineKeyKHR", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPipelineBinaryDataKHR"))
+			LoadFunction("vkGetPipelineBinaryDataKHR", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkReleaseCapturedPipelineDataKHR"))
+			LoadFunction("vkReleaseCapturedPipelineDataKHR", instance).IgnoreError();
+
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetFramebufferTilePropertiesQCOM"))
 			LoadFunction("vkGetFramebufferTilePropertiesQCOM", instance).IgnoreError();
 
@@ -8706,6 +9051,15 @@ public extension VulkanNative
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroySemaphoreSciSyncPoolNV"))
 			LoadFunction("vkDestroySemaphoreSciSyncPoolNV", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceCooperativeVectorPropertiesNV"))
+			LoadFunction("vkGetPhysicalDeviceCooperativeVectorPropertiesNV", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkConvertCooperativeVectorMatrixNV"))
+			LoadFunction("vkConvertCooperativeVectorMatrixNV", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdConvertCooperativeVectorMatrixNV"))
+			LoadFunction("vkCmdConvertCooperativeVectorMatrixNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkSetLatencySleepModeNV"))
 			LoadFunction("vkSetLatencySleepModeNV", instance).IgnoreError();
@@ -8731,11 +9085,56 @@ public extension VulkanNative
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetScreenBufferPropertiesQNX"))
 			LoadFunction("vkGetScreenBufferPropertiesQNX", instance).IgnoreError();
 
-		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBindDescriptorSets2KHR"))
-			LoadFunction("vkCmdBindDescriptorSets2KHR", instance).IgnoreError();
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetClusterAccelerationStructureBuildSizesNV"))
+			LoadFunction("vkGetClusterAccelerationStructureBuildSizesNV", instance).IgnoreError();
 
-		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdPushConstants2KHR"))
-			LoadFunction("vkCmdPushConstants2KHR", instance).IgnoreError();
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBuildClusterAccelerationStructureIndirectNV"))
+			LoadFunction("vkCmdBuildClusterAccelerationStructureIndirectNV", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPartitionedAccelerationStructuresBuildSizesNV"))
+			LoadFunction("vkGetPartitionedAccelerationStructuresBuildSizesNV", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBuildPartitionedAccelerationStructuresNV"))
+			LoadFunction("vkCmdBuildPartitionedAccelerationStructuresNV", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetGeneratedCommandsMemoryRequirementsEXT"))
+			LoadFunction("vkGetGeneratedCommandsMemoryRequirementsEXT", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdPreprocessGeneratedCommandsEXT"))
+			LoadFunction("vkCmdPreprocessGeneratedCommandsEXT", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdExecuteGeneratedCommandsEXT"))
+			LoadFunction("vkCmdExecuteGeneratedCommandsEXT", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateIndirectCommandsLayoutEXT"))
+			LoadFunction("vkCreateIndirectCommandsLayoutEXT", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyIndirectCommandsLayoutEXT"))
+			LoadFunction("vkDestroyIndirectCommandsLayoutEXT", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateIndirectExecutionSetEXT"))
+			LoadFunction("vkCreateIndirectExecutionSetEXT", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyIndirectExecutionSetEXT"))
+			LoadFunction("vkDestroyIndirectExecutionSetEXT", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkUpdateIndirectExecutionSetPipelineEXT"))
+			LoadFunction("vkUpdateIndirectExecutionSetPipelineEXT", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkUpdateIndirectExecutionSetShaderEXT"))
+			LoadFunction("vkUpdateIndirectExecutionSetShaderEXT", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetDepthClampRangeEXT"))
+			LoadFunction("vkCmdSetDepthClampRangeEXT", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV"))
+			LoadFunction("vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetMemoryMetalHandleEXT"))
+			LoadFunction("vkGetMemoryMetalHandleEXT", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetMemoryMetalHandlePropertiesEXT"))
+			LoadFunction("vkGetMemoryMetalHandlePropertiesEXT", instance).IgnoreError();
 
 	}
 }

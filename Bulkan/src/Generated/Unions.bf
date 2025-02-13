@@ -17,6 +17,14 @@ public struct VkClearValue
 }
 
 [CRepr, Union]
+public struct VkClusterAccelerationStructureOpInputNV
+{
+	public VkClusterAccelerationStructureClustersBottomLevelInputNV* pClustersBottomLevel;
+	public VkClusterAccelerationStructureTriangleClusterInputNV* pTriangleClusters;
+	public VkClusterAccelerationStructureMoveObjectsInputNV* pMoveObjects;
+}
+
+[CRepr, Union]
 public struct VkPerformanceCounterResultKHR
 {
 	public int32 int32;
@@ -73,6 +81,22 @@ public struct VkAccelerationStructureGeometryDataKHR
 	public VkAccelerationStructureGeometryTrianglesDataKHR triangles;
 	public VkAccelerationStructureGeometryAabbsDataKHR aabbs;
 	public VkAccelerationStructureGeometryInstancesDataKHR instances;
+}
+
+[CRepr, Union]
+public struct VkIndirectExecutionSetInfoEXT
+{
+	public VkIndirectExecutionSetPipelineInfoEXT* pPipelineInfo;
+	public VkIndirectExecutionSetShaderInfoEXT* pShaderInfo;
+}
+
+[CRepr, Union]
+public struct VkIndirectCommandsTokenDataEXT
+{
+	public VkIndirectCommandsPushConstantTokenEXT* pPushConstant;
+	public VkIndirectCommandsVertexBufferTokenEXT* pVertexBuffer;
+	public VkIndirectCommandsIndexBufferTokenEXT* pIndexBuffer;
+	public VkIndirectCommandsExecutionSetTokenEXT* pExecutionSet;
 }
 
 [CRepr, Union]
