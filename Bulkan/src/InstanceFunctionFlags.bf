@@ -16,4 +16,5 @@ enum InstanceFunctionFlags
 	QNX = _*2,
 	DirectFB = _*2,
 	Headless = _*2,
+	OHOS = _*2,
 }

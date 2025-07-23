@@ -2819,6 +2819,24 @@ public extension VulkanNative
 	public static VkResult vkGetPhysicalDeviceRefreshableObjectTypesKHR(VkPhysicalDevice physicalDevice, uint32* pRefreshableObjectTypeCount, VkObjectType* pRefreshableObjectTypes)
 		=> vkGetPhysicalDeviceRefreshableObjectTypesKHR_ptr(physicalDevice, pRefreshableObjectTypeCount, pRefreshableObjectTypes);
 
+	public typealias vkCmdDispatchTileQCOMFunction = function void(VkCommandBuffer commandBuffer, VkDispatchTileInfoQCOM* pDispatchTileInfo);
+	private static vkCmdDispatchTileQCOMFunction vkCmdDispatchTileQCOM_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkCmdDispatchTileQCOM(VkCommandBuffer commandBuffer, VkDispatchTileInfoQCOM* pDispatchTileInfo)
+		=> vkCmdDispatchTileQCOM_ptr(commandBuffer, pDispatchTileInfo);
+
+	public typealias vkCmdBeginPerTileExecutionQCOMFunction = function void(VkCommandBuffer commandBuffer, VkPerTileBeginInfoQCOM* pPerTileBeginInfo);
+	private static vkCmdBeginPerTileExecutionQCOMFunction vkCmdBeginPerTileExecutionQCOM_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkCmdBeginPerTileExecutionQCOM(VkCommandBuffer commandBuffer, VkPerTileBeginInfoQCOM* pPerTileBeginInfo)
+		=> vkCmdBeginPerTileExecutionQCOM_ptr(commandBuffer, pPerTileBeginInfo);
+
+	public typealias vkCmdEndPerTileExecutionQCOMFunction = function void(VkCommandBuffer commandBuffer, VkPerTileEndInfoQCOM* pPerTileEndInfo);
+	private static vkCmdEndPerTileExecutionQCOMFunction vkCmdEndPerTileExecutionQCOM_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkCmdEndPerTileExecutionQCOM(VkCommandBuffer commandBuffer, VkPerTileEndInfoQCOM* pPerTileEndInfo)
+		=> vkCmdEndPerTileExecutionQCOM_ptr(commandBuffer, pPerTileEndInfo);
+
 	public typealias vkExportMetalObjectsEXTFunction = function void(VkDevice device, VkExportMetalObjectsInfoEXT* pMetalObjectsInfo);
 	private static vkExportMetalObjectsEXTFunction vkExportMetalObjectsEXT_ptr;
 	[CallingConvention(VulkanNative.CallConv)]
@@ -3341,6 +3359,60 @@ public extension VulkanNative
 	public static void vkCmdSetColorWriteMaskEXT(VkCommandBuffer commandBuffer, uint32 firstAttachment, uint32 attachmentCount, VkColorComponentFlags* pColorWriteMasks)
 		=> vkCmdSetColorWriteMaskEXT_ptr(commandBuffer, firstAttachment, attachmentCount, pColorWriteMasks);
 
+	public typealias vkCreateTensorARMFunction = function VkResult(VkDevice device, VkTensorCreateInfoARM* pCreateInfo, VkAllocationCallbacks* pAllocator, VkTensorARM* pTensor);
+	private static vkCreateTensorARMFunction vkCreateTensorARM_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static VkResult vkCreateTensorARM(VkDevice device, VkTensorCreateInfoARM* pCreateInfo, VkAllocationCallbacks* pAllocator, VkTensorARM* pTensor)
+		=> vkCreateTensorARM_ptr(device, pCreateInfo, pAllocator, pTensor);
+
+	public typealias vkDestroyTensorARMFunction = function void(VkDevice device, VkTensorARM tensor, VkAllocationCallbacks* pAllocator);
+	private static vkDestroyTensorARMFunction vkDestroyTensorARM_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkDestroyTensorARM(VkDevice device, VkTensorARM tensor, VkAllocationCallbacks* pAllocator)
+		=> vkDestroyTensorARM_ptr(device, tensor, pAllocator);
+
+	public typealias vkCreateTensorViewARMFunction = function VkResult(VkDevice device, VkTensorViewCreateInfoARM* pCreateInfo, VkAllocationCallbacks* pAllocator, VkTensorViewARM* pView);
+	private static vkCreateTensorViewARMFunction vkCreateTensorViewARM_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static VkResult vkCreateTensorViewARM(VkDevice device, VkTensorViewCreateInfoARM* pCreateInfo, VkAllocationCallbacks* pAllocator, VkTensorViewARM* pView)
+		=> vkCreateTensorViewARM_ptr(device, pCreateInfo, pAllocator, pView);
+
+	public typealias vkDestroyTensorViewARMFunction = function void(VkDevice device, VkTensorViewARM tensorView, VkAllocationCallbacks* pAllocator);
+	private static vkDestroyTensorViewARMFunction vkDestroyTensorViewARM_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkDestroyTensorViewARM(VkDevice device, VkTensorViewARM tensorView, VkAllocationCallbacks* pAllocator)
+		=> vkDestroyTensorViewARM_ptr(device, tensorView, pAllocator);
+
+	public typealias vkGetTensorMemoryRequirementsARMFunction = function void(VkDevice device, VkTensorMemoryRequirementsInfoARM* pInfo, VkMemoryRequirements2* pMemoryRequirements);
+	private static vkGetTensorMemoryRequirementsARMFunction vkGetTensorMemoryRequirementsARM_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkGetTensorMemoryRequirementsARM(VkDevice device, VkTensorMemoryRequirementsInfoARM* pInfo, VkMemoryRequirements2* pMemoryRequirements)
+		=> vkGetTensorMemoryRequirementsARM_ptr(device, pInfo, pMemoryRequirements);
+
+	public typealias vkBindTensorMemoryARMFunction = function VkResult(VkDevice device, uint32 bindInfoCount, VkBindTensorMemoryInfoARM* pBindInfos);
+	private static vkBindTensorMemoryARMFunction vkBindTensorMemoryARM_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static VkResult vkBindTensorMemoryARM(VkDevice device, uint32 bindInfoCount, VkBindTensorMemoryInfoARM* pBindInfos)
+		=> vkBindTensorMemoryARM_ptr(device, bindInfoCount, pBindInfos);
+
+	public typealias vkGetDeviceTensorMemoryRequirementsARMFunction = function void(VkDevice device, VkDeviceTensorMemoryRequirementsARM* pInfo, VkMemoryRequirements2* pMemoryRequirements);
+	private static vkGetDeviceTensorMemoryRequirementsARMFunction vkGetDeviceTensorMemoryRequirementsARM_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkGetDeviceTensorMemoryRequirementsARM(VkDevice device, VkDeviceTensorMemoryRequirementsARM* pInfo, VkMemoryRequirements2* pMemoryRequirements)
+		=> vkGetDeviceTensorMemoryRequirementsARM_ptr(device, pInfo, pMemoryRequirements);
+
+	public typealias vkCmdCopyTensorARMFunction = function void(VkCommandBuffer commandBuffer, VkCopyTensorInfoARM* pCopyTensorInfo);
+	private static vkCmdCopyTensorARMFunction vkCmdCopyTensorARM_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkCmdCopyTensorARM(VkCommandBuffer commandBuffer, VkCopyTensorInfoARM* pCopyTensorInfo)
+		=> vkCmdCopyTensorARM_ptr(commandBuffer, pCopyTensorInfo);
+
+	public typealias vkGetPhysicalDeviceExternalTensorPropertiesARMFunction = function void(VkPhysicalDevice physicalDevice, VkPhysicalDeviceExternalTensorInfoARM* pExternalTensorInfo, VkExternalTensorPropertiesARM* pExternalTensorProperties);
+	private static vkGetPhysicalDeviceExternalTensorPropertiesARMFunction vkGetPhysicalDeviceExternalTensorPropertiesARM_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkGetPhysicalDeviceExternalTensorPropertiesARM(VkPhysicalDevice physicalDevice, VkPhysicalDeviceExternalTensorInfoARM* pExternalTensorInfo, VkExternalTensorPropertiesARM* pExternalTensorProperties)
+		=> vkGetPhysicalDeviceExternalTensorPropertiesARM_ptr(physicalDevice, pExternalTensorInfo, pExternalTensorProperties);
+
 	public typealias vkGetShaderModuleIdentifierEXTFunction = function void(VkDevice device, VkShaderModule shaderModule, VkShaderModuleIdentifierEXT* pIdentifier);
 	private static vkGetShaderModuleIdentifierEXTFunction vkGetShaderModuleIdentifierEXT_ptr;
 	[CallingConvention(VulkanNative.CallConv)]
@@ -3388,6 +3460,12 @@ public extension VulkanNative
 	[CallingConvention(VulkanNative.CallConv)]
 	public static void vkAntiLagUpdateAMD(VkDevice device, VkAntiLagDataAMD* pData)
 		=> vkAntiLagUpdateAMD_ptr(device, pData);
+
+	public typealias vkWaitForPresent2KHRFunction = function VkResult(VkDevice device, VkSwapchainKHR swapchain, VkPresentWait2InfoKHR* pPresentWait2Info);
+	private static vkWaitForPresent2KHRFunction vkWaitForPresent2KHR_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static VkResult vkWaitForPresent2KHR(VkDevice device, VkSwapchainKHR swapchain, VkPresentWait2InfoKHR* pPresentWait2Info)
+		=> vkWaitForPresent2KHR_ptr(device, swapchain, pPresentWait2Info);
 
 	public typealias vkCreateShadersEXTFunction = function VkResult(VkDevice device, uint32 createInfoCount, VkShaderCreateInfoEXT* pCreateInfos, VkAllocationCallbacks* pAllocator, VkShaderEXT* pShaders);
 	private static vkCreateShadersEXTFunction vkCreateShadersEXT_ptr;
@@ -3527,6 +3605,72 @@ public extension VulkanNative
 	public static VkResult vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR(VkPhysicalDevice physicalDevice, uint32* pPropertyCount, VkCooperativeMatrixPropertiesKHR* pProperties)
 		=> vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR_ptr(physicalDevice, pPropertyCount, pProperties);
 
+	public typealias vkCreateDataGraphPipelinesARMFunction = function VkResult(VkDevice device, VkDeferredOperationKHR deferredOperation, VkPipelineCache pipelineCache, uint32 createInfoCount, VkDataGraphPipelineCreateInfoARM* pCreateInfos, VkAllocationCallbacks* pAllocator, VkPipeline* pPipelines);
+	private static vkCreateDataGraphPipelinesARMFunction vkCreateDataGraphPipelinesARM_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static VkResult vkCreateDataGraphPipelinesARM(VkDevice device, VkDeferredOperationKHR deferredOperation, VkPipelineCache pipelineCache, uint32 createInfoCount, VkDataGraphPipelineCreateInfoARM* pCreateInfos, VkAllocationCallbacks* pAllocator, VkPipeline* pPipelines)
+		=> vkCreateDataGraphPipelinesARM_ptr(device, deferredOperation, pipelineCache, createInfoCount, pCreateInfos, pAllocator, pPipelines);
+
+	public typealias vkCreateDataGraphPipelineSessionARMFunction = function VkResult(VkDevice device, VkDataGraphPipelineSessionCreateInfoARM* pCreateInfo, VkAllocationCallbacks* pAllocator, VkDataGraphPipelineSessionARM* pSession);
+	private static vkCreateDataGraphPipelineSessionARMFunction vkCreateDataGraphPipelineSessionARM_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static VkResult vkCreateDataGraphPipelineSessionARM(VkDevice device, VkDataGraphPipelineSessionCreateInfoARM* pCreateInfo, VkAllocationCallbacks* pAllocator, VkDataGraphPipelineSessionARM* pSession)
+		=> vkCreateDataGraphPipelineSessionARM_ptr(device, pCreateInfo, pAllocator, pSession);
+
+	public typealias vkGetDataGraphPipelineSessionBindPointRequirementsARMFunction = function VkResult(VkDevice device, VkDataGraphPipelineSessionBindPointRequirementsInfoARM* pInfo, uint32* pBindPointRequirementCount, VkDataGraphPipelineSessionBindPointRequirementARM* pBindPointRequirements);
+	private static vkGetDataGraphPipelineSessionBindPointRequirementsARMFunction vkGetDataGraphPipelineSessionBindPointRequirementsARM_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static VkResult vkGetDataGraphPipelineSessionBindPointRequirementsARM(VkDevice device, VkDataGraphPipelineSessionBindPointRequirementsInfoARM* pInfo, uint32* pBindPointRequirementCount, VkDataGraphPipelineSessionBindPointRequirementARM* pBindPointRequirements)
+		=> vkGetDataGraphPipelineSessionBindPointRequirementsARM_ptr(device, pInfo, pBindPointRequirementCount, pBindPointRequirements);
+
+	public typealias vkGetDataGraphPipelineSessionMemoryRequirementsARMFunction = function void(VkDevice device, VkDataGraphPipelineSessionMemoryRequirementsInfoARM* pInfo, VkMemoryRequirements2* pMemoryRequirements);
+	private static vkGetDataGraphPipelineSessionMemoryRequirementsARMFunction vkGetDataGraphPipelineSessionMemoryRequirementsARM_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkGetDataGraphPipelineSessionMemoryRequirementsARM(VkDevice device, VkDataGraphPipelineSessionMemoryRequirementsInfoARM* pInfo, VkMemoryRequirements2* pMemoryRequirements)
+		=> vkGetDataGraphPipelineSessionMemoryRequirementsARM_ptr(device, pInfo, pMemoryRequirements);
+
+	public typealias vkBindDataGraphPipelineSessionMemoryARMFunction = function VkResult(VkDevice device, uint32 bindInfoCount, VkBindDataGraphPipelineSessionMemoryInfoARM* pBindInfos);
+	private static vkBindDataGraphPipelineSessionMemoryARMFunction vkBindDataGraphPipelineSessionMemoryARM_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static VkResult vkBindDataGraphPipelineSessionMemoryARM(VkDevice device, uint32 bindInfoCount, VkBindDataGraphPipelineSessionMemoryInfoARM* pBindInfos)
+		=> vkBindDataGraphPipelineSessionMemoryARM_ptr(device, bindInfoCount, pBindInfos);
+
+	public typealias vkDestroyDataGraphPipelineSessionARMFunction = function void(VkDevice device, VkDataGraphPipelineSessionARM session, VkAllocationCallbacks* pAllocator);
+	private static vkDestroyDataGraphPipelineSessionARMFunction vkDestroyDataGraphPipelineSessionARM_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkDestroyDataGraphPipelineSessionARM(VkDevice device, VkDataGraphPipelineSessionARM session, VkAllocationCallbacks* pAllocator)
+		=> vkDestroyDataGraphPipelineSessionARM_ptr(device, session, pAllocator);
+
+	public typealias vkCmdDispatchDataGraphARMFunction = function void(VkCommandBuffer commandBuffer, VkDataGraphPipelineSessionARM session, VkDataGraphPipelineDispatchInfoARM* pInfo);
+	private static vkCmdDispatchDataGraphARMFunction vkCmdDispatchDataGraphARM_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkCmdDispatchDataGraphARM(VkCommandBuffer commandBuffer, VkDataGraphPipelineSessionARM session, VkDataGraphPipelineDispatchInfoARM* pInfo)
+		=> vkCmdDispatchDataGraphARM_ptr(commandBuffer, session, pInfo);
+
+	public typealias vkGetDataGraphPipelineAvailablePropertiesARMFunction = function VkResult(VkDevice device, VkDataGraphPipelineInfoARM* pPipelineInfo, uint32* pPropertiesCount, VkDataGraphPipelinePropertyARM* pProperties);
+	private static vkGetDataGraphPipelineAvailablePropertiesARMFunction vkGetDataGraphPipelineAvailablePropertiesARM_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static VkResult vkGetDataGraphPipelineAvailablePropertiesARM(VkDevice device, VkDataGraphPipelineInfoARM* pPipelineInfo, uint32* pPropertiesCount, VkDataGraphPipelinePropertyARM* pProperties)
+		=> vkGetDataGraphPipelineAvailablePropertiesARM_ptr(device, pPipelineInfo, pPropertiesCount, pProperties);
+
+	public typealias vkGetDataGraphPipelinePropertiesARMFunction = function VkResult(VkDevice device, VkDataGraphPipelineInfoARM* pPipelineInfo, uint32 propertiesCount, VkDataGraphPipelinePropertyQueryResultARM* pProperties);
+	private static vkGetDataGraphPipelinePropertiesARMFunction vkGetDataGraphPipelinePropertiesARM_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static VkResult vkGetDataGraphPipelinePropertiesARM(VkDevice device, VkDataGraphPipelineInfoARM* pPipelineInfo, uint32 propertiesCount, VkDataGraphPipelinePropertyQueryResultARM* pProperties)
+		=> vkGetDataGraphPipelinePropertiesARM_ptr(device, pPipelineInfo, propertiesCount, pProperties);
+
+	public typealias vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARMFunction = function VkResult(VkPhysicalDevice physicalDevice, uint32 queueFamilyIndex, uint32* pQueueFamilyDataGraphPropertyCount, VkQueueFamilyDataGraphPropertiesARM* pQueueFamilyDataGraphProperties);
+	private static vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARMFunction vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static VkResult vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM(VkPhysicalDevice physicalDevice, uint32 queueFamilyIndex, uint32* pQueueFamilyDataGraphPropertyCount, VkQueueFamilyDataGraphPropertiesARM* pQueueFamilyDataGraphProperties)
+		=> vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM_ptr(physicalDevice, queueFamilyIndex, pQueueFamilyDataGraphPropertyCount, pQueueFamilyDataGraphProperties);
+
+	public typealias vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARMFunction = function void(VkPhysicalDevice physicalDevice, VkPhysicalDeviceQueueFamilyDataGraphProcessingEngineInfoARM* pQueueFamilyDataGraphProcessingEngineInfo, VkQueueFamilyDataGraphProcessingEnginePropertiesARM* pQueueFamilyDataGraphProcessingEngineProperties);
+	private static vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARMFunction vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM(VkPhysicalDevice physicalDevice, VkPhysicalDeviceQueueFamilyDataGraphProcessingEngineInfoARM* pQueueFamilyDataGraphProcessingEngineInfo, VkQueueFamilyDataGraphProcessingEnginePropertiesARM* pQueueFamilyDataGraphProcessingEngineProperties)
+		=> vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM_ptr(physicalDevice, pQueueFamilyDataGraphProcessingEngineInfo, pQueueFamilyDataGraphProcessingEngineProperties);
+
 	public typealias vkCmdSetAttachmentFeedbackLoopEnableEXTFunction = function void(VkCommandBuffer commandBuffer, VkImageAspectFlags aspectMask);
 	private static vkCmdSetAttachmentFeedbackLoopEnableEXTFunction vkCmdSetAttachmentFeedbackLoopEnableEXT_ptr;
 	[CallingConvention(VulkanNative.CallConv)]
@@ -3538,6 +3682,30 @@ public extension VulkanNative
 	[CallingConvention(VulkanNative.CallConv)]
 	public static VkResult vkGetScreenBufferPropertiesQNX(VkDevice device, void* buffer, VkScreenBufferPropertiesQNX* pProperties)
 		=> vkGetScreenBufferPropertiesQNX_ptr(device, buffer, pProperties);
+
+	public typealias vkCmdBindTileMemoryQCOMFunction = function void(VkCommandBuffer commandBuffer, VkTileMemoryBindInfoQCOM* pTileMemoryBindInfo);
+	private static vkCmdBindTileMemoryQCOMFunction vkCmdBindTileMemoryQCOM_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkCmdBindTileMemoryQCOM(VkCommandBuffer commandBuffer, VkTileMemoryBindInfoQCOM* pTileMemoryBindInfo)
+		=> vkCmdBindTileMemoryQCOM_ptr(commandBuffer, pTileMemoryBindInfo);
+
+	public typealias vkCreateExternalComputeQueueNVFunction = function VkResult(VkDevice device, VkExternalComputeQueueCreateInfoNV* pCreateInfo, VkAllocationCallbacks* pAllocator, VkExternalComputeQueueNV* pExternalQueue);
+	private static vkCreateExternalComputeQueueNVFunction vkCreateExternalComputeQueueNV_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static VkResult vkCreateExternalComputeQueueNV(VkDevice device, VkExternalComputeQueueCreateInfoNV* pCreateInfo, VkAllocationCallbacks* pAllocator, VkExternalComputeQueueNV* pExternalQueue)
+		=> vkCreateExternalComputeQueueNV_ptr(device, pCreateInfo, pAllocator, pExternalQueue);
+
+	public typealias vkDestroyExternalComputeQueueNVFunction = function void(VkDevice device, VkExternalComputeQueueNV externalQueue, VkAllocationCallbacks* pAllocator);
+	private static vkDestroyExternalComputeQueueNVFunction vkDestroyExternalComputeQueueNV_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkDestroyExternalComputeQueueNV(VkDevice device, VkExternalComputeQueueNV externalQueue, VkAllocationCallbacks* pAllocator)
+		=> vkDestroyExternalComputeQueueNV_ptr(device, externalQueue, pAllocator);
+
+	public typealias vkGetExternalComputeQueueDataNVFunction = function void(VkExternalComputeQueueNV externalQueue, VkExternalComputeQueueDataParamsNV* vkParams, void* pData);
+	private static vkGetExternalComputeQueueDataNVFunction vkGetExternalComputeQueueDataNV_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkGetExternalComputeQueueDataNV(VkExternalComputeQueueNV externalQueue, VkExternalComputeQueueDataParamsNV* vkParams, void* pData)
+		=> vkGetExternalComputeQueueDataNV_ptr(externalQueue, vkParams, pData);
 
 	public typealias vkGetClusterAccelerationStructureBuildSizesNVFunction = function void(VkDevice device, VkClusterAccelerationStructureInputInfoNV* pInfo, VkAccelerationStructureBuildSizesInfoKHR* pSizeInfo);
 	private static vkGetClusterAccelerationStructureBuildSizesNVFunction vkGetClusterAccelerationStructureBuildSizesNV_ptr;
@@ -3623,6 +3791,12 @@ public extension VulkanNative
 	public static void vkCmdSetDepthClampRangeEXT(VkCommandBuffer commandBuffer, VkDepthClampModeEXT depthClampMode, VkDepthClampRangeEXT* pDepthClampRange)
 		=> vkCmdSetDepthClampRangeEXT_ptr(commandBuffer, depthClampMode, pDepthClampRange);
 
+	public typealias vkCreateSurfaceOHOSFunction = function VkResult(VkInstance instance, VkOHSurfaceCreateInfoOHOS* pCreateInfo, VkAllocationCallbacks* pAllocator, VkSurfaceKHR* pSurface);
+	private static vkCreateSurfaceOHOSFunction vkCreateSurfaceOHOS_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static VkResult vkCreateSurfaceOHOS(VkInstance instance, VkOHSurfaceCreateInfoOHOS* pCreateInfo, VkAllocationCallbacks* pAllocator, VkSurfaceKHR* pSurface)
+		=> vkCreateSurfaceOHOS_ptr(instance, pCreateInfo, pAllocator, pSurface);
+
 	public typealias vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNVFunction = function VkResult(VkPhysicalDevice physicalDevice, uint32* pPropertyCount, VkCooperativeMatrixFlexibleDimensionsPropertiesNV* pProperties);
 	private static vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNVFunction vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV_ptr;
 	[CallingConvention(VulkanNative.CallConv)]
@@ -3641,6 +3815,12 @@ public extension VulkanNative
 	public static VkResult vkGetMemoryMetalHandlePropertiesEXT(VkDevice device, VkExternalMemoryHandleTypeFlags handleType, void* pHandle, VkMemoryMetalHandlePropertiesEXT* pMemoryMetalHandleProperties)
 		=> vkGetMemoryMetalHandlePropertiesEXT_ptr(device, handleType, pHandle, pMemoryMetalHandleProperties);
 
+	public typealias vkCmdEndRendering2EXTFunction = function void(VkCommandBuffer commandBuffer, VkRenderingEndInfoEXT* pRenderingEndInfo);
+	private static vkCmdEndRendering2EXTFunction vkCmdEndRendering2EXT_ptr;
+	[CallingConvention(VulkanNative.CallConv)]
+	public static void vkCmdEndRendering2EXT(VkCommandBuffer commandBuffer, VkRenderingEndInfoEXT* pRenderingEndInfo)
+		=> vkCmdEndRendering2EXT_ptr(commandBuffer, pRenderingEndInfo);
+
 
 	private static List<(InstanceFunctionFlags Flags, String Name)> sKnownInstanceCommands = new .()
 	{
@@ -3650,8 +3830,12 @@ public extension VulkanNative
 		(.Agnostic, "vkEnumeratePhysicalDeviceGroups"),
 		(.Agnostic, "vkDestroySurfaceKHR"),
 		(.Agnostic, "vkCreateDisplayPlaneSurfaceKHR"),
+		(.Agnostic, "vkCreateDebugReportCallbackEXT"),
+		(.Agnostic, "vkDestroyDebugReportCallbackEXT"),
+		(.Agnostic, "vkDebugReportMessageEXT"),
 		(.Agnostic, "vkCreateDebugUtilsMessengerEXT"),
 		(.Agnostic, "vkDestroyDebugUtilsMessengerEXT"),
+		(.Agnostic, "vkSubmitDebugUtilsMessageEXT"),
 		(.Xlib, "vkCreateXlibSurfaceKHR"),
 		(.Xcb, "vkCreateXcbSurfaceKHR"),
 		(.Wayland, "vkCreateWaylandSurfaceKHR"),
@@ -3666,6 +3850,7 @@ public extension VulkanNative
 		(.Headless, "vkCreateHeadlessSurfaceEXT"),
 		(.DirectFB, "vkCreateDirectFBSurfaceEXT"),
 		(.QNX, "vkCreateScreenSurfaceQNX"),
+		(.OHOS, "vkCreateSurfaceOHOS"),
 	} ~ delete _;
 
 	public static Result<void> LoadFunction(StringView name, VkInstance? instance = null, bool invokeErrorCallback = true)
@@ -6490,6 +6675,24 @@ public extension VulkanNative
 				return .Err;
 			break;
 
+		case "vkCmdDispatchTileQCOM":
+			LoadFunction("vkCmdDispatchTileQCOM", out vkCmdDispatchTileQCOM_ptr, instance, invokeErrorCallback);
+			if(vkCmdDispatchTileQCOM_ptr == null)
+				return .Err;
+			break;
+
+		case "vkCmdBeginPerTileExecutionQCOM":
+			LoadFunction("vkCmdBeginPerTileExecutionQCOM", out vkCmdBeginPerTileExecutionQCOM_ptr, instance, invokeErrorCallback);
+			if(vkCmdBeginPerTileExecutionQCOM_ptr == null)
+				return .Err;
+			break;
+
+		case "vkCmdEndPerTileExecutionQCOM":
+			LoadFunction("vkCmdEndPerTileExecutionQCOM", out vkCmdEndPerTileExecutionQCOM_ptr, instance, invokeErrorCallback);
+			if(vkCmdEndPerTileExecutionQCOM_ptr == null)
+				return .Err;
+			break;
+
 		case "vkExportMetalObjectsEXT":
 			LoadFunction("vkExportMetalObjectsEXT", out vkExportMetalObjectsEXT_ptr, instance, invokeErrorCallback);
 			if(vkExportMetalObjectsEXT_ptr == null)
@@ -7012,6 +7215,60 @@ public extension VulkanNative
 				return .Err;
 			break;
 
+		case "vkCreateTensorARM":
+			LoadFunction("vkCreateTensorARM", out vkCreateTensorARM_ptr, instance, invokeErrorCallback);
+			if(vkCreateTensorARM_ptr == null)
+				return .Err;
+			break;
+
+		case "vkDestroyTensorARM":
+			LoadFunction("vkDestroyTensorARM", out vkDestroyTensorARM_ptr, instance, invokeErrorCallback);
+			if(vkDestroyTensorARM_ptr == null)
+				return .Err;
+			break;
+
+		case "vkCreateTensorViewARM":
+			LoadFunction("vkCreateTensorViewARM", out vkCreateTensorViewARM_ptr, instance, invokeErrorCallback);
+			if(vkCreateTensorViewARM_ptr == null)
+				return .Err;
+			break;
+
+		case "vkDestroyTensorViewARM":
+			LoadFunction("vkDestroyTensorViewARM", out vkDestroyTensorViewARM_ptr, instance, invokeErrorCallback);
+			if(vkDestroyTensorViewARM_ptr == null)
+				return .Err;
+			break;
+
+		case "vkGetTensorMemoryRequirementsARM":
+			LoadFunction("vkGetTensorMemoryRequirementsARM", out vkGetTensorMemoryRequirementsARM_ptr, instance, invokeErrorCallback);
+			if(vkGetTensorMemoryRequirementsARM_ptr == null)
+				return .Err;
+			break;
+
+		case "vkBindTensorMemoryARM":
+			LoadFunction("vkBindTensorMemoryARM", out vkBindTensorMemoryARM_ptr, instance, invokeErrorCallback);
+			if(vkBindTensorMemoryARM_ptr == null)
+				return .Err;
+			break;
+
+		case "vkGetDeviceTensorMemoryRequirementsARM":
+			LoadFunction("vkGetDeviceTensorMemoryRequirementsARM", out vkGetDeviceTensorMemoryRequirementsARM_ptr, instance, invokeErrorCallback);
+			if(vkGetDeviceTensorMemoryRequirementsARM_ptr == null)
+				return .Err;
+			break;
+
+		case "vkCmdCopyTensorARM":
+			LoadFunction("vkCmdCopyTensorARM", out vkCmdCopyTensorARM_ptr, instance, invokeErrorCallback);
+			if(vkCmdCopyTensorARM_ptr == null)
+				return .Err;
+			break;
+
+		case "vkGetPhysicalDeviceExternalTensorPropertiesARM":
+			LoadFunction("vkGetPhysicalDeviceExternalTensorPropertiesARM", out vkGetPhysicalDeviceExternalTensorPropertiesARM_ptr, instance, invokeErrorCallback);
+			if(vkGetPhysicalDeviceExternalTensorPropertiesARM_ptr == null)
+				return .Err;
+			break;
+
 		case "vkGetShaderModuleIdentifierEXT":
 			LoadFunction("vkGetShaderModuleIdentifierEXT", out vkGetShaderModuleIdentifierEXT_ptr, instance, invokeErrorCallback);
 			if(vkGetShaderModuleIdentifierEXT_ptr == null)
@@ -7057,6 +7314,12 @@ public extension VulkanNative
 		case "vkAntiLagUpdateAMD":
 			LoadFunction("vkAntiLagUpdateAMD", out vkAntiLagUpdateAMD_ptr, instance, invokeErrorCallback);
 			if(vkAntiLagUpdateAMD_ptr == null)
+				return .Err;
+			break;
+
+		case "vkWaitForPresent2KHR":
+			LoadFunction("vkWaitForPresent2KHR", out vkWaitForPresent2KHR_ptr, instance, invokeErrorCallback);
+			if(vkWaitForPresent2KHR_ptr == null)
 				return .Err;
 			break;
 
@@ -7198,6 +7461,72 @@ public extension VulkanNative
 				return .Err;
 			break;
 
+		case "vkCreateDataGraphPipelinesARM":
+			LoadFunction("vkCreateDataGraphPipelinesARM", out vkCreateDataGraphPipelinesARM_ptr, instance, invokeErrorCallback);
+			if(vkCreateDataGraphPipelinesARM_ptr == null)
+				return .Err;
+			break;
+
+		case "vkCreateDataGraphPipelineSessionARM":
+			LoadFunction("vkCreateDataGraphPipelineSessionARM", out vkCreateDataGraphPipelineSessionARM_ptr, instance, invokeErrorCallback);
+			if(vkCreateDataGraphPipelineSessionARM_ptr == null)
+				return .Err;
+			break;
+
+		case "vkGetDataGraphPipelineSessionBindPointRequirementsARM":
+			LoadFunction("vkGetDataGraphPipelineSessionBindPointRequirementsARM", out vkGetDataGraphPipelineSessionBindPointRequirementsARM_ptr, instance, invokeErrorCallback);
+			if(vkGetDataGraphPipelineSessionBindPointRequirementsARM_ptr == null)
+				return .Err;
+			break;
+
+		case "vkGetDataGraphPipelineSessionMemoryRequirementsARM":
+			LoadFunction("vkGetDataGraphPipelineSessionMemoryRequirementsARM", out vkGetDataGraphPipelineSessionMemoryRequirementsARM_ptr, instance, invokeErrorCallback);
+			if(vkGetDataGraphPipelineSessionMemoryRequirementsARM_ptr == null)
+				return .Err;
+			break;
+
+		case "vkBindDataGraphPipelineSessionMemoryARM":
+			LoadFunction("vkBindDataGraphPipelineSessionMemoryARM", out vkBindDataGraphPipelineSessionMemoryARM_ptr, instance, invokeErrorCallback);
+			if(vkBindDataGraphPipelineSessionMemoryARM_ptr == null)
+				return .Err;
+			break;
+
+		case "vkDestroyDataGraphPipelineSessionARM":
+			LoadFunction("vkDestroyDataGraphPipelineSessionARM", out vkDestroyDataGraphPipelineSessionARM_ptr, instance, invokeErrorCallback);
+			if(vkDestroyDataGraphPipelineSessionARM_ptr == null)
+				return .Err;
+			break;
+
+		case "vkCmdDispatchDataGraphARM":
+			LoadFunction("vkCmdDispatchDataGraphARM", out vkCmdDispatchDataGraphARM_ptr, instance, invokeErrorCallback);
+			if(vkCmdDispatchDataGraphARM_ptr == null)
+				return .Err;
+			break;
+
+		case "vkGetDataGraphPipelineAvailablePropertiesARM":
+			LoadFunction("vkGetDataGraphPipelineAvailablePropertiesARM", out vkGetDataGraphPipelineAvailablePropertiesARM_ptr, instance, invokeErrorCallback);
+			if(vkGetDataGraphPipelineAvailablePropertiesARM_ptr == null)
+				return .Err;
+			break;
+
+		case "vkGetDataGraphPipelinePropertiesARM":
+			LoadFunction("vkGetDataGraphPipelinePropertiesARM", out vkGetDataGraphPipelinePropertiesARM_ptr, instance, invokeErrorCallback);
+			if(vkGetDataGraphPipelinePropertiesARM_ptr == null)
+				return .Err;
+			break;
+
+		case "vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM":
+			LoadFunction("vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM", out vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM_ptr, instance, invokeErrorCallback);
+			if(vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM_ptr == null)
+				return .Err;
+			break;
+
+		case "vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM":
+			LoadFunction("vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM", out vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM_ptr, instance, invokeErrorCallback);
+			if(vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM_ptr == null)
+				return .Err;
+			break;
+
 		case "vkCmdSetAttachmentFeedbackLoopEnableEXT":
 			LoadFunction("vkCmdSetAttachmentFeedbackLoopEnableEXT", out vkCmdSetAttachmentFeedbackLoopEnableEXT_ptr, instance, invokeErrorCallback);
 			if(vkCmdSetAttachmentFeedbackLoopEnableEXT_ptr == null)
@@ -7207,6 +7536,30 @@ public extension VulkanNative
 		case "vkGetScreenBufferPropertiesQNX":
 			LoadFunction("vkGetScreenBufferPropertiesQNX", out vkGetScreenBufferPropertiesQNX_ptr, instance, invokeErrorCallback);
 			if(vkGetScreenBufferPropertiesQNX_ptr == null)
+				return .Err;
+			break;
+
+		case "vkCmdBindTileMemoryQCOM":
+			LoadFunction("vkCmdBindTileMemoryQCOM", out vkCmdBindTileMemoryQCOM_ptr, instance, invokeErrorCallback);
+			if(vkCmdBindTileMemoryQCOM_ptr == null)
+				return .Err;
+			break;
+
+		case "vkCreateExternalComputeQueueNV":
+			LoadFunction("vkCreateExternalComputeQueueNV", out vkCreateExternalComputeQueueNV_ptr, instance, invokeErrorCallback);
+			if(vkCreateExternalComputeQueueNV_ptr == null)
+				return .Err;
+			break;
+
+		case "vkDestroyExternalComputeQueueNV":
+			LoadFunction("vkDestroyExternalComputeQueueNV", out vkDestroyExternalComputeQueueNV_ptr, instance, invokeErrorCallback);
+			if(vkDestroyExternalComputeQueueNV_ptr == null)
+				return .Err;
+			break;
+
+		case "vkGetExternalComputeQueueDataNV":
+			LoadFunction("vkGetExternalComputeQueueDataNV", out vkGetExternalComputeQueueDataNV_ptr, instance, invokeErrorCallback);
+			if(vkGetExternalComputeQueueDataNV_ptr == null)
 				return .Err;
 			break;
 
@@ -7294,6 +7647,12 @@ public extension VulkanNative
 				return .Err;
 			break;
 
+		case "vkCreateSurfaceOHOS":
+			LoadFunction("vkCreateSurfaceOHOS", out vkCreateSurfaceOHOS_ptr, instance, invokeErrorCallback);
+			if(vkCreateSurfaceOHOS_ptr == null)
+				return .Err;
+			break;
+
 		case "vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV":
 			LoadFunction("vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV", out vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV_ptr, instance, invokeErrorCallback);
 			if(vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV_ptr == null)
@@ -7309,6 +7668,12 @@ public extension VulkanNative
 		case "vkGetMemoryMetalHandlePropertiesEXT":
 			LoadFunction("vkGetMemoryMetalHandlePropertiesEXT", out vkGetMemoryMetalHandlePropertiesEXT_ptr, instance, invokeErrorCallback);
 			if(vkGetMemoryMetalHandlePropertiesEXT_ptr == null)
+				return .Err;
+			break;
+
+		case "vkCmdEndRendering2EXT":
+			LoadFunction("vkCmdEndRendering2EXT", out vkCmdEndRendering2EXT_ptr, instance, invokeErrorCallback);
+			if(vkCmdEndRendering2EXT_ptr == null)
 				return .Err;
 			break;
 
@@ -8727,6 +9092,15 @@ public extension VulkanNative
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceRefreshableObjectTypesKHR"))
 			LoadFunction("vkGetPhysicalDeviceRefreshableObjectTypesKHR", instance).IgnoreError();
 
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDispatchTileQCOM"))
+			LoadFunction("vkCmdDispatchTileQCOM", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBeginPerTileExecutionQCOM"))
+			LoadFunction("vkCmdBeginPerTileExecutionQCOM", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdEndPerTileExecutionQCOM"))
+			LoadFunction("vkCmdEndPerTileExecutionQCOM", instance).IgnoreError();
+
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkExportMetalObjectsEXT"))
 			LoadFunction("vkExportMetalObjectsEXT", instance).IgnoreError();
 
@@ -8988,6 +9362,33 @@ public extension VulkanNative
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetColorWriteMaskEXT"))
 			LoadFunction("vkCmdSetColorWriteMaskEXT", instance).IgnoreError();
 
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateTensorARM"))
+			LoadFunction("vkCreateTensorARM", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyTensorARM"))
+			LoadFunction("vkDestroyTensorARM", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateTensorViewARM"))
+			LoadFunction("vkCreateTensorViewARM", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyTensorViewARM"))
+			LoadFunction("vkDestroyTensorViewARM", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetTensorMemoryRequirementsARM"))
+			LoadFunction("vkGetTensorMemoryRequirementsARM", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkBindTensorMemoryARM"))
+			LoadFunction("vkBindTensorMemoryARM", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDeviceTensorMemoryRequirementsARM"))
+			LoadFunction("vkGetDeviceTensorMemoryRequirementsARM", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdCopyTensorARM"))
+			LoadFunction("vkCmdCopyTensorARM", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceExternalTensorPropertiesARM"))
+			LoadFunction("vkGetPhysicalDeviceExternalTensorPropertiesARM", instance).IgnoreError();
+
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetShaderModuleIdentifierEXT"))
 			LoadFunction("vkGetShaderModuleIdentifierEXT", instance).IgnoreError();
 
@@ -9011,6 +9412,9 @@ public extension VulkanNative
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkAntiLagUpdateAMD"))
 			LoadFunction("vkAntiLagUpdateAMD", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkWaitForPresent2KHR"))
+			LoadFunction("vkWaitForPresent2KHR", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateShadersEXT"))
 			LoadFunction("vkCreateShadersEXT", instance).IgnoreError();
@@ -9081,11 +9485,56 @@ public extension VulkanNative
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR"))
 			LoadFunction("vkGetPhysicalDeviceCooperativeMatrixPropertiesKHR", instance).IgnoreError();
 
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateDataGraphPipelinesARM"))
+			LoadFunction("vkCreateDataGraphPipelinesARM", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateDataGraphPipelineSessionARM"))
+			LoadFunction("vkCreateDataGraphPipelineSessionARM", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDataGraphPipelineSessionBindPointRequirementsARM"))
+			LoadFunction("vkGetDataGraphPipelineSessionBindPointRequirementsARM", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDataGraphPipelineSessionMemoryRequirementsARM"))
+			LoadFunction("vkGetDataGraphPipelineSessionMemoryRequirementsARM", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkBindDataGraphPipelineSessionMemoryARM"))
+			LoadFunction("vkBindDataGraphPipelineSessionMemoryARM", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyDataGraphPipelineSessionARM"))
+			LoadFunction("vkDestroyDataGraphPipelineSessionARM", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdDispatchDataGraphARM"))
+			LoadFunction("vkCmdDispatchDataGraphARM", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDataGraphPipelineAvailablePropertiesARM"))
+			LoadFunction("vkGetDataGraphPipelineAvailablePropertiesARM", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetDataGraphPipelinePropertiesARM"))
+			LoadFunction("vkGetDataGraphPipelinePropertiesARM", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM"))
+			LoadFunction("vkGetPhysicalDeviceQueueFamilyDataGraphPropertiesARM", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM"))
+			LoadFunction("vkGetPhysicalDeviceQueueFamilyDataGraphProcessingEnginePropertiesARM", instance).IgnoreError();
+
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetAttachmentFeedbackLoopEnableEXT"))
 			LoadFunction("vkCmdSetAttachmentFeedbackLoopEnableEXT", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetScreenBufferPropertiesQNX"))
 			LoadFunction("vkGetScreenBufferPropertiesQNX", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdBindTileMemoryQCOM"))
+			LoadFunction("vkCmdBindTileMemoryQCOM", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateExternalComputeQueueNV"))
+			LoadFunction("vkCreateExternalComputeQueueNV", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkDestroyExternalComputeQueueNV"))
+			LoadFunction("vkDestroyExternalComputeQueueNV", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetExternalComputeQueueDataNV"))
+			LoadFunction("vkGetExternalComputeQueueDataNV", instance).IgnoreError();
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetClusterAccelerationStructureBuildSizesNV"))
 			LoadFunction("vkGetClusterAccelerationStructureBuildSizesNV", instance).IgnoreError();
@@ -9129,6 +9578,9 @@ public extension VulkanNative
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdSetDepthClampRangeEXT"))
 			LoadFunction("vkCmdSetDepthClampRangeEXT", instance).IgnoreError();
 
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkCreateSurfaceOHOS"))
+			LoadFunction("vkCreateSurfaceOHOS", instance).IgnoreError();
+
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV"))
 			LoadFunction("vkGetPhysicalDeviceCooperativeMatrixFlexibleDimensionsPropertiesNV", instance).IgnoreError();
 
@@ -9137,6 +9589,9 @@ public extension VulkanNative
 
 		if(excludeFunctions == null || !excludeFunctions.Contains("vkGetMemoryMetalHandlePropertiesEXT"))
 			LoadFunction("vkGetMemoryMetalHandlePropertiesEXT", instance).IgnoreError();
+
+		if(excludeFunctions == null || !excludeFunctions.Contains("vkCmdEndRendering2EXT"))
+			LoadFunction("vkCmdEndRendering2EXT", instance).IgnoreError();
 
 	}
 }

@@ -923,6 +923,66 @@ public struct VkShaderEXT : IEquatable<VkShaderEXT>, IHashable
 }
 
 [CRepr]
+public struct VkTensorARM : IEquatable<VkTensorARM>, IHashable
+{
+	public readonly uint64 Handle;
+	public this(uint64 existingHandle) { Handle = existingHandle; }
+	public this(void* existingHandle) { Handle = (uint64)(int)existingHandle; }
+	public static Self Null => Self(0);
+	public static implicit operator Self(uint64 handle) => Self(handle);
+	public static implicit operator uint64(Self self) => self.Handle;
+	public static implicit operator Self(void* handle) => Self((uint64)(int)handle);
+	public static implicit operator void*(Self self) => (void*)(int)self.Handle;
+	public static bool operator ==(Self left, Self right) => left.Handle == right.Handle;
+	public static bool operator !=(Self left, Self right) => left.Handle != right.Handle;
+	public static bool operator ==(Self left, uint64 right) => left.Handle == right;
+	public static bool operator !=(Self left, uint64 right) => left.Handle != right;
+	public bool Equals(Self h) => Handle == h.Handle;
+
+	public int GetHashCode() { return (.)Handle; }
+}
+
+[CRepr]
+public struct VkTensorViewARM : IEquatable<VkTensorViewARM>, IHashable
+{
+	public readonly uint64 Handle;
+	public this(uint64 existingHandle) { Handle = existingHandle; }
+	public this(void* existingHandle) { Handle = (uint64)(int)existingHandle; }
+	public static Self Null => Self(0);
+	public static implicit operator Self(uint64 handle) => Self(handle);
+	public static implicit operator uint64(Self self) => self.Handle;
+	public static implicit operator Self(void* handle) => Self((uint64)(int)handle);
+	public static implicit operator void*(Self self) => (void*)(int)self.Handle;
+	public static bool operator ==(Self left, Self right) => left.Handle == right.Handle;
+	public static bool operator !=(Self left, Self right) => left.Handle != right.Handle;
+	public static bool operator ==(Self left, uint64 right) => left.Handle == right;
+	public static bool operator !=(Self left, uint64 right) => left.Handle != right;
+	public bool Equals(Self h) => Handle == h.Handle;
+
+	public int GetHashCode() { return (.)Handle; }
+}
+
+[CRepr]
+public struct VkDataGraphPipelineSessionARM : IEquatable<VkDataGraphPipelineSessionARM>, IHashable
+{
+	public readonly uint64 Handle;
+	public this(uint64 existingHandle) { Handle = existingHandle; }
+	public this(void* existingHandle) { Handle = (uint64)(int)existingHandle; }
+	public static Self Null => Self(0);
+	public static implicit operator Self(uint64 handle) => Self(handle);
+	public static implicit operator uint64(Self self) => self.Handle;
+	public static implicit operator Self(void* handle) => Self((uint64)(int)handle);
+	public static implicit operator void*(Self self) => (void*)(int)self.Handle;
+	public static bool operator ==(Self left, Self right) => left.Handle == right.Handle;
+	public static bool operator !=(Self left, Self right) => left.Handle != right.Handle;
+	public static bool operator ==(Self left, uint64 right) => left.Handle == right;
+	public static bool operator !=(Self left, uint64 right) => left.Handle != right;
+	public bool Equals(Self h) => Handle == h.Handle;
+
+	public int GetHashCode() { return (.)Handle; }
+}
+
+[CRepr]
 public struct VkDisplayKHR : IEquatable<VkDisplayKHR>, IHashable
 {
 	public readonly uint64 Handle;
@@ -1137,6 +1197,26 @@ public struct VkCudaFunctionNV : IEquatable<VkCudaFunctionNV>, IHashable
 	public static bool operator !=(Self left, Self right) => left.Handle != right.Handle;
 	public static bool operator ==(Self left, uint64 right) => left.Handle == right;
 	public static bool operator !=(Self left, uint64 right) => left.Handle != right;
+	public bool Equals(Self h) => Handle == h.Handle;
+
+	public int GetHashCode() { return (.)Handle; }
+}
+
+[CRepr]
+public struct VkExternalComputeQueueNV : IEquatable<VkExternalComputeQueueNV>, IHashable
+{
+	public readonly int Handle;
+	public this(int existingHandle) { Handle = existingHandle; }
+	public this(void* existingHandle) { Handle = (int)existingHandle; }
+	public static Self Null => Self(0);
+	public static implicit operator Self(int handle) => Self(handle);
+	public static implicit operator int(Self self) => self.Handle;
+	public static implicit operator Self(void* handle) => Self((int)handle);
+	public static implicit operator void*(Self self) => (void*)(int)self.Handle;
+	public static bool operator ==(Self left, Self right) => left.Handle == right.Handle;
+	public static bool operator !=(Self left, Self right) => left.Handle != right.Handle;
+	public static bool operator ==(Self left, int right) => left.Handle == right;
+	public static bool operator !=(Self left, int right) => left.Handle != right;
 	public bool Equals(Self h) => Handle == h.Handle;
 
 	public int GetHashCode() { return (.)Handle; }

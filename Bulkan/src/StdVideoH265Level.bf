@@ -2,7 +2,7 @@ using System;
 namespace Bulkan;
 
 [CRepr, AllowDuplicates]
-enum StdVideoH265Level
+enum StdVideoH265Level : int32
 {
 	STD_VIDEO_H265_LEVEL_1_0 = 0,
 	STD_VIDEO_H265_LEVEL_2_0 = 1,
