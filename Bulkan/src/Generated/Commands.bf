@@ -3650,6 +3650,8 @@ public extension VulkanNative
 		(.Agnostic, "vkEnumeratePhysicalDeviceGroups"),
 		(.Agnostic, "vkDestroySurfaceKHR"),
 		(.Agnostic, "vkCreateDisplayPlaneSurfaceKHR"),
+		(.Agnostic, "vkCreateDebugUtilsMessengerEXT"),
+		(.Agnostic, "vkDestroyDebugUtilsMessengerEXT"),
 		(.Xlib, "vkCreateXlibSurfaceKHR"),
 		(.Xcb, "vkCreateXcbSurfaceKHR"),
 		(.Wayland, "vkCreateWaylandSurfaceKHR"),
